@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		750FA20A1FBCDCDA00A1D89A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */; };
-		750FA20C1FBCDCDA00A1D89A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750FA20B1FBCDCDA00A1D89A /* ViewController.swift */; };
 		750FA20F1FBCDCDA00A1D89A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750FA20D1FBCDCDA00A1D89A /* Main.storyboard */; };
 		750FA2111FBCDCDA00A1D89A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 750FA2101FBCDCDA00A1D89A /* Assets.xcassets */; };
 		750FA2141FBCDCDA00A1D89A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750FA2121FBCDCDA00A1D89A /* LaunchScreen.storyboard */; };
+		750FA21C1FBCDE7B00A1D89A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750FA21B1FBCDE7B00A1D89A /* HomeViewController.swift */; };
+		75E9E8621FBE218900A51F89 /* PlayerInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E9E8611FBE218900A51F89 /* PlayerInformationTableViewController.swift */; };
+		75E9E8641FBE219D00A51F89 /* PlayerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E9E8631FBE219D00A51F89 /* PlayerDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		750FA2061FBCDCDA00A1D89A /* Time on Ice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time on Ice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		750FA20B1FBCDCDA00A1D89A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		750FA20E1FBCDCDA00A1D89A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		750FA2101FBCDCDA00A1D89A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		750FA2131FBCDCDA00A1D89A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		750FA2151FBCDCDA00A1D89A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		750FA21B1FBCDE7B00A1D89A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		75E9E8611FBE218900A51F89 /* PlayerInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationTableViewController.swift; sourceTree = "<group>"; };
+		75E9E8631FBE219D00A51F89 /* PlayerDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +59,23 @@
 			isa = PBXGroup;
 			children = (
 				750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */,
-				750FA20B1FBCDCDA00A1D89A /* ViewController.swift */,
 				750FA20D1FBCDCDA00A1D89A /* Main.storyboard */,
 				750FA2101FBCDCDA00A1D89A /* Assets.xcassets */,
 				750FA2121FBCDCDA00A1D89A /* LaunchScreen.storyboard */,
 				750FA2151FBCDCDA00A1D89A /* Info.plist */,
+				750FA21B1FBCDE7B00A1D89A /* HomeViewController.swift */,
+				75E9E8651FBE21A200A51F89 /* Players */,
 			);
 			path = "Time on Ice";
+			sourceTree = "<group>";
+		};
+		75E9E8651FBE21A200A51F89 /* Players */ = {
+			isa = PBXGroup;
+			children = (
+				75E9E8611FBE218900A51F89 /* PlayerInformationTableViewController.swift */,
+				75E9E8631FBE219D00A51F89 /* PlayerDetailsViewController.swift */,
+			);
+			path = Players;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +150,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				750FA20C1FBCDCDA00A1D89A /* ViewController.swift in Sources */,
 				750FA20A1FBCDCDA00A1D89A /* AppDelegate.swift in Sources */,
+				75E9E8621FBE218900A51F89 /* PlayerInformationTableViewController.swift in Sources */,
+				75E9E8641FBE219D00A51F89 /* PlayerDetailsViewController.swift in Sources */,
+				750FA21C1FBCDE7B00A1D89A /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,13 +291,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KTQBE53LG7;
+				DEVELOPMENT_TEAM = 28DUX73466;
 				INFOPLIST_FILE = "Time on Ice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.paulsurette.Time-on-Ice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -290,13 +306,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KTQBE53LG7;
+				DEVELOPMENT_TEAM = 28DUX73466;
 				INFOPLIST_FILE = "Time on Ice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.paulsurette.Time-on-Ice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
