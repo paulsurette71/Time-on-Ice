@@ -22,13 +22,8 @@ class PlayerDetailsTableViewController: UITableViewController {
     //UILabel
     @IBOutlet weak var ageLabel: UILabel!
     
-    
-    
-    
     //Classes
     let calculate = Calculate()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
