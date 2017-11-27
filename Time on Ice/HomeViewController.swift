@@ -44,7 +44,7 @@ class HomeViewController: UIViewController {
     let timeFormat = TimeFormat()
     
     //temp array for test data
-    var playerArray = [PlayerInformation]()
+    var playerArray       = [PlayerInformation]()
     var playersOnIceArray = [PlayerInformation]()
     
     override func viewDidLoad() {
@@ -60,6 +60,7 @@ class HomeViewController: UIViewController {
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayersOnIceTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playersOnIceTableViewCell")
+        tableView.rowHeight = 60
         
         // collectionView delegate
         collectionView.delegate   = self
@@ -78,7 +79,7 @@ class HomeViewController: UIViewController {
         //setupUI
         setupUI()
         
-    }
+    }  //viewDidLoad
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -120,12 +121,10 @@ class HomeViewController: UIViewController {
             playerArray[rows].runningTimeOnIce += 1
             playerArray[rows].timeOnIce += 1
             tableView.reloadData()
-        }
+            
+        }  //rows
         
-        print("timerCounter \(timerCounter)")
-        print("runningTotalCounter \(runningTotalCounter)")
-        
-    }
+    }  //startTimer
     
     func collectionViewLayout() {
         
@@ -135,12 +134,13 @@ class HomeViewController: UIViewController {
         layout.minimumLineSpacing = 5
         collectionView!.collectionViewLayout = layout
         
-    }
+    }  //collectionViewLayout
     
     func setupUI () {
         
         playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playerArray.count)
-    }
+        
+    }  //setupUI
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -199,6 +199,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             playerArray[indexPath.row].timeOnIce = 0
             playerArray[indexPath.row].shifts += 1
             
+            
         } else {
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
@@ -209,8 +210,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
         
+        //Update players on bench
+        let playersOnBench = playerArray.count - tappedArray.count
+        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench)
+
         tableView.reloadData()
-        print("tappedArray \(tappedArray)")
         
     }  //didSelectItemAt
     
@@ -223,13 +227,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         print("\(self) -> \(#function)")
         
         return 1
-    }
+        
+    }  //numberOfSections
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("\(self) -> \(#function)")
         
         return tappedArray.count
-    }
+        
+    }  //numberOfRowsInSection
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("\(self) -> \(#function)")
@@ -238,13 +244,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let player = playerArray[tappedArray[indexPath.row]]
         
-        cell.playerNumberLabel.text                = String(player.number)
-        cell.playerNameLabel.text                  = player.firstName + " " + player.lastName
-        cell.playerTimerLabel.text                 = timeFormat.mmSS(totalSeconds: player.timeOnIce)
-        cell.timeOnIceLabel.text                   = "ToI: \(timeFormat.mmSS(totalSeconds: player.runningTimeOnIce))"
-        cell.shiftsLabel.text                      = "Shifts: \(player.shifts)"
+        cell.playerNumberLabel.text          = String(player.number)
+        cell.playerNameLabel.attributedText  = createAttributedString.forFirstNameLastName(firstName: player.firstName, lastName: player.lastName)
+        cell.playerTimerLabel.attributedText = createAttributedString.forTimeOnIce(timeInSeconds: player.timeOnIce)
+        cell.timeOnIceLabel.attributedText   = createAttributedString.forTotalTimeOnIce(timeInSeconds: player.runningTimeOnIce)
+        cell.shiftsLabel.attributedText      = createAttributedString.forNumberOfShifts(numberOfShifts: player.shifts)
         
         return cell
-    }
+    }  //cellForRowAt
     
 }  //extension

@@ -11,6 +11,8 @@ import UIKit
 
 class CreateAttributedString {
     
+    let timeFormat = TimeFormat()
+    
     func forPlayersOnBench(numberOfPlayers: Int) -> NSMutableAttributedString {
         
         let staticAttributedString = NSMutableAttributedString(string: "Players on Bench")
@@ -35,7 +37,17 @@ class CreateAttributedString {
     
     func forPlayersOnIce(numberOfPlayers: Int) -> NSMutableAttributedString  {
         
-        let staticAttributedString = NSMutableAttributedString(string: "Players on Ice")
+        var staticAttributedString = NSMutableAttributedString()
+        
+        if numberOfPlayers > 1 {
+            
+            staticAttributedString = NSMutableAttributedString(string: "Players on Ice")
+            
+        } else {
+            
+            staticAttributedString = NSMutableAttributedString(string: "Player on Ice")
+        }
+        
         let spaceAttributedString  = NSMutableAttributedString(string: " ")
         
         let numberOfPlayersAttributedString = NSMutableAttributedString(string: String(numberOfPlayers))
@@ -55,41 +67,103 @@ class CreateAttributedString {
         
     }  //forPlayersOnIce
     
-    func forPlayersOnIceBeingTimed( playerNumber: Int, firstName: String, lastName: String, position: Position) -> NSMutableAttributedString {
-        
-        let playerNumberAttributedString = NSMutableAttributedString(string: String(playerNumber))
-        playerNumberAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.heavy), range: NSMakeRange(0, playerNumberAttributedString.length))
+    func forFirstNameLastName( firstName: String, lastName: String) -> NSMutableAttributedString {
         
         let firstNameAttributedString = NSMutableAttributedString(string: firstName)
         firstNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.light), range: NSMakeRange(0, firstNameAttributedString.length))
         
-        let dashAttributedString  = NSMutableAttributedString(string: "-")
-        dashAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.regular), range: NSMakeRange(0, dashAttributedString.length))
-
         let lastNameAttributedString = NSMutableAttributedString(string: lastName)
-        lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold), range: NSMakeRange(0, lastNameAttributedString.length))
+        lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, lastNameAttributedString.length))
         
-        let positionAttributedString = NSMutableAttributedString(string: position.rawValue)
-        positionAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.regular), range: NSMakeRange(0, positionAttributedString.length))
         
         let combination = NSMutableAttributedString()
         
         let spaceAttributedString  = NSMutableAttributedString(string: " ")
-
         
-        //47 - Lucas Surette LW
-        combination.append(playerNumberAttributedString)
-        combination.append(spaceAttributedString)
-        combination.append(dashAttributedString)
-        combination.append(spaceAttributedString)
+        //Lucas Surette
         combination.append(firstNameAttributedString)
         combination.append(spaceAttributedString)
         combination.append(lastNameAttributedString)
-//        combination.append(spaceAttributedString)
-//        combination.append(positionAttributedString)
         
         return combination
         
-    }  //forPlayersOnIceBeingTimed
+    }  //forFirstNameLastName
+    
+    func forTotalTimeOnIce(timeInSeconds: Int) -> NSMutableAttributedString {
+        
+        let timeOnIceAttributedString = NSMutableAttributedString(string: "ToI")
+        timeOnIceAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, timeOnIceAttributedString.length))
+        
+        let convertedTime = timeFormat.mmSS(totalSeconds: timeInSeconds)
+        
+        let iceTimeAttributedString = NSMutableAttributedString(string: convertedTime)
+        iceTimeAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.thin), range: NSMakeRange(0, iceTimeAttributedString.length))
+        
+        
+        let combination = NSMutableAttributedString()
+        
+        let spaceAttributedString  = NSMutableAttributedString(string: " ")
+        
+        //00:00
+        combination.append(timeOnIceAttributedString)
+        combination.append(spaceAttributedString)
+        combination.append(iceTimeAttributedString)
+        
+        return combination
+        
+    }  //forTotalTimeOnIce
+    
+    func forNumberOfShifts(numberOfShifts: Int) -> NSMutableAttributedString {
+        
+        let shiftsAttributedString = NSMutableAttributedString(string: "Shifts")
+        shiftsAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, shiftsAttributedString.length))
+        
+        let numberOfShiftsAttributedString = NSMutableAttributedString(string: String(numberOfShifts))
+        numberOfShiftsAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.thin), range: NSMakeRange(0, numberOfShiftsAttributedString.length))
+        
+        
+        let combination = NSMutableAttributedString()
+        
+        let spaceAttributedString  = NSMutableAttributedString(string: " ")
+        
+        //00:00
+        combination.append(shiftsAttributedString)
+        combination.append(spaceAttributedString)
+        combination.append(numberOfShiftsAttributedString)
+        
+        return combination
+        
+    }  //forNumberOfShifts
+    
+    func forTimeOnIce(timeInSeconds: Int) -> NSMutableAttributedString {
+        
+        let convertedTime = timeFormat.mmSS(totalSeconds: timeInSeconds)
+        
+        let iceTimeAttributedString = NSMutableAttributedString(string: convertedTime)
+        iceTimeAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy), range: NSMakeRange(0, iceTimeAttributedString.length))
+        
+        if timeInSeconds <= 30 {
+            iceTimeAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.black, range: NSMakeRange(0, iceTimeAttributedString.length))
+            
+//        } else if timeInSeconds > 15 && timeInSeconds <= 45 {
+//
+//            iceTimeAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.yellow, range: NSMakeRange(0, iceTimeAttributedString.length))
+        } else if timeInSeconds > 30 {
+            iceTimeAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.red, range: NSMakeRange(0, iceTimeAttributedString.length))
+        }
+        
+        
+        
+        let combination = NSMutableAttributedString()
+        
+        
+        //00:00
+        
+        combination.append(iceTimeAttributedString)
+        
+        return combination
+        
+    }  //forTimeOnIce
+    
     
 }  //CreateAttributedString

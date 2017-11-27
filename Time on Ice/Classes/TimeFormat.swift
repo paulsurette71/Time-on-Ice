@@ -15,7 +15,7 @@ class TimeFormat {
         let minutes = totalSeconds / 60
         let seconds = totalSeconds % 60
 
-        let timeAsString = String(format:"%02d:%02ds", minutes, seconds)
+        let timeAsString = String(format:"%02d:%02d", minutes, seconds)
         
         return timeAsString
         
