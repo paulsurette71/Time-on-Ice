@@ -10,6 +10,7 @@ import UIKit
 
 class BenchCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var totalTimeOnIceLabel: UILabel!
     @IBOutlet weak var cellBackgroundImageView: UIImageView!
     
     @IBOutlet weak var playerNumberLabel: UILabel!

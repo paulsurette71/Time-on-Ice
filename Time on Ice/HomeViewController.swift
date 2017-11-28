@@ -115,7 +115,6 @@ class HomeViewController: UIViewController {
         runningTotalCounter += 1
         timerCounter += 0
         
-        
         for rows in tappedArray {
             
             playerArray[rows].runningTimeOnIce += 1
@@ -165,18 +164,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "benchCell", for: indexPath) as! BenchCollectionViewCell
         
-        cell.playerNumberLabel.text    = String(playerArray[indexPath.row].number)
-        cell.playerLastNameLabel.text  = playerArray[indexPath.row].lastName
+        cell.playerNumberLabel.text   = String(playerArray[indexPath.row].number)
+        cell.playerLastNameLabel.text = playerArray[indexPath.row].lastName
+        
         
         if tappedArray.count > 0 {
             
             if tappedArray.contains(indexPath.row) {
                 
-                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_green")
+                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
                 
             } else {
                 
                 cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
+                
+                
             }
         }
         
@@ -185,14 +187,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }  //cellForItemAt
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         print("\(self) -> \(#function)")
         
         let cell = collectionView.cellForItem(at: indexPath) as! BenchCollectionViewCell
         
         if cell.cellBackgroundImageView.image == UIImage(named: "collectionviewcell_60x60_white") {
             
-            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_green")
+            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
             
             tappedArray.append(indexPath.row)
             
@@ -204,6 +205,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
             
+            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: playerArray[indexPath.row].runningTimeOnIce)
+            
             tappedArray = tappedArray.filter { $0 != indexPath.row }
             
         }
@@ -213,7 +216,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         //Update players on bench
         let playersOnBench = playerArray.count - tappedArray.count
         playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench)
-
+        
         tableView.reloadData()
         
     }  //didSelectItemAt

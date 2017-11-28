@@ -23,31 +23,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="BBf-il-NLE">
-                        <rect key="frame" x="7.5" y="13" width="55" height="45.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="BBf-il-NLE">
+                        <rect key="frame" x="7.5" y="5" width="55" height="60"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M9-IF-gfF">
-                                <rect key="frame" x="8.5" y="0.0" width="38.5" height="33.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M9-IF-gfF">
+                                <rect key="frame" x="0.0" y="0.0" width="55" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surette" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KJu-Oa-wOA">
-                                <rect key="frame" x="4" y="28.5" width="47" height="17"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KJu-Oa-wOA">
+                                <rect key="frame" x="0.0" y="19.5" width="55" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2h6-IE-3Vg">
+                                <rect key="frame" x="0.0" y="38.5" width="55" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="width" constant="55" id="GIZ-rl-9GC"/>
+                            <constraint firstAttribute="width" constant="55" id="8b7-9b-xUw"/>
+                            <constraint firstAttribute="height" constant="60" id="XbU-de-d0b"/>
                         </constraints>
                     </stackView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="BBf-il-NLE" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Ap9-cR-UUv"/>
-                <constraint firstItem="BBf-il-NLE" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="KZR-fi-NpY"/>
+                <constraint firstItem="BBf-il-NLE" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="5Ah-rQ-GF8"/>
+                <constraint firstItem="BBf-il-NLE" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Gr0-Bq-8yt"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="265" height="314"/>
@@ -55,6 +62,7 @@
                 <outlet property="cellBackgroundImageView" destination="ylK-3l-P2a" id="L4b-2H-AKz"/>
                 <outlet property="playerLastNameLabel" destination="KJu-Oa-wOA" id="qgy-aU-CwP"/>
                 <outlet property="playerNumberLabel" destination="2M9-IF-gfF" id="4oz-AN-I9y"/>
+                <outlet property="totalTimeOnIceLabel" destination="2h6-IE-3Vg" id="3qL-Yc-cdb"/>
             </connections>
             <point key="canvasLocation" x="-371" y="205"/>
         </collectionViewCell>
