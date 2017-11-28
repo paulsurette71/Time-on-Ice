@@ -100,7 +100,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YFh-g2-Ipm" userLabel="Clock Stack View">
                                 <rect key="frame" x="274" y="386" width="85.5" height="51.5"/>
                                 <subviews>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jb1-Kx-uTP">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jb1-Kx-uTP">
                                         <rect key="frame" x="18.5" y="0.0" width="51" height="31"/>
                                         <color key="onTintColor" name="gryphonBlue"/>
                                         <connections>

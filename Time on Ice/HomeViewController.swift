@@ -89,6 +89,15 @@ class HomeViewController: UIViewController {
     
     @IBAction func toggleClock(_ sender: Any) {
         
+        guard tappedArray.count > 0 else {
+            
+            clockSwitch.isEnabled = false
+            
+            return
+        }
+        
+        clockSwitch.isEnabled = true
+        
         if (sender as! UISwitch).isOn {
             
             clockStatusLabel.text = clockStatus.on.rawValue
@@ -102,7 +111,7 @@ class HomeViewController: UIViewController {
             timerCounter = 0
             
             //stop the timer
-            timer.invalidate()
+            stopTimer()
         }
     }
     
@@ -124,6 +133,12 @@ class HomeViewController: UIViewController {
         }  //rows
         
     }  //startTimer
+    
+    func stopTimer()  {
+        
+        clockStatusLabel.text = clockStatus.off.rawValue
+        timer.invalidate()
+    }
     
     func collectionViewLayout() {
         
@@ -167,7 +182,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.playerNumberLabel.text   = String(playerArray[indexPath.row].number)
         cell.playerLastNameLabel.text = playerArray[indexPath.row].lastName
         
-        
         if tappedArray.count > 0 {
             
             if tappedArray.contains(indexPath.row) {
@@ -177,7 +191,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             } else {
                 
                 cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-                
                 
             }
         }
@@ -209,6 +222,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             tappedArray = tappedArray.filter { $0 != indexPath.row }
             
+            //If there is no one on the ice, stop and disable the clock.
+            if tappedArray.count == 0 {
+                
+                clockSwitch.isOn      = false
+                clockSwitch.isEnabled = false
+                stopTimer()
+            }
+            
+        }
+        
+        if tappedArray.count > 0 {
+            
+            clockSwitch.isEnabled = true
         }
         
         playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
