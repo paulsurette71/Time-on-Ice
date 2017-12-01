@@ -210,7 +210,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ixn-oC-USV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Ixn-oC-USV">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ixn-oC-USV" id="CwX-im-Y8M">
@@ -402,8 +402,9 @@
                                                             <rect key="frame" x="178" y="0.0" width="167" height="53"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mjc-2z-7qu">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="167" height="27.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="167" height="24"/>
                                                                     <constraints>
+                                                                        <constraint firstAttribute="height" constant="24" id="stR-U6-jCC"/>
                                                                         <constraint firstAttribute="width" constant="167" id="wZN-4p-45g"/>
                                                                     </constraints>
                                                                     <nil key="textColor"/>
@@ -411,12 +412,13 @@
                                                                     <textInputTraits key="textInputTraits" textContentType="family-name"/>
                                                                 </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separatorLine167px" translatesAutoresizingMaskIntoConstraints="NO" id="XeY-f1-QwX">
-                                                                    <rect key="frame" x="0.0" y="29.5" width="167" height="1"/>
+                                                                    <rect key="frame" x="0.0" y="26" width="167" height="1"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwz-3K-NFe">
-                                                                    <rect key="frame" x="0.0" y="32.5" width="167" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="29" width="167" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="167" id="UQw-G1-VRW"/>
+                                                                        <constraint firstAttribute="height" constant="24" id="vzr-wD-M3N"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -876,13 +878,25 @@
                     <connections>
                         <outlet property="ageLabel" destination="6kJ-1v-nGH" id="YUf-Ak-NOt"/>
                         <outlet property="cameraButton" destination="DLR-3r-A1C" id="aFA-l7-5ge"/>
+                        <outlet property="cityTextField" destination="SyV-6z-H3m" id="VdG-I7-W9p"/>
                         <outlet property="datePicker" destination="ef6-84-JyE" id="Vin-HZ-1Wo"/>
+                        <outlet property="divisionTextField" destination="vR3-oT-cAh" id="d1d-vf-ABg"/>
+                        <outlet property="firstNameTextField" destination="RoM-5f-FEO" id="Iu9-hl-YAu"/>
                         <outlet property="headShotImageView" destination="Obc-Ia-GKl" id="8iq-M4-2JY"/>
+                        <outlet property="heightTextField" destination="JLT-ue-tah" id="yJU-fY-h8V"/>
+                        <outlet property="lastNameTextField" destination="mjc-2z-7qu" id="rwC-lW-awg"/>
+                        <outlet property="leagueTextField" destination="3X7-3W-ea9" id="LlN-tm-tOP"/>
+                        <outlet property="levelTextField" destination="6kQ-ER-6Hx" id="Zdw-vQ-bzl"/>
+                        <outlet property="numberTextField" destination="3xA-Bg-lQO" id="XfM-YF-fiL"/>
+                        <outlet property="positionTextField" destination="qVO-RT-WM0" id="LZJ-xV-nrW"/>
+                        <outlet property="shootsTextField" destination="boo-Ug-oPo" id="okR-KL-hqT"/>
+                        <outlet property="teamTextField" destination="WBe-EC-t2e" id="zX4-T2-yxu"/>
+                        <outlet property="weightTextField" destination="NfO-GT-VQ2" id="7Zf-mJ-GKP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1af-aq-aCU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2222" y="566"/>
+            <point key="canvasLocation" x="3177" y="575"/>
         </scene>
         <!--Players-->
         <scene sceneID="Pq8-GJ-o5t">

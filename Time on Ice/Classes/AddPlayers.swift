@@ -16,33 +16,38 @@ enum Position: String {
     case g  = "Goalie"
 }
 
-struct PlayerInformation {
+struct Player {
     let firstName: String
     let lastName: String
     let position: Position
     let number: Int
-    var timeOnIce: Int
-    var runningTimeOnIce: Int
-    var shifts: Int
+
 }
+
+struct Shift {
+    let player: Player
+    var timeOnIce: Int
+    var dateOnIce: Date
+}
+
 class AddPlayers {
     
-    func addTestPlayers() -> [PlayerInformation] {
+    func addTestPlayers() -> [Player] {
         
-        var playerInformationArray = [PlayerInformation]()
+        var playerInformationArray = [Player]()
         
-        let sidneyCrosby      = PlayerInformation.init(firstName: "Sidney", lastName: "Crosby", position: Position.c, number: 87, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let alexOvechkin      = PlayerInformation.init(firstName: "Alex", lastName: "Ovechkin", position: Position.lw, number: 8, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let patrickKane       = PlayerInformation.init(firstName: "Patrick", lastName: "Kane", position: Position.rw, number: 88, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let stevenStamkos     = PlayerInformation.init(firstName: "Steven", lastName: "Stamkos", position: Position.c, number: 91, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let jamieBenn         = PlayerInformation.init(firstName: "Jamie", lastName: "Benn", position: Position.lw, number: 14, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let johnTavares       = PlayerInformation.init(firstName: "John", lastName: "Tavares", position: Position.c, number: 91, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let pkSubban          = PlayerInformation.init(firstName: "P.K.", lastName: "Subban", position: Position.d, number: 76, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let jaromirJagr       = PlayerInformation.init(firstName: "Jaromir", lastName: "Jagr", position: Position.rw, number: 68, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let careyPrice        = PlayerInformation.init(firstName: "Carey", lastName: "Price", position: Position.g, number: 31, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let connorMcDavid     = PlayerInformation.init(firstName: "Connor", lastName: "McDavid", position: Position.c, number: 97, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let vladimirTarasenko = PlayerInformation.init(firstName: "Vladimir", lastName: "Tarasenko", position: Position.rw, number: 91, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
-        let henrikLundqvist   = PlayerInformation.init(firstName: "Henrik", lastName: "Lundqvist", position: Position.g, number: 30, timeOnIce: 0, runningTimeOnIce: 0, shifts: 0)
+        let sidneyCrosby      = Player(firstName: "Sidney", lastName: "Crosby", position: Position.c, number: 87)
+        let alexOvechkin      = Player(firstName: "Alex", lastName: "Ovechkin", position: Position.lw, number: 8)
+        let patrickKane       = Player(firstName: "Patrick", lastName: "Kane", position: Position.rw, number: 88)
+        let stevenStamkos     = Player(firstName: "Steven", lastName: "Stamkos", position: Position.c, number: 91)
+        let jamieBenn         = Player(firstName: "Jamie", lastName: "Benn", position: Position.lw, number: 14)
+        let johnTavares       = Player(firstName: "John", lastName: "Tavares", position: Position.c, number: 91)
+        let pkSubban          = Player(firstName: "P.K.", lastName: "Subban", position: Position.d, number: 76)
+        let jaromirJagr       = Player(firstName: "Jaromir", lastName: "Jagr", position: Position.rw, number: 68)
+        let careyPrice        = Player(firstName: "Carey", lastName: "Price", position: Position.g, number: 31)
+        let connorMcDavid     = Player(firstName: "Connor", lastName: "McDavid", position: Position.c, number: 97)
+        let vladimirTarasenko = Player(firstName: "Vladimir", lastName: "Tarasenko", position: Position.rw, number: 91)
+        let henrikLundqvist   = Player(firstName: "Henrik", lastName: "Lundqvist", position: Position.g, number: 30)
         
         
         playerInformationArray.append(sidneyCrosby)

@@ -7,8 +7,23 @@
 //
 
 import UIKit
+import CoreData
 
 class PlayerDetailsTableViewController: UITableViewController {
+    
+    //UITextField
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var numberTextField: UITextField!
+    @IBOutlet weak var positionTextField: UITextField!
+    @IBOutlet weak var shootsTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var teamTextField: UITextField!
+    @IBOutlet weak var leagueTextField: UITextField!
+    @IBOutlet weak var levelTextField: UITextField!
+    @IBOutlet weak var divisionTextField: UITextField!
+    @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField!
     
     //UIImageView
     @IBOutlet weak var headShotImageView: UIImageView!
@@ -25,23 +40,24 @@ class PlayerDetailsTableViewController: UITableViewController {
     //Classes
     let calculate = Calculate()
     
+    //JPEG Compresion
+    let bestQuality:CGFloat = 1.0
+    
+    //coredata
+    var managedContext: NSManagedObjectContext!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        newPlayer()
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 4
@@ -90,7 +106,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }
     
     @IBAction func camera(_ sender: Any) {
-    
+        
     }  //camera
     
     @IBAction func birthdate(_ sender: UIDatePicker) {
@@ -102,5 +118,39 @@ class PlayerDetailsTableViewController: UITableViewController {
         ageLabel.text = String(describing: age)
         
     }  //birthdate
+    
+    func newPlayer() {
+        
+        do {
+            
+            let entity = NSEntityDescription.entity(forEntityName: "Players", in: managedContext)
+            let player = Players(entity: entity!, insertInto: managedContext)
+            
+            player.firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.lastName  = lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.number    = numberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.position  = positionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.shoots    = shootsTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.city      = cityTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.team      = teamTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.league    = leagueTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.level     = levelTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.division  = divisionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.height    = heightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.weight    = weightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+
+            //HeadShot
+            let headshot     = UIImageJPEGRepresentation(headShotImageView.image!, bestQuality) as NSData?
+            player.headshot  = headshot
+            player.birthdate = datePicker.date as NSDate?
+            
+            //Save
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            print("PlayerDetailsTableViewController|newPlayer: Fetch error: \(error) description: \(error.userInfo)")
+       
+        }  //do
+    }  //newPlayer
     
 }  //PlayerDetailsTableViewController
