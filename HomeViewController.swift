@@ -9,6 +9,20 @@
 import UIKit
 import CoreData
 
+enum Position: String {
+    case leftWing  = "Left Wing"
+    case rightWing = "Right Wing"
+    case centre    = "Centre"
+    case defense   = "Defense"
+    case goalie    = "Goalie"
+}
+
+enum Shoots: String {
+    case left  = "Left"
+    case right = "Right"
+    case both  = "Switch"
+}
+
 class HomeViewController: UIViewController {
     
     enum clockStatus: String {
@@ -170,7 +184,13 @@ class HomeViewController: UIViewController {
         playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playerArray.count)
         
     }  //setupUI
-}
+    
+}  //ShotDetailsPopover
+
+    
+    
+    
+
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -314,3 +334,5 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }  //cellForRowAt
     
 }  //extension
+
+

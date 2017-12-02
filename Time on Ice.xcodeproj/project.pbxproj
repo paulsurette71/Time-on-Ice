@@ -20,6 +20,8 @@
 		75292ECC1FD1962000CE5DCC /* Players+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292EC61FD1962000CE5DCC /* Players+CoreDataClass.swift */; };
 		75292ECD1FD1962000CE5DCC /* Players+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292EC71FD1962000CE5DCC /* Players+CoreDataProperties.swift */; };
 		75292ECF1FD196FB00CE5DCC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292ECE1FD196FB00CE5DCC /* CoreDataStack.swift */; };
+		75292F191FD1EE7F00CE5DCC /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292F181FD1EE7F00CE5DCC /* Picker.swift */; };
+		75292F1B1FD1F38F00CE5DCC /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292F1A1FD1F38F00CE5DCC /* PopoverViewController.swift */; };
 		75561F9A1FC6415C009079EC /* AddPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75561F991FC6415C009079EC /* AddPlayers.swift */; };
 		7574B3CB1FC8CE7E00CF4214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7574B3CA1FC8CE7E00CF4214 /* Assets.xcassets */; };
 		75795AD11FC358F8006A52D7 /* PlayerDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */; };
@@ -49,6 +51,8 @@
 		75292EC61FD1962000CE5DCC /* Players+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Players+CoreDataClass.swift"; sourceTree = "<group>"; };
 		75292EC71FD1962000CE5DCC /* Players+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Players+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75292ECE1FD196FB00CE5DCC /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		75292F181FD1EE7F00CE5DCC /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
+		75292F1A1FD1F38F00CE5DCC /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		75561F991FC6415C009079EC /* AddPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayers.swift; sourceTree = "<group>"; };
 		7574B3CA1FC8CE7E00CF4214 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsTableViewController.swift; sourceTree = "<group>"; };
@@ -76,8 +80,16 @@
 		750FA1FD1FBCDCDA00A1D89A = {
 			isa = PBXGroup;
 			children = (
+				75292F1A1FD1F38F00CE5DCC /* PopoverViewController.swift */,
+				750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */,
+				750FA2151FBCDCDA00A1D89A /* Info.plist */,
+				750FA21B1FBCDE7B00A1D89A /* HomeViewController.swift */,
+				75D803A51FC8D6920084B97E /* PlayersOnIceTableViewCell.swift */,
+				75D803A61FC8D6930084B97E /* PlayersOnIceTableViewCell.xib */,
+				75F977F71FC4CA41006506A4 /* Classes */,
+				75F977F81FC4CA4D006506A4 /* Storyboard */,
+				75E9E8651FBE21A200A51F89 /* Players */,
 				75E333A81FD0E4AB00408317 /* CoreData */,
-				750FA2081FBCDCDA00A1D89A /* Time on Ice */,
 				750FA2071FBCDCDA00A1D89A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,21 +100,6 @@
 				750FA2061FBCDCDA00A1D89A /* Time on Ice.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		750FA2081FBCDCDA00A1D89A /* Time on Ice */ = {
-			isa = PBXGroup;
-			children = (
-				75F977F81FC4CA4D006506A4 /* Storyboard */,
-				750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */,
-				750FA2151FBCDCDA00A1D89A /* Info.plist */,
-				750FA21B1FBCDE7B00A1D89A /* HomeViewController.swift */,
-				75D803A51FC8D6920084B97E /* PlayersOnIceTableViewCell.swift */,
-				75D803A61FC8D6930084B97E /* PlayersOnIceTableViewCell.xib */,
-				75E9E8651FBE21A200A51F89 /* Players */,
-				75F977F71FC4CA41006506A4 /* Classes */,
-			);
-			path = "Time on Ice";
 			sourceTree = "<group>";
 		};
 		75E333A81FD0E4AB00408317 /* CoreData */ = {
@@ -139,6 +136,7 @@
 				75561F991FC6415C009079EC /* AddPlayers.swift */,
 				75E304EF1FCC6AF30010C708 /* CreateAttributedString.swift */,
 				75E304F11FCC96E50010C708 /* TimeFormat.swift */,
+				75292F181FD1EE7F00CE5DCC /* Picker.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -239,6 +237,8 @@
 				75795AD31FC37B6B006A52D7 /* Calculate.swift in Sources */,
 				75E304F01FCC6AF30010C708 /* CreateAttributedString.swift in Sources */,
 				75292ECB1FD1962000CE5DCC /* Games+CoreDataProperties.swift in Sources */,
+				75292F191FD1EE7F00CE5DCC /* Picker.swift in Sources */,
+				75292F1B1FD1F38F00CE5DCC /* PopoverViewController.swift in Sources */,
 				750FA21C1FBCDE7B00A1D89A /* HomeViewController.swift in Sources */,
 				75292ECC1FD1962000CE5DCC /* Players+CoreDataClass.swift in Sources */,
 				75561F9A1FC6415C009079EC /* AddPlayers.swift in Sources */,
@@ -384,7 +384,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 28DUX73466;
-				INFOPLIST_FILE = "Time on Ice/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.paulsurette.Time-on-Ice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,7 +399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 28DUX73466;
-				INFOPLIST_FILE = "Time on Ice/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.paulsurette.Time-on-Ice";
 				PRODUCT_NAME = "$(TARGET_NAME)";

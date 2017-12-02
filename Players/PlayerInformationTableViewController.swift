@@ -14,7 +14,8 @@ class PlayerInformationTableViewController: UITableViewController {
     //coredata
     var managedContext: NSManagedObjectContext!
     var fetchedResultsController: NSFetchedResultsController<Players>!
-    
+    var selectedPlayer: Players?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +39,15 @@ class PlayerInformationTableViewController: UITableViewController {
         tableView.reloadData()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("\(self) -> \(#function)")
+        
+        tableView.reloadData()
+    }
+    
+    
     
     // MARK: - Table view data source
     
@@ -122,7 +132,32 @@ class PlayerInformationTableViewController: UITableViewController {
         
         let playerDetailsTableViewController = segue.destination as! PlayerDetailsTableViewController
         
-        playerDetailsTableViewController.managedContext = managedContext
+        if segue.identifier == "newSegue" {
+            
+            print("Create new player")
+            
+            playerDetailsTableViewController.managedContext = managedContext
+            playerDetailsTableViewController.newPlayer = true
+            
+        }
+        
+        if segue.identifier == "updateSegue" {
+            
+            print("Update this player")
+            
+            playerDetailsTableViewController.newPlayer = false
+            
+            if let indexPath = tableView.indexPathForSelectedRow{
+                
+                selectedPlayer = self.fetchedResultsController.object(at: indexPath as IndexPath)
+                print("selectedPlayer \(String(describing: selectedPlayer))")
+                
+                playerDetailsTableViewController.selectedPlayer = selectedPlayer
+                
+            }
+            
+            
+        }
         
     }  //prepare
 }
