@@ -35,9 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         playerInformationTableViewController.managedContext = coreDataStack.managedContext
         
         //Game Tab
-        
-        //Pretty it up
-        
+                
         return true
     }
     

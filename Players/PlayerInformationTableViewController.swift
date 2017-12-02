@@ -15,11 +15,31 @@ class PlayerInformationTableViewController: UITableViewController {
     var managedContext: NSManagedObjectContext!
     var fetchedResultsController: NSFetchedResultsController<Players>!
     var selectedPlayer: Players?
-
+    
+    let createAttributedString = CreateAttributedString()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("\(self) -> \(#function)")
         
-        print("PlayerInformationTableViewController|managedContext \(managedContext)")
+        
+        // Register tableView cell classes
+        let cellNib = UINib(nibName: "PlayerInformationTableViewCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "playerInformationTableViewCell")
+        tableView.rowHeight = 90
+        
+        goFetch()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("\(self) -> \(#function)")
+        
+        goFetch()
+    }
+    
+    func goFetch() {
+        print("\(self) -> \(#function)")
         
         let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
         let sort = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
@@ -40,54 +60,58 @@ class PlayerInformationTableViewController: UITableViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("\(self) -> \(#function)")
-        
-        tableView.reloadData()
-    }
-    
-    
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        print("\(self) -> \(#function)")
+        
         return fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("\(self) -> \(#function)")
+        
         let sectionInfo = fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let event = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withEvent: event)
+        print("\(self) -> \(#function)")
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "playerInformationTableViewCell", for: indexPath) as! PlayerInformationTableViewCell
+        
+        let results = fetchedResultsController.object(at: indexPath)
+        configureCell(cell, withPlayer: results)
         return cell
     }
     
-    func configureCell(_ cell: UITableViewCell, withEvent event: Players) {
-        cell.textLabel!.text = event.lastName
+    func configureCell(_ cell: PlayerInformationTableViewCell, withPlayer player: Players) {
+        print("\(self) -> \(#function)")
+                
+        cell.numberLabel.text = player.number
+        
+        let playerInformation = createAttributedString.forFirstNameLastNameDivisionLevel(firstName: player.firstName!, lastName: player.lastName!, divsion: player.division!, level: player.level!)
+        
+        cell.playerInformationLabel.attributedText = playerInformation
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
-        //http://stackoverflow.com/questions/19802336/changing-font-size-for-uitableview-section-headers
+        print("\(self) -> \(#function)")
         
         guard let header = view as? UITableViewHeaderFooterView else {
             return
         }
         
-        header.textLabel?.textColor = UIColor.black
-        header.textLabel?.font = UIFont.systemFont(ofSize: 17, weight: .heavy)
-        header.textLabel?.frame = header.frame
+        header.textLabel?.textColor     = UIColor.black
+        header.textLabel?.font          = UIFont.systemFont(ofSize: 24, weight: .heavy)
+        header.textLabel?.frame         = header.frame
         header.textLabel?.textAlignment = .left
-        
+        header.backgroundView?.backgroundColor = UIColor(named: "gryphonGold")
     }
-    
+
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        print("\(self) -> \(#function)")
         
         let sectionInfo = fetchedResultsController.sections?[section]
         return sectionInfo?.name
@@ -129,6 +153,7 @@ class PlayerInformationTableViewController: UITableViewController {
      */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("\(self) -> \(#function)")
         
         let playerDetailsTableViewController = segue.destination as! PlayerDetailsTableViewController
         

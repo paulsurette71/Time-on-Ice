@@ -200,6 +200,28 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     func updatePlayer()  {
         
+        do {
+            
+            selectedPlayer?.firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.lastName  = lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.number    = numberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.position  = positionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.shoots    = shootsTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.city      = cityTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.team      = teamTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.league    = leagueTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.level     = levelTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.division  = divisionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.height    = heightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.weight    = weightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            try selectedPlayer?.managedObjectContext?.save()
+            
+        } catch let error as NSError {
+            print("PlayerDetailsTableViewController|updatePlayer: Fetch error: \(error) description: \(error.userInfo)")
+        }
+        
+        
     }  //updatePlayer
     
     func showPopover(textField: UITextField, array: [Any], popoverTitle: String) {

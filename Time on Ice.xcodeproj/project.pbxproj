@@ -27,6 +27,8 @@
 		75795AD11FC358F8006A52D7 /* PlayerDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */; };
 		75795AD31FC37B6B006A52D7 /* Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75795AD21FC37B6B006A52D7 /* Calculate.swift */; };
 		7582620C1FC31D5C003044FF /* PlayerDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7582620B1FC31D5C003044FF /* PlayerDetailsView.xib */; };
+		758D35FE1FD2EEB80038BBDB /* PlayerInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758D35FC1FD2EEB80038BBDB /* PlayerInformationTableViewCell.swift */; };
+		758D35FF1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 758D35FD1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib */; };
 		75D803A71FC8D6930084B97E /* PlayersOnIceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D803A51FC8D6920084B97E /* PlayersOnIceTableViewCell.swift */; };
 		75D803A81FC8D6930084B97E /* PlayersOnIceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75D803A61FC8D6930084B97E /* PlayersOnIceTableViewCell.xib */; };
 		75E304F01FCC6AF30010C708 /* CreateAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E304EF1FCC6AF30010C708 /* CreateAttributedString.swift */; };
@@ -58,6 +60,8 @@
 		75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsTableViewController.swift; sourceTree = "<group>"; };
 		75795AD21FC37B6B006A52D7 /* Calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculate.swift; sourceTree = "<group>"; };
 		7582620B1FC31D5C003044FF /* PlayerDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailsView.xib; sourceTree = "<group>"; };
+		758D35FC1FD2EEB80038BBDB /* PlayerInformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationTableViewCell.swift; sourceTree = "<group>"; };
+		758D35FD1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerInformationTableViewCell.xib; sourceTree = "<group>"; };
 		75D803A51FC8D6920084B97E /* PlayersOnIceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersOnIceTableViewCell.swift; sourceTree = "<group>"; };
 		75D803A61FC8D6930084B97E /* PlayersOnIceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayersOnIceTableViewCell.xib; sourceTree = "<group>"; };
 		75E304EF1FCC6AF30010C708 /* CreateAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAttributedString.swift; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 				75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */,
 				751022F41FC61DD7000009EC /* BenchCollectionViewCell.swift */,
 				751022F51FC61DD7000009EC /* BenchCollectionViewCell.xib */,
+				758D35FC1FD2EEB80038BBDB /* PlayerInformationTableViewCell.swift */,
+				758D35FD1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib */,
 			);
 			path = Players;
 			sourceTree = "<group>";
@@ -211,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7582620C1FC31D5C003044FF /* PlayerDetailsView.xib in Resources */,
+				758D35FF1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib in Resources */,
 				750FA2141FBCDCDA00A1D89A /* LaunchScreen.storyboard in Resources */,
 				751022F71FC61DD7000009EC /* BenchCollectionViewCell.xib in Resources */,
 				750FA20F1FBCDCDA00A1D89A /* Main.storyboard in Resources */,
@@ -236,6 +243,7 @@
 				75D803A71FC8D6930084B97E /* PlayersOnIceTableViewCell.swift in Sources */,
 				75795AD31FC37B6B006A52D7 /* Calculate.swift in Sources */,
 				75E304F01FCC6AF30010C708 /* CreateAttributedString.swift in Sources */,
+				758D35FE1FD2EEB80038BBDB /* PlayerInformationTableViewCell.swift in Sources */,
 				75292ECB1FD1962000CE5DCC /* Games+CoreDataProperties.swift in Sources */,
 				75292F191FD1EE7F00CE5DCC /* Picker.swift in Sources */,
 				75292F1B1FD1F38F00CE5DCC /* PopoverViewController.swift in Sources */,

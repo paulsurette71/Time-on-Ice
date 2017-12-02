@@ -165,5 +165,37 @@ class CreateAttributedString {
         
     }  //forTimeOnIce
     
+    func forFirstNameLastNameDivisionLevel( firstName: String, lastName: String, divsion: String, level: String) -> NSMutableAttributedString {
+        
+        let firstNameAttributedString = NSMutableAttributedString(string: firstName)
+        firstNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.light), range: NSMakeRange(0, firstNameAttributedString.length))
+        
+        let lastNameAttributedString = NSMutableAttributedString(string: lastName)
+        lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy), range: NSMakeRange(0, lastNameAttributedString.length))
+        
+        let divisionAttributedString = NSMutableAttributedString(string: divsion)
+        divisionAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy), range: NSMakeRange(0, divisionAttributedString.length))
+
+        let levelAttributedString = NSMutableAttributedString(string: level)
+        levelAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy), range: NSMakeRange(0, levelAttributedString.length))
+
+        
+        let combination = NSMutableAttributedString()
+        
+        let spaceAttributedString  = NSMutableAttributedString(string: " ")
+        let dashAttributedString  = NSMutableAttributedString(string: " - ")
+        
+        //Lucas Surette - Novice AA
+        combination.append(firstNameAttributedString)
+        combination.append(spaceAttributedString)
+        combination.append(lastNameAttributedString)
+        combination.append(dashAttributedString)
+        combination.append(divisionAttributedString)
+        combination.append(spaceAttributedString)
+        combination.append(levelAttributedString)
+        return combination
+        
+    }  //forFirstNameLastNameDivisionLevel
+
     
 }  //CreateAttributedString
