@@ -54,9 +54,16 @@ class PlayerDetailsTableViewController: UITableViewController {
         }
     }
     
+    //Arrays
+    let shootsArray = ["Left", "Right"].sorted()
+    let positionArray = ["Defense", "Goalie", "Left Wing", "Right Wing", "Centre", "Forward"].sorted()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("\(self) -> \(#function)")
+        
+        //NotificationCenter
+        SetupNotificationCenter()
         
         //UITextFieldDelegate
         positionTextField.delegate = self
@@ -92,13 +99,11 @@ class PlayerDetailsTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         print("\(self) -> \(#function)")
         
-        
         return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("\(self) -> \(#function)")
-        
         
         switch section {
         case 0:
@@ -117,7 +122,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         print("\(self) -> \(#function)")
-        
         
         if section == 0 {
             return 0  //hide the first section
@@ -147,12 +151,10 @@ class PlayerDetailsTableViewController: UITableViewController {
     @IBAction func camera(_ sender: Any) {
         print("\(self) -> \(#function)")
         
-        
     }  //camera
     
     @IBAction func birthdate(_ sender: UIDatePicker) {
         print("\(self) -> \(#function)")
-        
         
         let birthdate = sender.date
         
@@ -164,7 +166,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     func saveNewPlayer() {
         print("\(self) -> \(#function)")
-        
         
         do {
             
@@ -199,6 +200,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //saveNewPlayer
     
     func updatePlayer()  {
+        print("\(self) -> \(#function)")
         
         do {
             
@@ -220,7 +222,6 @@ class PlayerDetailsTableViewController: UITableViewController {
         } catch let error as NSError {
             print("PlayerDetailsTableViewController|updatePlayer: Fetch error: \(error) description: \(error.userInfo)")
         }
-        
         
     }  //updatePlayer
     
@@ -306,6 +307,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //configureView
     
     func calculateBirthDate(birthdate: Date) -> Int {
+        print("\(self) -> \(#function)")
         
         let calendar = NSCalendar.current
         
@@ -313,13 +315,42 @@ class PlayerDetailsTableViewController: UITableViewController {
         
         return components.year!
         
-    }
+    }  //calculateBirthDate
+    
+    func SetupNotificationCenter()  {
+        print("\(self) -> \(#function)")
+        
+        let positionNotificationCenter = NotificationCenter.default
+        positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"Notification"),
+                                               object:nil, queue:nil,
+                                               using:updateLabel)
+        
+    }  //SetupNotificationCenter
+    
+    func updateLabel(notification:Notification) -> Void  {
+        print("\(self) -> \(#function)")
+        
+        guard let userInfo = notification.userInfo, let value = userInfo["value"] else {
+            print("No userInfo found in notification")
+            return
+        }
+        
+        if shootsArray.contains(value as! String){
+            shootsTextField.text = value as? String
+        }
+        
+        if positionArray.contains(value as! String){
+            positionTextField.text = value as? String
+        }
+        
+    }  //updatePositionLabel
     
 }  //PlayerDetailsTableViewController
 
 extension PlayerDetailsTableViewController: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        print("\(self) -> \(#function)")
         
         return .none
     }
@@ -328,17 +359,25 @@ extension PlayerDetailsTableViewController: UIPopoverPresentationControllerDeleg
 extension PlayerDetailsTableViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("\(self) -> \(#function)")
         
         if textField == shootsTextField {
             
-            showPopover(textField: shootsTextField, array: [Shoots.both.rawValue, Shoots.left.rawValue, Shoots.right.rawValue], popoverTitle: "Shoots")
+            if (textField.text?.isEmpty)! {
+                shootsTextField.text = shootsArray.first
+            }
+            
+            showPopover(textField: shootsTextField, array: shootsArray, popoverTitle: "Shoots")
             
         } else if textField == positionTextField {
             
-            showPopover(textField: positionTextField, array: [Position.centre.rawValue, Position.defense.rawValue, Position.goalie.rawValue, Position.leftWing.rawValue, Position.rightWing.rawValue], popoverTitle: "Position")
+            if (textField.text?.isEmpty)! {
+                positionTextField.text = positionArray.first
+            }
+            
+            showPopover(textField: positionTextField, array: positionArray, popoverTitle: "Position")
+            
         }
-        
-        
     }  //textFieldDidBeginEditing
     
 }  //extension

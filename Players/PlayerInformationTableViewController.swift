@@ -22,7 +22,6 @@ class PlayerInformationTableViewController: UITableViewController {
         super.viewDidLoad()
         print("\(self) -> \(#function)")
         
-        
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayerInformationTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playerInformationTableViewCell")
@@ -159,16 +158,12 @@ class PlayerInformationTableViewController: UITableViewController {
         
         if segue.identifier == "newSegue" {
             
-            print("Create new player")
-            
             playerDetailsTableViewController.managedContext = managedContext
             playerDetailsTableViewController.newPlayer = true
             
         }
         
         if segue.identifier == "updateSegue" {
-            
-            print("Update this player")
             
             playerDetailsTableViewController.newPlayer = false
             
@@ -180,8 +175,6 @@ class PlayerInformationTableViewController: UITableViewController {
                 playerDetailsTableViewController.selectedPlayer = selectedPlayer
                 
             }
-            
-            
         }
         
     }  //prepare

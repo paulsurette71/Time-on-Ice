@@ -18,11 +18,13 @@ class PopoverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(self) -> \(#function)")
         
-        pickerView.dataArray = dataToPassToPicker
-        titleLabel.text      = popoverTitle
+        pickerView.dataArray   = dataToPassToPicker
+        titleLabel.text        = popoverTitle
         
         // Do any additional setup after loading the view.
     }
-}
+    
+}  //selectedPositionFromPicker
+
+

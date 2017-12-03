@@ -8,20 +8,7 @@
 
 import UIKit
 import CoreData
-
-enum Position: String {
-    case leftWing  = "Left Wing"
-    case rightWing = "Right Wing"
-    case centre    = "Centre"
-    case defense   = "Defense"
-    case goalie    = "Goalie"
-}
-
-enum Shoots: String {
-    case left  = "Left"
-    case right = "Right"
-    case both  = "Switch"
-}
+import Foundation
 
 class HomeViewController: UIViewController {
     
@@ -55,13 +42,7 @@ class HomeViewController: UIViewController {
     var tappedArray = [Int]()
     
     //classes
-    let addPlayers = AddPlayers()
     let timeFormat = TimeFormat()
-    
-    //temp array for test data
-    var playerArray       = [Player]()
-    var playersOnIceArray = [Player]()
-    var shiftDetails      = [Shift]()
     
     //coredata
     var managedContext: NSManagedObjectContext!
@@ -93,7 +74,7 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         
         //load in test data
-//        playerArray = addPlayers.addTestPlayers()
+        //        playerArray = addPlayers.addTestPlayers()
         
         //collectionView Layout
         collectionViewLayout()
@@ -146,20 +127,20 @@ class HomeViewController: UIViewController {
         runningTotalCounter += 1
         timerCounter += 0
         
-        for rows in tappedArray {
-            
-            if shiftDetails.count > 0 {
-                
-                print(shiftDetails, rows)
-//                shiftDetails[playerArray[rows]].timeOnIce += 1
-                
-            }
-            //            playerArray[rows].runningTimeOnIce += 1
-            //            playerArray[rows].timeOnIce += 1
-            
-            tableView.reloadData()
-            
-        }  //rows
+//        for rows in tappedArray {
+//
+//            if shiftDetails.count > 0 {
+//
+//                print(shiftDetails, rows)
+//                //                shiftDetails[playerArray[rows]].timeOnIce += 1
+//
+//            }
+//            //            playerArray[rows].runningTimeOnIce += 1
+//            //            playerArray[rows].timeOnIce += 1
+//
+//            tableView.reloadData()
+//
+//        }  //rows
         
     }  //startTimer
     
@@ -181,15 +162,15 @@ class HomeViewController: UIViewController {
     
     func setupUI () {
         
-        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playerArray.count)
+//        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playerArray.count)
         
     }  //setupUI
     
 }  //ShotDetailsPopover
 
-    
-    
-    
+
+
+
 
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -205,7 +186,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("\(self) -> \(#function)")
         
-        return playerArray.count
+        return 0 //playerArray.count
         
     }  //numberOfItemsInSection
     
@@ -214,8 +195,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "benchCell", for: indexPath) as! BenchCollectionViewCell
         
-        cell.playerNumberLabel.text   = String(playerArray[indexPath.row].number)
-        cell.playerLastNameLabel.text = playerArray[indexPath.row].lastName
+//        cell.playerNumberLabel.text   = String(playerArray[indexPath.row].number)
+//        cell.playerLastNameLabel.text = playerArray[indexPath.row].lastName
         
         if tappedArray.count > 0 {
             
@@ -248,9 +229,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             //            playerArray[indexPath.row].timeOnIce = 0
             //            playerArray[indexPath.row].shifts += 1
             
-            let currentShift = Shift(player: playerArray[indexPath.row], timeOnIce: 0, dateOnIce: Date())
-            
-            shiftDetails.append(currentShift)
+//            let currentShift = Shift(player: playerArray[indexPath.row], timeOnIce: 0, dateOnIce: Date())
+//
+//            shiftDetails.append(currentShift)
             //            shiftDetails[indexPath.row].timeOnIce = 0
             
         } else {
@@ -258,7 +239,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
             
             //            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: playerArray[indexPath.row].runningTimeOnIce)
-            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: shiftDetails[indexPath.row].timeOnIce)
+//            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: shiftDetails[indexPath.row].timeOnIce)
             
             tappedArray = tappedArray.filter { $0 != indexPath.row }
             
@@ -280,8 +261,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
         
         //Update players on bench
-        let playersOnBench = playerArray.count - tappedArray.count
-        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench)
+//        let playersOnBench = playerArray.count - tappedArray.count
+//        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench)
         
         tableView.reloadData()
         
@@ -311,22 +292,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersOnIceTableViewCell", for: indexPath) as! PlayersOnIceTableViewCell
         
-        let player = playerArray[tappedArray[indexPath.row]]
+//        let player = playerArray[tappedArray[indexPath.row]]
         
         
-        cell.playerNumberLabel.text          = String(player.number)
-        cell.playerNameLabel.attributedText  = createAttributedString.forFirstNameLastName(firstName: player.firstName, lastName: player.lastName)
+//        cell.playerNumberLabel.text          = String(player.number)
+//        cell.playerNameLabel.attributedText  = createAttributedString.forFirstNameLastName(firstName: player.firstName, lastName: player.lastName)
         //        cell.playerTimerLabel.attributedText = createAttributedString.forTimeOnIce(timeInSeconds: player.timeOnIce)
         //        cell.timeOnIceLabel.attributedText   = createAttributedString.forTotalTimeOnIce(timeInSeconds: player.runningTimeOnIce)
         //        cell.shiftsLabel.attributedText      = createAttributedString.forNumberOfShifts(numberOfShifts: player.shifts)
         
-        if shiftDetails.count > 0 {
-            
-            print("tappedArray[indexPath.row] \(tappedArray[indexPath.row])")
-            let shift = shiftDetails[indexPath.row]
-            cell.playerTimerLabel.attributedText = createAttributedString.forTimeOnIce(timeInSeconds: shift.timeOnIce)
-            
-        }
+//        if shiftDetails.count > 0 {
+//            
+//            print("tappedArray[indexPath.row] \(tappedArray[indexPath.row])")
+//            let shift = shiftDetails[indexPath.row]
+//            cell.playerTimerLabel.attributedText = createAttributedString.forTimeOnIce(timeInSeconds: shift.timeOnIce)
+//            
+//        }
         
         
         

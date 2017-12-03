@@ -22,6 +22,7 @@
 		75292ECF1FD196FB00CE5DCC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292ECE1FD196FB00CE5DCC /* CoreDataStack.swift */; };
 		75292F191FD1EE7F00CE5DCC /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292F181FD1EE7F00CE5DCC /* Picker.swift */; };
 		75292F1B1FD1F38F00CE5DCC /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292F1A1FD1F38F00CE5DCC /* PopoverViewController.swift */; };
+		7539FC851FD4458C009E6CB4 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7539FC841FD4458C009E6CB4 /* Delegates.swift */; };
 		75561F9A1FC6415C009079EC /* AddPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75561F991FC6415C009079EC /* AddPlayers.swift */; };
 		7574B3CB1FC8CE7E00CF4214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7574B3CA1FC8CE7E00CF4214 /* Assets.xcassets */; };
 		75795AD11FC358F8006A52D7 /* PlayerDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */; };
@@ -55,6 +56,7 @@
 		75292ECE1FD196FB00CE5DCC /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		75292F181FD1EE7F00CE5DCC /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		75292F1A1FD1F38F00CE5DCC /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
+		7539FC841FD4458C009E6CB4 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
 		75561F991FC6415C009079EC /* AddPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayers.swift; sourceTree = "<group>"; };
 		7574B3CA1FC8CE7E00CF4214 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsTableViewController.swift; sourceTree = "<group>"; };
@@ -84,8 +86,8 @@
 		750FA1FD1FBCDCDA00A1D89A = {
 			isa = PBXGroup;
 			children = (
+				7539FC831FD4455A009E6CB4 /* Delegate */,
 				75292F1A1FD1F38F00CE5DCC /* PopoverViewController.swift */,
-				750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */,
 				750FA2151FBCDCDA00A1D89A /* Info.plist */,
 				750FA21B1FBCDE7B00A1D89A /* HomeViewController.swift */,
 				75D803A51FC8D6920084B97E /* PlayersOnIceTableViewCell.swift */,
@@ -104,6 +106,15 @@
 				750FA2061FBCDCDA00A1D89A /* Time on Ice.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7539FC831FD4455A009E6CB4 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */,
+				7539FC841FD4458C009E6CB4 /* Delegates.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		75E333A81FD0E4AB00408317 /* CoreData */ = {
@@ -251,6 +262,7 @@
 				75292ECC1FD1962000CE5DCC /* Players+CoreDataClass.swift in Sources */,
 				75561F9A1FC6415C009079EC /* AddPlayers.swift in Sources */,
 				751022F61FC61DD7000009EC /* BenchCollectionViewCell.swift in Sources */,
+				7539FC851FD4458C009E6CB4 /* Delegates.swift in Sources */,
 				75292ECA1FD1962000CE5DCC /* Games+CoreDataClass.swift in Sources */,
 				75292EC81FD1962000CE5DCC /* Shifts+CoreDataClass.swift in Sources */,
 				75E333A71FD0E49A00408317 /* Time On Ice.xcdatamodeld in Sources */,
