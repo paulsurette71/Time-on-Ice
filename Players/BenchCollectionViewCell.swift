@@ -10,18 +10,12 @@ import UIKit
 
 class BenchCollectionViewCell: UICollectionViewCell {
     
+    //UILabel
     @IBOutlet weak var totalTimeOnIceLabel: UILabel!
+    @IBOutlet weak var playerNumberLabel: UILabel!
+    @IBOutlet weak var playerLastNameLabel: UILabel!
+    
+    //UIImageView
     @IBOutlet weak var cellBackgroundImageView: UIImageView!
     
-    @IBOutlet weak var playerNumberLabel: UILabel!
-//    @IBOutlet weak var playerFirstNameLabel: UILabel!
-    @IBOutlet weak var playerLastNameLabel: UILabel!
-//    @IBOutlet weak var playerPositionLabel: UILabel!
-//    @IBOutlet weak var timeOnIceLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
 }

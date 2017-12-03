@@ -174,10 +174,10 @@ class CreateAttributedString {
         lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy), range: NSMakeRange(0, lastNameAttributedString.length))
         
         let divisionAttributedString = NSMutableAttributedString(string: divsion)
-        divisionAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy), range: NSMakeRange(0, divisionAttributedString.length))
+        divisionAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, divisionAttributedString.length))
 
         let levelAttributedString = NSMutableAttributedString(string: level)
-        levelAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy), range: NSMakeRange(0, levelAttributedString.length))
+        levelAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, levelAttributedString.length))
 
         
         let combination = NSMutableAttributedString()

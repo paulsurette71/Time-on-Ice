@@ -17,15 +17,4 @@ class PlayersOnIceTableViewCell: UITableViewCell {
     @IBOutlet weak var shiftsLabel: UILabel!
     @IBOutlet weak var playerNumberLabel: UILabel!
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-    
 }

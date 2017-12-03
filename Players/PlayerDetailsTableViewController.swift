@@ -76,6 +76,12 @@ class PlayerDetailsTableViewController: UITableViewController {
         super.viewDidDisappear(animated)
         print("\(self) -> \(#function)")
         
+        //Check to see if the mandatory first name, last name and number are empty.
+        guard !(firstNameTextField.text?.isEmpty)!, !(lastNameTextField.text?.isEmpty)!,!(numberTextField.text?.isEmpty)! else {
+            //Found empty fields.
+            return
+        }
+        
         if newPlayer {
             
             saveNewPlayer()
@@ -133,7 +139,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         print("\(self) -> \(#function)")
-        
         
         //http://stackoverflow.com/questions/19802336/changing-font-size-for-uitableview-section-headers
         
@@ -302,6 +307,14 @@ class PlayerDetailsTableViewController: UITableViewController {
             if let image = self.headShotImageView {
                 
                 image.image = UIImage(data:player.headshot! as Data,scale:1.0)
+            }
+            
+            if let label = self.positionTextField {
+                label.text = player.position
+            }
+            
+            if let label = self.shootsTextField {
+                label.text = player.shoots
             }
         }
     }  //configureView
