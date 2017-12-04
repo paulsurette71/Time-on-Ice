@@ -20,7 +20,7 @@ class PlayerInformationTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayerInformationTableViewCell", bundle: nil)
@@ -32,13 +32,13 @@ class PlayerInformationTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         goFetch()
     }
     
     func goFetch() {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
         let sort = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
@@ -60,7 +60,7 @@ class PlayerInformationTableViewController: UITableViewController {
     }
     
     func updatePlayer(indexPath: IndexPath)  {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         let player = self.fetchedResultsController.object(at: indexPath as IndexPath)
         
@@ -69,6 +69,9 @@ class PlayerInformationTableViewController: UITableViewController {
         playerDetailsTableViewController.selectedPlayer = player
         playerDetailsTableViewController.newPlayer = false
         
+        //This is for lookup popovers
+        playerDetailsTableViewController.managedContext = managedContext
+        
         self.navigationController?.pushViewController(playerDetailsTableViewController, animated: true)
         
     }
@@ -76,20 +79,20 @@ class PlayerInformationTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         return fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         let sectionInfo = fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playerInformationTableViewCell", for: indexPath) as! PlayerInformationTableViewCell
         
@@ -100,7 +103,7 @@ class PlayerInformationTableViewController: UITableViewController {
     }
     
     func configureCell(_ cell: PlayerInformationTableViewCell, withPlayer player: Players, indexPath: IndexPath) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         cell.numberLabel.text = player.number
         
@@ -117,13 +120,13 @@ class PlayerInformationTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         updatePlayer(indexPath: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         guard let header = view as? UITableViewHeaderFooterView else {
             return
@@ -137,7 +140,7 @@ class PlayerInformationTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         var sectionName = ""
         
@@ -157,7 +160,7 @@ class PlayerInformationTableViewController: UITableViewController {
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         // Return false if you do not want the specified item to be editable.
         return true
     }
@@ -166,7 +169,7 @@ class PlayerInformationTableViewController: UITableViewController {
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         if editingStyle == .delete {
             
@@ -185,7 +188,7 @@ class PlayerInformationTableViewController: UITableViewController {
     }  //editingStyle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         let playerDetailsTableViewController = segue.destination as! PlayerDetailsTableViewController
         

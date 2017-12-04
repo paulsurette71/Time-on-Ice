@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var coreDataStack = CoreDataStack(modelName: "Time On Ice")
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         // Override point for customization after application launch.
         
         let tabBarController = window?.rootViewController as! UITabBarController
@@ -41,29 +41,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         coreDataStack.saveContext()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         coreDataStack.saveContext()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
     }
     

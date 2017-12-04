@@ -39,6 +39,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     //Classes
     let calculate = Calculate()
+    let goFetch   = GoFetch()
     
     //JPEG Compresion
     let bestQuality:CGFloat = 1.0
@@ -60,7 +61,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         //NotificationCenter
         SetupNotificationCenter()
@@ -68,13 +69,18 @@ class PlayerDetailsTableViewController: UITableViewController {
         //UITextFieldDelegate
         positionTextField.delegate = self
         shootsTextField.delegate   = self
+        teamTextField.delegate     = self
+        cityTextField.delegate     = self
+        leagueTextField.delegate   = self
+        levelTextField.delegate    = self
+        divisionTextField.delegate = self
         
         configureView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         //Check to see if the mandatory first name, last name and number are empty.
         guard !(firstNameTextField.text?.isEmpty)!, !(lastNameTextField.text?.isEmpty)!,!(numberTextField.text?.isEmpty)! else {
@@ -95,7 +101,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         tableView.reloadData()
     }
@@ -103,13 +109,13 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         switch section {
         case 0:
@@ -127,7 +133,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         if section == 0 {
             return 0  //hide the first section
@@ -138,7 +144,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         //http://stackoverflow.com/questions/19802336/changing-font-size-for-uitableview-section-headers
         
@@ -154,12 +160,12 @@ class PlayerDetailsTableViewController: UITableViewController {
     }
     
     @IBAction func camera(_ sender: Any) {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
     }  //camera
     
     @IBAction func birthdate(_ sender: UIDatePicker) {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         let birthdate = sender.date
         
@@ -170,7 +176,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //birthdate
     
     func saveNewPlayer() {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         do {
             
@@ -205,7 +211,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //saveNewPlayer
     
     func updatePlayer()  {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         do {
             
@@ -231,7 +237,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //updatePlayer
     
     func showPopover(textField: UITextField, array: [Any], popoverTitle: String) {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         var rootViewController = UIApplication.shared.keyWindow?.rootViewController
         
@@ -243,8 +249,9 @@ class PlayerDetailsTableViewController: UITableViewController {
         
         popoverViewController.modalPresentationStyle = .popover
         popoverViewController.preferredContentSize   = CGSize(width: 150, height: 150)
-        popoverViewController.dataToPassToPicker = array
-        popoverViewController.popoverTitle = popoverTitle
+        popoverViewController.dataToPassToPicker     = array
+        popoverViewController.popoverTitle           = popoverTitle
+        popoverViewController.sender                 = textField
         
         let popover = popoverViewController.popoverPresentationController!
         
@@ -258,7 +265,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //showShotDetails
     
     func configureView() {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         // Update the user interface for the detail item.
         
@@ -320,7 +327,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //configureView
     
     func calculateBirthDate(birthdate: Date) -> Int {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         let calendar = NSCalendar.current
         
@@ -331,7 +338,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //calculateBirthDate
     
     func SetupNotificationCenter()  {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         let positionNotificationCenter = NotificationCenter.default
         positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"Notification"),
@@ -341,20 +348,16 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //SetupNotificationCenter
     
     func updateLabel(notification:Notification) -> Void  {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         guard let userInfo = notification.userInfo, let value = userInfo["value"] else {
             print("No userInfo found in notification")
             return
         }
         
-        if shootsArray.contains(value as! String){
-            shootsTextField.text = value as? String
-        }
+        let textField = (notification.object as! UITextField)
+        textField.text = value as? String
         
-        if positionArray.contains(value as! String){
-            positionTextField.text = value as? String
-        }
         
     }  //updatePositionLabel
     
@@ -363,7 +366,7 @@ class PlayerDetailsTableViewController: UITableViewController {
 extension PlayerDetailsTableViewController: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         return .none
     }
@@ -372,7 +375,7 @@ extension PlayerDetailsTableViewController: UIPopoverPresentationControllerDeleg
 extension PlayerDetailsTableViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("\(self) -> \(#function)")
+        ////print("\(self) -> \(#function)")
         
         if textField == shootsTextField {
             
@@ -391,6 +394,63 @@ extension PlayerDetailsTableViewController: UITextFieldDelegate {
             showPopover(textField: positionTextField, array: positionArray, popoverTitle: "Position")
             
         }
+        
+        if textField == teamTextField {
+            
+            let teamNames = goFetch.teamNames(managedContext: managedContext)
+            
+            guard teamNames.count != 0 else {
+                return
+            }
+            
+            showPopover(textField: teamTextField, array: teamNames.sorted(), popoverTitle: "Teams")
+        }
+        
+        if textField == cityTextField {
+            
+            let cityNames = goFetch.city(managedContext: managedContext)
+            
+            guard cityNames.count != 0 else {
+                return
+            }
+            
+            showPopover(textField: cityTextField, array: cityNames.sorted(), popoverTitle: "City")
+        }
+
+        if textField == leagueTextField {
+            
+            let leagueNames = goFetch.league(managedContext: managedContext)
+            
+            guard leagueNames.count != 0 else {
+                return
+            }
+            
+            showPopover(textField: leagueTextField, array: leagueNames.sorted(), popoverTitle: "League")
+        }
+
+        if textField == levelTextField {
+            
+            let levelNames = goFetch.level(managedContext: managedContext)
+            
+            guard levelNames.count != 0 else {
+                return
+            }
+            
+            showPopover(textField: levelTextField, array: levelNames.sorted(), popoverTitle: "Level")
+        }
+
+        if textField == divisionTextField {
+            
+            let divisionNames = goFetch.division(managedContext: managedContext)
+            
+            guard divisionNames.count != 0 else {
+                return
+            }
+            
+            showPopover(textField: divisionTextField, array: divisionNames.sorted(), popoverTitle: "Division")
+        }
+
+        
     }  //textFieldDidBeginEditing
     
 }  //extension

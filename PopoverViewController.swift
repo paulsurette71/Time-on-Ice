@@ -14,13 +14,16 @@ class PopoverViewController: UIViewController {
     @IBOutlet weak var pickerView: Picker!
     
     var dataToPassToPicker = [Any]()
-    var popoverTitle = ""
+    var popoverTitle       = ""
+    var sender = UITextField()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pickerView.dataArray   = dataToPassToPicker
-        titleLabel.text        = popoverTitle
+        pickerView.dataArray = dataToPassToPicker
+        pickerView.textField = sender
+        titleLabel.text      = popoverTitle
         
         // Do any additional setup after loading the view.
     }

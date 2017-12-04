@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         print("HomeViewController|managedContext \(managedContext!)")
         
@@ -176,7 +176,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         return 1
         
@@ -184,14 +184,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         return 0 //playerArray.count
         
     }  //numberOfItemsInSection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "benchCell", for: indexPath) as! BenchCollectionViewCell
         
@@ -216,7 +216,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }  //cellForItemAt
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         let cell = collectionView.cellForItem(at: indexPath) as! BenchCollectionViewCell
         
@@ -274,21 +274,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         return 1
         
     }  //numberOfSections
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         return tappedArray.count
         
     }  //numberOfRowsInSection
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("\(self) -> \(#function)")
+        //print("\(self) -> \(#function)")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersOnIceTableViewCell", for: indexPath) as! PlayersOnIceTableViewCell
         
