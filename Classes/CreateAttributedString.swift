@@ -70,10 +70,10 @@ class CreateAttributedString {
     func forFirstNameLastName( firstName: String, lastName: String) -> NSMutableAttributedString {
         
         let firstNameAttributedString = NSMutableAttributedString(string: firstName)
-        firstNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.light), range: NSMakeRange(0, firstNameAttributedString.length))
+        firstNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.bold), range: NSMakeRange(0, firstNameAttributedString.length))
         
         let lastNameAttributedString = NSMutableAttributedString(string: lastName)
-        lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, lastNameAttributedString.length))
+        lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.bold), range: NSMakeRange(0, lastNameAttributedString.length))
         
         
         let combination = NSMutableAttributedString()
@@ -197,5 +197,26 @@ class CreateAttributedString {
         
     }  //forFirstNameLastNameDivisionLevel
 
-    
+    func forDivisionLevel(divsion: String, level: String) -> NSMutableAttributedString {
+        
+        let divisionAttributedString = NSMutableAttributedString(string: divsion)
+        divisionAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular), range: NSMakeRange(0, divisionAttributedString.length))
+        
+        let levelAttributedString = NSMutableAttributedString(string: level)
+        levelAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular), range: NSMakeRange(0, levelAttributedString.length))
+        
+        
+        let combination = NSMutableAttributedString()
+        
+        let spaceAttributedString  = NSMutableAttributedString(string: " ")
+        
+        //Lucas Surette
+        combination.append(divisionAttributedString)
+        combination.append(spaceAttributedString)
+        combination.append(levelAttributedString)
+ 
+        return combination
+        
+    }  //forDivisionLevel
+
 }  //CreateAttributedString

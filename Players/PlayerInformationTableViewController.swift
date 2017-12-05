@@ -25,7 +25,7 @@ class PlayerInformationTableViewController: UITableViewController {
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayerInformationTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playerInformationTableViewCell")
-        tableView.rowHeight = 90
+        tableView.rowHeight = 117
         
         goFetch()
     }
@@ -41,8 +41,9 @@ class PlayerInformationTableViewController: UITableViewController {
         //print("\(self) -> \(#function)")
         
         let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
-        let sort = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
-        fetchRequest.sortDescriptors = [sort]
+        let sortTeam   = NSSortDescriptor(key: #keyPath(Players.team), ascending: true)
+        let sortNumber = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
+        fetchRequest.sortDescriptors = [sortTeam, sortNumber]
         fetchRequest.fetchBatchSize = 10
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: #keyPath(Players.team), cacheName: nil)
@@ -54,10 +55,7 @@ class PlayerInformationTableViewController: UITableViewController {
         } catch let error as NSError {
             print("PlayerInformationTableViewController|goFetch: Fetching error: \(error), \(error.userInfo)")
         }
-        
-        tableView.reloadData()
-        
-    }
+    }  //goFetch
     
     func updatePlayer(indexPath: IndexPath)  {
         //print("\(self) -> \(#function)")
@@ -74,20 +72,26 @@ class PlayerInformationTableViewController: UITableViewController {
         
         self.navigationController?.pushViewController(playerDetailsTableViewController, animated: true)
         
-    }
+    }  //updatePlayer
     
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        //print("\(self) -> \(#function)")
         
-        return fetchedResultsController.sections?.count ?? 0
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print("\(self) -> \(#function)")
         
-        let sectionInfo = fetchedResultsController.sections![section]
+        guard let sectionInfo = fetchedResultsController.sections?[section] else {
+                return 0
+            
+        }
+        
         return sectionInfo.numberOfObjects
     }
     
@@ -107,9 +111,12 @@ class PlayerInformationTableViewController: UITableViewController {
         
         cell.numberLabel.text = player.number
         
-        let playerInformation = createAttributedString.forFirstNameLastNameDivisionLevel(firstName: player.firstName!, lastName: player.lastName!, divsion: player.division!, level: player.level!)
+        let playerInformation = createAttributedString.forFirstNameLastName(firstName: player.firstName!, lastName: player.lastName!)
+        
+        let playerDivision = createAttributedString.forDivisionLevel(divsion: player.division!, level: player.level!)
         
         cell.playerInformationLabel.attributedText = playerInformation
+        cell.divisionLevelLabel.attributedText     = playerDivision
         
         if let position = player.position {
             cell.positionLabel.text = position
@@ -133,28 +140,18 @@ class PlayerInformationTableViewController: UITableViewController {
         }
         
         header.textLabel?.textColor     = UIColor.black
-        header.textLabel?.font          = UIFont.systemFont(ofSize: 24, weight: .heavy)
+        header.textLabel?.font          = UIFont.systemFont(ofSize: 24, weight: .light)
         header.textLabel?.frame         = header.frame
         header.textLabel?.textAlignment = .left
         header.backgroundView?.backgroundColor = UIColor(named: "gryphonGold")
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //print("\(self) -> \(#function)")
         
-        var sectionName = ""
+        let sectionInfo = fetchedResultsController.sections?[section]
         
-        guard let sectionInfo = fetchedResultsController.sections?[section] else {
-            return ""
-        }
+        return sectionInfo?.name
         
-        if (sectionInfo.name.isEmpty) {
-            sectionName = "No Team Name"
-        } else {
-            sectionName = sectionInfo.name
-        }
-        
-        return sectionName
     }
     
     
@@ -164,8 +161,6 @@ class PlayerInformationTableViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    
-    
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -178,7 +173,7 @@ class PlayerInformationTableViewController: UITableViewController {
             
             do {
                 try managedContext.save()
-                tableView.reloadData()
+//                tableView.reloadData()
                 
             } catch let error as NSError {
                 print("PlayerInformationTableViewController|editingStyle: Saving error: \(error), description: \(error.userInfo)")
@@ -236,7 +231,7 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
         default: break
         }
     }
-
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }

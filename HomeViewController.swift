@@ -79,15 +79,15 @@ class HomeViewController: UIViewController {
         //setupUI
         setupUI()
         
-//        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-//        let importPlayers            = ImportPlayers()
-//        
-//        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-//            
-//            //Import Test data
-//           importPlayers.importPlayers()
-//            
-//        }
+        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        let importPlayers            = ImportPlayers()
+        
+        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+            
+            //Import Test data
+           importPlayers.importPlayers()
+            
+        }
         
         
     }  //viewDidLoad
