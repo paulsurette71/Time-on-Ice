@@ -38,8 +38,9 @@ class PlayerDetailsTableViewController: UITableViewController {
     @IBOutlet weak var ageLabel: UILabel!
     
     //Classes
-    let calculate = Calculate()
-    let goFetch   = GoFetch()
+    let calculate        = Calculate()
+    let goFetch          = GoFetch()
+    let roundedImageView = RoundedImageView()
     
     //JPEG Compresion
     let bestQuality:CGFloat = 1.0
@@ -62,6 +63,8 @@ class PlayerDetailsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ////print("\(self) -> \(#function)")
+        
+        roundedImageView.setRounded(image: headShotImageView, colour: "gryphonGold")
         
         //NotificationCenter
         SetupNotificationCenter()
@@ -121,7 +124,7 @@ class PlayerDetailsTableViewController: UITableViewController {
         case 0:
             return 1
         case 1:
-            return 2
+            return 3
         case 2:
             return 3
         case 3:
@@ -153,7 +156,7 @@ class PlayerDetailsTableViewController: UITableViewController {
         }
         
         header.textLabel?.textColor     = UIColor.black
-        header.textLabel?.font          = UIFont.systemFont(ofSize: 24, weight: .heavy)
+        header.textLabel?.font          = UIFont.systemFont(ofSize: 24, weight: .light)
         header.textLabel?.frame         = header.frame
         header.textLabel?.textAlignment = .left
         header.backgroundView?.backgroundColor = UIColor(named: "gryphonGold")
