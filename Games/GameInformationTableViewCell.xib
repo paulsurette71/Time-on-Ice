@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="gameInformationTableViewCell" rowHeight="50" id="KGk-i7-Jjw" customClass="GameInformationTableViewCell" customModule="Time_on_Ice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="FPE-wk-Y2e">
+                        <rect key="frame" x="45" y="9" width="280" height="61.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaC-aV-DkO">
+                                <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWJ-Aw-6se">
+                                <rect key="frame" x="0.0" y="20.5" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2u-6o-FOV">
+                                <rect key="frame" x="0.0" y="41" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="mdb-2l-c4u">
+                        <rect key="frame" x="330" y="7.5" width="45" height="63"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="qAX-mb-Ala">
+                        <rect key="frame" x="10" y="24" width="30" height="30"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="mdb-2l-c4u" secondAttribute="trailing" id="2u9-yX-fHr"/>
+                    <constraint firstItem="qAX-mb-Ala" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4VI-gi-BzZ"/>
+                    <constraint firstItem="FPE-wk-Y2e" firstAttribute="leading" secondItem="qAX-mb-Ala" secondAttribute="trailing" constant="5" id="Dqb-ek-JxL"/>
+                    <constraint firstItem="FPE-wk-Y2e" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lwy-jo-zCg"/>
+                    <constraint firstItem="mdb-2l-c4u" firstAttribute="leading" secondItem="FPE-wk-Y2e" secondAttribute="trailing" constant="5" id="VQK-cF-RLZ"/>
+                    <constraint firstItem="qAX-mb-Ala" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hPQ-0Z-CBX"/>
+                    <constraint firstItem="mdb-2l-c4u" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yTE-ST-SAk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="LaC-aV-DkO" id="bd2-q9-CEf"/>
+                <outlet property="homeTeamLabel" destination="BWJ-Aw-6se" id="fxN-t7-mfH"/>
+                <outlet property="visitingTeamLabel" destination="e2u-6o-FOV" id="3nB-wv-rXt"/>
+            </connections>
+            <point key="canvasLocation" x="-172.5" y="-21"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkmark" width="30" height="30"/>
+        <image name="chevron" width="45" height="63"/>
+    </resources>
+</document>

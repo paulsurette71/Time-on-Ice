@@ -16,9 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var coreDataStack = CoreDataStack(modelName: "Time On Ice")
     
+    //classes
+    let colourPalette = ColourPalette()
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //print("\(self) -> \(#function)")
         // Override point for customization after application launch.
+        
+        //Pretty up the place
+        colourPalette.changeAppearance()
         
         let tabBarController = window?.rootViewController as! UITabBarController
         
@@ -36,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         playerInformationTableViewController.managedContext = coreDataStack.managedContext
         
         //Game Tab
+        let gameNavigationController = tabBarController.viewControllers?[1] as! UINavigationController
+        let gameInformationTableViewController = gameNavigationController.viewControllers[0] as! GameInformationTableViewController
+        
+        gameInformationTableViewController.managedContext = coreDataStack.managedContext
         
         return true
     }

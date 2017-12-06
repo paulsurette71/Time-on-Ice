@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dPN-p4-gIq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dPN-p4-gIq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -241,13 +241,13 @@
         <!--Games-->
         <scene sceneID="W4l-S7-ZA1">
             <objects>
-                <tableViewController id="Unh-Aw-xXu" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="GameInformationTableViewController" storyboardIdentifier="GameInformationTableViewController" id="Unh-Aw-xXu" customClass="GameInformationTableViewController" customModule="Time_on_Ice" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rsk-uP-PNS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Games" id="dog-tq-HWq">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Games" id="dog-tq-HWq" customClass="GameInformationTableViewCell" customModule="Time_on_Ice" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dog-tq-HWq" id="tAx-4U-GNq">
@@ -265,7 +265,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="uxy-Ua-dqk"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xTC-gd-OLX">
                             <connections>
-                                <segue destination="wAg-SQ-4zg" kind="show" id="lsU-z9-qhv"/>
+                                <segue destination="wAg-SQ-4zg" kind="show" identifier="newGameSegue" id="lsU-z9-qhv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -275,29 +275,278 @@
             </objects>
             <point key="canvasLocation" x="806" y="-394"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Game Details-->
         <scene sceneID="fkz-cL-XBW">
             <objects>
-                <tableViewController id="wAg-SQ-4zg" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="f5A-KI-rBA">
+                <tableViewController restorationIdentifier="GameDetailsTableViewController" storyboardIdentifier="GameDetailsTableViewController" title="Game Details" id="wAg-SQ-4zg" customClass="GameDetailsTableViewController" customModule="Time_on_Ice" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="f5A-KI-rBA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="gamesDetail" id="gH4-4h-3ze">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gH4-4h-3ze" id="WKZ-mx-fAd">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                        <sections>
+                            <tableViewSection headerTitle="Game Date &amp; Time" id="leq-Sw-gWm">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="gamesDetail" rowHeight="100" id="gH4-4h-3ze">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gH4-4h-3ze" id="WKZ-mx-fAd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dTl-jB-6sU">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="99.5"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="534207948.06940001">
+                                                        <!--2017-12-05 23:05:48 +0000-->
+                                                    </date>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dTl-jB-6sU" firstAttribute="top" secondItem="WKZ-mx-fAd" secondAttribute="top" id="IGV-PW-6LM"/>
+                                                <constraint firstAttribute="bottom" secondItem="dTl-jB-6sU" secondAttribute="bottom" id="bYR-vg-eN7"/>
+                                                <constraint firstAttribute="trailing" secondItem="dTl-jB-6sU" secondAttribute="trailing" constant="15" id="chH-Kc-WZf"/>
+                                                <constraint firstItem="dTl-jB-6sU" firstAttribute="leading" secondItem="WKZ-mx-fAd" secondAttribute="leading" constant="15" id="p1N-5X-7AJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Home Team" id="NZS-qk-XRj">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="gamesDetail" rowHeight="100" id="JVm-qa-fYo">
+                                        <rect key="frame" x="0.0" y="156" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JVm-qa-fYo" id="5Sv-z9-kCR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6ft-ij-CAK" userLabel="Home Stack View">
+                                                    <rect key="frame" x="15" y="25" width="345" height="49"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="oS6-vS-3ZK" userLabel="Number Stack View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="167" height="49"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mandatory" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="My3-Yr-mct">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="165" id="NE1-Tz-tHO"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                                </textField>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separatorLine167px" translatesAutoresizingMaskIntoConstraints="NO" id="mPR-1i-fgA">
+                                                                    <rect key="frame" x="0.0" y="24" width="167" height="1"/>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDv-hQ-jnJ">
+                                                                    <rect key="frame" x="0.0" y="25" width="108" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="108" id="p2f-Ev-WCL"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <viewLayoutGuide key="safeArea" id="41R-iF-ho3"/>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="57x-FF-NhS" userLabel="Position Stack View">
+                                                            <rect key="frame" x="178" y="0.0" width="167" height="49"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OAz-4k-rzD">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="165" id="mHl-KS-6oH"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                                </textField>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separatorLine167px" translatesAutoresizingMaskIntoConstraints="NO" id="hGL-54-3l2">
+                                                                    <rect key="frame" x="0.0" y="24" width="167" height="1"/>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdr-9a-Sdp">
+                                                                    <rect key="frame" x="0.0" y="25" width="150" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="150" id="km2-vC-ZIm"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <viewLayoutGuide key="safeArea" id="PTi-PD-Spq"/>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6ft-ij-CAK" firstAttribute="leading" secondItem="5Sv-z9-kCR" secondAttribute="leading" constant="15" id="9JN-ch-iz1"/>
+                                                <constraint firstItem="6ft-ij-CAK" firstAttribute="centerY" secondItem="5Sv-z9-kCR" secondAttribute="centerY" id="IH8-7H-gWe"/>
+                                                <constraint firstAttribute="trailing" secondItem="6ft-ij-CAK" secondAttribute="trailing" constant="15" id="bZa-4s-95J"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Visiting Team" id="hqB-Gg-ESX">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="gamesDetail" rowHeight="100" id="N7g-ZS-WrC">
+                                        <rect key="frame" x="0.0" y="284" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N7g-ZS-WrC" id="fBZ-DT-gQ7">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eTb-MK-2sF" userLabel="Home Stack View">
+                                                    <rect key="frame" x="15" y="25" width="345" height="49"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="F3X-MZ-7GP" userLabel="Number Stack View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="167" height="49"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mandatory" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zcQ-kE-pYU">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="165" id="hvw-wU-Dvi"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                                </textField>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separatorLine167px" translatesAutoresizingMaskIntoConstraints="NO" id="Y8W-8K-y3M">
+                                                                    <rect key="frame" x="0.0" y="24" width="167" height="1"/>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5y-FN-Gka">
+                                                                    <rect key="frame" x="0.0" y="25" width="108" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="108" id="2yE-9t-lOR"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <viewLayoutGuide key="safeArea" id="pUq-rl-IFT"/>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Xec-qA-h5E" userLabel="Position Stack View">
+                                                            <rect key="frame" x="178" y="0.0" width="167" height="49"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="G6z-wr-chJ">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="165" id="fWz-jW-C0K"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                                </textField>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separatorLine167px" translatesAutoresizingMaskIntoConstraints="NO" id="U03-yn-Sr4">
+                                                                    <rect key="frame" x="0.0" y="24" width="167" height="1"/>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcq-8v-fzf">
+                                                                    <rect key="frame" x="0.0" y="25" width="150" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="150" id="fUI-ND-Ots"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <viewLayoutGuide key="safeArea" id="N3S-oE-jg1"/>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="eTb-MK-2sF" secondAttribute="trailing" constant="15" id="1mL-Nz-PGj"/>
+                                                <constraint firstItem="eTb-MK-2sF" firstAttribute="centerY" secondItem="fBZ-DT-gQ7" secondAttribute="centerY" id="EEl-8r-xkt"/>
+                                                <constraint firstItem="eTb-MK-2sF" firstAttribute="leading" secondItem="fBZ-DT-gQ7" secondAttribute="leading" constant="15" id="Xox-ev-bbk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Arena Information" id="apa-tc-obd">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="gamesDetail" rowHeight="100" id="n3h-GI-NhJ">
+                                        <rect key="frame" x="0.0" y="412" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n3h-GI-NhJ" id="qMK-tw-JZG">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7qH-Rm-WRm" userLabel="Home Stack View">
+                                                    <rect key="frame" x="15" y="25" width="345" height="49"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ESA-4s-EyC" userLabel="Number Stack View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="167" height="49"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mandatory" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UpA-tN-5Q4">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="165" id="D2I-rN-jmP"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                                </textField>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separatorLine167px" translatesAutoresizingMaskIntoConstraints="NO" id="onK-QX-JnT">
+                                                                    <rect key="frame" x="0.0" y="24" width="167" height="1"/>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ka9-Hn-cXU">
+                                                                    <rect key="frame" x="0.0" y="25" width="165" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="165" id="gdk-mn-Dqo"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <viewLayoutGuide key="safeArea" id="NDQ-MC-eNT"/>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Nzh-LW-PaG" userLabel="Position Stack View">
+                                                            <rect key="frame" x="178" y="0.0" width="167" height="49"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UmF-C5-qVa">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="165" id="2Bp-PU-roP"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                                </textField>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separatorLine167px" translatesAutoresizingMaskIntoConstraints="NO" id="g06-sT-3Lu">
+                                                                    <rect key="frame" x="0.0" y="24" width="167" height="1"/>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arena Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMY-YL-m21">
+                                                                    <rect key="frame" x="0.0" y="25" width="150" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="150" id="fxr-Zl-saK"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <viewLayoutGuide key="safeArea" id="PO0-Mj-mTv"/>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7qH-Rm-WRm" firstAttribute="centerY" secondItem="qMK-tw-JZG" secondAttribute="centerY" id="12N-ki-GXC"/>
+                                                <constraint firstItem="7qH-Rm-WRm" firstAttribute="leading" secondItem="qMK-tw-JZG" secondAttribute="leading" constant="15" id="eSu-D9-SL9"/>
+                                                <constraint firstAttribute="trailing" secondItem="7qH-Rm-WRm" secondAttribute="trailing" constant="15" id="tmR-aA-kR5"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="wAg-SQ-4zg" id="8Jv-zu-KRE"/>
                             <outlet property="delegate" destination="wAg-SQ-4zg" id="Vwu-UZ-a5z"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="arenaCityTextField" destination="UpA-tN-5Q4" id="OUw-lK-xR3"/>
+                        <outlet property="arenaNameTextField" destination="UmF-C5-qVa" id="eVo-zu-nhU"/>
+                        <outlet property="datePicker" destination="dTl-jB-6sU" id="1HB-uj-0GC"/>
+                        <outlet property="homeTeamCityTextField" destination="My3-Yr-mct" id="BAm-Dl-kF2"/>
+                        <outlet property="homeTeamNameTextField" destination="OAz-4k-rzD" id="WNQ-4I-CL5"/>
+                        <outlet property="visitingTeamCityTextField" destination="zcQ-kE-pYU" id="3RH-BU-rQY"/>
+                        <outlet property="visitingTeamNameTextField" destination="G6z-wr-chJ" id="f6s-m4-cg9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKo-u6-YwY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -338,7 +587,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headShot" translatesAutoresizingMaskIntoConstraints="NO" id="Obc-Ia-GKl">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headshot" translatesAutoresizingMaskIntoConstraints="NO" id="Obc-Ia-GKl">
                                                     <rect key="frame" x="150" y="12" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="75" id="K5L-ne-bnd"/>
@@ -373,7 +622,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="0RV-UC-bb7" userLabel="1st Row Stack View">
-                                                    <rect key="frame" x="15" y="3" width="345" height="55"/>
+                                                    <rect key="frame" x="15" y="7.5" width="345" height="55"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="3og-y5-6Aw" userLabel="First Name Stack View">
                                                             <rect key="frame" x="0.0" y="0.0" width="167" height="55"/>
@@ -454,7 +703,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="CTH-gR-Ic3" userLabel="2nd Row Stack View">
-                                                    <rect key="frame" x="15" y="6" width="345" height="49"/>
+                                                    <rect key="frame" x="15" y="10.5" width="345" height="49"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="dWG-Fc-hWe" userLabel="Number Stack View">
                                                             <rect key="frame" x="0.0" y="0.0" width="167" height="49"/>
@@ -988,8 +1237,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="headShot" width="77" height="77"/>
         <image name="headingBackground" width="375" height="20"/>
+        <image name="headshot" width="75" height="75"/>
         <image name="icons8-calendar" width="25" height="26"/>
         <image name="icons8-camera-filled" width="30" height="24"/>
         <image name="icons8-conference" width="37" height="26"/>
