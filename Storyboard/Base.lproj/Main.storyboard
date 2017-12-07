@@ -59,9 +59,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="7Mu-xI-0gK">
-                                <rect key="frame" x="0.0" y="64" width="375" height="20"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGA-Zg-82y">
                                 <rect key="frame" x="15" y="64" width="360" height="20.5"/>
                                 <constraints>
@@ -145,9 +142,6 @@
                                     <outlet property="delegate" destination="5t9-lx-hAx" id="9jl-BN-cMg"/>
                                 </connections>
                             </collectionView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="dt7-NN-eWv">
-                                <rect key="frame" x="0.0" y="448" width="375" height="20"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8g7-iG-cMa">
                                 <rect key="frame" x="15" y="447.5" width="360" height="20.5"/>
                                 <constraints>
@@ -157,32 +151,45 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-vu-LSl" userLabel="Button Stack View">
+                                <rect key="frame" x="10" y="408" width="120" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-fs-WSk">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <state key="normal" image="buttonGame"/>
+                                        <connections>
+                                            <action selector="selectGame:" destination="5t9-lx-hAx" eventType="touchUpInside" id="546-UL-PiO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-Aj-f3d">
+                                        <rect key="frame" x="60" y="0.0" width="60" height="60"/>
+                                        <state key="normal" image="buttonPlayers"/>
+                                        <connections>
+                                            <action selector="selectPlayers:" destination="5t9-lx-hAx" eventType="touchUpInside" id="hFB-2K-YPJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VGA-Zg-82y" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="0Vi-6Z-Fnz"/>
                             <constraint firstItem="YFh-g2-Ipm" firstAttribute="top" secondItem="Z1V-wy-CnS" secondAttribute="bottom" constant="10" id="0mp-q6-zFr"/>
-                            <constraint firstItem="dt7-NN-eWv" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="14n-si-DbV"/>
-                            <constraint firstItem="dt7-NN-eWv" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="2Ca-xX-Ulm"/>
-                            <constraint firstItem="7Mu-xI-0gK" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="4vn-OM-IJR"/>
                             <constraint firstItem="Z1V-wy-CnS" firstAttribute="top" secondItem="VGA-Zg-82y" secondAttribute="bottom" constant="5" id="5So-sJ-GKb"/>
                             <constraint firstItem="kzy-O2-pP9" firstAttribute="bottom" secondItem="2zv-rF-527" secondAttribute="bottom" id="7c9-Y0-I9n"/>
                             <constraint firstItem="Z1V-wy-CnS" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="9ct-WA-Nx1"/>
-                            <constraint firstItem="7Mu-xI-0gK" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="AjA-ld-p3O"/>
                             <constraint firstItem="VGA-Zg-82y" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="15" id="CdX-ZU-SxE"/>
                             <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="8g7-iG-cMa" secondAttribute="trailing" id="DK6-dv-WaS"/>
-                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="7Mu-xI-0gK" secondAttribute="trailing" id="LUX-3X-i7i"/>
+                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="vAe-vu-LSl" secondAttribute="bottom" constant="10" id="Frz-AG-oKS"/>
                             <constraint firstItem="8g7-iG-cMa" firstAttribute="top" secondItem="YFh-g2-Ipm" secondAttribute="bottom" constant="10" id="OcX-58-sM0"/>
                             <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="15" id="PUs-79-SbA"/>
                             <constraint firstItem="8g7-iG-cMa" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="S3n-5e-Qv7"/>
                             <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="VGA-Zg-82y" secondAttribute="trailing" id="YpB-EU-Phe"/>
-                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="dt7-NN-eWv" secondAttribute="trailing" id="fDd-CN-0ms"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="fEx-jI-o7y"/>
-                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="dt7-NN-eWv" secondAttribute="bottom" constant="10" id="lPs-jL-9on"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="8g7-iG-cMa" secondAttribute="bottom" constant="10" id="mPH-UJ-aRb"/>
+                            <constraint firstItem="vAe-vu-LSl" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="10" id="oNU-33-nP0"/>
                             <constraint firstItem="Z1V-wy-CnS" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="rzr-rM-wFh"/>
                             <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="YFh-g2-Ipm" secondAttribute="trailing" constant="15" id="s7X-gr-YYY"/>
-                            <constraint firstItem="dt7-NN-eWv" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="tPI-2r-k88"/>
                             <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="15" id="tdt-Ei-9pR"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="vAu-uv-SJc"/>
                         </constraints>
@@ -193,6 +200,8 @@
                         <outlet property="clockStatusLabel" destination="BBn-GT-lfV" id="zmB-Qr-tPh"/>
                         <outlet property="clockSwitch" destination="jb1-Kx-uTP" id="hAP-YY-ifD"/>
                         <outlet property="collectionView" destination="2zv-rF-527" id="KJ1-tz-u42"/>
+                        <outlet property="gameButton" destination="2ai-fs-WSk" id="NXC-Qd-T1e"/>
+                        <outlet property="playersButton" destination="tSx-Aj-f3d" id="eME-MZ-9D7"/>
                         <outlet property="playersOnBenchLabel" destination="8g7-iG-cMa" id="DHk-S0-DTd"/>
                         <outlet property="playersOnIceLabel" destination="VGA-Zg-82y" id="sGh-4J-Yr0"/>
                         <outlet property="tableView" destination="Z1V-wy-CnS" id="OCS-FW-cXR"/>
@@ -473,7 +482,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ESA-4s-EyC" userLabel="Number Stack View">
                                                             <rect key="frame" x="0.0" y="0.0" width="167" height="49"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mandatory" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UpA-tN-5Q4">
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UpA-tN-5Q4">
                                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="165" id="D2I-rN-jmP"/>
@@ -1218,6 +1227,78 @@
             </objects>
             <point key="canvasLocation" x="2186" y="335"/>
         </scene>
+        <!--Player Popover View Controller-->
+        <scene sceneID="cEl-yb-PBh">
+            <objects>
+                <viewController storyboardIdentifier="PlayerPopoverViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LQu-em-eVH" customClass="PlayerPopoverViewController" customModule="Time_on_Ice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QnK-QP-ICd">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEC-dN-gbZ">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
+                                <color key="backgroundColor" name="gryphonBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="f3N-GT-RSb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpq-1I-MU2" customClass="PlayerPicker" customModule="Time_on_Ice" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="35" width="150" height="115"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NEC-dN-gbZ" firstAttribute="top" secondItem="QwM-OV-5HB" secondAttribute="top" id="53n-qq-gqi"/>
+                            <constraint firstItem="NEC-dN-gbZ" firstAttribute="leading" secondItem="QwM-OV-5HB" secondAttribute="leading" id="DFA-M9-Cgu"/>
+                            <constraint firstItem="tpq-1I-MU2" firstAttribute="leading" secondItem="QwM-OV-5HB" secondAttribute="leading" id="ZXS-hP-K9z"/>
+                            <constraint firstItem="tpq-1I-MU2" firstAttribute="bottom" secondItem="QwM-OV-5HB" secondAttribute="bottom" id="Zle-w3-yL5"/>
+                            <constraint firstItem="tpq-1I-MU2" firstAttribute="trailing" secondItem="QwM-OV-5HB" secondAttribute="trailing" id="mvh-n6-ThF"/>
+                            <constraint firstItem="tpq-1I-MU2" firstAttribute="top" secondItem="NEC-dN-gbZ" secondAttribute="bottom" id="nOr-KY-uS5"/>
+                            <constraint firstItem="NEC-dN-gbZ" firstAttribute="trailing" secondItem="QwM-OV-5HB" secondAttribute="trailing" id="xyo-m4-i6z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QwM-OV-5HB"/>
+                    </view>
+                    <size key="freeformSize" width="150" height="150"/>
+                    <connections>
+                        <outlet property="picker" destination="tpq-1I-MU2" id="cDX-c6-Llu"/>
+                        <outlet property="popoverTitleLabel" destination="NEC-dN-gbZ" id="XxV-Xw-TgV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2hh-AZ-2XB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2602" y="335"/>
+        </scene>
+        <!--Player Popover Table View Controller-->
+        <scene sceneID="kkJ-5J-xxP">
+            <objects>
+                <tableViewController storyboardIdentifier="PlayerPopoverTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yq6-nh-rqK" customClass="PlayerPopoverTableViewController" customModule="Time_on_Ice" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fNN-5y-drf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="playerPopoverCell" id="9X3-9V-2fh">
+                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9X3-9V-2fh" id="2cq-FO-eZ7">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Yq6-nh-rqK" id="qOg-Aw-oIC"/>
+                            <outlet property="delegate" destination="Yq6-nh-rqK" id="myw-v4-T9q"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LeY-kV-m45" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3199" y="566"/>
+        </scene>
         <!--Players-->
         <scene sceneID="Pq8-GJ-o5t">
             <objects>
@@ -1237,7 +1318,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="headingBackground" width="375" height="20"/>
+        <image name="buttonGame" width="60" height="60"/>
+        <image name="buttonPlayers" width="60" height="60"/>
         <image name="headshot" width="75" height="75"/>
         <image name="icons8-calendar" width="25" height="26"/>
         <image name="icons8-camera-filled" width="30" height="24"/>

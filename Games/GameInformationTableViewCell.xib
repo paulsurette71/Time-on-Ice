@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="FPE-wk-Y2e">
-                        <rect key="frame" x="45" y="9" width="280" height="61.5"/>
+                        <rect key="frame" x="15" y="9" width="310" height="61.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaC-aV-DkO">
                                 <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
@@ -45,17 +45,12 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="mdb-2l-c4u">
                         <rect key="frame" x="330" y="7.5" width="45" height="63"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="qAX-mb-Ala">
-                        <rect key="frame" x="10" y="24" width="30" height="30"/>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="mdb-2l-c4u" secondAttribute="trailing" id="2u9-yX-fHr"/>
-                    <constraint firstItem="qAX-mb-Ala" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4VI-gi-BzZ"/>
-                    <constraint firstItem="FPE-wk-Y2e" firstAttribute="leading" secondItem="qAX-mb-Ala" secondAttribute="trailing" constant="5" id="Dqb-ek-JxL"/>
                     <constraint firstItem="FPE-wk-Y2e" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lwy-jo-zCg"/>
                     <constraint firstItem="mdb-2l-c4u" firstAttribute="leading" secondItem="FPE-wk-Y2e" secondAttribute="trailing" constant="5" id="VQK-cF-RLZ"/>
-                    <constraint firstItem="qAX-mb-Ala" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hPQ-0Z-CBX"/>
+                    <constraint firstItem="FPE-wk-Y2e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="gX5-KR-Ukr"/>
                     <constraint firstItem="mdb-2l-c4u" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yTE-ST-SAk"/>
                 </constraints>
             </tableViewCellContentView>
@@ -69,7 +64,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkmark" width="30" height="30"/>
         <image name="chevron" width="45" height="63"/>
     </resources>
 </document>

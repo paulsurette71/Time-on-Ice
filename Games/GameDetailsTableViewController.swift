@@ -44,10 +44,10 @@ class GameDetailsTableViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         
         //Check to see if the mandatory first name, last name and number are empty.
-        //        guard !(arenaCityTextField.text?.isEmpty)!, !(arenaNameTextField.text?.isEmpty)!,!(oppositionCityTextField.text?.isEmpty)!,!(oppositionTeamNameTextField.text?.isEmpty)! else {
-        //            //Found empty fields.
-        //            return
-        //        }
+        guard !(homeTeamCityTextField.text?.isEmpty)!, !(visitingTeamCityTextField.text?.isEmpty)! else {
+            //Found empty fields.
+            return
+        }
         
         if newGame {
             

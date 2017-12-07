@@ -85,7 +85,7 @@ class GoFetch {
         
         return leagueArray
     }
-
+    
     func level(managedContext: NSManagedObjectContext) -> [String] {
         //print("\(self) -> \(#function)")
         
@@ -110,7 +110,7 @@ class GoFetch {
         
         return levelArray
     }
-
+    
     func division(managedContext: NSManagedObjectContext) -> [String] {
         //print("\(self) -> \(#function)")
         
@@ -135,7 +135,31 @@ class GoFetch {
         
         return divisionArray
     }
-
+    
+    func player(managedContext: NSManagedObjectContext) -> [Players] {
+        //print("\(self) -> \(#function)")
+        
+        var fetchPlayerArray = [Players]()
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
+        
+        let sort = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        fetchRequest.fetchBatchSize = 8
+        
+        do {
+            
+            fetchPlayerArray = try managedContext.fetch(fetchRequest) as! [Players]
+            
+        } catch let error as NSError {
+            
+            print("GoFetch|player: Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+       return fetchPlayerArray
+    }
+    
+    
 }
 
 

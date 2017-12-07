@@ -1,25 +1,24 @@
 //
-//  Picker.swift
+//  PlayerPicker.swift
 //  Time on Ice
 //
-//  Created by Surette, Paul on 2017-12-01.
+//  Created by Surette, Paul on 2017-12-06.
 //  Copyright © 2017 Surette, Paul. All rights reserved.
 //
 
 import UIKit
 
-class Picker: UIPickerView {
-    
-    var dataArray = [Any]()
+class PlayerPicker: UIPickerView {
+
+    var playersArray = [Players]()
     var textField = UITextField()
     //    var viewController: UIViewController!
     
     //Protocol
-    var myDelegates: myDelegates?
+//    var myDelegates: myDelegates?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        //print("\(self) -> \(#function)")
         
         self.delegate   = self
         self.dataSource = self
@@ -28,24 +27,19 @@ class Picker: UIPickerView {
     
 }  //Picker
 
-extension Picker: UIPickerViewDataSource {
+extension PlayerPicker: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        //print("\(self) -> \(#function)")
-        
-        print("count \(dataArray.count)")
-        
-        return dataArray.count
+                
+        return playersArray.count
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        //print("\(self) -> \(#function)")
         
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        //print("\(self) -> \(#function)")
         
         return 150
     }
@@ -58,7 +52,7 @@ extension Picker: UIPickerViewDataSource {
         let pickerLabel = UILabel()
         
         pickerLabel.textColor     = UIColor.black
-        pickerLabel.text          = dataArray[row] as? String
+        pickerLabel.text          = playersArray[row].firstName! + " " + playersArray[row].lastName!
         pickerLabel.font          = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.thin)
         pickerLabel.textAlignment = NSTextAlignment.center
         
@@ -66,34 +60,22 @@ extension Picker: UIPickerViewDataSource {
     }  //forComponent
 }
 
-extension Picker: UIPickerViewDelegate {
+extension PlayerPicker: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        //print("\(self) -> \(#function)")
         
         return 35.0
     }  //rowHeightForComponent
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        //print("\(self) -> \(#function)")
         
-//        let playerArray = dataArray as? Players
-//        
-//        let name = (dataArray[row] as! AnyObject).firsN  as Players
-        
-        return dataArray[row] as? String
+        return playersArray[row].firstName! + " " + playersArray[row].lastName!
         
     }  //titleForRow
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //print("\(self) -> \(#function)")
-        
-        //NotificationCenter
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.post(name:Notification.Name(rawValue:"Notification"),
-                                object: textField,
-                                userInfo: ["value" : dataArray[row]])
-        
+ 
+        print("\(playersArray[row].firstName! + " " + playersArray[row].lastName!)")
     }
-    
-}  //UIPickerViewDelegate
+
+}

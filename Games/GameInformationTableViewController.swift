@@ -105,9 +105,7 @@ class GameInformationTableViewController: UITableViewController {
         //print("\(self) -> \(#function)")
         
         let game = self.fetchedResultsController.object(at: indexPath as IndexPath)
-        
-        print("game \(game)")
-        
+                
         let gameDetailsTableViewController = storyboard?.instantiateViewController(withIdentifier: "GameDetailsTableViewController") as! GameDetailsTableViewController
         
         gameDetailsTableViewController.selectedGame = game

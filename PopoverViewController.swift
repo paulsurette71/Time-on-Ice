@@ -15,8 +15,7 @@ class PopoverViewController: UIViewController {
     
     var dataToPassToPicker = [Any]()
     var popoverTitle       = ""
-    var sender = UITextField()
-    
+    var sender             = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +24,7 @@ class PopoverViewController: UIViewController {
         pickerView.textField = sender
         titleLabel.text      = popoverTitle
         
-        // Do any additional setup after loading the view.
-    }
+    }  //viewDidLoad
     
 }  //selectedPositionFromPicker
 
