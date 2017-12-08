@@ -20,7 +20,7 @@ class CreateAttributedString {
         
         let numberOfPlayersAttributedString = NSMutableAttributedString(string: String(numberOfPlayers))
         numberOfPlayersAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, numberOfPlayersAttributedString.length))
-        
+
         let staticStringAttributedString = staticAttributedString
         staticStringAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.regular), range: NSMakeRange(0, staticStringAttributedString.length))
         

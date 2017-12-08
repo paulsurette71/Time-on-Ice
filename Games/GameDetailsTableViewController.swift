@@ -86,7 +86,6 @@ class GameDetailsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        ////print("\(self) -> \(#function)")
         
         //http://stackoverflow.com/questions/19802336/changing-font-size-for-uitableview-section-headers
         

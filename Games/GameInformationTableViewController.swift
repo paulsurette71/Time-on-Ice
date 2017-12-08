@@ -33,7 +33,6 @@ class GameInformationTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //print("\(self) -> \(#function)")
         
         goFetch()
     }
@@ -44,7 +43,6 @@ class GameInformationTableViewController: UITableViewController {
     }
     
     func goFetch() {
-        //print("\(self) -> \(#function)")
         
         let fetchRequest: NSFetchRequest<Games> = Games.fetchRequest()
         let sortDate   = NSSortDescriptor(key: #keyPath(Games.date), ascending: true)
@@ -85,8 +83,6 @@ class GameInformationTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //print("\(self) -> \(#function)")
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameInformationTableViewCell", for: indexPath) as! GameInformationTableViewCell
         
         let results = fetchedResultsController.object(at: indexPath)
@@ -96,13 +92,13 @@ class GameInformationTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print("\(self) -> \(#function)")
+        
         
         updateGame(indexPath: indexPath)
     }
     
     func updateGame(indexPath: IndexPath)  {
-        //print("\(self) -> \(#function)")
+        
         
         let game = self.fetchedResultsController.object(at: indexPath as IndexPath)
                 
@@ -120,7 +116,7 @@ class GameInformationTableViewController: UITableViewController {
 
     
     func configureCell(_ cell: GameInformationTableViewCell, withGame game: Games, indexPath: IndexPath) {
-        //print("\(self) -> \(#function)")
+        
         
         let currentDate = convertDate.convertDate(date: (game.date)!)
         
@@ -132,7 +128,7 @@ class GameInformationTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //print("\(self) -> \(#function)")
+        
         
         let gameDetailsTableViewController = segue.destination as! GameDetailsTableViewController
         

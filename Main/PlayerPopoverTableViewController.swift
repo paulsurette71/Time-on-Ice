@@ -10,9 +10,15 @@ import UIKit
 
 class PlayerPopoverTableViewController: UITableViewController {
     
-    var dataToPassToPicker = [Players]()
-    
+    var players         = [Players]()
+    var selectedPlayers = [Players]()
     var checkmarkIndexPathArray = [IndexPath]()
+    
+    //Delegates
+    var myDelegates: myDelegates?
+    
+    //App Delegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +28,18 @@ class PlayerPopoverTableViewController: UITableViewController {
         tableView.register(cellNib, forCellReuseIdentifier: "playerPopoverTableViewCell")
         tableView.rowHeight = 75
         
-    }
+        if appDelegate.checkmarkIndexPath != nil {
+            if let checkArray = appDelegate.checkmarkIndexPath {
+                checkmarkIndexPathArray = checkArray
+            }
+        }
+        
+        if appDelegate.selectedPlayers != nil {
+            if let selectedPalyersInDelegate = appDelegate.selectedPlayers {
+                selectedPlayers = selectedPalyersInDelegate
+            }
+        }
+    }  //viewDidLoad
     
     // MARK: - Table view data source
     
@@ -33,7 +50,7 @@ class PlayerPopoverTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return dataToPassToPicker.count
+        return players.count
         
     }  //numberOfRowsInSection
     
@@ -42,9 +59,11 @@ class PlayerPopoverTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playerPopoverTableViewCell", for: indexPath) as! PlayerPopoverTableViewCell
         
-        cell.playerNumberLabel.text      = dataToPassToPicker[indexPath.row].number
-        cell.playerInformationLabel.text = dataToPassToPicker[indexPath.row].firstName! + " " + dataToPassToPicker[indexPath.row].lastName!
-        cell.playerTeamLabel.text  = dataToPassToPicker[indexPath.row].city! + " " + dataToPassToPicker[indexPath.row].team!
+        cell.playerNumberLabel.text      = players[indexPath.row].number
+        cell.playerInformationLabel.text = players[indexPath.row].firstName! + " " + players[indexPath.row].lastName!
+        cell.playerTeamLabel.text        = players[indexPath.row].city! + " " + players[indexPath.row].team!
+        
+        
         
         if checkmarkIndexPathArray.count > 0 {
             
@@ -82,7 +101,7 @@ class PlayerPopoverTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        let playersCount = String(dataToPassToPicker.count)
+        let playersCount = String(players.count)
         
         return playersCount + " Players"
         
@@ -91,19 +110,44 @@ class PlayerPopoverTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! PlayerPopoverTableViewCell
         
+        let selectedPlayer = players[indexPath.row]
+        
         if cell.checkMarkImageView.isHidden {
             
             cell.checkMarkImageView.isHidden = false
             
             checkmarkIndexPathArray.append(indexPath)
             
+            //Store Array in Delegate
+            myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkmarkIndexPathArray)
+            
+            selectedPlayers.append(selectedPlayer)
+            
+            //Store Array in Delegate
+            myDelegates?.storeSelectedPlayers(selectedPlayers: selectedPlayers)
+            
         } else {
             
             cell.checkMarkImageView.isHidden = true
             
             checkmarkIndexPathArray = checkmarkIndexPathArray.filter { $0 != indexPath }
+            
+            //Store Array in Delegate
+            myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkmarkIndexPathArray)
+            
+            selectedPlayers = selectedPlayers.filter {$0 != selectedPlayer}
+            
+            //Store Array in Delegate
+            myDelegates?.storeSelectedPlayers(selectedPlayers: selectedPlayers)
+            
         }
         
+        //NotificationCenter
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.post(name:Notification.Name(rawValue:"PlayersOnBench"),
+                                object: selectedPlayers,
+                                userInfo: nil)
+        
     }  //didSelectRowAt
-
+    
 }

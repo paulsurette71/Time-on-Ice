@@ -59,17 +59,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGA-Zg-82y">
-                                <rect key="frame" x="15" y="64" width="360" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGA-Zg-82y">
+                                <rect key="frame" x="0.0" y="64" width="375" height="20.5"/>
+                                <color key="backgroundColor" name="gryphonGold"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="zee-Ry-vC7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Players On Ice">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="15" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z1V-wy-CnS">
-                                <rect key="frame" x="0.0" y="90" width="375" height="286"/>
+                                <rect key="frame" x="0.0" y="84.5" width="375" height="303"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="playersTableViewCell" textLabel="2eh-Ie-kLQ" style="IBUITableViewCellStyleDefault" id="SG8-jn-ebg">
@@ -95,24 +102,60 @@
                                     <outlet property="delegate" destination="5t9-lx-hAx" id="pXg-4h-pTc"/>
                                 </connections>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YFh-g2-Ipm" userLabel="Clock Stack View">
-                                <rect key="frame" x="274" y="386" width="85.5" height="51.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YFh-g2-Ipm" userLabel="Clock Stack View">
+                                <rect key="frame" x="274" y="386" width="86" height="51.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jb1-Kx-uTP">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jb1-Kx-uTP">
                                         <rect key="frame" x="18.5" y="0.0" width="51" height="31"/>
                                         <color key="onTintColor" name="gryphonBlue"/>
                                         <connections>
                                             <action selector="toggleClock:" destination="5t9-lx-hAx" eventType="valueChanged" id="Nlr-G7-79P"/>
                                         </connections>
                                     </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Clock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBn-GT-lfV">
-                                        <rect key="frame" x="0.0" y="31" width="85.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Start Clock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBn-GT-lfV">
+                                        <rect key="frame" x="0.0" y="31" width="86" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-vu-LSl" userLabel="Button Stack View">
+                                <rect key="frame" x="10" y="392.5" width="130" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-fs-WSk">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <state key="normal" image="buttonGame"/>
+                                        <connections>
+                                            <action selector="selectGame:" destination="5t9-lx-hAx" eventType="touchUpInside" id="546-UL-PiO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-Aj-f3d">
+                                        <rect key="frame" x="70" y="0.0" width="60" height="60"/>
+                                        <state key="normal" image="buttonPlayers"/>
+                                        <connections>
+                                            <action selector="selectPlayers:" destination="5t9-lx-hAx" eventType="touchUpInside" id="hFB-2K-YPJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8g7-iG-cMa">
+                                <rect key="frame" x="0.0" y="457.5" width="375" height="20.5"/>
+                                <color key="backgroundColor" name="gryphonGold"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="XI5-fs-dIZ"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Players on Bench">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="15" headIndent="15" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zv-rF-527">
                                 <rect key="frame" x="0.0" y="478" width="375" height="140"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -142,56 +185,24 @@
                                     <outlet property="delegate" destination="5t9-lx-hAx" id="9jl-BN-cMg"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8g7-iG-cMa">
-                                <rect key="frame" x="15" y="447.5" width="360" height="20.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="XI5-fs-dIZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-vu-LSl" userLabel="Button Stack View">
-                                <rect key="frame" x="10" y="408" width="120" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-fs-WSk">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                        <state key="normal" image="buttonGame"/>
-                                        <connections>
-                                            <action selector="selectGame:" destination="5t9-lx-hAx" eventType="touchUpInside" id="546-UL-PiO"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-Aj-f3d">
-                                        <rect key="frame" x="60" y="0.0" width="60" height="60"/>
-                                        <state key="normal" image="buttonPlayers"/>
-                                        <connections>
-                                            <action selector="selectPlayers:" destination="5t9-lx-hAx" eventType="touchUpInside" id="hFB-2K-YPJ"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VGA-Zg-82y" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="0Vi-6Z-Fnz"/>
-                            <constraint firstItem="YFh-g2-Ipm" firstAttribute="top" secondItem="Z1V-wy-CnS" secondAttribute="bottom" constant="10" id="0mp-q6-zFr"/>
-                            <constraint firstItem="Z1V-wy-CnS" firstAttribute="top" secondItem="VGA-Zg-82y" secondAttribute="bottom" constant="5" id="5So-sJ-GKb"/>
+                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="VGA-Zg-82y" secondAttribute="trailing" id="0Ea-KU-Gdy"/>
+                            <constraint firstItem="vAe-vu-LSl" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="10" id="27Z-hd-1Uf"/>
+                            <constraint firstItem="8g7-iG-cMa" firstAttribute="top" secondItem="vAe-vu-LSl" secondAttribute="bottom" constant="5" id="4FT-8V-VCw"/>
                             <constraint firstItem="kzy-O2-pP9" firstAttribute="bottom" secondItem="2zv-rF-527" secondAttribute="bottom" id="7c9-Y0-I9n"/>
-                            <constraint firstItem="Z1V-wy-CnS" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="9ct-WA-Nx1"/>
-                            <constraint firstItem="VGA-Zg-82y" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="15" id="CdX-ZU-SxE"/>
-                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="8g7-iG-cMa" secondAttribute="trailing" id="DK6-dv-WaS"/>
-                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="vAe-vu-LSl" secondAttribute="bottom" constant="10" id="Frz-AG-oKS"/>
-                            <constraint firstItem="8g7-iG-cMa" firstAttribute="top" secondItem="YFh-g2-Ipm" secondAttribute="bottom" constant="10" id="OcX-58-sM0"/>
-                            <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="15" id="PUs-79-SbA"/>
-                            <constraint firstItem="8g7-iG-cMa" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="S3n-5e-Qv7"/>
-                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="VGA-Zg-82y" secondAttribute="trailing" id="YpB-EU-Phe"/>
+                            <constraint firstItem="Z1V-wy-CnS" firstAttribute="top" secondItem="VGA-Zg-82y" secondAttribute="bottom" id="9iA-D1-2hU"/>
+                            <constraint firstItem="vAe-vu-LSl" firstAttribute="top" secondItem="Z1V-wy-CnS" secondAttribute="bottom" constant="5" id="A6l-s2-Mgs"/>
+                            <constraint firstItem="Z1V-wy-CnS" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="ERq-Ic-S1l"/>
+                            <constraint firstItem="Z1V-wy-CnS" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="QjP-ds-i44"/>
+                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="8g7-iG-cMa" secondAttribute="bottom" id="Qua-mc-5bv"/>
+                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="8g7-iG-cMa" secondAttribute="trailing" id="RF2-hK-UUB"/>
+                            <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="fmq-fK-yEq" secondAttribute="leading" id="Xdq-fk-PWn"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="fEx-jI-o7y"/>
-                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="8g7-iG-cMa" secondAttribute="bottom" constant="10" id="mPH-UJ-aRb"/>
-                            <constraint firstItem="vAe-vu-LSl" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="10" id="oNU-33-nP0"/>
-                            <constraint firstItem="Z1V-wy-CnS" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="rzr-rM-wFh"/>
-                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="YFh-g2-Ipm" secondAttribute="trailing" constant="15" id="s7X-gr-YYY"/>
-                            <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="15" id="tdt-Ei-9pR"/>
+                            <constraint firstItem="VGA-Zg-82y" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="h8s-DA-lVt"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="vAu-uv-SJc"/>
+                            <constraint firstItem="VGA-Zg-82y" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="zYF-e4-14O"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kzy-O2-pP9"/>
                     </view>
@@ -1329,6 +1340,9 @@
         <image name="separatorLine167px" width="167" height="1"/>
         <namedColor name="gryphonBlue">
             <color red="0.41176470588235292" green="0.63921568627450975" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gryphonGold">
+            <color red="1" green="0.7803921568627451" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gryphonRed">
             <color red="0.76078431372549016" green="0.015686274509803921" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

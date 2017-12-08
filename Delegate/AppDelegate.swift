@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     
     var window: UIWindow?
     
@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //classes
     let colourPalette = ColourPalette()
+    
+    //Delegates
+    var playersOnBench: [Players]?
+    var checkmarkIndexPath: [IndexPath]?
+    var selectedPlayers: [Players]?
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -35,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //pass managedContext
         homeViewController.managedContext = coreDataStack.managedContext
+        homeViewController.myDelegates    = self
         
         //Player Tab
         let playerNavigationController = tabBarController.viewControllers?[2] as! UINavigationController
@@ -75,6 +81,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         //print("\(self) -> \(#function)")
+        
+    }
+    
+    //Delegates
+    func storePlayersOnBench(playersOnBench: [Players]) {
+        
+        self.playersOnBench = playersOnBench
+        
+    }
+    
+    func storeCheckmarkIndexPathArray(indexPath: [IndexPath]) {
+        
+        self.checkmarkIndexPath = indexPath
+    }
+    
+    func storeSelectedPlayers(selectedPlayers: [Players]) {
+        
+        self.selectedPlayers = selectedPlayers
         
     }
     

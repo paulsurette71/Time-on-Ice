@@ -44,25 +44,31 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playersButton: UIButton!
     
     var tappedArray = [Int]()
+    var playerArray = [Players]()
     
     //classes
     let timeFormat = TimeFormat()
     let goFetch    = GoFetch()
     
+    //App Delegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     //coredata
     var managedContext: NSManagedObjectContext!
+    
+    //Delegates
+    var myDelegates: myDelegates?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //print("\(self) -> \(#function)")
-        
         // Do any additional setup after loading the view.
+        
+        //NotifactionCenter
+        SetupNotificationCenter()
         
         // Register collectionView cell classes
         collectionView.register(UINib(nibName: "BenchCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "benchCell")
-        
         collectionView.register(UINib(nibName: "AddPlayerToBenchCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "addBenchCell")
         
         // Register tableView cell classes
@@ -82,7 +88,7 @@ class HomeViewController: UIViewController {
         collectionViewLayout()
         
         //setupUI
-        setupUI()
+        //        setupUI()
         
         //        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
         //        let importPlayers            = ImportPlayers()
@@ -175,7 +181,7 @@ class HomeViewController: UIViewController {
     
     func setupUI () {
         
-        //        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playerArray.count)
+        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playerArray.count)
         
     }  //setupUI
     
@@ -183,7 +189,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func selectGame(_ sender: Any) {
         
-//        showPopover(sender: sender as! UIButton, array: <#[Any]#>, popoverTitle: "Games")
+        //        showPopover(sender: sender as! UIButton, array: <#[Any]#>, popoverTitle: "Games")
     }
     
     @IBAction func selectPlayers(_ sender: Any) {
@@ -205,7 +211,10 @@ class HomeViewController: UIViewController {
         
         playerPopoverTableViewController.modalPresentationStyle = .popover
         playerPopoverTableViewController.preferredContentSize   = CGSize(width: 350, height: 250)
-        playerPopoverTableViewController.dataToPassToPicker     = array
+        playerPopoverTableViewController.players     = array
+        
+        //Pass delegate
+        playerPopoverTableViewController.myDelegates = myDelegates
         
         let popover = playerPopoverTableViewController.popoverPresentationController!
         
@@ -218,13 +227,34 @@ class HomeViewController: UIViewController {
         
     }  //showShotDetails
     
+    func SetupNotificationCenter()  {
+        ////print("\(self) -> \(#function)")
+        
+        let positionNotificationCenter = NotificationCenter.default
+        positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"PlayersOnBench"),
+                                               object:nil, queue:nil,
+                                               using:notificationCenterData)
+        
+    }  //SetupNotificationCenter
+    
+    func notificationCenterData(notification:Notification) -> Void  {
+        
+        guard notification.object != nil else {
+            print("En Garde")
+            return
+        }
+        
+        playerArray = notification.object as! [Players]
+        
+        //Update UI
+        setupUI()
+        
+        //reload data into CollectionView
+        collectionView.reloadData()
+        
+    }  //notificationCenterData
     
 }  //ShotDetailsPopover
-
-
-
-
-
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -239,89 +269,85 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //print("\(self) -> \(#function)")
         
-        return 0 //playerArray.count
+        return playerArray.count
         
     }  //numberOfItemsInSection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //print("\(self) -> \(#function)")
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "benchCell", for: indexPath) as! BenchCollectionViewCell
         
-        //        let cellAdd = collectionView.dequeueReusableCell(withReuseIdentifier: "addBenchCell", for: indexPath) as! AddPlayerToBenchCollectionViewCell
+        cell.playerNumberLabel.text   = playerArray[indexPath.row].number
+        cell.playerLastNameLabel.text = playerArray[indexPath.row].lastName
         
-        //        cell.playerNumberLabel.text   = String(playerArray[indexPath.row].number)
-        //        cell.playerLastNameLabel.text = playerArray[indexPath.row].lastName
-        
-        //        if tappedArray.count > 0 {
-        //
-        //            if tappedArray.contains(indexPath.row) {
-        //
-        //                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
-        //
-        //            } else {
-        //
-        //                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-        //
-        //            }
-        //        }
+        if tappedArray.count > 0 {
+            
+            if tappedArray.contains(indexPath.row) {
+                
+                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
+                
+            } else {
+                
+                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
+                
+            }
+        }
         
         return cell
         
     }  //cellForItemAt
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //print("\(self) -> \(#function)")
-        
         
         let cell = collectionView.cellForItem(at: indexPath) as! BenchCollectionViewCell
         
+        if cell.cellBackgroundImageView.image == UIImage(named: "collectionviewcell_60x60_white") {
+            
+            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
+            
+            tappedArray.append(indexPath.row)
+            
+            //            playerArray[indexPath.row].timeOnIce = 0
+            //            playerArray[indexPath.row].shifts += 1
+            
+            //            let currentShift = Shift(player: playerArray[indexPath.row], timeOnIce: 0, dateOnIce: Date())
+            //
+            //            shiftDetails.append(currentShift)
+            //            shiftDetails[indexPath.row].timeOnIce = 0
+            
+        } else {
+            
+            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
+            
+            //            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: playerArray[indexPath.row].runningTimeOnIce)
+            //            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: shiftDetails[indexPath.row].timeOnIce)
+            
+            tappedArray = tappedArray.filter { $0 != indexPath.row }
+            
+            //If there is no one on the ice, stop and disable the clock.
+            if tappedArray.count == 0 {
+                
+                clockSwitch.isOn      = false
+                clockSwitch.isEnabled = false
+                stopTimer()
+            }
+            
+        }
         
-        //        if cell?.cellBackgroundImageView.image == UIImage(named: "collectionviewcell_60x60_white") {
-        //
-        //            cell?.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
-        //
-        //            tappedArray.append(indexPath.row)
-        //
-        //            //            playerArray[indexPath.row].timeOnIce = 0
-        //            //            playerArray[indexPath.row].shifts += 1
-        //
-        //            //            let currentShift = Shift(player: playerArray[indexPath.row], timeOnIce: 0, dateOnIce: Date())
-        //            //
-        //            //            shiftDetails.append(currentShift)
-        //            //            shiftDetails[indexPath.row].timeOnIce = 0
-        //
-        //        } else {
-        //
-        //            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-        //
-        //            //            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: playerArray[indexPath.row].runningTimeOnIce)
-        //            //            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: shiftDetails[indexPath.row].timeOnIce)
-        //
-        //            tappedArray = tappedArray.filter { $0 != indexPath.row }
-        //
-        //            //If there is no one on the ice, stop and disable the clock.
-        //            if tappedArray.count == 0 {
-        //
-        //                clockSwitch.isOn      = false
-        //                clockSwitch.isEnabled = false
-        //                stopTimer()
-        //            }
-        //
-        //        }
-        //
-        //        if tappedArray.count > 0 {
-        //
-        //            clockSwitch.isEnabled = true
-        //        }
-        //
-        //        playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
-        //
-        //        //Update players on bench
-        //        //        let playersOnBench = playerArray.count - tappedArray.count
-        //        //        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench)
-        //
-        //        tableView.reloadData()
+        if tappedArray.count > 0 {
+            
+            clockSwitch.isEnabled = true
+        }
+        
+        playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
+        
+        //Update players on bench
+        let playersOnBench = playerArray.count - tappedArray.count
+        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench)
+        
+        appDelegate.storePlayersOnBench(playersOnBench: playerArray)
+        
+        tableView.reloadData()
         
     }  //didSelectItemAt
     
