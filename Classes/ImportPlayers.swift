@@ -343,6 +343,78 @@ class ImportPlayers {
             print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
         }
 
+        do {
+            
+            let entity = NSEntityDescription.entity(forEntityName: "Players", in: managedContext)
+            let player = Players(entity: entity!, insertInto: managedContext)
+            
+            player.firstName = "Connor"
+            player.lastName  = "McDavid"
+            player.number    = "97"
+            player.position  = "Centre"
+            player.shoots    = "Left"
+            player.city      = "Edmonton"
+            player.team      = "Oilers"
+            player.league    = "NHL"
+            player.level     = "Professional"
+            player.division  = "Pacific"
+            player.height    = "6'1\""
+            player.weight    = "192 lb"
+            
+            //HeadShot
+            let playerHeadshot = UIImageJPEGRepresentation(UIImage(named: "mcdavid.jpg")!, 1.0) as NSData?
+            player.headshot = playerHeadshot
+            
+            //Store Birthdate
+            let dateString           = "1997-01-13"
+            let dateFormatter        = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let date = dateFormatter.date(from: dateString)
+            
+            player.birthdate = date as NSDate?
+            
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+        }
+
+        do {
+            
+            let entity = NSEntityDescription.entity(forEntityName: "Players", in: managedContext)
+            let player = Players(entity: entity!, insertInto: managedContext)
+            
+            player.firstName = "Vladimir"
+            player.lastName  = "Tarasenko"
+            player.number    = "91"
+            player.position  = "Centre"
+            player.shoots    = "Left"
+            player.city      = "St. Louis"
+            player.team      = "Blues"
+            player.league    = "NHL"
+            player.level     = "Professional"
+            player.division  = "Central"
+            player.height    = "6'0\""
+            player.weight    = "225 lb"
+            
+            //HeadShot
+            let playerHeadshot = UIImageJPEGRepresentation(UIImage(named: "tarasenko.jpg")!, 1.0) as NSData?
+            player.headshot = playerHeadshot
+            
+            //Store Birthdate
+            let dateString           = "1991-12-13"
+            let dateFormatter        = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let date = dateFormatter.date(from: dateString)
+            
+            player.birthdate = date as NSDate?
+            
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+        }
+
     }  //importPlayers
     
 }  //ImportPlayers 

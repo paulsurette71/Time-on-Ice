@@ -38,7 +38,7 @@
         <scene sceneID="zwV-2n-FOh">
             <objects>
                 <navigationController id="ndY-5Z-dk5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="icons8-home" id="Hto-s5-brm"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home icon 25x25" id="Hto-s5-brm"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7d9-Lj-jjL">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -103,7 +103,7 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YFh-g2-Ipm" userLabel="Clock Stack View">
-                                <rect key="frame" x="274" y="386" width="86" height="51.5"/>
+                                <rect key="frame" x="274" y="386" width="85.5" height="51.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jb1-Kx-uTP">
@@ -114,7 +114,7 @@
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Start Clock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBn-GT-lfV">
-                                        <rect key="frame" x="0.0" y="31" width="86" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="31" width="85.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -140,6 +140,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R19-ey-bkE">
+                                <rect key="frame" x="305" y="392" width="60" height="60"/>
+                                <state key="normal" image="buttonClockStart"/>
+                                <connections>
+                                    <action selector="clock:" destination="5t9-lx-hAx" eventType="touchUpInside" id="glZ-qH-fv8"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8g7-iG-cMa">
                                 <rect key="frame" x="0.0" y="457.5" width="375" height="20.5"/>
                                 <color key="backgroundColor" name="gryphonGold"/>
@@ -201,6 +208,8 @@
                             <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="fmq-fK-yEq" secondAttribute="leading" id="Xdq-fk-PWn"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="fEx-jI-o7y"/>
                             <constraint firstItem="VGA-Zg-82y" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="h8s-DA-lVt"/>
+                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="R19-ey-bkE" secondAttribute="trailing" constant="10" id="nJF-jw-7oa"/>
+                            <constraint firstItem="8g7-iG-cMa" firstAttribute="top" secondItem="R19-ey-bkE" secondAttribute="bottom" constant="5" id="rm7-k7-qU0"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="vAu-uv-SJc"/>
                             <constraint firstItem="VGA-Zg-82y" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="zYF-e4-14O"/>
                         </constraints>
@@ -208,6 +217,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Time on Ice" id="ySc-pr-LsJ"/>
                     <connections>
+                        <outlet property="clockButton" destination="R19-ey-bkE" id="77P-My-xjK"/>
                         <outlet property="clockStatusLabel" destination="BBn-GT-lfV" id="zmB-Qr-tPh"/>
                         <outlet property="clockSwitch" destination="jb1-Kx-uTP" id="hAP-YY-ifD"/>
                         <outlet property="collectionView" destination="2zv-rF-527" id="KJ1-tz-u42"/>
@@ -576,7 +586,7 @@
         <scene sceneID="3Gz-p7-PfI">
             <objects>
                 <navigationController id="fWh-mE-Mb0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Game" image="icons8-calendar" id="dWz-jc-WCs"/>
+                    <tabBarItem key="tabBarItem" title="Game" image="calendar icon 25x25 copy" id="dWz-jc-WCs"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lEW-zD-kWZ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1310,11 +1320,68 @@
             </objects>
             <point key="canvasLocation" x="3199" y="566"/>
         </scene>
+        <!--No Player Popover View Controller-->
+        <scene sceneID="aB7-KD-8IV">
+            <objects>
+                <viewController storyboardIdentifier="NoPlayerPopoverViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0aa-kS-Wxm" customClass="NoPlayerPopoverViewController" customModule="Time_on_Ice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JAb-cE-1pk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Bg2-Me-Dnp">
+                                <rect key="frame" x="94" y="292.5" width="187" height="83.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nQA-0p-SQO">
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="30.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To begin, tap the " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVf-Gy-x61">
+                                                <rect key="frame" x="0.0" y="4" width="158" height="26.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user icon 25x25" translatesAutoresizingMaskIntoConstraints="NO" id="4rM-X7-4i5">
+                                                <rect key="frame" x="160" y="0.0" width="27" height="25"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="iQz-BN-fTQ">
+                                        <rect key="frame" x="0.0" y="30.5" width="171.5" height="53"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="at the bottom right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZk-LJ-v8l">
+                                                <rect key="frame" x="0.0" y="0.0" width="171.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to add players." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qr7-78-XWr">
+                                                <rect key="frame" x="0.0" y="26.5" width="136.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" name="gryphonGold"/>
+                        <constraints>
+                            <constraint firstItem="Bg2-Me-Dnp" firstAttribute="centerY" secondItem="JAb-cE-1pk" secondAttribute="centerY" id="QGx-MO-fmz"/>
+                            <constraint firstItem="Bg2-Me-Dnp" firstAttribute="centerX" secondItem="JAb-cE-1pk" secondAttribute="centerX" id="l8i-sX-eR7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1fa-6A-r5i"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Za-1U-UXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3879" y="563"/>
+        </scene>
         <!--Players-->
         <scene sceneID="Pq8-GJ-o5t">
             <objects>
                 <navigationController id="Wuc-Dc-aRm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Players" image="icons8-conference" selectedImage="icons8-conference" id="eSX-ZF-ZMR"/>
+                    <tabBarItem key="tabBarItem" title="Players" image="user icon 25x25" id="eSX-ZF-ZMR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="R4X-4I-aWk">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1329,17 +1396,21 @@
         </scene>
     </scenes>
     <resources>
+        <image name="buttonClockStart" width="60" height="60"/>
         <image name="buttonGame" width="60" height="60"/>
         <image name="buttonPlayers" width="60" height="60"/>
+        <image name="calendar icon 25x25 copy" width="27" height="25"/>
         <image name="headshot" width="75" height="75"/>
-        <image name="icons8-calendar" width="25" height="26"/>
+        <image name="home icon 25x25" width="27" height="25"/>
         <image name="icons8-camera-filled" width="30" height="24"/>
-        <image name="icons8-conference" width="37" height="26"/>
-        <image name="icons8-home" width="26" height="26"/>
         <image name="separatorLine108px" width="108" height="1"/>
         <image name="separatorLine167px" width="167" height="1"/>
+        <image name="user icon 25x25" width="27" height="25"/>
         <namedColor name="gryphonBlue">
             <color red="0.41176470588235292" green="0.63921568627450975" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gryphonGold">
+            <color red="1" green="0.7803921568627451" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gryphonGold">
             <color red="1" green="0.7803921568627451" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

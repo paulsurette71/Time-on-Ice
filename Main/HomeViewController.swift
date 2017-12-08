@@ -42,13 +42,16 @@ class HomeViewController: UIViewController {
     //UIButton
     @IBOutlet weak var gameButton: UIButton!
     @IBOutlet weak var playersButton: UIButton!
+    @IBOutlet weak var clockButton: UIButton!
     
     var tappedArray = [Int]()
     var playerArray = [Players]()
+    var tappedButton = true
     
     //classes
-    let timeFormat = TimeFormat()
-    let goFetch    = GoFetch()
+    let timeFormat  = TimeFormat()
+    let goFetch     = GoFetch()
+    let showPopover = ShowPopover()
     
     //App Delegate
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -96,7 +99,7 @@ class HomeViewController: UIViewController {
         //        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
         //
         //            //Import Test data
-        //           importPlayers.importPlayers()
+        //            importPlayers.importPlayers()
         //
         //        }
         
@@ -196,6 +199,11 @@ class HomeViewController: UIViewController {
         
         let playerList = goFetch.player(managedContext: managedContext) // as? [[Players]]
         
+        guard playerList.count != 0 else {
+            showPopover.forNoPlayers(view: self, sender: sender as! UIButton)
+            return
+        }
+        
         showPopover(sender: sender as! UIButton, array: playerList, popoverTitle: "Players")
     }
     
@@ -254,12 +262,37 @@ class HomeViewController: UIViewController {
         
     }  //notificationCenterData
     
+    
+    @IBAction func clock(_ sender: Any) {
+        
+        let button = sender as! UIButton
+        
+        if tappedButton {
+            
+            tappedButton = false
+            button.setImage(UIImage(named: "buttonClockStop"), for: .normal)
+            
+            print("Start the Clock")
+            
+        } else {
+            
+            tappedButton = true
+            button.setImage(UIImage(named: "buttonClockStart"), for: .normal)
+            
+            print("Stop the Clock")
+            
+        }
+        
+    }  //clock
+    
+    
+    
+    
 }  //ShotDetailsPopover
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        //print("\(self) -> \(#function)")
         
         return 1
         
@@ -267,7 +300,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //print("\(self) -> \(#function)")
         
         return playerArray.count
         
@@ -357,21 +389,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //print("\(self) -> \(#function)")
         
         return 1
         
     }  //numberOfSections
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print("\(self) -> \(#function)")
         
         return tappedArray.count
         
     }  //numberOfRowsInSection
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //print("\(self) -> \(#function)")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersOnIceTableViewCell", for: indexPath) as! PlayersOnIceTableViewCell
         
@@ -403,7 +432,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        ////print("\(self) -> \(#function)")
         
         return .none
     }
