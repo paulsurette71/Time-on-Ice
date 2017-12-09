@@ -10,28 +10,25 @@ import UIKit
 import CoreData
 import Foundation
 
+//struct Shift {
+//    var row: Int
+//    var timeOnIce: Int
+//    var runningTimeOnIce: Int {
+//        return self.runningTimeOnIce + timeOnIce
+//    }
+//}
+
 class HomeViewController: UIViewController {
-    
-    enum clockStatus: String {
-        case on  = "Stop Clock"
-        case off = "Start Clock"
-    }
-    
-    let createAttributedString = CreateAttributedString()
     
     //timer
     var timer               = Timer()
     var timerCounter        = 0
-    var runningTotalCounter = 0
-    var shifts              = 0
+    //    var runningTotalCounter = 0
+    //    var shifts              = 0
     
     //UILabel
     @IBOutlet weak var playersOnBenchLabel: UILabel!
-    @IBOutlet weak var clockStatusLabel: UILabel!
     @IBOutlet weak var playersOnIceLabel: UILabel!
-    
-    //UISwitch
-    @IBOutlet weak var clockSwitch: UISwitch!
     
     //UITableView
     @IBOutlet weak var tableView: UITableView!
@@ -44,14 +41,20 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playersButton: UIButton!
     @IBOutlet weak var clockButton: UIButton!
     
-    var tappedArray = [Int]()
-    var playerArray = [Players]()
-    var tappedButton = true
+    //    var tappedArray      = [Int]()
+    //        var tappedArray = [[String:Int]]()var currentPlayerSelected = [String:Int]()
+    var tappedArray = [[String:Int]]()
+    var playerArray      = [Players]()
+    var tappedButton     = true
+    //    var playerOnIceArray = [Any]()
+    //    var shiftArray       = [Shift]()
+    var valueArray = [Int]()
     
     //classes
-    let timeFormat  = TimeFormat()
-    let goFetch     = GoFetch()
-    let showPopover = ShowPopover()
+    let timeFormat             = TimeFormat()
+    let goFetch                = GoFetch()
+    let showPopover            = ShowPopover()
+    let createAttributedString = CreateAttributedString()
     
     //App Delegate
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -61,7 +64,6 @@ class HomeViewController: UIViewController {
     
     //Delegates
     var myDelegates: myDelegates?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,9 +92,6 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-        //setupUI
-        //        setupUI()
-        
         //        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
         //        let importPlayers            = ImportPlayers()
         //
@@ -103,7 +102,6 @@ class HomeViewController: UIViewController {
         //
         //        }
         
-        
     }  //viewDidLoad
     
     override func didReceiveMemoryWarning() {
@@ -112,65 +110,66 @@ class HomeViewController: UIViewController {
         
     }  //didReceiveMemoryWarning
     
-    @IBAction func toggleClock(_ sender: Any) {
-        
-        guard tappedArray.count > 0 else {
-            
-            clockSwitch.isEnabled = false
-            
-            return
-        }
-        
-        clockSwitch.isEnabled = true
-        
-        if (sender as! UISwitch).isOn {
-            
-            clockStatusLabel.text = clockStatus.on.rawValue
-            
-            //start the timer
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
-            
-        } else {
-            
-            clockStatusLabel.text = clockStatus.off.rawValue
-            timerCounter = 0
-            
-            //stop the timer
-            stopTimer()
-        }
-    }
     
-    @objc func startTimer() {
-        
-        guard tappedArray.count > 0 else {
-            return
-        }
-        
-        runningTotalCounter += 1
-        timerCounter += 0
-        
-        //        for rows in tappedArray {
-        //
-        //            if shiftDetails.count > 0 {
-        //
-        //                print(shiftDetails, rows)
-        //                //                shiftDetails[playerArray[rows]].timeOnIce += 1
-        //
-        //            }
-        //            //            playerArray[rows].runningTimeOnIce += 1
-        //            //            playerArray[rows].timeOnIce += 1
-        //
-        //            tableView.reloadData()
-        //
-        //        }  //rows
-        
-    }  //startTimer
+    //    @IBAction func toggleClock(_ sender: Any) {
+    //
+    //        guard tappedArray.count > 0 else {
+    //
+    //            clockSwitch.isEnabled = false
+    //
+    //            return
+    //        }
+    //
+    //        clockSwitch.isEnabled = true
+    //
+    //        if (sender as! UISwitch).isOn {
+    //
+    //            clockStatusLabel.text = clockStatus.on.rawValue
+    //
+    //            //start the timer
+    //            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
+    //
+    //        } else {
+    //
+    //            clockStatusLabel.text = clockStatus.off.rawValue
+    //            timerCounter = 0
+    //
+    //            //stop the timer
+    //            stopTimer()
+    //        }
+    //    }
     
-    func stopTimer()  {
-        
-        clockStatusLabel.text = clockStatus.off.rawValue
-        timer.invalidate()
-    }
+    //    @objc func startTimer() {
+    //
+    //        guard tappedArray.count > 0 else {
+    //            return
+    //        }
+    //
+    //        runningTotalCounter += 1
+    //        timerCounter += 0
+    //
+    //        //        for rows in tappedArray {
+    //        //
+    //        //            if shiftDetails.count > 0 {
+    //        //
+    //        //                print(shiftDetails, rows)
+    //        //                //                shiftDetails[playerArray[rows]].timeOnIce += 1
+    //        //
+    //        //            }
+    //        //            //            playerArray[rows].runningTimeOnIce += 1
+    //        //            //            playerArray[rows].timeOnIce += 1
+    //        //
+    //        //            tableView.reloadData()
+    //        //
+    //        //        }  //rows
+    //
+    //    }  //startTimer
+    
+    //    func stopTimer()  {
+    //
+    //        clockStatusLabel.text = clockStatus.off.rawValue
+    //        timer.invalidate()
+    //    }
     
     func collectionViewLayout() {
         
@@ -236,7 +235,6 @@ class HomeViewController: UIViewController {
     }  //showShotDetails
     
     func SetupNotificationCenter()  {
-        ////print("\(self) -> \(#function)")
         
         let positionNotificationCenter = NotificationCenter.default
         positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"PlayersOnBench"),
@@ -248,7 +246,7 @@ class HomeViewController: UIViewController {
     func notificationCenterData(notification:Notification) -> Void  {
         
         guard notification.object != nil else {
-            print("En Garde")
+            
             return
         }
         
@@ -272,19 +270,48 @@ class HomeViewController: UIViewController {
             tappedButton = false
             button.setImage(UIImage(named: "buttonClockStop"), for: .normal)
             
-            print("Start the Clock")
+            startTimer()
             
         } else {
             
             tappedButton = true
             button.setImage(UIImage(named: "buttonClockStart"), for: .normal)
             
-            print("Stop the Clock")
-            
+            stopTimer()
         }
         
     }  //clock
     
+    func startTimer()  {
+        
+        //start the timer
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounters), userInfo: nil, repeats: true)
+        
+    }  //startTimer
+    
+    func stopTimer() {
+        
+        timer.invalidate()
+    }  //stopTimer
+    
+    @objc func updateCounters() {
+        
+        timerCounter += 1
+        
+        for row in tappedArray.indices {
+            
+            print("row \(tappedArray[row])")
+            
+            tappedArray[row]["timeOnIce"]! += 1
+        }
+        
+        print("tappedArray \(tappedArray)")
+        
+        //Update tableview
+        tableView.reloadData()
+        
+        
+    }  //updateCounters
     
     
     
@@ -314,16 +341,25 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         if tappedArray.count > 0 {
             
-            if tappedArray.contains(indexPath.row) {
+            valueArray = []
+            
+            for value in tappedArray {
                 
-                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
+                valueArray.append(value["indexPath"]!)
                 
-            } else {
+                if valueArray.contains(indexPath.row) {
+                    
+                    cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
+                    
+                } else {
+                    
+                    cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
+                    
+                } //if
                 
-                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-                
-            }
-        }
+            }  //for
+            
+        }  //if tappedArray.count
         
         return cell
         
@@ -337,38 +373,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
             
-            tappedArray.append(indexPath.row)
-            
-            //            playerArray[indexPath.row].timeOnIce = 0
-            //            playerArray[indexPath.row].shifts += 1
-            
-            //            let currentShift = Shift(player: playerArray[indexPath.row], timeOnIce: 0, dateOnIce: Date())
-            //
-            //            shiftDetails.append(currentShift)
-            //            shiftDetails[indexPath.row].timeOnIce = 0
+            let currentPlayerSelected = ["indexPath": indexPath.row, "timeOnIce": 0]
+            tappedArray.append(currentPlayerSelected)
             
         } else {
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
             
-            //            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: playerArray[indexPath.row].runningTimeOnIce)
-            //            cell.totalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: shiftDetails[indexPath.row].timeOnIce)
-            
-            tappedArray = tappedArray.filter { $0 != indexPath.row }
-            
-            //If there is no one on the ice, stop and disable the clock.
-            if tappedArray.count == 0 {
-                
-                clockSwitch.isOn      = false
-                clockSwitch.isEnabled = false
-                stopTimer()
-            }
-            
-        }
-        
-        if tappedArray.count > 0 {
-            
-            clockSwitch.isEnabled = true
+            tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }
         }
         
         playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
@@ -404,27 +416,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersOnIceTableViewCell", for: indexPath) as! PlayersOnIceTableViewCell
         
+        let player = playerArray[tappedArray[indexPath.row]["indexPath"]!]
         
-        //        let player = playerArray[tappedArray[indexPath.row]]
+        cell.playerNumberLabel.text          = player.number
+        cell.playerNameLabel.attributedText  = createAttributedString.forFirstNameLastName(firstName: player.firstName!, lastName: player.lastName!)
         
+        //        let timeOnIce = timeFormat.mmSS(totalSeconds: timerCounter)
         
-        //        cell.playerNumberLabel.text          = String(player.number)
-        //        cell.playerNameLabel.attributedText  = createAttributedString.forFirstNameLastName(firstName: player.firstName, lastName: player.lastName)
-        //        cell.playerTimerLabel.attributedText = createAttributedString.forTimeOnIce(timeInSeconds: player.timeOnIce)
-        //        cell.timeOnIceLabel.attributedText   = createAttributedString.forTotalTimeOnIce(timeInSeconds: player.runningTimeOnIce)
-        //        cell.shiftsLabel.attributedText      = createAttributedString.forNumberOfShifts(numberOfShifts: player.shifts)
-        
-        //        if shiftDetails.count > 0 {
-        //
-        //            print("tappedArray[indexPath.row] \(tappedArray[indexPath.row])")
-        //            let shift = shiftDetails[indexPath.row]
-        //            cell.playerTimerLabel.attributedText = createAttributedString.forTimeOnIce(timeInSeconds: shift.timeOnIce)
-        //
-        //        }
-        
-        
+        let timeOnIce = timeFormat.mmSS(totalSeconds: tappedArray[indexPath.row]["timeOnIce"]!)
+        cell.playerTimerLabel.text = timeOnIce
         
         return cell
+        
     }  //cellForRowAt
     
 }  //extension

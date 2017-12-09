@@ -12,18 +12,15 @@ class Picker: UIPickerView {
     
     var dataArray = [Any]()
     var textField = UITextField()
-    //    var viewController: UIViewController!
     
     //Protocol
     var myDelegates: myDelegates?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        //print("\(self) -> \(#function)")
         
         self.delegate   = self
         self.dataSource = self
-        
     }
     
 }  //Picker
@@ -31,27 +28,21 @@ class Picker: UIPickerView {
 extension Picker: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        //print("\(self) -> \(#function)")
-        
-        print("count \(dataArray.count)")
         
         return dataArray.count
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        //print("\(self) -> \(#function)")
         
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        //print("\(self) -> \(#function)")
         
         return 150
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        //print("\(self) -> \(#function)")
         
         //http://stackoverflow.com/questions/27455345/uipickerview-wont-allow-changing-font-name-and-size-via-delegates-attributedt
         
@@ -69,24 +60,17 @@ extension Picker: UIPickerViewDataSource {
 extension Picker: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        //print("\(self) -> \(#function)")
         
         return 35.0
     }  //rowHeightForComponent
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        //print("\(self) -> \(#function)")
-        
-//        let playerArray = dataArray as? Players
-//        
-//        let name = (dataArray[row] as! AnyObject).firsN  as Players
         
         return dataArray[row] as? String
         
     }  //titleForRow
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //print("\(self) -> \(#function)")
         
         //NotificationCenter
         let notificationCenter = NotificationCenter.default
@@ -94,6 +78,6 @@ extension Picker: UIPickerViewDelegate {
                                 object: textField,
                                 userInfo: ["value" : dataArray[row]])
         
-    }
+    }  //didSelectRow
     
 }  //UIPickerViewDelegate

@@ -102,25 +102,6 @@
                                     <outlet property="delegate" destination="5t9-lx-hAx" id="pXg-4h-pTc"/>
                                 </connections>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YFh-g2-Ipm" userLabel="Clock Stack View">
-                                <rect key="frame" x="274" y="386" width="85.5" height="51.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jb1-Kx-uTP">
-                                        <rect key="frame" x="18.5" y="0.0" width="51" height="31"/>
-                                        <color key="onTintColor" name="gryphonBlue"/>
-                                        <connections>
-                                            <action selector="toggleClock:" destination="5t9-lx-hAx" eventType="valueChanged" id="Nlr-G7-79P"/>
-                                        </connections>
-                                    </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Start Clock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBn-GT-lfV">
-                                        <rect key="frame" x="0.0" y="31" width="85.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-vu-LSl" userLabel="Button Stack View">
                                 <rect key="frame" x="10" y="392.5" width="130" height="60"/>
                                 <subviews>
@@ -218,8 +199,6 @@
                     <navigationItem key="navigationItem" title="Time on Ice" id="ySc-pr-LsJ"/>
                     <connections>
                         <outlet property="clockButton" destination="R19-ey-bkE" id="77P-My-xjK"/>
-                        <outlet property="clockStatusLabel" destination="BBn-GT-lfV" id="zmB-Qr-tPh"/>
-                        <outlet property="clockSwitch" destination="jb1-Kx-uTP" id="hAP-YY-ifD"/>
                         <outlet property="collectionView" destination="2zv-rF-527" id="KJ1-tz-u42"/>
                         <outlet property="gameButton" destination="2ai-fs-WSk" id="NXC-Qd-T1e"/>
                         <outlet property="playersButton" destination="tSx-Aj-f3d" id="eME-MZ-9D7"/>
@@ -1408,9 +1387,6 @@
         <image name="user icon 25x25" width="27" height="25"/>
         <namedColor name="gryphonBlue">
             <color red="0.41176470588235292" green="0.63921568627450975" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="gryphonGold">
-            <color red="1" green="0.7803921568627451" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gryphonGold">
             <color red="1" green="0.7803921568627451" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
