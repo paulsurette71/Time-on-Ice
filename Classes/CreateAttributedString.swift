@@ -20,7 +20,7 @@ class CreateAttributedString {
         
         let numberOfPlayersAttributedString = NSMutableAttributedString(string: String(numberOfPlayers))
         numberOfPlayersAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, numberOfPlayersAttributedString.length))
-
+        
         let staticStringAttributedString = staticAttributedString
         staticStringAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.regular), range: NSMakeRange(0, staticStringAttributedString.length))
         
@@ -70,7 +70,7 @@ class CreateAttributedString {
     func forFirstNameLastName( firstName: String, lastName: String) -> NSMutableAttributedString {
         
         let firstNameAttributedString = NSMutableAttributedString(string: firstName)
-        firstNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.bold), range: NSMakeRange(0, firstNameAttributedString.length))
+        firstNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.light), range: NSMakeRange(0, firstNameAttributedString.length))
         
         let lastNameAttributedString = NSMutableAttributedString(string: lastName)
         lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.bold), range: NSMakeRange(0, lastNameAttributedString.length))
@@ -145,9 +145,9 @@ class CreateAttributedString {
         if timeInSeconds <= 30 {
             iceTimeAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.black, range: NSMakeRange(0, iceTimeAttributedString.length))
             
-//        } else if timeInSeconds > 15 && timeInSeconds <= 45 {
-//
-//            iceTimeAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.yellow, range: NSMakeRange(0, iceTimeAttributedString.length))
+            //        } else if timeInSeconds > 15 && timeInSeconds <= 45 {
+            //
+            //            iceTimeAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.yellow, range: NSMakeRange(0, iceTimeAttributedString.length))
         } else if timeInSeconds > 30 {
             iceTimeAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.red, range: NSMakeRange(0, iceTimeAttributedString.length))
         }
@@ -175,10 +175,10 @@ class CreateAttributedString {
         
         let divisionAttributedString = NSMutableAttributedString(string: divsion)
         divisionAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, divisionAttributedString.length))
-
+        
         let levelAttributedString = NSMutableAttributedString(string: level)
         levelAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.heavy), range: NSMakeRange(0, levelAttributedString.length))
-
+        
         
         let combination = NSMutableAttributedString()
         
@@ -196,7 +196,7 @@ class CreateAttributedString {
         return combination
         
     }  //forFirstNameLastNameDivisionLevel
-
+    
     func forDivisionLevel(divsion: String, level: String) -> NSMutableAttributedString {
         
         let divisionAttributedString = NSMutableAttributedString(string: divsion)
@@ -214,9 +214,40 @@ class CreateAttributedString {
         combination.append(divisionAttributedString)
         combination.append(spaceAttributedString)
         combination.append(levelAttributedString)
- 
+        
         return combination
         
     }  //forDivisionLevel
-
+    
+    func poundNumberFirstNameLastName(number: String, firstName: String, lastName: String) -> NSMutableAttributedString {
+        
+        let numberAttributedString = NSMutableAttributedString(string: number)
+        numberAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular), range: NSMakeRange(0, numberAttributedString.length))
+        
+        let poundAttributedString = NSMutableAttributedString(string: "#")
+        poundAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light), range: NSMakeRange(0, poundAttributedString.length))
+        poundAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.lightGray, range: NSMakeRange(0, poundAttributedString.length))
+        
+        let firstNameAttributedString = NSMutableAttributedString(string: firstName)
+        firstNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.light), range: NSMakeRange(0, firstNameAttributedString.length))
+        
+        let lastNameAttributedString = NSMutableAttributedString(string: lastName)
+        lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.light), range: NSMakeRange(0, lastNameAttributedString.length))
+        
+        let combination = NSMutableAttributedString()
+        let spaceAttributedString  = NSMutableAttributedString(string: " ")
+        
+        //#47 Lucas Surette
+        combination.append(poundAttributedString)
+        combination.append(numberAttributedString)
+        combination.append(spaceAttributedString)
+        combination.append(firstNameAttributedString)
+        combination.append(spaceAttributedString)
+        combination.append(lastNameAttributedString)
+        
+        return combination
+        
+    }  //forDivisionLevel
+    
+    
 }  //CreateAttributedString

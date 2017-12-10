@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		750388391FDDD4270086073D /* ImportGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750388381FDDD4270086073D /* ImportGames.swift */; };
 		750FA20A1FBCDCDA00A1D89A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */; };
 		750FA20F1FBCDCDA00A1D89A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750FA20D1FBCDCDA00A1D89A /* Main.storyboard */; };
 		750FA2141FBCDCDA00A1D89A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750FA2121FBCDCDA00A1D89A /* LaunchScreen.storyboard */; };
@@ -55,6 +56,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		750388381FDDD4270086073D /* ImportGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportGames.swift; sourceTree = "<group>"; };
 		750FA2061FBCDCDA00A1D89A /* Time on Ice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time on Ice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		750FA2091FBCDCDA00A1D89A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		750FA20E1FBCDCDA00A1D89A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				75F7EF331FD8BDBD002BD535 /* PlayerPicker.swift */,
 				7539FC881FD4CBB4009E6CB4 /* GoFetch.swift */,
 				7539FC8A1FD6D336009E6CB4 /* ImportPlayers.swift */,
+				750388381FDDD4270086073D /* ImportGames.swift */,
 				7539FC8C1FD6D7B8009E6CB4 /* IsAppAlreadyLaunchedOnce.swift */,
 				7539FC8F1FD6EADF009E6CB4 /* RoundedImage.swift */,
 				75D2F3911FD86B9C0089DC63 /* changeAppearance.swift */,
@@ -319,6 +322,7 @@
 				75A062C51FD9769800EA626F /* PlayerPopoverTableViewCell.swift in Sources */,
 				75F7EF341FD8BDBD002BD535 /* PlayerPicker.swift in Sources */,
 				75292ECD1FD1962000CE5DCC /* Players+CoreDataProperties.swift in Sources */,
+				750388391FDDD4270086073D /* ImportGames.swift in Sources */,
 				75E304F21FCC96E50010C708 /* TimeFormat.swift in Sources */,
 				75D2F3941FD874C20089DC63 /* ConvertDate.swift in Sources */,
 				7539FC901FD6EADF009E6CB4 /* RoundedImage.swift in Sources */,

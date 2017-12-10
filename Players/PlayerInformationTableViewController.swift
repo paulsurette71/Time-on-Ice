@@ -16,7 +16,10 @@ class PlayerInformationTableViewController: UITableViewController {
     var fetchedResultsController: NSFetchedResultsController<Players>!
     var selectedPlayer: Players?
     
+    //classes
     let createAttributedString = CreateAttributedString()
+    let goFetch                = GoFetch()
+    let timeFormat             = TimeFormat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +29,16 @@ class PlayerInformationTableViewController: UITableViewController {
         tableView.register(cellNib, forCellReuseIdentifier: "playerInformationTableViewCell")
         tableView.rowHeight = 117
         
-        goFetch()
+        goFetchPlayers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        goFetch()
+        goFetchPlayers()
     }
     
-    func goFetch() {
+    func goFetchPlayers() {
         
         let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
         let sortTeam   = NSSortDescriptor(key: #keyPath(Players.team), ascending: true)
@@ -52,7 +55,7 @@ class PlayerInformationTableViewController: UITableViewController {
         } catch let error as NSError {
             print("\(self) -> \(#function): Fetching error: \(error), \(error.userInfo)")
         }
-    }  //goFetch
+    }  //goFetchPlayers
     
     func updatePlayer(indexPath: IndexPath)  {
         
@@ -83,7 +86,7 @@ class PlayerInformationTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let sectionInfo = fetchedResultsController.sections?[section] else {
-                return 0
+            return 0
             
         }
         
@@ -102,18 +105,18 @@ class PlayerInformationTableViewController: UITableViewController {
     
     func configureCell(_ cell: PlayerInformationTableViewCell, withPlayer player: Players, indexPath: IndexPath) {
         
-        cell.numberLabel.text = player.number
+        let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
         
-        let playerInformation = createAttributedString.forFirstNameLastName(firstName: player.firstName!, lastName: player.lastName!)
+        let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
+        cell.totalTimeOnIceLabel.text = totalTimeOnIce
         
-        let playerDivision = createAttributedString.forDivisionLevel(divsion: player.division!, level: player.level!)
+        if let shifts = results["shifts"] {
+            cell.totalShiftsLabel.text = String(shifts)
+        }
+        
+        let playerInformation = createAttributedString.poundNumberFirstNameLastName(number: player.number!, firstName: player.firstName!, lastName: player.lastName!)
         
         cell.playerInformationLabel.attributedText = playerInformation
-        cell.divisionLevelLabel.attributedText     = playerDivision
-        
-        if let position = player.position {
-            cell.positionLabel.text = position
-        }
         
         cell.selectionStyle = .none
         
@@ -141,14 +144,17 @@ class PlayerInformationTableViewController: UITableViewController {
         
         let sectionInfo = fetchedResultsController.sections?[section]
         
-        return sectionInfo?.name
+        if sectionInfo?.name == "" {
+            return "No team for Player"
+        } else {
+            return sectionInfo?.name
+        }
         
-    }
-    
+    }  //titleForHeaderInSection
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-
+        
         return true
     }
     
@@ -199,7 +205,7 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
         case .update:
-            let cell = tableView.cellForRow(at: indexPath!) as! PlayerInformationTableViewCell
+            let cell = tableView?.cellForRow(at: indexPath!) as! PlayerInformationTableViewCell  //crash?
             let results = fetchedResultsController.object(at: indexPath!)
             configureCell(cell, withPlayer: results, indexPath: indexPath!)
         case .move:

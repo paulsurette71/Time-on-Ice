@@ -10,21 +10,11 @@ import UIKit
 import CoreData
 import Foundation
 
-//struct Shift {
-//    var row: Int
-//    var timeOnIce: Int
-//    var runningTimeOnIce: Int {
-//        return self.runningTimeOnIce + timeOnIce
-//    }
-//}
-
 class HomeViewController: UIViewController {
     
     //timer
     var timer               = Timer()
     var timerCounter        = 0
-    //    var runningTotalCounter = 0
-    //    var shifts              = 0
     
     //UILabel
     @IBOutlet weak var playersOnBenchLabel: UILabel!
@@ -41,14 +31,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playersButton: UIButton!
     @IBOutlet weak var clockButton: UIButton!
     
-    //    var tappedArray      = [Int]()
-    //        var tappedArray = [[String:Int]]()var currentPlayerSelected = [String:Int]()
     var tappedArray = [[String:Int]]()
     var playerArray      = [Players]()
     var tappedButton     = true
-    //    var playerOnIceArray = [Any]()
-    //    var shiftArray       = [Shift]()
-    var valueArray = [Int]()
+    var valueArray   = [Int]()
     
     //classes
     let timeFormat             = TimeFormat()
@@ -79,7 +65,7 @@ class HomeViewController: UIViewController {
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayersOnIceTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playersOnIceTableViewCell")
-        tableView.rowHeight = 60
+        tableView.rowHeight = 90
         
         // collectionView delegate
         collectionView.delegate   = self
@@ -92,15 +78,17 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-        //        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-        //        let importPlayers            = ImportPlayers()
-        //
-        //        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-        //
-        //            //Import Test data
-        //            importPlayers.importPlayers()
-        //
-        //        }
+//        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+//        let importPlayers            = ImportPlayers()
+//        let importGames              = ImportGames()
+//        
+//        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+//            
+//            //Import Test data
+//            importPlayers.importPlayers()
+//            importGames.importGames()
+//            
+//        }
         
     }  //viewDidLoad
     
@@ -448,8 +436,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let player = playerArray[tappedArray[indexPath.row]["indexPath"]!]
         
-        cell.playerNumberLabel.text          = player.number
-        cell.playerNameLabel.attributedText  = createAttributedString.forFirstNameLastName(firstName: player.firstName!, lastName: player.lastName!)
+        //        cell.playerNumberLabel.attributedText = createAttributedString.poundNumber(number: player.number!)
+        cell.playerNameLabel.attributedText   = createAttributedString.poundNumberFirstNameLastName(number: player.number!, firstName: player.firstName!, lastName: player.lastName!)
         
         let timeOnIce = timeFormat.mmSS(totalSeconds: tappedArray[indexPath.row]["timeOnIce"]!)
         cell.playerTimerLabel.text = timeOnIce
@@ -462,6 +450,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if let shifts = results["shifts"] {
             cell.shiftsLabel.text = String(shifts)
         }
+        
         return cell
         
     }  //cellForRowAt
