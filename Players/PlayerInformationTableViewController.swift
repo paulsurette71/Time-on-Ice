@@ -20,7 +20,6 @@ class PlayerInformationTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("\(self) -> \(#function)")
         
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayerInformationTableViewCell", bundle: nil)
@@ -32,13 +31,11 @@ class PlayerInformationTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //print("\(self) -> \(#function)")
         
         goFetch()
     }
     
     func goFetch() {
-        //print("\(self) -> \(#function)")
         
         let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
         let sortTeam   = NSSortDescriptor(key: #keyPath(Players.team), ascending: true)
@@ -53,12 +50,11 @@ class PlayerInformationTableViewController: UITableViewController {
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
-            print("PlayerInformationTableViewController|goFetch: Fetching error: \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Fetching error: \(error), \(error.userInfo)")
         }
     }  //goFetch
     
     func updatePlayer(indexPath: IndexPath)  {
-        //print("\(self) -> \(#function)")
         
         let player = self.fetchedResultsController.object(at: indexPath as IndexPath)
         
@@ -85,7 +81,6 @@ class PlayerInformationTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print("\(self) -> \(#function)")
         
         guard let sectionInfo = fetchedResultsController.sections?[section] else {
                 return 0
@@ -96,7 +91,6 @@ class PlayerInformationTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //print("\(self) -> \(#function)")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playerInformationTableViewCell", for: indexPath) as! PlayerInformationTableViewCell
         
@@ -107,7 +101,6 @@ class PlayerInformationTableViewController: UITableViewController {
     }
     
     func configureCell(_ cell: PlayerInformationTableViewCell, withPlayer player: Players, indexPath: IndexPath) {
-        //print("\(self) -> \(#function)")
         
         cell.numberLabel.text = player.number
         
@@ -127,13 +120,11 @@ class PlayerInformationTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print("\(self) -> \(#function)")
         
         updatePlayer(indexPath: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        //print("\(self) -> \(#function)")
         
         guard let header = view as? UITableViewHeaderFooterView else {
             return
@@ -157,14 +148,12 @@ class PlayerInformationTableViewController: UITableViewController {
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        //print("\(self) -> \(#function)")
-        // Return false if you do not want the specified item to be editable.
+
         return true
     }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        //print("\(self) -> \(#function)")
         
         if editingStyle == .delete {
             
@@ -173,17 +162,16 @@ class PlayerInformationTableViewController: UITableViewController {
             
             do {
                 try managedContext.save()
-//                tableView.reloadData()
                 
             } catch let error as NSError {
-                print("PlayerInformationTableViewController|editingStyle: Saving error: \(error), description: \(error.userInfo)")
+                print("\(self) -> \(#function): Saving error: \(error), description: \(error.userInfo)")
             }  //do
             
         }  //if
+        
     }  //editingStyle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //print("\(self) -> \(#function)")
         
         let playerDetailsTableViewController = segue.destination as! PlayerDetailsTableViewController
         

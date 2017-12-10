@@ -45,7 +45,6 @@ extension PlayerPicker: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        //print("\(self) -> \(#function)")
         
         //http://stackoverflow.com/questions/27455345/uipickerview-wont-allow-changing-font-name-and-size-via-delegates-attributedt
         

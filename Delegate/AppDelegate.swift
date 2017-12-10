@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        //print("\(self) -> \(#function)")
+
         // Override point for customization after application launch.
         
         //Pretty up the place
@@ -58,30 +58,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        //print("\(self) -> \(#function)")
         
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        //print("\(self) -> \(#function)")
-        
+
         coreDataStack.saveContext()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        //print("\(self) -> \(#function)")
-        
+
         coreDataStack.saveContext()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        //print("\(self) -> \(#function)")
-        
+   
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        //print("\(self) -> \(#function)")
-        
+      
     }
     
     //Delegates

@@ -119,7 +119,7 @@ class GameDetailsTableViewController: UITableViewController {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("GameDetailsTableViewController|saveNewGame: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
             
         }  //do
     }  //saveNewPlayer
@@ -139,13 +139,12 @@ class GameDetailsTableViewController: UITableViewController {
             try games?.managedObjectContext?.save()
             
         } catch let error as NSError {
-            print("GameDetailsTableViewController|updateGame: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }  //do
         
     }  //updateGame
     
     func configureView() {
-        ////print("\(self) -> \(#function)")
         
         // Update the user interface for the detail item.
         

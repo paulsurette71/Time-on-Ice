@@ -57,7 +57,7 @@ class GameInformationTableViewController: UITableViewController {
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
-            print("GameInformationTableViewController|goFetch: Fetching error: \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Fetching error: \(error), \(error.userInfo)")
         }
     }  //goFetch
 

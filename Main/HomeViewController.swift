@@ -300,12 +300,8 @@ class HomeViewController: UIViewController {
         
         for row in tappedArray.indices {
             
-            print("row \(tappedArray[row])")
-            
             tappedArray[row]["timeOnIce"]! += 1
         }
-        
-        print("tappedArray \(tappedArray)")
         
         //Update tableview
         tableView.reloadData()
@@ -380,6 +376,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
             
+            //Save to CoreData since the shift is over
+            let selectedPlayerArray = tappedArray.filter { $0["indexPath"] == indexPath.row }
+            
+            let timeOnIce = selectedPlayerArray.first!["timeOnIce"]
+            let row = selectedPlayerArray.first!["indexPath"]
+            let currentPlayer = playerArray[row!]
+            
+            saveShift(player: currentPlayer, timeOnIce: timeOnIce!)
+            
+            //Remove player from on ice.
             tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }
         }
         
@@ -394,6 +400,27 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         tableView.reloadData()
         
     }  //didSelectItemAt
+    
+    func saveShift(player:Players, timeOnIce: Int) {
+        
+        do {
+            
+            let entity = NSEntityDescription.entity(forEntityName: "Shifts", in: managedContext)
+            let shifts = Shifts(entity: entity!, insertInto: managedContext)
+            
+            shifts.playersRelationship = player
+            shifts.timeOnIce           = Int16(timeOnIce)
+            shifts.date                = Date() as NSDate
+            
+            //Save
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
+            
+        }  //do
+        
+    }  //saveShift
     
 }  //extension
 
@@ -421,11 +448,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.playerNumberLabel.text          = player.number
         cell.playerNameLabel.attributedText  = createAttributedString.forFirstNameLastName(firstName: player.firstName!, lastName: player.lastName!)
         
-        //        let timeOnIce = timeFormat.mmSS(totalSeconds: timerCounter)
-        
         let timeOnIce = timeFormat.mmSS(totalSeconds: tappedArray[indexPath.row]["timeOnIce"]!)
         cell.playerTimerLabel.text = timeOnIce
         
+        let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
+        
+        let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
+        cell.timeOnIceLabel.text = totalTimeOnIce
+        
+        if let shifts = results["shifts"] {
+            cell.shiftsLabel.text = String(shifts)
+        }
         return cell
         
     }  //cellForRowAt

@@ -12,7 +12,6 @@ import CoreData
 class GoFetch {
     
     func teamNames(managedContext: NSManagedObjectContext) -> [String] {
-        //print("\(self) -> \(#function)")
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         var teamNameArray = [String]()
@@ -30,14 +29,13 @@ class GoFetch {
             
         } catch let error as NSError {
             
-            print("GoFetch|teamNames: Could not fetch. \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
         }
         
         return teamNameArray
     }
     
     func city(managedContext: NSManagedObjectContext) -> [String] {
-        //print("\(self) -> \(#function)")
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         var cityArray = [String]()
@@ -55,14 +53,13 @@ class GoFetch {
             
         } catch let error as NSError {
             
-            print("GoFetch|city: Could not fetch. \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
         }
         
         return cityArray
     }
     
     func league(managedContext: NSManagedObjectContext) -> [String] {
-        //print("\(self) -> \(#function)")
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         var leagueArray = [String]()
@@ -80,14 +77,13 @@ class GoFetch {
             
         } catch let error as NSError {
             
-            print("GoFetch|league: Could not fetch. \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
         }
         
         return leagueArray
     }
     
     func level(managedContext: NSManagedObjectContext) -> [String] {
-        //print("\(self) -> \(#function)")
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         var levelArray = [String]()
@@ -105,14 +101,13 @@ class GoFetch {
             
         } catch let error as NSError {
             
-            print("GoFetch|level: Could not fetch. \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
         }
         
         return levelArray
     }
     
     func division(managedContext: NSManagedObjectContext) -> [String] {
-        //print("\(self) -> \(#function)")
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         var divisionArray = [String]()
@@ -130,14 +125,13 @@ class GoFetch {
             
         } catch let error as NSError {
             
-            print("GoFetch|level: Could not fetch. \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
         }
         
         return divisionArray
     }
     
     func player(managedContext: NSManagedObjectContext) -> [Players] {
-        //print("\(self) -> \(#function)")
         
         var fetchPlayerArray = [Players]()
         
@@ -153,10 +147,48 @@ class GoFetch {
             
         } catch let error as NSError {
             
-            print("GoFetch|player: Could not fetch. \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
         }
         
-       return fetchPlayerArray
+        return fetchPlayerArray
+    }
+    
+    func timeOnIceWithShifts(player: Players, managedContext: NSManagedObjectContext) -> [String:Int] {
+        
+        var resultsDictionary = [String: Int]()
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
+        let predicate               = NSPredicate(format: "playersRelationship = %@", player)
+        fetchRequest.predicate      = predicate
+
+        let nsExpressionForKeyPath  = NSExpression(forKeyPath: "timeOnIce")
+
+        let nsExpressionForFunction = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPath])
+        let nsExpressionDescriptionCount = NSExpressionDescription()
+        nsExpressionDescriptionCount.expression = nsExpressionForFunction
+        nsExpressionDescriptionCount.name = "shifts"
+        nsExpressionDescriptionCount.expressionResultType = .integer16AttributeType
+        
+        let nsExpressionForFunctionSum = NSExpression(forFunction: "sum:", arguments: [nsExpressionForKeyPath])
+        let nsExpressionDescriptionSum = NSExpressionDescription()
+        nsExpressionDescriptionSum.expression = nsExpressionForFunctionSum
+        nsExpressionDescriptionSum.name = "timeOnIce"
+        nsExpressionDescriptionSum.expressionResultType = .integer16AttributeType
+        
+        fetchRequest.propertiesToFetch   = [nsExpressionDescriptionCount, nsExpressionDescriptionSum]
+        fetchRequest.resultType = .dictionaryResultType
+        
+        do {
+            
+            let fetchArray    = try managedContext.fetch(fetchRequest) as! [[String:Int]]
+            resultsDictionary = fetchArray.first!
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return resultsDictionary
     }
     
     

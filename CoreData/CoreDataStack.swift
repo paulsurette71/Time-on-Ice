@@ -33,7 +33,7 @@ class CoreDataStack {
             (storeDescription, error) in
             
             if let error = error as NSError? {
-                print("CoreDataStack|storeContainer: Unresolved error \(error), \(error.userInfo)")
+                print("\(self) -> \(#function): Unresolved error \(error), \(error.userInfo)")
             }
         }
         return container
@@ -57,7 +57,7 @@ class CoreDataStack {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("CoreDataStack|saveContext: Error Saving.  Unresolved error \(error), \(error.userInfo)")
+            print("\(self) -> \(#function): Error Saving.  Unresolved error \(error), \(error.userInfo)")
         }
     }
 }

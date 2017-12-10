@@ -62,7 +62,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ////print("\(self) -> \(#function)")
         
         roundedImageView.setRounded(image: headShotImageView, colour: "gryphonGold")
         
@@ -83,7 +82,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        ////print("\(self) -> \(#function)")
         
         //Check to see if the mandatory first name, last name and number are empty.
         guard !(firstNameTextField.text?.isEmpty)!, !(lastNameTextField.text?.isEmpty)!,!(numberTextField.text?.isEmpty)! else {
@@ -104,7 +102,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ////print("\(self) -> \(#function)")
         
         tableView.reloadData()
     }
@@ -112,13 +109,11 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        ////print("\(self) -> \(#function)")
         
         return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        ////print("\(self) -> \(#function)")
         
         switch section {
         case 0:
@@ -136,7 +131,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        ////print("\(self) -> \(#function)")
         
         if section == 0 {
             return 0  //hide the first section
@@ -147,7 +141,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        ////print("\(self) -> \(#function)")
         
         //http://stackoverflow.com/questions/19802336/changing-font-size-for-uitableview-section-headers
         
@@ -163,12 +156,10 @@ class PlayerDetailsTableViewController: UITableViewController {
     }
     
     @IBAction func camera(_ sender: Any) {
-        ////print("\(self) -> \(#function)")
         
     }  //camera
     
     @IBAction func birthdate(_ sender: UIDatePicker) {
-        ////print("\(self) -> \(#function)")
         
         let birthdate = sender.date
         
@@ -179,7 +170,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //birthdate
     
     func saveNewPlayer() {
-        ////print("\(self) -> \(#function)")
         
         do {
             
@@ -208,13 +198,12 @@ class PlayerDetailsTableViewController: UITableViewController {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("PlayerDetailsTableViewController|newPlayer: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
             
         }  //do
     }  //saveNewPlayer
     
     func updatePlayer()  {
-        ////print("\(self) -> \(#function)")
         
         do {
             
@@ -234,13 +223,12 @@ class PlayerDetailsTableViewController: UITableViewController {
             try selectedPlayer?.managedObjectContext?.save()
             
         } catch let error as NSError {
-            print("PlayerDetailsTableViewController|updatePlayer: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
         
     }  //updatePlayer
     
     func showPopover(textField: UITextField, array: [Any], popoverTitle: String) {
-        ////print("\(self) -> \(#function)")
         
         var rootViewController = UIApplication.shared.keyWindow?.rootViewController
         
@@ -268,7 +256,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //showShotDetails
     
     func configureView() {
-        ////print("\(self) -> \(#function)")
         
         // Update the user interface for the detail item.
         
@@ -330,7 +317,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //configureView
     
     func calculateBirthDate(birthdate: Date) -> Int {
-        ////print("\(self) -> \(#function)")
         
         let calendar = NSCalendar.current
         
@@ -341,7 +327,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //calculateBirthDate
     
     func SetupNotificationCenter()  {
-        ////print("\(self) -> \(#function)")
         
         let positionNotificationCenter = NotificationCenter.default
         positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"Notification"),
@@ -351,7 +336,6 @@ class PlayerDetailsTableViewController: UITableViewController {
     }  //SetupNotificationCenter
     
     func updateLabel(notification:Notification) -> Void  {
-        ////print("\(self) -> \(#function)")
         
         guard let userInfo = notification.userInfo, let value = userInfo["value"] else {
             print("No userInfo found in notification")
@@ -369,7 +353,6 @@ class PlayerDetailsTableViewController: UITableViewController {
 extension PlayerDetailsTableViewController: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        ////print("\(self) -> \(#function)")
         
         return .none
     }
@@ -378,7 +361,6 @@ extension PlayerDetailsTableViewController: UIPopoverPresentationControllerDeleg
 extension PlayerDetailsTableViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        ////print("\(self) -> \(#function)")
         
         if textField == shootsTextField {
             

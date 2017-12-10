@@ -52,7 +52,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -88,7 +88,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -124,7 +124,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -160,7 +160,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -196,7 +196,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -232,7 +232,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -268,7 +268,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -304,7 +304,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -340,7 +340,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -376,7 +376,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
         do {
@@ -412,7 +412,7 @@ class ImportPlayers {
             try managedContext.save()
             
         } catch let error as NSError {
-            print("ImportPlayers|importPlayers: Fetch error: \(error) description: \(error.userInfo)")
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
     }  //importPlayers
