@@ -59,20 +59,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGA-Zg-82y">
-                                <rect key="frame" x="0.0" y="64" width="375" height="20.5"/>
-                                <color key="backgroundColor" name="gryphonGold"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="4DF-S9-i94">
+                                <rect key="frame" x="0.0" y="64" width="375" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="zee-Ry-vC7"/>
+                                    <constraint firstAttribute="height" constant="20" id="dw5-Rm-evA"/>
                                 </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="Players On Ice">
-                                        <attributes>
-                                            <font key="NSFont" metaFont="system" size="17"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="15" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players On Ice" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGA-Zg-82y">
+                                <rect key="frame" x="15" y="64" width="360" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="ewG-iC-Qjl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z1V-wy-CnS">
@@ -122,26 +121,25 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R19-ey-bkE">
-                                <rect key="frame" x="305" y="392" width="60" height="60"/>
+                                <rect key="frame" x="305" y="393" width="60" height="60"/>
                                 <state key="normal" image="buttonClockStart"/>
                                 <connections>
                                     <action selector="clock:" destination="5t9-lx-hAx" eventType="touchUpInside" id="glZ-qH-fv8"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8g7-iG-cMa">
-                                <rect key="frame" x="0.0" y="457.5" width="375" height="20.5"/>
-                                <color key="backgroundColor" name="gryphonGold"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Dea-1F-wVD">
+                                <rect key="frame" x="0.0" y="458" width="375" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="XI5-fs-dIZ"/>
+                                    <constraint firstAttribute="height" constant="20" id="M8Q-4k-2vR"/>
                                 </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="Players on Bench">
-                                        <attributes>
-                                            <font key="NSFont" metaFont="system" size="17"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="15" headIndent="15" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players on Bench" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8g7-iG-cMa">
+                                <rect key="frame" x="15" y="457.5" width="360" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="TVN-20-Y90"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zv-rF-527">
@@ -176,23 +174,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="VGA-Zg-82y" secondAttribute="trailing" id="0Ea-KU-Gdy"/>
                             <constraint firstItem="vAe-vu-LSl" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="10" id="27Z-hd-1Uf"/>
-                            <constraint firstItem="8g7-iG-cMa" firstAttribute="top" secondItem="vAe-vu-LSl" secondAttribute="bottom" constant="5" id="4FT-8V-VCw"/>
+                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="Dea-1F-wVD" secondAttribute="bottom" id="7Cu-UC-VHF"/>
                             <constraint firstItem="kzy-O2-pP9" firstAttribute="bottom" secondItem="2zv-rF-527" secondAttribute="bottom" id="7c9-Y0-I9n"/>
-                            <constraint firstItem="Z1V-wy-CnS" firstAttribute="top" secondItem="VGA-Zg-82y" secondAttribute="bottom" id="9iA-D1-2hU"/>
                             <constraint firstItem="vAe-vu-LSl" firstAttribute="top" secondItem="Z1V-wy-CnS" secondAttribute="bottom" constant="5" id="A6l-s2-Mgs"/>
+                            <constraint firstItem="Dea-1F-wVD" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="BS1-pf-wLl"/>
+                            <constraint firstItem="Dea-1F-wVD" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="Cdi-Is-5nu"/>
+                            <constraint firstItem="Z1V-wy-CnS" firstAttribute="top" secondItem="VGA-Zg-82y" secondAttribute="bottom" id="DAt-ma-Jg9"/>
                             <constraint firstItem="Z1V-wy-CnS" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="ERq-Ic-S1l"/>
+                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="VGA-Zg-82y" secondAttribute="trailing" id="MR2-ax-fv9"/>
                             <constraint firstItem="Z1V-wy-CnS" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="QjP-ds-i44"/>
-                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="8g7-iG-cMa" secondAttribute="bottom" id="Qua-mc-5bv"/>
-                            <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="8g7-iG-cMa" secondAttribute="trailing" id="RF2-hK-UUB"/>
-                            <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="fmq-fK-yEq" secondAttribute="leading" id="Xdq-fk-PWn"/>
+                            <constraint firstItem="VGA-Zg-82y" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="Qlo-1e-vdv"/>
+                            <constraint firstItem="4DF-S9-i94" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="b15-Bt-RDW"/>
+                            <constraint firstItem="4DF-S9-i94" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="bkk-SZ-rf8"/>
+                            <constraint firstItem="8g7-iG-cMa" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="exH-fW-8lM"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="fEx-jI-o7y"/>
-                            <constraint firstItem="VGA-Zg-82y" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="h8s-DA-lVt"/>
+                            <constraint firstItem="Dea-1F-wVD" firstAttribute="top" secondItem="vAe-vu-LSl" secondAttribute="bottom" constant="5" id="gsJ-4x-Vkb"/>
+                            <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="15" id="m6m-Rx-BZP"/>
                             <constraint firstItem="kzy-O2-pP9" firstAttribute="trailing" secondItem="R19-ey-bkE" secondAttribute="trailing" constant="10" id="nJF-jw-7oa"/>
-                            <constraint firstItem="8g7-iG-cMa" firstAttribute="top" secondItem="R19-ey-bkE" secondAttribute="bottom" constant="5" id="rm7-k7-qU0"/>
+                            <constraint firstItem="VGA-Zg-82y" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" constant="15" id="oA3-Cb-FCc"/>
+                            <constraint firstItem="Dea-1F-wVD" firstAttribute="top" secondItem="R19-ey-bkE" secondAttribute="bottom" constant="5" id="p19-kt-KLK"/>
+                            <constraint firstItem="4DF-S9-i94" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="q3M-zX-cYy"/>
+                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="8g7-iG-cMa" secondAttribute="bottom" id="t2W-8N-Fx4"/>
                             <constraint firstItem="2zv-rF-527" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="vAu-uv-SJc"/>
-                            <constraint firstItem="VGA-Zg-82y" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="zYF-e4-14O"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kzy-O2-pP9"/>
                     </view>
@@ -1379,6 +1383,7 @@
         <image name="buttonGame" width="60" height="60"/>
         <image name="buttonPlayers" width="60" height="60"/>
         <image name="calendar icon 25x25 copy" width="27" height="25"/>
+        <image name="headingBackground" width="375" height="20"/>
         <image name="headshot" width="75" height="75"/>
         <image name="home icon 25x25" width="27" height="25"/>
         <image name="icons8-camera-filled" width="30" height="24"/>

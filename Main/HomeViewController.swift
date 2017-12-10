@@ -383,7 +383,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let row = selectedPlayerArray.first!["indexPath"]
             let currentPlayer = playerArray[row!]
             
-            saveShift(player: currentPlayer, timeOnIce: timeOnIce!)
+            //Only save a shift if it's greater that 1s.
+            if timeOnIce! > 0 {
+                saveShift(player: currentPlayer, timeOnIce: timeOnIce!)
+            }
             
             //Remove player from on ice.
             tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }
