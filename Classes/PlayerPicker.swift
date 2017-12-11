@@ -12,10 +12,6 @@ class PlayerPicker: UIPickerView {
 
     var playersArray = [Players]()
     var textField = UITextField()
-    //    var viewController: UIViewController!
-    
-    //Protocol
-//    var myDelegates: myDelegates?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

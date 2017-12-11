@@ -33,7 +33,7 @@ class GoFetch {
         }
         
         return teamNameArray
-    }
+    }  //teamNames
     
     func city(managedContext: NSManagedObjectContext) -> [String] {
         
@@ -57,7 +57,7 @@ class GoFetch {
         }
         
         return cityArray
-    }
+    }  //city
     
     func league(managedContext: NSManagedObjectContext) -> [String] {
         
@@ -81,7 +81,7 @@ class GoFetch {
         }
         
         return leagueArray
-    }
+    }  //league
     
     func level(managedContext: NSManagedObjectContext) -> [String] {
         
@@ -105,7 +105,7 @@ class GoFetch {
         }
         
         return levelArray
-    }
+    }  //level
     
     func division(managedContext: NSManagedObjectContext) -> [String] {
         
@@ -129,7 +129,7 @@ class GoFetch {
         }
         
         return divisionArray
-    }
+    }  //division
     
     func player(managedContext: NSManagedObjectContext) -> [Players] {
         
@@ -151,7 +151,7 @@ class GoFetch {
         }
         
         return fetchPlayerArray
-    }
+    }  //player
     
     func timeOnIceWithShifts(player: Players, managedContext: NSManagedObjectContext) -> [String:Int] {
         
@@ -181,7 +181,12 @@ class GoFetch {
         do {
             
             let fetchArray    = try managedContext.fetch(fetchRequest) as! [[String:Int]]
-            resultsDictionary = fetchArray.first!
+            
+            guard fetchArray.count != 0 else {
+                return resultsDictionary
+            }
+
+            resultsDictionary = fetchArray.first!  //crash
             
         } catch let error as NSError {
             
@@ -189,7 +194,31 @@ class GoFetch {
         }
         
         return resultsDictionary
-    }
+    }  //timeOnIceWithShifts
+    
+    func games(managedContext: NSManagedObjectContext) -> [Games] {
+        
+        var fetchGamesArray = [Games]()
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Games")
+        
+        let sort = NSSortDescriptor(key: #keyPath(Games.date), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        fetchRequest.fetchBatchSize = 8
+        
+        do {
+            
+            fetchGamesArray = try managedContext.fetch(fetchRequest) as! [Games]
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return fetchGamesArray
+        
+    }  //games
+
     
     
 }

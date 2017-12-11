@@ -13,6 +13,7 @@ protocol myDelegates {
     func storePlayersOnBench(playersOnBench: [Players])
     func storeCheckmarkIndexPathArray(indexPath: [IndexPath])
     func storeSelectedPlayers(selectedPlayers: [Players])
-    
+    func storeGame(game: Games?)
+    func storeGameCheckmarkIndexPathArray(indexPath: IndexPath?)
     
 }  //myDelegates

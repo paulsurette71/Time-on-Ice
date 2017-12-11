@@ -31,9 +31,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playersButton: UIButton!
     @IBOutlet weak var clockButton: UIButton!
     
-    var tappedArray = [[String:Int]]()
-    var playerArray      = [Players]()
-    var tappedButton     = true
+    var tappedArray  = [[String:Int]]()
+    var playerArray  = [Players]()
+    var tappedButton = true
     var valueArray   = [Int]()
     
     //classes
@@ -78,17 +78,17 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-//        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-//        let importPlayers            = ImportPlayers()
-//        let importGames              = ImportGames()
-//        
-//        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-//            
-//            //Import Test data
-//            importPlayers.importPlayers()
-//            importGames.importGames()
-//            
-//        }
+        //        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        //        let importPlayers            = ImportPlayers()
+        //        let importGames              = ImportGames()
+        //
+        //        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+        //
+        //            //Import Test data
+        //            importPlayers.importPlayers()
+        //            importGames.importGames()
+        //
+        //        }
         
     }  //viewDidLoad
     
@@ -179,7 +179,14 @@ class HomeViewController: UIViewController {
     
     @IBAction func selectGame(_ sender: Any) {
         
-        //        showPopover(sender: sender as! UIButton, array: <#[Any]#>, popoverTitle: "Games")
+        let gameList = goFetch.games(managedContext: managedContext)
+        
+        guard gameList.count != 0 else {
+            showPopover.forNoGames(view: self, sender: sender as! UIButton)
+            return
+        }
+        
+        showPopover.showPopoverForGames(sender: sender as! UIButton, array: gameList, popoverTitle: "Games", delegate: myDelegates!)
     }
     
     @IBAction func selectPlayers(_ sender: Any) {
@@ -191,36 +198,37 @@ class HomeViewController: UIViewController {
             return
         }
         
-        showPopover(sender: sender as! UIButton, array: playerList, popoverTitle: "Players")
+        //        showPopoverForPlayers(sender: sender as! UIButton, array: playerList, popoverTitle: "Players")
+        showPopover.showPopoverForPlayers(sender: sender as! UIButton, array: playerList, popoverTitle: "Players", delegate: myDelegates!)
     }
     
-    func showPopover(sender: UIButton, array: [Players], popoverTitle: String) {
-        
-        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
-        
-        if let navigationController = rootViewController as? UINavigationController {
-            rootViewController = navigationController.viewControllers.first
-        }
-        
-        let playerPopoverTableViewController = rootViewController?.storyboard?.instantiateViewController(withIdentifier: "PlayerPopoverTableViewController") as! PlayerPopoverTableViewController
-        
-        playerPopoverTableViewController.modalPresentationStyle = .popover
-        playerPopoverTableViewController.preferredContentSize   = CGSize(width: 350, height: 250)
-        playerPopoverTableViewController.players     = array
-        
-        //Pass delegate
-        playerPopoverTableViewController.myDelegates = myDelegates
-        
-        let popover = playerPopoverTableViewController.popoverPresentationController!
-        
-        popover.delegate = self
-        popover.permittedArrowDirections = .any
-        popover.sourceView = sender
-        popover.sourceRect = sender.bounds
-        
-        self.present(playerPopoverTableViewController, animated: true, completion: nil)
-        
-    }  //showShotDetails
+    //    func showPopoverForPlayers(sender: UIButton, array: [Players], popoverTitle: String) {
+    //
+    //        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+    //
+    //        if let navigationController = rootViewController as? UINavigationController {
+    //            rootViewController = navigationController.viewControllers.first
+    //        }
+    //
+    //        let playerPopoverTableViewController = rootViewController?.storyboard?.instantiateViewController(withIdentifier: "PlayerPopoverTableViewController") as! PlayerPopoverTableViewController
+    //
+    //        playerPopoverTableViewController.modalPresentationStyle = .popover
+    //        playerPopoverTableViewController.preferredContentSize   = CGSize(width: 350, height: 250)
+    //        playerPopoverTableViewController.players     = array
+    //
+    //        //Pass delegate
+    //        playerPopoverTableViewController.myDelegates = myDelegates
+    //
+    //        let popover = playerPopoverTableViewController.popoverPresentationController!
+    //
+    //        popover.delegate = self
+    //        popover.permittedArrowDirections = .any
+    //        popover.sourceView = sender
+    //        popover.sourceRect = sender.bounds
+    //
+    //        self.present(playerPopoverTableViewController, animated: true, completion: nil)
+    //
+    //    }  //showShotDetails
     
     func SetupNotificationCenter()  {
         

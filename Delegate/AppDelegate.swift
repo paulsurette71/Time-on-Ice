@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     var playersOnBench: [Players]?
     var checkmarkIndexPath: [IndexPath]?
     var selectedPlayers: [Players]?
-    
+    var game: Games?
+    var gameIndexPath: IndexPath?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -97,5 +98,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
         
     }
     
+    func storeGame(game: Games?) {
+        
+        self.game = game
+    }
+    
+    func storeGameCheckmarkIndexPathArray(indexPath: IndexPath?) {
+        
+        self.gameIndexPath = indexPath
+    }
 }
 
