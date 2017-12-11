@@ -15,5 +15,6 @@ protocol myDelegates {
     func storeSelectedPlayers(selectedPlayers: [Players])
     func storeGame(game: Games?)
     func storeGameCheckmarkIndexPathArray(indexPath: IndexPath?)
+    func storePlayersOnIceIndexPathArray(indexPath: [IndexPath])
     
 }  //myDelegates

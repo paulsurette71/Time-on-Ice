@@ -118,29 +118,29 @@ class PlayerPopoverTableViewController: UITableViewController {
             
             checkmarkIndexPathArray.append(indexPath)
             
-            //Store Array in Delegate
-            myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkmarkIndexPathArray)
-            
             selectedPlayers.append(selectedPlayer)
             
-            //Store Array in Delegate
-            myDelegates?.storeSelectedPlayers(selectedPlayers: selectedPlayers)
-            
         } else {
+            
+            //If this player in on the ice, we can't take him off the bench.
+            guard !(appDelegate.playersOnIceIndexPathArray?.contains(indexPath))! else {
+                
+                return
+            }
             
             cell.checkMarkImageView.isHidden = true
             
             checkmarkIndexPathArray = checkmarkIndexPathArray.filter { $0 != indexPath }
             
-            //Store Array in Delegate
-            myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkmarkIndexPathArray)
-            
             selectedPlayers = selectedPlayers.filter {$0 != selectedPlayer}
             
-            //Store Array in Delegate
-            myDelegates?.storeSelectedPlayers(selectedPlayers: selectedPlayers)
-            
         }
+        
+        //Store Array in Delegate
+        myDelegates?.storePlayersOnBench(playersOnBench: selectedPlayers)
+        
+        //Store Array in Delegate
+        myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkmarkIndexPathArray)
         
         //NotificationCenter
         let notificationCenter = NotificationCenter.default

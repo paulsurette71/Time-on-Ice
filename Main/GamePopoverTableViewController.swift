@@ -35,15 +35,7 @@ class GamePopoverTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let a = appDelegate.gameIndexPath {
-            print(a)
-        }
-        
-        if let b = appDelegate.game {
-            print(b)
-        }
-        
+                
         if let indexPath = appDelegate.gameIndexPath {
             
             let cell = tableView?.cellForRow(at: indexPath) as! GamePopoverTableViewCell

@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
     var playerArray  = [Players]()
     var tappedButton = true
     var valueArray   = [Int]()
+    var selectedPlayerIndexPathArray = [IndexPath]()
     
     //classes
     let timeFormat             = TimeFormat()
@@ -78,19 +79,35 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-        //        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-        //        let importPlayers            = ImportPlayers()
-        //        let importGames              = ImportGames()
-        //
-        //        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-        //
-        //            //Import Test data
-        //            importPlayers.importPlayers()
-        //            importGames.importGames()
-        //
-        //        }
+        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        let importPlayers            = ImportPlayers()
+        let importGames              = ImportGames()
+        
+        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+            
+            //Import Test data
+            importPlayers.importPlayers()
+            importGames.importGames()
+            
+        }
         
     }  //viewDidLoad
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if appDelegate.game == nil  {
+            
+            clockButton.isEnabled = false
+            
+        } else {
+            
+            clockButton.isEnabled = true
+        }
+        
+        
+        
+    }  //viewWillAppear
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -198,37 +215,8 @@ class HomeViewController: UIViewController {
             return
         }
         
-        //        showPopoverForPlayers(sender: sender as! UIButton, array: playerList, popoverTitle: "Players")
         showPopover.showPopoverForPlayers(sender: sender as! UIButton, array: playerList, popoverTitle: "Players", delegate: myDelegates!)
     }
-    
-    //    func showPopoverForPlayers(sender: UIButton, array: [Players], popoverTitle: String) {
-    //
-    //        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
-    //
-    //        if let navigationController = rootViewController as? UINavigationController {
-    //            rootViewController = navigationController.viewControllers.first
-    //        }
-    //
-    //        let playerPopoverTableViewController = rootViewController?.storyboard?.instantiateViewController(withIdentifier: "PlayerPopoverTableViewController") as! PlayerPopoverTableViewController
-    //
-    //        playerPopoverTableViewController.modalPresentationStyle = .popover
-    //        playerPopoverTableViewController.preferredContentSize   = CGSize(width: 350, height: 250)
-    //        playerPopoverTableViewController.players     = array
-    //
-    //        //Pass delegate
-    //        playerPopoverTableViewController.myDelegates = myDelegates
-    //
-    //        let popover = playerPopoverTableViewController.popoverPresentationController!
-    //
-    //        popover.delegate = self
-    //        popover.permittedArrowDirections = .any
-    //        popover.sourceView = sender
-    //        popover.sourceRect = sender.bounds
-    //
-    //        self.present(playerPopoverTableViewController, animated: true, completion: nil)
-    //
-    //    }  //showShotDetails
     
     func SetupNotificationCenter()  {
         
@@ -366,7 +354,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
             
             let currentPlayerSelected = ["indexPath": indexPath.row, "timeOnIce": 0]
+            
             tappedArray.append(currentPlayerSelected)
+            
+            selectedPlayerIndexPathArray.append(indexPath)
             
         } else {
             
@@ -381,20 +372,30 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             //Only save a shift if it's greater that 1s.
             if timeOnIce! > 0 {
+                
                 saveShift(player: currentPlayer, timeOnIce: timeOnIce!)
             }
             
             //Remove player from on ice.
             tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }
+            
+            selectedPlayerIndexPathArray = selectedPlayerIndexPathArray.filter {$0 != indexPath }
         }
+        
+        if tappedArray.count > 0 {
+            clockButton.isEnabled = true
+        } else {
+            clockButton.isEnabled = false
+        }
+        
+//        print("On the ice \(selectedPlayerIndexPathArray)")
+        myDelegates?.storePlayersOnIceIndexPathArray(indexPath: selectedPlayerIndexPathArray)
         
         playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
         
         //Update players on bench
         let playersOnBench = playerArray.count - tappedArray.count
         playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench)
-        
-        appDelegate.storePlayersOnBench(playersOnBench: playerArray)
         
         tableView.reloadData()
         
@@ -404,10 +405,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         do {
             
+            let game = appDelegate.game
+            
             let entity = NSEntityDescription.entity(forEntityName: "Shifts", in: managedContext)
             let shifts = Shifts(entity: entity!, insertInto: managedContext)
             
             shifts.playersRelationship = player
+            shifts.gameRelationship    = game
+            
             shifts.timeOnIce           = Int16(timeOnIce)
             shifts.date                = Date() as NSDate
             
