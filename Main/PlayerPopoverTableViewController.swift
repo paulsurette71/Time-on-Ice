@@ -31,14 +31,28 @@ class PlayerPopoverTableViewController: UITableViewController {
         if appDelegate.checkmarkIndexPath != nil {
             if let checkArray = appDelegate.checkmarkIndexPath {
                 checkmarkIndexPathArray = checkArray
+                
             }
         }
         
-        if appDelegate.selectedPlayers != nil {
-            if let selectedPalyersInDelegate = appDelegate.selectedPlayers {
-                selectedPlayers = selectedPalyersInDelegate
-            }
+        //        print("appDelegate.playersOnBench \(appDelegate.playersOnBench!)")
+        //        print("appDelegate.selectedPlayers \(appDelegate.selectedPlayers!)")
+        
+        //       if appDelegate.playersOnBench != nil {
+        //            if let selectedPalyersInDelegate = appDelegate.selectedPlayers {
+        //                selectedPlayers = selectedPalyersInDelegate
+        //
+        //                print("1. selectedPlayers \(selectedPlayers)")
+        //
+        //            }
+        //        }
+        
+        if let playersOnBenchDelegate = appDelegate.playersOnBench {
+            
+            selectedPlayers = playersOnBenchDelegate
+            
         }
+        
     }  //viewDidLoad
     
     // MARK: - Table view data source
@@ -63,8 +77,6 @@ class PlayerPopoverTableViewController: UITableViewController {
         cell.playerInformationLabel.text = players[indexPath.row].firstName! + " " + players[indexPath.row].lastName!
         cell.playerTeamLabel.text        = players[indexPath.row].city! + " " + players[indexPath.row].team!
         
-        
-        
         if checkmarkIndexPathArray.count > 0 {
             
             if checkmarkIndexPathArray.contains(indexPath) {
@@ -76,7 +88,6 @@ class PlayerPopoverTableViewController: UITableViewController {
                 cell.checkMarkImageView.isHidden = true
                 
             }
-            
         }
         
         return cell
@@ -108,9 +119,12 @@ class PlayerPopoverTableViewController: UITableViewController {
     }  //titleForHeaderInSection
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let cell = tableView.cellForRow(at: indexPath) as! PlayerPopoverTableViewCell
         
-        let selectedPlayer = players[indexPath.row]
+        //print("2. selectedPlayers \(selectedPlayers)")
+        
+        let selectedPlayerToGoOnBench = players[indexPath.row]
         
         if cell.checkMarkImageView.isHidden {
             
@@ -118,7 +132,7 @@ class PlayerPopoverTableViewController: UITableViewController {
             
             checkmarkIndexPathArray.append(indexPath)
             
-            selectedPlayers.append(selectedPlayer)
+            selectedPlayers.append(selectedPlayerToGoOnBench)
             
         } else {
             
@@ -131,8 +145,8 @@ class PlayerPopoverTableViewController: UITableViewController {
             cell.checkMarkImageView.isHidden = true
             
             checkmarkIndexPathArray = checkmarkIndexPathArray.filter { $0 != indexPath }
-            
-            selectedPlayers = selectedPlayers.filter {$0 != selectedPlayer}
+                        
+            selectedPlayers = selectedPlayers.filter {$0 != selectedPlayerToGoOnBench}
             
         }
         

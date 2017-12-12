@@ -121,8 +121,8 @@ class GameInformationTableViewController: UITableViewController {
         let currentDate = convertDate.convertDate(date: (game.date)!)
         
         cell.dateLabel.text = currentDate
-        cell.homeTeamLabel.text = game.homeTeamCity! + " " + game.homeTeamName! + " vs."
-        cell.visitingTeamLabel.text = game.visitorTeamCity! + " " + game.visitorTeamName!
+        cell.homeTeamLabel.text = game.homeTeamCity! + " " + game.homeTeamName!
+        cell.visitingTeamLabel.text = game.visitorTeamCity! + " " + game.visitorTeamName! + " vs."
         
         
     }

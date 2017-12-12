@@ -35,7 +35,7 @@ class GamePopoverTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                
+        
         if let indexPath = appDelegate.gameIndexPath {
             
             let cell = tableView?.cellForRow(at: indexPath) as! GamePopoverTableViewCell
@@ -70,7 +70,9 @@ class GamePopoverTableViewController: UITableViewController {
         
         cell.gameDateLabel.text         = currentDate
         cell.gameVisitingTeamLabel.text = games[indexPath.row].visitorTeamCity! + " vs."
-        cell.gameHomeTeamLabel.text     = games[indexPath.row].homeTeamCity
+        cell.gameHomeTeamLabel.text     = games[indexPath.row].homeTeamCity!
+        
+        
         
         //This is to check to see if the checkmark needs to be removed or stick to the same cell.
         if checkmarkIndexPath != nil {
@@ -132,6 +134,15 @@ class GamePopoverTableViewController: UITableViewController {
             
         } else {
             
+            //If this player in on the ice, we can't take him off the bench.
+            //            guard (appDelegate.playersOnIceIndexPathArray != nil) else {
+            //
+            //                print("En Garde Fool!")
+            //
+            //                return
+            //            }
+            //            print("Got past the guard")
+            
             cell.gameCheckmarkImageView.isHidden = true
             
             checkmarkIndexPath = nil
@@ -144,7 +155,13 @@ class GamePopoverTableViewController: UITableViewController {
         //reloading the table will get rid of the checkmark if already selected.
         tableView.reloadData()
         
+        //NotificationCenter
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.post(name:Notification.Name(rawValue:"GameNotification"),
+                                object: nil,
+                                userInfo: nil)
         
-     }  //didSelectRowAt
+        
+    }  //didSelectRowAt
     
 }

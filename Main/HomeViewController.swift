@@ -19,6 +19,8 @@ class HomeViewController: UIViewController {
     //UILabel
     @IBOutlet weak var playersOnBenchLabel: UILabel!
     @IBOutlet weak var playersOnIceLabel: UILabel!
+    @IBOutlet weak var gameInformationLabel: UILabel!
+    @IBOutlet weak var gameDateInformationLabel: UILabel!
     
     //UITableView
     @IBOutlet weak var tableView: UITableView!
@@ -42,6 +44,7 @@ class HomeViewController: UIViewController {
     let goFetch                = GoFetch()
     let showPopover            = ShowPopover()
     let createAttributedString = CreateAttributedString()
+    let convertDate            = ConvertDate()
     
     //App Delegate
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -79,17 +82,17 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-        let importPlayers            = ImportPlayers()
-        let importGames              = ImportGames()
-        
-        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-            
-            //Import Test data
-            importPlayers.importPlayers()
-            importGames.importGames()
-            
-        }
+        //        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        //        let importPlayers            = ImportPlayers()
+        //        let importGames              = ImportGames()
+        //
+        //        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+        //
+        //            //Import Test data
+        //            importPlayers.importPlayers()
+        //            importGames.importGames()
+        //
+        //        }
         
     }  //viewDidLoad
     
@@ -225,6 +228,10 @@ class HomeViewController: UIViewController {
                                                object:nil, queue:nil,
                                                using:notificationCenterData)
         
+        positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"GameNotification"),
+                                               object:nil, queue:nil,
+                                               using:displayGameHeader)
+        
     }  //SetupNotificationCenter
     
     func notificationCenterData(notification:Notification) -> Void  {
@@ -243,6 +250,30 @@ class HomeViewController: UIViewController {
         collectionView.reloadData()
         
     }  //notificationCenterData
+    
+    func displayGameHeader(notification:Notification) -> Void {
+        
+        guard (appDelegate.game != nil) else {
+            
+            gameInformationLabel.text = "Welcome"
+            gameDateInformationLabel.text = ""
+            
+            return
+        }
+        
+        if let game = appDelegate.game {
+            
+            let homeTeam     = game.homeTeamCity
+            let visitingTeam = game.visitorTeamCity
+            let gameDate     = game.date
+            
+            gameInformationLabel.text = homeTeam! + " vs. " + visitingTeam!
+            
+            let currentDate = convertDate.convertDate(date: gameDate!)
+            gameDateInformationLabel.text = currentDate
+            
+        }
+    }  //displayGameHeader
     
     
     @IBAction func clock(_ sender: Any) {
@@ -349,6 +380,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let cell = collectionView.cellForItem(at: indexPath) as! BenchCollectionViewCell
         
+        configCollectionViewCell(cell: cell, indexPath: indexPath)
+        
+    }  //didSelectItemAt
+    
+    func configCollectionViewCell(cell: BenchCollectionViewCell, indexPath: IndexPath) {
+        
         if cell.cellBackgroundImageView.image == UIImage(named: "collectionviewcell_60x60_white") {
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
@@ -363,10 +400,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
             
+            print("tappedArray -> crash \(tappedArray)")
+            
             //Save to CoreData since the shift is over
             let selectedPlayerArray = tappedArray.filter { $0["indexPath"] == indexPath.row }
             
-            let timeOnIce = selectedPlayerArray.first!["timeOnIce"]
+            let timeOnIce = selectedPlayerArray.first!["timeOnIce"]  //crash
             let row = selectedPlayerArray.first!["indexPath"]
             let currentPlayer = playerArray[row!]
             
@@ -388,7 +427,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             clockButton.isEnabled = false
         }
         
-//        print("On the ice \(selectedPlayerIndexPathArray)")
+        //        print("On the ice \(selectedPlayerIndexPathArray)")
         myDelegates?.storePlayersOnIceIndexPathArray(indexPath: selectedPlayerIndexPathArray)
         
         playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
@@ -399,7 +438,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         tableView.reloadData()
         
-    }  //didSelectItemAt
+        
+    }
     
     func saveShift(player:Players, timeOnIce: Int) {
         
@@ -447,7 +487,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersOnIceTableViewCell", for: indexPath) as! PlayersOnIceTableViewCell
         
-        let player = playerArray[tappedArray[indexPath.row]["indexPath"]!]
+        print("\(tappedArray[indexPath.row])")
+        
+        let player = playerArray[tappedArray[indexPath.row]["indexPath"]!]  //crash
         
         //        cell.playerNumberLabel.attributedText = createAttributedString.poundNumber(number: player.number!)
         cell.playerNameLabel.attributedText   = createAttributedString.poundNumberFirstNameLastName(number: player.number!, firstName: player.firstName!, lastName: player.lastName!)

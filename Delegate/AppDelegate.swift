@@ -61,23 +61,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     
     func applicationWillResignActive(_ application: UIApplication) {
         
+        print("applicationWillResignActive")
+    
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
 
+        print("applicationDidEnterBackground")
         coreDataStack.saveContext()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
 
+        print("applicationWillEnterForeground")
         coreDataStack.saveContext()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        print("applicationDidBecomeActive")
    
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
+        
+        print("applicationWillTerminate")
       
     }
     
