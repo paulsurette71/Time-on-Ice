@@ -10,9 +10,9 @@ import UIKit
 
 class PlayerPopoverTableViewController: UITableViewController {
     
-    var players         = [Players]()
-    var selectedPlayers = [Players]()
-    var checkmarkIndexPathArray = [IndexPath]()
+    var players              = [Players]()
+    var playersToPlayInGame  = [Players]()
+    var checkMark            = [IndexPath]()
     
     //Delegates
     var myDelegates: myDelegates?
@@ -23,18 +23,21 @@ class PlayerPopoverTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("viewDidLoad")
+        
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayerPopoverTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playerPopoverTableViewCell")
         tableView.rowHeight = 75
         
         if appDelegate.checkmarkIndexPath != nil {
+
             if let checkArray = appDelegate.checkmarkIndexPath {
-                checkmarkIndexPathArray = checkArray
+                checkMark = checkArray
                 
             }
         }
-        
+        //
         //        print("appDelegate.playersOnBench \(appDelegate.playersOnBench!)")
         //        print("appDelegate.selectedPlayers \(appDelegate.selectedPlayers!)")
         
@@ -47,9 +50,10 @@ class PlayerPopoverTableViewController: UITableViewController {
         //            }
         //        }
         
-        if let playersOnBenchDelegate = appDelegate.playersOnBench {
+        
+        if let playersOnBenchDelegate = appDelegate.toPlay {
             
-            selectedPlayers = playersOnBenchDelegate
+            playersToPlayInGame = playersOnBenchDelegate
             
         }
         
@@ -77,9 +81,9 @@ class PlayerPopoverTableViewController: UITableViewController {
         cell.playerInformationLabel.text = players[indexPath.row].firstName! + " " + players[indexPath.row].lastName!
         cell.playerTeamLabel.text        = players[indexPath.row].city! + " " + players[indexPath.row].team!
         
-        if checkmarkIndexPathArray.count > 0 {
+        if checkMark.count > 0 {
             
-            if checkmarkIndexPathArray.contains(indexPath) {
+            if checkMark.contains(indexPath) {
                 
                 cell.checkMarkImageView.isHidden = false
                 
@@ -122,44 +126,57 @@ class PlayerPopoverTableViewController: UITableViewController {
         
         let cell = tableView.cellForRow(at: indexPath) as! PlayerPopoverTableViewCell
         
-        //print("2. selectedPlayers \(selectedPlayers)")
-        
         let selectedPlayerToGoOnBench = players[indexPath.row]
         
         if cell.checkMarkImageView.isHidden {
             
             cell.checkMarkImageView.isHidden = false
             
-            checkmarkIndexPathArray.append(indexPath)
+            checkMark.append(indexPath)
             
-            selectedPlayers.append(selectedPlayerToGoOnBench)
+            playersToPlayInGame.append(selectedPlayerToGoOnBench)
             
         } else {
             
-            //If this player in on the ice, we can't take him off the bench.
-            guard !(appDelegate.playersOnIceIndexPathArray?.contains(indexPath))! else {
-                
-                return
-            }
+            //            guard let playerIsOnTheIce = appDelegate.playersOnIceIndexPathArray?.contains(indexPath) else {
+            //
+            //                return
+            //            }
+            
+            //            if playerIsOnTheIce == false {  //allow the checkmark to be removed.
             
             cell.checkMarkImageView.isHidden = true
             
-            checkmarkIndexPathArray = checkmarkIndexPathArray.filter { $0 != indexPath }
-                        
-            selectedPlayers = selectedPlayers.filter {$0 != selectedPlayerToGoOnBench}
+            checkMark = checkMark.filter { $0 != indexPath }
+            
+            playersToPlayInGame = playersToPlayInGame.filter {$0 != selectedPlayerToGoOnBench}
+            
+            //            }  //playerIsOnTheIce
             
         }
         
-        //Store Array in Delegate
-        myDelegates?.storePlayersOnBench(playersOnBench: selectedPlayers)
+//        print("On the Bench \(checkMark)")
+//        
+//        for player in playersToPlayInGame {
+//            
+//            print(player.lastName!)
+//            
+//            
+//        }
         
+        //        //Store Array in Delegate
+        //        myDelegates?.storePlayersOnBench(playersOnBench: selectedPlayers)
+        //
         //Store Array in Delegate
-        myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkmarkIndexPathArray)
+        myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkMark)
+        
+        //Store players in delegate
+        myDelegates?.playersToPlay(players: playersToPlayInGame)
         
         //NotificationCenter
         let notificationCenter = NotificationCenter.default
         notificationCenter.post(name:Notification.Name(rawValue:"PlayersOnBench"),
-                                object: selectedPlayers,
+                                object: nil,
                                 userInfo: nil)
         
     }  //didSelectRowAt

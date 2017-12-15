@@ -13,8 +13,8 @@ import Foundation
 class HomeViewController: UIViewController {
     
     //timer
-    var timer               = Timer()
-    var timerCounter        = 0
+    var timer        = Timer()
+    //    var timerCounter = 0
     
     //UILabel
     @IBOutlet weak var playersOnBenchLabel: UILabel!
@@ -33,11 +33,19 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playersButton: UIButton!
     @IBOutlet weak var clockButton: UIButton!
     
-    var tappedArray  = [[String:Int]]()
-    var playerArray  = [Players]()
+    var trackTimeOnInce  = [[String:Int]]()
+    
+    var playersOnBench  = [Players]()
+    var playersOnIce    = [Players]()
+    
     var tappedButton = true
-    var valueArray   = [Int]()
+    //    var valueArray   = [Int]()
     var selectedPlayerIndexPathArray = [IndexPath]()
+    //    var trackTimeOnInce = [Int]()
+    
+    //    //new
+    //    var selectedPlayer = [Players]()
+    //    var removedPlayer  = [Players]()
     
     //classes
     let timeFormat             = TimeFormat()
@@ -82,17 +90,17 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-        //        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-        //        let importPlayers            = ImportPlayers()
-        //        let importGames              = ImportGames()
+        //                let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        //                let importPlayers            = ImportPlayers()
+        //                let importGames              = ImportGames()
         //
-        //        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+        //                if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
         //
-        //            //Import Test data
-        //            importPlayers.importPlayers()
-        //            importGames.importGames()
+        //                    //Import Test data
+        //                    importPlayers.importPlayers()
+        //                    importGames.importGames()
         //
-        //        }
+        //                }
         
     }  //viewDidLoad
     
@@ -107,8 +115,6 @@ class HomeViewController: UIViewController {
             
             clockButton.isEnabled = true
         }
-        
-        
         
     }  //viewWillAppear
     
@@ -191,7 +197,7 @@ class HomeViewController: UIViewController {
     
     func setupUI () {
         
-        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playerArray.count)
+        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench.count)
         
     }  //setupUI
     
@@ -211,7 +217,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func selectPlayers(_ sender: Any) {
         
-        let playerList = goFetch.player(managedContext: managedContext) // as? [[Players]]
+        let playerList = goFetch.player(managedContext: managedContext)
         
         guard playerList.count != 0 else {
             showPopover.forNoPlayers(view: self, sender: sender as! UIButton)
@@ -236,12 +242,21 @@ class HomeViewController: UIViewController {
     
     func notificationCenterData(notification:Notification) -> Void  {
         
-        guard notification.object != nil else {
-            
-            return
+        //        guard notification.object != nil else {
+        //
+        //            return
+        //        }
+        
+        playersOnBench = appDelegate.toPlay!
+        
+        print("\n")
+        print("On Bench")
+        print("########")
+        for players in playersOnBench {
+            print(players.lastName!)
         }
         
-        playerArray = notification.object as! [Players]
+        //myDelegates?.playersOnBench(players: playersOnBench)
         
         //Update UI
         setupUI()
@@ -307,16 +322,21 @@ class HomeViewController: UIViewController {
     func stopTimer() {
         
         timer.invalidate()
+        clockButton.setImage(UIImage(named: "buttonClockStart"), for: .normal)
+        tappedButton = true
+        
     }  //stopTimer
     
     @objc func updateCounters() {
         
-        timerCounter += 1
+        //        timerCounter += 1
         
-        for row in tappedArray.indices {
+        for row in trackTimeOnInce.indices {
             
-            tappedArray[row]["timeOnIce"]! += 1
+            trackTimeOnInce[row]["timeOnIce"]! += 1
         }
+        
+        print("trackTimeOnInce \(trackTimeOnInce)")
         
         //Update tableview
         tableView.reloadData()
@@ -339,7 +359,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return playerArray.count
+        return playersOnBench.count
         
     }  //numberOfItemsInSection
     
@@ -347,30 +367,33 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "benchCell", for: indexPath) as! BenchCollectionViewCell
         
-        cell.playerNumberLabel.text   = playerArray[indexPath.row].number
-        cell.playerLastNameLabel.text = playerArray[indexPath.row].lastName
+        cell.playerNumberLabel.text   = playersOnBench[indexPath.row].number
+        cell.playerLastNameLabel.text = playersOnBench[indexPath.row].lastName
         
-        if tappedArray.count > 0 {
+        //        if tappedArray.count > 0 {
+        //
+        //            valueArray = []
+        //
+        //            for value in tappedArray {
+        //
+        //                valueArray.append(value["indexPath"]!)
+        //
+        
+        if selectedPlayerIndexPathArray.contains(indexPath) {
             
-            valueArray = []
+            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
             
-            for value in tappedArray {
-                
-                valueArray.append(value["indexPath"]!)
-                
-                if valueArray.contains(indexPath.row) {
-                    
-                    cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
-                    
-                } else {
-                    
-                    cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-                    
-                } //if
-                
-            }  //for
+        } else {
             
-        }  //if tappedArray.count
+            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
+            
+        }  //if
+        
+        
+        //
+        //            }  //for
+        //
+        //        }  //if tappedArray.count
         
         return cell
         
@@ -390,56 +413,173 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
             
-            let currentPlayerSelected = ["indexPath": indexPath.row, "timeOnIce": 0]
+            playersOnIce.append(playersOnBench[indexPath.row])
             
-            tappedArray.append(currentPlayerSelected)
-            
+            //Keep track of which players have a blue cell
             selectedPlayerIndexPathArray.append(indexPath)
             
+            //            selectedPlayer.append(playerPicked)
+            //
+            //            for players in selectedPlayer {
+            //
+            //                if let index = playersOnBench.index(of: players)
+            //                {
+            //                    playersOnIce += [playersOnBench.remove(at: index)]
+            //
+            //                }
+            //
+            //            }
+            
+            
+            
+            
+            /*
+             
+             let cardsPlayed = [1,3,2,8,7]
+             
+             for cards in cardsPlayed {
+             
+             if let index = cardsInHand.index(of: cards)
+             {
+             cardsOnTable += [cardsInHand.remove(at: index)]
+             }
+             }
+             */
+            
+            //            print("This is the selected Player \(String(describing: playerOnBench[indexPath.row].lastName!))")
+            //
+            //            print("These are the players on the bench \n")
+            //            for players in playerOnBench {
+            //
+            //                print("On Bench \(players.lastName!)")
+            //            }
+            //
+            //            playerOnBench = playerOnBench.filter { $0 !=  playerOnBench[indexPath.row] }
+            //
+            //            print("These are the players on the bench \n")
+            //            for players in playerOnBench {
+            //
+            //                print("On Bench \(players.lastName!)")
+            //            }
+            
+            
+            
+            //            //Add player to the ice
+            //            selectedPlayer.append(playerOnBench[indexPath.row])
+            //            print("selectedPlayer \(String(describing: selectedPlayer))")
+            //
+            //            myDelegates?.playersOnIce(players: selectedPlayer)
+            //
+            //            //remove player from Bench
+            //            removedPlayer = (selectedPlayer.filter { $0 != selectedPlayer[indexPath.row] })
+            //            myDelegates?.playersOnBench(players: removedPlayer)
+            
+            let currentPlayerSelected = ["indexPath": indexPath.row, "timeOnIce": 0]
+            
+            trackTimeOnInce.append(currentPlayerSelected)
+            //
+            
+            
+            //            selectedPlayerIndexPathArray.append(indexPath)
+            
+            //                        //store player on ice in delegate so he can't be removed from the bench if he's on the ice
+            //                        myDelegates?.storePlayersOnIceIndexPathArray(indexPath: selectedPlayerIndexPathArray)
+            //
         } else {
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
             
-            print("tappedArray -> crash \(tappedArray)")
+            
+            //   cardsInHand = cardsInHand.filter{!self.cardsOnTable.contains($0)}
+            //tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }\
+            
+            //            for players in selectedPlayer {
+            //
+            //                if let index = playersOnIce.index(of: players)
+            //                {
+            //                    playersOnBench += [playersOnIce.remove(at: index)]
+            //
+            //                }
+            //            }
+            
+            
             
             //Save to CoreData since the shift is over
-            let selectedPlayerArray = tappedArray.filter { $0["indexPath"] == indexPath.row }
+            let selectedPlayerArray = trackTimeOnInce.filter { $0["indexPath"] == indexPath.row }
             
-            let timeOnIce = selectedPlayerArray.first!["timeOnIce"]  //crash
-            let row = selectedPlayerArray.first!["indexPath"]
-            let currentPlayer = playerArray[row!]
-            
-            //Only save a shift if it's greater that 1s.
-            if timeOnIce! > 0 {
+            if selectedPlayerArray.count > 0 {
                 
-                saveShift(player: currentPlayer, timeOnIce: timeOnIce!)
+                let timeOnIce = selectedPlayerArray.first!["timeOnIce"]  //crash
+                let row = selectedPlayerArray.first!["indexPath"]
+                let currentPlayer = playersOnBench[row!]
+                
+                //Only save a shift if it's greater that 1s.
+                if timeOnIce! > 0 {
+                    
+                    saveShift(player: currentPlayer, timeOnIce: timeOnIce!)
+                }
+                
+                //Remove player from on ice.
+                //                tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }
+                
+                //              selectedPlayerIndexPathArray = selectedPlayerIndexPathArray.filter {$0 != indexPath }
+                //
+                //            //store player on ice in delegate so he can't be removed from the bench if he's on the ice
+                //            myDelegates?.storePlayersOnIceIndexPathArray(indexPath: selectedPlayerIndexPathArray)
+                //            }
+                
+                playersOnIce = playersOnIce.filter { $0 != playersOnBench[indexPath.row] }
+                
+                selectedPlayerIndexPathArray = selectedPlayerIndexPathArray.filter {$0 != indexPath }
+                
+                trackTimeOnInce = trackTimeOnInce.filter { $0["indexPath"] != indexPath.row }
+
             }
             
-            //Remove player from on ice.
-            tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }
             
-            selectedPlayerIndexPathArray = selectedPlayerIndexPathArray.filter {$0 != indexPath }
+            
         }
         
-        if tappedArray.count > 0 {
+        //        print("\nselectedPlayer ")
+        //        for player in selectedPlayer {
+        //            print(player.lastName!)
+        //        }
+        //        print("\nPlayersOnBench ")
+        //        for player in playersOnBench {
+        //            print(player.lastName!)
+        //        }
+        //
+        
+        
+        
+        print("\nPlayersOnIce ")
+        for player in playersOnIce {
+            print(player.lastName!)
+        }
+        
+        
+        //       print("On Ice \(selectedPlayerIndexPathArray)")
+        //
+        //        print("tappedArray \(tappedArray)")
+        //
+        //        print("storePlayersOnIceIndexPathArray \(String(describing: appDelegate.playersOnIceIndexPathArray))")
+        
+        if playersOnIce.count > 0 {
             clockButton.isEnabled = true
         } else {
             clockButton.isEnabled = false
+            stopTimer()
         }
         
-        //        print("On the ice \(selectedPlayerIndexPathArray)")
-        myDelegates?.storePlayersOnIceIndexPathArray(indexPath: selectedPlayerIndexPathArray)
-        
-        playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: tappedArray.count)
+        playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: playersOnIce.count)
         
         //Update players on bench
-        let playersOnBench = playerArray.count - tappedArray.count
-        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench)
+        let playersOnBenchCount = playersOnBench.count - playersOnIce.count
+        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBenchCount)
         
         tableView.reloadData()
         
-        
-    }
+    }  //configCollectionViewCell
     
     func saveShift(player:Players, timeOnIce: Int) {
         
@@ -479,7 +619,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return tappedArray.count
+        //return tappedArray.count
+        return playersOnIce.count
         
     }  //numberOfRowsInSection
     
@@ -487,16 +628,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersOnIceTableViewCell", for: indexPath) as! PlayersOnIceTableViewCell
         
-        print("\(tappedArray[indexPath.row])")
+        // let player = playersOnBench[tappedArray[indexPath.row]["indexPath"]!]  //crash
+        let player = playersOnIce[indexPath.row]
         
-        let player = playerArray[tappedArray[indexPath.row]["indexPath"]!]  //crash
         
-        //        cell.playerNumberLabel.attributedText = createAttributedString.poundNumber(number: player.number!)
         cell.playerNameLabel.attributedText   = createAttributedString.poundNumberFirstNameLastName(number: player.number!, firstName: player.firstName!, lastName: player.lastName!)
         
-        let timeOnIce = timeFormat.mmSS(totalSeconds: tappedArray[indexPath.row]["timeOnIce"]!)
+        let timeOnIce = timeFormat.mmSS(totalSeconds: trackTimeOnInce[indexPath.row]["timeOnIce"]!)
+        //        let timeOnIce = timeFormat.mmSS(totalSeconds: playersOnIce[indexPath.row])
         cell.playerTimerLabel.text = timeOnIce
-        
+        //
         let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
         
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)

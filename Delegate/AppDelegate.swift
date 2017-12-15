@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     var gameIndexPath: IndexPath?
     var playersOnIceIndexPathArray: [IndexPath]?
     
+    var onBench: [Players]?
+    var onIce:   [Players]?
+    var toPlay:  [Players]?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
@@ -61,31 +65,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     
     func applicationWillResignActive(_ application: UIApplication) {
         
-        print("applicationWillResignActive")
-    
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
 
-        print("applicationDidEnterBackground")
         coreDataStack.saveContext()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
 
-        print("applicationWillEnterForeground")
         coreDataStack.saveContext()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         
-        print("applicationDidBecomeActive")
-   
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        
-        print("applicationWillTerminate")
       
     }
     
@@ -121,5 +117,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
         
         self.playersOnIceIndexPathArray = indexPath
     }
+    
+    
+    //New stuff
+    func playersOnBench(players: [Players]) {
+        self.onBench = players
+        
+    }
+    
+    func playersOnIce(players: [Players]) {
+        self.onIce = players
+        
+    }
+    
+    func playersToPlay(players: [Players]) {
+        self.toPlay = players
+    }
+    
 }
 
