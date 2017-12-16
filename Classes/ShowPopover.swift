@@ -115,6 +115,54 @@ class ShowPopover: NSObject {
         
     }  //forNoGames
     
+    func forNoGamesAdded(view: UIViewController,sender: UIBarButtonItem) {
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        
+        let noGamesViewController = rootViewController?.storyboard?.instantiateViewController(withIdentifier: "NoGamesViewController") as! NoGamesViewController
+        
+        noGamesViewController.modalPresentationStyle = .popover
+        noGamesViewController.preferredContentSize   = CGSize(width: 300, height: 90)
+        
+        let popover = noGamesViewController.popoverPresentationController!
+        
+        popover.delegate = self
+        popover.permittedArrowDirections = .any
+        popover.barButtonItem = sender
+        
+        rootViewController?.present(noGamesViewController, animated: true, completion: nil)
+        
+        
+    }  //forNoGamesAdded
+
+    func forNoPlayersAdded(view: UIViewController,sender: UIBarButtonItem) {
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        
+        let noPlayersViewController = rootViewController?.storyboard?.instantiateViewController(withIdentifier: "NoPlayersViewController") as! NoPlayersViewController
+        
+        noPlayersViewController.modalPresentationStyle = .popover
+        noPlayersViewController.preferredContentSize   = CGSize(width: 300, height: 90)
+        
+        let popover = noPlayersViewController.popoverPresentationController!
+        
+        popover.delegate = self
+        popover.permittedArrowDirections = .any
+        popover.barButtonItem = sender
+        
+        rootViewController?.present(noPlayersViewController, animated: true, completion: nil)
+        
+        
+    }  //forNoGamesAdded
+
 }
 
 extension ShowPopover: UIPopoverPresentationControllerDelegate {

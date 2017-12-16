@@ -23,8 +23,6 @@ class PlayerPopoverTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("viewDidLoad")
-        
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayerPopoverTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playerPopoverTableViewCell")
@@ -37,20 +35,7 @@ class PlayerPopoverTableViewController: UITableViewController {
                 
             }
         }
-        //
-        //        print("appDelegate.playersOnBench \(appDelegate.playersOnBench!)")
-        //        print("appDelegate.selectedPlayers \(appDelegate.selectedPlayers!)")
-        
-        //       if appDelegate.playersOnBench != nil {
-        //            if let selectedPalyersInDelegate = appDelegate.selectedPlayers {
-        //                selectedPlayers = selectedPalyersInDelegate
-        //
-        //                print("1. selectedPlayers \(selectedPlayers)")
-        //
-        //            }
-        //        }
-        
-        
+                
         if let playersOnBenchDelegate = appDelegate.toPlay {
             
             playersToPlayInGame = playersOnBenchDelegate
@@ -138,35 +123,14 @@ class PlayerPopoverTableViewController: UITableViewController {
             
         } else {
             
-            //            guard let playerIsOnTheIce = appDelegate.playersOnIceIndexPathArray?.contains(indexPath) else {
-            //
-            //                return
-            //            }
-            
-            //            if playerIsOnTheIce == false {  //allow the checkmark to be removed.
-            
             cell.checkMarkImageView.isHidden = true
             
             checkMark = checkMark.filter { $0 != indexPath }
             
             playersToPlayInGame = playersToPlayInGame.filter {$0 != selectedPlayerToGoOnBench}
-            
-            //            }  //playerIsOnTheIce
-            
+                        
         }
         
-//        print("On the Bench \(checkMark)")
-//        
-//        for player in playersToPlayInGame {
-//            
-//            print(player.lastName!)
-//            
-//            
-//        }
-        
-        //        //Store Array in Delegate
-        //        myDelegates?.storePlayersOnBench(playersOnBench: selectedPlayers)
-        //
         //Store Array in Delegate
         myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkMark)
         

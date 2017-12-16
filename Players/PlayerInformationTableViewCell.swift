@@ -11,13 +11,9 @@ import UIKit
 class PlayerInformationTableViewCell: UITableViewCell {
     
     //UILabel
-//    @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var playerInformationLabel: UILabel!
-//    @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var totalTimeOnIceLabel: UILabel!
     @IBOutlet weak var totalShiftsLabel: UILabel!
-//    @IBOutlet weak var teamLabel: UILabel!
-//    @IBOutlet weak var divisionLevelLabel: UILabel!
     
     //UIButton
     @IBOutlet weak var chevronButton: UIButton!

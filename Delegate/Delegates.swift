@@ -10,15 +10,9 @@ import Foundation
 
 protocol myDelegates {
     
-//    func storePlayersOnBench(playersOnBench: [Players])
-   func storeCheckmarkIndexPathArray(indexPath: [IndexPath])
-//    func storeSelectedPlayers(selectedPlayers: [Players])
+    func storeCheckmarkIndexPathArray(indexPath: [IndexPath])
     func storeGame(game: Games?)
     func storeGameCheckmarkIndexPathArray(indexPath: IndexPath?)
-//    func storePlayersOnIceIndexPathArray(indexPath: [IndexPath])
-    
-//    func playersOnBench(players: [Players])
-//    func playersOnIce(players: [Players])
     func playersToPlay(players: [Players])
     
 }  //myDelegates

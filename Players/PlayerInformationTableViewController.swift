@@ -11,6 +11,9 @@ import CoreData
 
 class PlayerInformationTableViewController: UITableViewController {
     
+    //UIBarButtonItem
+    @IBOutlet weak var addBarButtonItem: UIBarButtonItem!
+    
     //coredata
     var managedContext: NSManagedObjectContext!
     var fetchedResultsController: NSFetchedResultsController<Players>!
@@ -20,6 +23,7 @@ class PlayerInformationTableViewController: UITableViewController {
     let createAttributedString = CreateAttributedString()
     let goFetch                = GoFetch()
     let timeFormat             = TimeFormat()
+    let showPopover            = ShowPopover()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,16 @@ class PlayerInformationTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         goFetchPlayers()
+        
+        if let fetchedObjects = fetchedResultsController.fetchedObjects?.count {
+            
+            if fetchedObjects == 0 {
+                
+                //Shot popover if there are no players listed.
+                showPopover.forNoPlayersAdded(view: self, sender: addBarButtonItem)
+            }
+        }
+        
     }
     
     func goFetchPlayers() {

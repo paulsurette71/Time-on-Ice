@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     
     //timer
     var timer        = Timer()
-    //    var timerCounter = 0
     
     //UILabel
     @IBOutlet weak var playersOnBenchLabel: UILabel!
@@ -35,17 +34,10 @@ class HomeViewController: UIViewController {
     
     var trackTimeOnInce  = [[String:Int]]()
     
-    var playersOnBench  = [Players]()
-    var playersOnIce    = [Players]()
-    
-    var tappedButton = true
-    //    var valueArray   = [Int]()
+    var playersOnBench               = [Players]()
+    var playersOnIce                 = [Players]()
+    var tappedButton                 = true
     var selectedPlayerIndexPathArray = [IndexPath]()
-    //    var trackTimeOnInce = [Int]()
-    
-    //    //new
-    //    var selectedPlayer = [Players]()
-    //    var removedPlayer  = [Players]()
     
     //classes
     let timeFormat             = TimeFormat()
@@ -77,7 +69,7 @@ class HomeViewController: UIViewController {
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayersOnIceTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playersOnIceTableViewCell")
-        tableView.rowHeight = 90
+        tableView.rowHeight = 75
         
         // collectionView delegate
         collectionView.delegate   = self
@@ -123,67 +115,6 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
         
     }  //didReceiveMemoryWarning
-    
-    
-    //    @IBAction func toggleClock(_ sender: Any) {
-    //
-    //        guard tappedArray.count > 0 else {
-    //
-    //            clockSwitch.isEnabled = false
-    //
-    //            return
-    //        }
-    //
-    //        clockSwitch.isEnabled = true
-    //
-    //        if (sender as! UISwitch).isOn {
-    //
-    //            clockStatusLabel.text = clockStatus.on.rawValue
-    //
-    //            //start the timer
-    //            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
-    //
-    //        } else {
-    //
-    //            clockStatusLabel.text = clockStatus.off.rawValue
-    //            timerCounter = 0
-    //
-    //            //stop the timer
-    //            stopTimer()
-    //        }
-    //    }
-    
-    //    @objc func startTimer() {
-    //
-    //        guard tappedArray.count > 0 else {
-    //            return
-    //        }
-    //
-    //        runningTotalCounter += 1
-    //        timerCounter += 0
-    //
-    //        //        for rows in tappedArray {
-    //        //
-    //        //            if shiftDetails.count > 0 {
-    //        //
-    //        //                print(shiftDetails, rows)
-    //        //                //                shiftDetails[playerArray[rows]].timeOnIce += 1
-    //        //
-    //        //            }
-    //        //            //            playerArray[rows].runningTimeOnIce += 1
-    //        //            //            playerArray[rows].timeOnIce += 1
-    //        //
-    //        //            tableView.reloadData()
-    //        //
-    //        //        }  //rows
-    //
-    //    }  //startTimer
-    
-    //    func stopTimer()  {
-    //
-    //        clockStatusLabel.text = clockStatus.off.rawValue
-    //        timer.invalidate()
-    //    }
     
     func collectionViewLayout() {
         
@@ -242,21 +173,7 @@ class HomeViewController: UIViewController {
     
     func notificationCenterData(notification:Notification) -> Void  {
         
-        //        guard notification.object != nil else {
-        //
-        //            return
-        //        }
-        
         playersOnBench = appDelegate.toPlay!
-        
-        print("\n")
-        print("On Bench")
-        print("########")
-        for players in playersOnBench {
-            print(players.lastName!)
-        }
-        
-        //myDelegates?.playersOnBench(players: playersOnBench)
         
         //Update UI
         setupUI()
@@ -329,18 +246,13 @@ class HomeViewController: UIViewController {
     
     @objc func updateCounters() {
         
-        //        timerCounter += 1
-        
         for row in trackTimeOnInce.indices {
             
             trackTimeOnInce[row]["timeOnIce"]! += 1
         }
         
-        print("trackTimeOnInce \(trackTimeOnInce)")
-        
         //Update tableview
         tableView.reloadData()
-        
         
     }  //updateCounters
     
@@ -370,14 +282,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.playerNumberLabel.text   = playersOnBench[indexPath.row].number
         cell.playerLastNameLabel.text = playersOnBench[indexPath.row].lastName
         
-        //        if tappedArray.count > 0 {
-        //
-        //            valueArray = []
-        //
-        //            for value in tappedArray {
-        //
-        //                valueArray.append(value["indexPath"]!)
-        //
+        
+        let results = goFetch.timeOnIceWithShifts(player: playersOnBench[indexPath.row], managedContext: managedContext)
+        
+        let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
+        
+        cell.totalTimeOnIceLabel.text = totalTimeOnIce
+        
         
         if selectedPlayerIndexPathArray.contains(indexPath) {
             
@@ -388,12 +299,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
             
         }  //if
-        
-        
-        //
-        //            }  //for
-        //
-        //        }  //if tappedArray.count
         
         return cell
         
@@ -413,96 +318,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
             
+            //Keep track of which players are on the ice
             playersOnIce.append(playersOnBench[indexPath.row])
             
             //Keep track of which players have a blue cell
             selectedPlayerIndexPathArray.append(indexPath)
             
-            //            selectedPlayer.append(playerPicked)
-            //
-            //            for players in selectedPlayer {
-            //
-            //                if let index = playersOnBench.index(of: players)
-            //                {
-            //                    playersOnIce += [playersOnBench.remove(at: index)]
-            //
-            //                }
-            //
-            //            }
-            
-            
-            
-            
-            /*
-             
-             let cardsPlayed = [1,3,2,8,7]
-             
-             for cards in cardsPlayed {
-             
-             if let index = cardsInHand.index(of: cards)
-             {
-             cardsOnTable += [cardsInHand.remove(at: index)]
-             }
-             }
-             */
-            
-            //            print("This is the selected Player \(String(describing: playerOnBench[indexPath.row].lastName!))")
-            //
-            //            print("These are the players on the bench \n")
-            //            for players in playerOnBench {
-            //
-            //                print("On Bench \(players.lastName!)")
-            //            }
-            //
-            //            playerOnBench = playerOnBench.filter { $0 !=  playerOnBench[indexPath.row] }
-            //
-            //            print("These are the players on the bench \n")
-            //            for players in playerOnBench {
-            //
-            //                print("On Bench \(players.lastName!)")
-            //            }
-            
-            
-            
-            //            //Add player to the ice
-            //            selectedPlayer.append(playerOnBench[indexPath.row])
-            //            print("selectedPlayer \(String(describing: selectedPlayer))")
-            //
-            //            myDelegates?.playersOnIce(players: selectedPlayer)
-            //
-            //            //remove player from Bench
-            //            removedPlayer = (selectedPlayer.filter { $0 != selectedPlayer[indexPath.row] })
-            //            myDelegates?.playersOnBench(players: removedPlayer)
-            
             let currentPlayerSelected = ["indexPath": indexPath.row, "timeOnIce": 0]
             
             trackTimeOnInce.append(currentPlayerSelected)
-            //
             
-            
-            //            selectedPlayerIndexPathArray.append(indexPath)
-            
-            //                        //store player on ice in delegate so he can't be removed from the bench if he's on the ice
-            //                        myDelegates?.storePlayersOnIceIndexPathArray(indexPath: selectedPlayerIndexPathArray)
-            //
         } else {
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-            
-            
-            //   cardsInHand = cardsInHand.filter{!self.cardsOnTable.contains($0)}
-            //tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }\
-            
-            //            for players in selectedPlayer {
-            //
-            //                if let index = playersOnIce.index(of: players)
-            //                {
-            //                    playersOnBench += [playersOnIce.remove(at: index)]
-            //
-            //                }
-            //            }
-            
-            
             
             //Save to CoreData since the shift is over
             let selectedPlayerArray = trackTimeOnInce.filter { $0["indexPath"] == indexPath.row }
@@ -519,50 +347,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     saveShift(player: currentPlayer, timeOnIce: timeOnIce!)
                 }
                 
-                //Remove player from on ice.
-                //                tappedArray = tappedArray.filter { $0["indexPath"] != indexPath.row }
-                
-                //              selectedPlayerIndexPathArray = selectedPlayerIndexPathArray.filter {$0 != indexPath }
-                //
-                //            //store player on ice in delegate so he can't be removed from the bench if he's on the ice
-                //            myDelegates?.storePlayersOnIceIndexPathArray(indexPath: selectedPlayerIndexPathArray)
-                //            }
-                
+                //Remove player from ice
                 playersOnIce = playersOnIce.filter { $0 != playersOnBench[indexPath.row] }
                 
+                //Remove cell from being selected
                 selectedPlayerIndexPathArray = selectedPlayerIndexPathArray.filter {$0 != indexPath }
                 
+                //Reomve players time on ice tracking.
                 trackTimeOnInce = trackTimeOnInce.filter { $0["indexPath"] != indexPath.row }
-
-            }
-            
-            
+                
+            }  //selectedPlayerArray.count
             
         }
-        
-        //        print("\nselectedPlayer ")
-        //        for player in selectedPlayer {
-        //            print(player.lastName!)
-        //        }
-        //        print("\nPlayersOnBench ")
-        //        for player in playersOnBench {
-        //            print(player.lastName!)
-        //        }
-        //
-        
-        
-        
-        print("\nPlayersOnIce ")
-        for player in playersOnIce {
-            print(player.lastName!)
-        }
-        
-        
-        //       print("On Ice \(selectedPlayerIndexPathArray)")
-        //
-        //        print("tappedArray \(tappedArray)")
-        //
-        //        print("storePlayersOnIceIndexPathArray \(String(describing: appDelegate.playersOnIceIndexPathArray))")
         
         if playersOnIce.count > 0 {
             clockButton.isEnabled = true
@@ -577,7 +373,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let playersOnBenchCount = playersOnBench.count - playersOnIce.count
         playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBenchCount)
         
+        //update the cells
         tableView.reloadData()
+        collectionView.reloadData()
         
     }  //configCollectionViewCell
     
@@ -628,16 +426,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersOnIceTableViewCell", for: indexPath) as! PlayersOnIceTableViewCell
         
-        // let player = playersOnBench[tappedArray[indexPath.row]["indexPath"]!]  //crash
         let player = playersOnIce[indexPath.row]
-        
         
         cell.playerNameLabel.attributedText   = createAttributedString.poundNumberFirstNameLastName(number: player.number!, firstName: player.firstName!, lastName: player.lastName!)
         
         let timeOnIce = timeFormat.mmSS(totalSeconds: trackTimeOnInce[indexPath.row]["timeOnIce"]!)
-        //        let timeOnIce = timeFormat.mmSS(totalSeconds: playersOnIce[indexPath.row])
         cell.playerTimerLabel.text = timeOnIce
-        //
+        
         let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
         
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
@@ -645,11 +440,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let shifts = results["shifts"] {
             cell.shiftsLabel.text = String(shifts)
+            
+            cell.averageTimeOnIceLabel.text = averageTimeOnIce(player: player, timeOnIce: results["timeOnIce"]!, shifts: shifts)
         }
         
         return cell
         
     }  //cellForRowAt
+    
+    func averageTimeOnIce(player: Players, timeOnIce: Int, shifts: Int) -> String {
+        
+        let average = timeOnIce / shifts
+        
+        return timeFormat.mmSS(totalSeconds: average)
+        
+    }
     
 }  //extension
 

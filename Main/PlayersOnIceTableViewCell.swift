@@ -15,6 +15,6 @@ class PlayersOnIceTableViewCell: UITableViewCell {
     @IBOutlet weak var timeOnIceLabel: UILabel!
     @IBOutlet weak var playerTimerLabel: UILabel!
     @IBOutlet weak var shiftsLabel: UILabel!
-//    @IBOutlet weak var playerNumberLabel: UILabel!
+    @IBOutlet weak var averageTimeOnIceLabel: UILabel!
     
 }

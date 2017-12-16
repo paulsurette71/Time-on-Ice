@@ -11,6 +11,10 @@ import CoreData
 
 class GameInformationTableViewController: UITableViewController {
     
+    
+    @IBOutlet weak var addBarButtonItem: UIBarButtonItem!
+    
+    
     //coredata
     var managedContext: NSManagedObjectContext!
     var fetchedResultsController: NSFetchedResultsController<Games>!
@@ -18,25 +22,36 @@ class GameInformationTableViewController: UITableViewController {
     
     //classes
     var convertDate = ConvertDate()
-
+    var showPopover = ShowPopover()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Register tableView cell classes
         let cellNib = UINib(nibName: "GameInformationTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "gameInformationTableViewCell")
         tableView.rowHeight = 80
         
         goFetch()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         goFetch()
+        
+        if let fetchedObjects = fetchedResultsController.fetchedObjects?.count {
+            
+            if fetchedObjects == 0 {
+                
+                //Shot popover if there are no games listed.
+                showPopover.forNoGamesAdded(view: self, sender: addBarButtonItem)
+            }
+        }
+    
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,7 +61,7 @@ class GameInformationTableViewController: UITableViewController {
         
         let fetchRequest: NSFetchRequest<Games> = Games.fetchRequest()
         let sortDate   = NSSortDescriptor(key: #keyPath(Games.date), ascending: true)
-
+        
         fetchRequest.sortDescriptors = [sortDate]
         fetchRequest.fetchBatchSize = 10
         
@@ -60,10 +75,10 @@ class GameInformationTableViewController: UITableViewController {
             print("\(self) -> \(#function): Fetching error: \(error), \(error.userInfo)")
         }
     }  //goFetch
-
-
+    
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if let sections = fetchedResultsController.sections {
@@ -71,7 +86,7 @@ class GameInformationTableViewController: UITableViewController {
         }
         return 0
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let sectionInfo = fetchedResultsController.sections?[section] else {
@@ -81,7 +96,7 @@ class GameInformationTableViewController: UITableViewController {
         
         return sectionInfo.numberOfObjects
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameInformationTableViewCell", for: indexPath) as! GameInformationTableViewCell
         
@@ -101,11 +116,11 @@ class GameInformationTableViewController: UITableViewController {
         
         
         let game = self.fetchedResultsController.object(at: indexPath as IndexPath)
-                
+        
         let gameDetailsTableViewController = storyboard?.instantiateViewController(withIdentifier: "GameDetailsTableViewController") as! GameDetailsTableViewController
         
         gameDetailsTableViewController.selectedGame = game
-        gameDetailsTableViewController.newGame       = false
+        gameDetailsTableViewController.newGame      = false
         
         //This is for lookup popovers
         gameDetailsTableViewController.managedContext = managedContext
@@ -113,10 +128,9 @@ class GameInformationTableViewController: UITableViewController {
         self.navigationController?.pushViewController(gameDetailsTableViewController, animated: true)
         
     }  //updatePlayer
-
+    
     
     func configureCell(_ cell: GameInformationTableViewCell, withGame game: Games, indexPath: IndexPath) {
-        
         
         let currentDate = convertDate.convertDate(date: (game.date)!)
         
@@ -124,16 +138,14 @@ class GameInformationTableViewController: UITableViewController {
         cell.homeTeamLabel.text = game.homeTeamCity! + " " + game.homeTeamName!
         cell.visitingTeamLabel.text = game.visitorTeamCity! + " " + game.visitorTeamName! + " vs."
         
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
         let gameDetailsTableViewController = segue.destination as! GameDetailsTableViewController
         
         if segue.identifier == "newGameSegue" {
-                        
+            
             gameDetailsTableViewController.managedContext = managedContext
             gameDetailsTableViewController.newGame = true
             

@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     var toPlay:  [Players]?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
+        
         // Override point for customization after application launch.
         
         //Pretty up the place
@@ -68,12 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-
+        
         coreDataStack.saveContext()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-
+        
         coreDataStack.saveContext()
     }
     
@@ -82,25 +82,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-      
+        
     }
     
     //Delegates
-    func storePlayersOnBench(playersOnBench: [Players]) {
-        
-        self.playersOnBench = playersOnBench
-        
-    }
     
     func storeCheckmarkIndexPathArray(indexPath: [IndexPath]) {
         
         self.checkmarkIndexPath = indexPath
-    }
-    
-    func storeSelectedPlayers(selectedPlayers: [Players]) {
-        
-        self.selectedPlayers = selectedPlayers
-        
     }
     
     func storeGame(game: Games?) {
@@ -113,24 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
         self.gameIndexPath = indexPath
     }
     
-    func storePlayersOnIceIndexPathArray(indexPath: [IndexPath]) {
-        
-        self.playersOnIceIndexPathArray = indexPath
-    }
-    
-    
-    //New stuff
-    func playersOnBench(players: [Players]) {
-        self.onBench = players
-        
-    }
-    
-    func playersOnIce(players: [Players]) {
-        self.onIce = players
-        
-    }
-    
     func playersToPlay(players: [Players]) {
+        
         self.toPlay = players
     }
     

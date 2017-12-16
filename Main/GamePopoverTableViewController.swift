@@ -134,15 +134,6 @@ class GamePopoverTableViewController: UITableViewController {
             
         } else {
             
-            //If this player in on the ice, we can't take him off the bench.
-            //            guard (appDelegate.playersOnIceIndexPathArray != nil) else {
-            //
-            //                print("En Garde Fool!")
-            //
-            //                return
-            //            }
-            //            print("Got past the guard")
-            
             cell.gameCheckmarkImageView.isHidden = true
             
             checkmarkIndexPath = nil

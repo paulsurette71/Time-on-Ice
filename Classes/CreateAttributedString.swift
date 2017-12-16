@@ -222,17 +222,17 @@ class CreateAttributedString {
     func poundNumberFirstNameLastName(number: String, firstName: String, lastName: String) -> NSMutableAttributedString {
         
         let numberAttributedString = NSMutableAttributedString(string: number)
-        numberAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular), range: NSMakeRange(0, numberAttributedString.length))
+        numberAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.medium), range: NSMakeRange(0, numberAttributedString.length))
         
         let poundAttributedString = NSMutableAttributedString(string: "#")
-        poundAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light), range: NSMakeRange(0, poundAttributedString.length))
+        poundAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.regular), range: NSMakeRange(0, poundAttributedString.length))
         poundAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.lightGray, range: NSMakeRange(0, poundAttributedString.length))
         
         let firstNameAttributedString = NSMutableAttributedString(string: firstName)
         firstNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.light), range: NSMakeRange(0, firstNameAttributedString.length))
         
         let lastNameAttributedString = NSMutableAttributedString(string: lastName)
-        lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.light), range: NSMakeRange(0, lastNameAttributedString.length))
+        lastNameAttributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular), range: NSMakeRange(0, lastNameAttributedString.length))
         
         let combination = NSMutableAttributedString()
         let spaceAttributedString  = NSMutableAttributedString(string: " ")
