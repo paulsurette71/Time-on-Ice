@@ -49,7 +49,7 @@ class GameInformationTableViewController: UITableViewController {
                 showPopover.forNoGamesAdded(view: self, sender: addBarButtonItem)
             }
         }
-    
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -106,6 +106,16 @@ class GameInformationTableViewController: UITableViewController {
         return cell
     }
     
+    func configureCell(_ cell: GameInformationTableViewCell, withGame game: Games, indexPath: IndexPath) {
+        
+        let currentDate = convertDate.convertDate(date: (game.date)!)
+        
+        cell.dateLabel.text = currentDate
+        cell.homeTeamLabel.text = game.homeTeamCity! + " " + game.homeTeamName!
+        cell.visitingTeamLabel.text = game.visitorTeamCity! + " " + game.visitorTeamName! + " vs."
+        
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
@@ -129,16 +139,6 @@ class GameInformationTableViewController: UITableViewController {
         
     }  //updatePlayer
     
-    
-    func configureCell(_ cell: GameInformationTableViewCell, withGame game: Games, indexPath: IndexPath) {
-        
-        let currentDate = convertDate.convertDate(date: (game.date)!)
-        
-        cell.dateLabel.text = currentDate
-        cell.homeTeamLabel.text = game.homeTeamCity! + " " + game.homeTeamName!
-        cell.visitingTeamLabel.text = game.visitorTeamCity! + " " + game.visitorTeamName! + " vs."
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -169,9 +169,13 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
         case .update:
-            let cell = tableView.cellForRow(at: indexPath!) as! GameInformationTableViewCell
-            let results = fetchedResultsController.object(at: indexPath!)
-            configureCell(cell, withGame: results, indexPath: indexPath!)
+            
+            tableView?.reloadData()
+            
+            //            let cell = tableView.cellForRow(at: indexPath!) as! GameInformationTableViewCell
+            //            let results = fetchedResultsController.object(at: indexPath!)
+            //            configureCell(cell, withGame: results, indexPath: indexPath!)
+            
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)

@@ -415,6 +415,43 @@ class ImportPlayers {
             print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
         }
 
+        do {
+            
+            let entity = NSEntityDescription.entity(forEntityName: "Players", in: managedContext)
+            let player = Players(entity: entity!, insertInto: managedContext)
+            
+            player.firstName = "Lucas"
+            player.lastName  = "Surette"
+            player.number    = "47"
+            player.position  = "Left Wing"
+            player.shoots    = "Left"
+            player.city      = "Guelph"
+            player.team      = "Jr. Gryphons"
+            player.league    = "Tri-County"
+            player.level     = "AA"
+            player.division  = "Novice"
+            player.height    = "4'3\""
+            player.weight    = "55 lbs"
+            
+            //HeadShot
+            let playerHeadshot = UIImageJPEGRepresentation(UIImage(named: "headshot")!, 1.0) as NSData?
+            player.headshot = playerHeadshot
+            
+            //Store Birthdate
+            let dateString           = "2009-04-07"
+            let dateFormatter        = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let date = dateFormatter.date(from: dateString)
+            
+            player.birthdate = date as NSDate?
+            
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
+        }
+
+        
     }  //importPlayers
     
 }  //ImportPlayers 

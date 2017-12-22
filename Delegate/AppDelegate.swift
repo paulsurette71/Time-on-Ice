@@ -20,16 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     let colourPalette = ColourPalette()
     
     //Delegates
-    var playersOnBench: [Players]?
     var checkmarkIndexPath: [IndexPath]?
-    var selectedPlayers: [Players]?
     var game: Games?
     var gameIndexPath: IndexPath?
-    var playersOnIceIndexPathArray: [IndexPath]?
-    
-    var onBench: [Players]?
-    var onIce:   [Players]?
     var toPlay:  [Players]?
+    
+    //    var selectedPlayers: [Players]?
+    //    var playersOnBench: [Players]?
+    //    var playersOnIceIndexPathArray: [IndexPath]?
+    //    var onBench: [Players]?
+    //    var onIce:   [Players]?
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

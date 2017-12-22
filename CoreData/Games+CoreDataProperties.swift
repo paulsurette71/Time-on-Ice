@@ -2,7 +2,7 @@
 //  Games+CoreDataProperties.swift
 //  Time on Ice
 //
-//  Created by Surette, Paul on 2017-12-05.
+//  Created by Surette, Paul on 2017-12-20.
 //  Copyright © 2017 Surette, Paul. All rights reserved.
 //
 //
@@ -17,13 +17,13 @@ extension Games {
         return NSFetchRequest<Games>(entityName: "Games")
     }
 
-    @NSManaged public var date: NSDate?
-    @NSManaged public var homeTeamName: String?
-    @NSManaged public var homeTeamCity: String?
-    @NSManaged public var visitorTeamName: String?
-    @NSManaged public var visitorTeamCity: String?
-    @NSManaged public var arenaName: String?
     @NSManaged public var arenaCity: String?
+    @NSManaged public var arenaName: String?
+    @NSManaged public var date: NSDate?
+    @NSManaged public var homeTeamCity: String?
+    @NSManaged public var homeTeamName: String?
+    @NSManaged public var visitorTeamCity: String?
+    @NSManaged public var visitorTeamName: String?
     @NSManaged public var gameShiftRelationship: NSSet?
 
 }

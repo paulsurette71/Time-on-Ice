@@ -82,17 +82,17 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-        //                let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-        //                let importPlayers            = ImportPlayers()
-        //                let importGames              = ImportGames()
-        //
-        //                if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-        //
-        //                    //Import Test data
-        //                    importPlayers.importPlayers()
-        //                    importGames.importGames()
-        //
-        //                }
+                                let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+                                let importPlayers            = ImportPlayers()
+                                let importGames              = ImportGames()
+        
+                                if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+        
+                                    //Import Test data
+                                    importPlayers.importPlayers()
+                                    importGames.importGames()
+        
+                                }
         
     }  //viewDidLoad
     
@@ -102,10 +102,12 @@ class HomeViewController: UIViewController {
         if appDelegate.game == nil  {
             
             clockButton.isEnabled = false
+            playersButton.isEnabled = false
             
         } else {
             
             clockButton.isEnabled = true
+            playersButton.isEnabled = true
         }
         
     }  //viewWillAppear
@@ -127,6 +129,12 @@ class HomeViewController: UIViewController {
     }  //collectionViewLayout
     
     func setupUI () {
+        
+        if playersOnBench.count > 0 {
+            gameButton.isEnabled = false
+        } else {
+            gameButton.isEnabled = true
+        }
         
         playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench.count)
         
@@ -155,7 +163,7 @@ class HomeViewController: UIViewController {
             return
         }
         
-        showPopover.showPopoverForPlayers(sender: sender as! UIButton, array: playerList, popoverTitle: "Players", delegate: myDelegates!)
+        showPopover.showPopoverForPlayers(sender: sender as! UIButton, array: playerList, popoverTitle: "Players", delegate: myDelegates!, managedContext: managedContext )
     }
     
     func SetupNotificationCenter()  {
@@ -181,14 +189,17 @@ class HomeViewController: UIViewController {
         //reload data into CollectionView
         collectionView.reloadData()
         
+       goFetch.playersOnBench(managedContext: managedContext)
+        
     }  //notificationCenterData
     
     func displayGameHeader(notification:Notification) -> Void {
         
         guard (appDelegate.game != nil) else {
             
-            gameInformationLabel.text = "Welcome"
+            gameInformationLabel.text     = "Welcome"
             gameDateInformationLabel.text = ""
+            playersButton.isEnabled = false
             
             return
         }
@@ -203,6 +214,8 @@ class HomeViewController: UIViewController {
             
             let currentDate = convertDate.convertDate(date: gameDate!)
             gameDateInformationLabel.text = currentDate
+            
+            playersButton.isEnabled = true
             
         }
     }  //displayGameHeader
@@ -256,8 +269,6 @@ class HomeViewController: UIViewController {
         
     }  //updateCounters
     
-    
-    
 }  //ShotDetailsPopover
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -288,7 +299,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
         
         cell.totalTimeOnIceLabel.text = totalTimeOnIce
-        
         
         if selectedPlayerIndexPathArray.contains(indexPath) {
             
@@ -430,7 +440,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.playerNameLabel.attributedText   = createAttributedString.poundNumberFirstNameLastName(number: player.number!, firstName: player.firstName!, lastName: player.lastName!)
         
-        let timeOnIce = timeFormat.mmSS(totalSeconds: trackTimeOnInce[indexPath.row]["timeOnIce"]!)
+        let timeOnIce = timeFormat.mmSS(totalSeconds: trackTimeOnInce[indexPath.row]["timeOnIce"]!)  //crash
         cell.playerTimerLabel.text = timeOnIce
         
         let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
@@ -449,10 +459,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }  //cellForRowAt
     
     func averageTimeOnIce(player: Players, timeOnIce: Int, shifts: Int) -> String {
+        var returnValue = ""
         
-        let average = timeOnIce / shifts
+        if shifts > 0 {
+            
+            let average = timeOnIce / shifts
+            
+            returnValue = timeFormat.mmSS(totalSeconds: average)
+            
+        } else {
+            
+            returnValue = ""
+        }
         
-        return timeFormat.mmSS(totalSeconds: average)
+        
+        return returnValue
         
     }
     

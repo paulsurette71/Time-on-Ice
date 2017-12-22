@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class PlayerPopoverTableViewController: UITableViewController {
     
     var players              = [Players]()
     var playersToPlayInGame  = [Players]()
     var checkMark            = [IndexPath]()
+    
+    //CoreData
+    var managedContext: NSManagedObjectContext!
     
     //Delegates
     var myDelegates: myDelegates?
@@ -29,13 +33,13 @@ class PlayerPopoverTableViewController: UITableViewController {
         tableView.rowHeight = 75
         
         if appDelegate.checkmarkIndexPath != nil {
-
+            
             if let checkArray = appDelegate.checkmarkIndexPath {
                 checkMark = checkArray
                 
             }
         }
-                
+        
         if let playersOnBenchDelegate = appDelegate.toPlay {
             
             playersToPlayInGame = playersOnBenchDelegate
@@ -49,7 +53,7 @@ class PlayerPopoverTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
-    }
+    }  //numberOfSections
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -121,6 +125,8 @@ class PlayerPopoverTableViewController: UITableViewController {
             
             playersToPlayInGame.append(selectedPlayerToGoOnBench)
             
+           saveOnBenchStatus(player: selectedPlayerToGoOnBench, managedContext: managedContext, onBench: true)
+            
         } else {
             
             cell.checkMarkImageView.isHidden = true
@@ -128,7 +134,9 @@ class PlayerPopoverTableViewController: UITableViewController {
             checkMark = checkMark.filter { $0 != indexPath }
             
             playersToPlayInGame = playersToPlayInGame.filter {$0 != selectedPlayerToGoOnBench}
-                        
+            
+            saveOnBenchStatus(player: selectedPlayerToGoOnBench, managedContext: managedContext, onBench: false)
+            
         }
         
         //Store Array in Delegate
@@ -144,5 +152,24 @@ class PlayerPopoverTableViewController: UITableViewController {
                                 userInfo: nil)
         
     }  //didSelectRowAt
+    
+    func saveOnBenchStatus(player:Players, managedContext: NSManagedObjectContext, onBench: Bool) {
+        
+        do {
+            
+            
+            print(player, onBench)
+
+            player.onBench = onBench
+            
+            //Save
+            try player.managedObjectContext?.save()
+            
+        } catch let error as NSError {
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
+            
+        }  //do
+        
+    }  //saveOnBenchStatus
     
 }

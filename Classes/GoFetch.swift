@@ -219,7 +219,30 @@ class GoFetch {
         
     }  //games
 
-    
+    func playersOnBench(managedContext: NSManagedObjectContext)  {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
+
+        let predicate               = NSPredicate(format: "%K = true", #keyPath(Players.onBench))
+        fetchRequest.predicate      = predicate
+        
+        let sort = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        fetchRequest.fetchBatchSize = 8
+        
+        do {
+            
+            let fetchGamesArray = try managedContext.fetch(fetchRequest)
+            print(fetchGamesArray)
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+       
+    }
+
     
 }
 

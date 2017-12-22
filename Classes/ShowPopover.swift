@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class ShowPopover: NSObject {
     
@@ -35,7 +36,7 @@ class ShowPopover: NSObject {
         
     }  //showPeriodPopover
     
-    func showPopoverForPlayers(sender: UIButton, array: [Players], popoverTitle: String, delegate: myDelegates) {
+    func showPopoverForPlayers(sender: UIButton, array: [Players], popoverTitle: String, delegate: myDelegates, managedContext: NSManagedObjectContext) {
         
         var rootViewController = UIApplication.shared.keyWindow?.rootViewController
         
@@ -47,7 +48,8 @@ class ShowPopover: NSObject {
         
         playerPopoverTableViewController.modalPresentationStyle = .popover
         playerPopoverTableViewController.preferredContentSize   = CGSize(width: 350, height: 250)
-        playerPopoverTableViewController.players     = array
+        playerPopoverTableViewController.players                = array
+        playerPopoverTableViewController.managedContext         = managedContext
         
         //Pass delegate
         playerPopoverTableViewController.myDelegates = delegate

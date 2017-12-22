@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1036" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1114" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Games" representedClassName=".Games" syncable="YES">
         <attribute name="arenaCity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="arenaName" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,6 +21,8 @@
         <attribute name="league" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="onBench" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="onIce" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shoots" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="team" optional="YES" attributeType="String" syncable="YES"/>
@@ -34,8 +36,8 @@
         <relationship name="playersRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Players" inverseName="playersShiftRelationship" inverseEntity="Players" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Games" positionX="-56" positionY="159" width="128" height="165"/>
-        <element name="Players" positionX="-56" positionY="-72" width="128" height="270"/>
-        <element name="Shifts" positionX="-353" positionY="51" width="128" height="103"/>
+        <element name="Games" positionX="-56" positionY="159" width="227" height="163"/>
+        <element name="Players" positionX="-135" positionY="-270" width="225" height="298"/>
+        <element name="Shifts" positionX="-441" positionY="51" width="279" height="103"/>
     </elements>
 </model>

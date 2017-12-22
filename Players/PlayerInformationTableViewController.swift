@@ -31,7 +31,7 @@ class PlayerInformationTableViewController: UITableViewController {
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayerInformationTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playerInformationTableViewCell")
-        tableView.rowHeight = 117
+        tableView.rowHeight = 90
         
         goFetchPlayers()
     }
@@ -49,6 +49,9 @@ class PlayerInformationTableViewController: UITableViewController {
                 showPopover.forNoPlayersAdded(view: self, sender: addBarButtonItem)
             }
         }
+        
+        //Update the tableview.
+        tableView.reloadData()
         
     }
     
@@ -222,9 +225,13 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
         case .update:
-            let cell = tableView?.cellForRow(at: indexPath!) as! PlayerInformationTableViewCell  //crash?
-            let results = fetchedResultsController.object(at: indexPath!)
-            configureCell(cell, withPlayer: results, indexPath: indexPath!)
+                    
+            tableView?.reloadData()
+            
+//            let cell = tableView?.cellForRow(at: indexPath!) as! PlayerInformationTableViewCell  //crash?
+//            let results = fetchedResultsController.object(at: indexPath!)
+//            configureCell(cell, withPlayer: results, indexPath: indexPath!)
+            
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
