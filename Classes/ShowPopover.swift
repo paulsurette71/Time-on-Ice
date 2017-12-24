@@ -48,7 +48,7 @@ class ShowPopover: NSObject {
         
         playerPopoverTableViewController.modalPresentationStyle = .popover
         playerPopoverTableViewController.preferredContentSize   = CGSize(width: 350, height: 250)
-        playerPopoverTableViewController.players                = array
+//        playerPopoverTableViewController.players                = array
         playerPopoverTableViewController.managedContext         = managedContext
         
         //Pass delegate

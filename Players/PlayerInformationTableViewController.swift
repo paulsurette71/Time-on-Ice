@@ -134,7 +134,7 @@ class PlayerInformationTableViewController: UITableViewController {
             }
         }
         
-        let playerInformation = createAttributedString.poundNumberFirstNameLastName(number: player.number!, firstName: player.firstName!, lastName: player.lastName!)
+        let playerInformation = createAttributedString.poundNumberFirstNameLastName(number: String(player.number), firstName: player.firstName!, lastName: player.lastName!)
         
         cell.playerInformationLabel.attributedText = playerInformation
         

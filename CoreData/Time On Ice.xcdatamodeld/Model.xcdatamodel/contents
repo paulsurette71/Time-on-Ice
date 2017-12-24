@@ -20,10 +20,11 @@
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="league" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="onBench" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="onIce" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="runningTimeOnIce" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="shoots" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="team" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,7 +38,7 @@
     </entity>
     <elements>
         <element name="Games" positionX="-56" positionY="159" width="227" height="163"/>
-        <element name="Players" positionX="-135" positionY="-270" width="225" height="298"/>
+        <element name="Players" positionX="-90" positionY="-270" width="225" height="313"/>
         <element name="Shifts" positionX="-441" positionY="51" width="279" height="103"/>
     </elements>
 </model>

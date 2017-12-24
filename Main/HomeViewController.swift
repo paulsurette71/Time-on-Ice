@@ -15,6 +15,38 @@ class HomeViewController: UIViewController {
     //timer
     var timer        = Timer()
     
+    lazy var fetchedResultsControllerOnBench: NSFetchedResultsController<Players> = {
+        
+        let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
+        let sort = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        let predicate               = NSPredicate(format: "%K = true", #keyPath(Players.onBench))
+        fetchRequest.predicate      = predicate
+        
+        let fetchedResultsControllerOnBench = NSFetchedResultsController( fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsControllerOnBench.delegate = self
+        
+        return fetchedResultsControllerOnBench
+    }()
+    
+    lazy var fetchedResultsControllerOnIce: NSFetchedResultsController<Players> = {
+        
+        let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
+        let sort = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        let predicate               = NSPredicate(format: "%K = true", #keyPath(Players.onIce))
+        fetchRequest.predicate      = predicate
+        
+        let fetchedResultsControllerOnIce = NSFetchedResultsController( fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsControllerOnIce.delegate = self
+        
+        return fetchedResultsControllerOnIce
+    }()
+    
     //UILabel
     @IBOutlet weak var playersOnBenchLabel: UILabel!
     @IBOutlet weak var playersOnIceLabel: UILabel!
@@ -32,12 +64,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playersButton: UIButton!
     @IBOutlet weak var clockButton: UIButton!
     
-    var trackTimeOnInce  = [[String:Int]]()
-    
-    var playersOnBench               = [Players]()
-    var playersOnIce                 = [Players]()
     var tappedButton                 = true
-    var selectedPlayerIndexPathArray = [IndexPath]()
     
     //classes
     let timeFormat             = TimeFormat()
@@ -82,17 +109,23 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-                                let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-                                let importPlayers            = ImportPlayers()
-                                let importGames              = ImportGames()
+        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        let importPlayers            = ImportPlayers()
+        let importGames              = ImportGames()
         
-                                if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+            
+            //Import Test data
+            importPlayers.importPlayers()
+            importGames.importGames()
+            
+        }
         
-                                    //Import Test data
-                                    importPlayers.importPlayers()
-                                    importGames.importGames()
+        //Go get the players on the bench
+        fetchPlayersOnBench()
         
-                                }
+        //Go get the players on the ice
+        fetchPlayersOnIce()
         
     }  //viewDidLoad
     
@@ -118,6 +151,26 @@ class HomeViewController: UIViewController {
         
     }  //didReceiveMemoryWarning
     
+    func fetchPlayersOnIce() {
+        
+        //Go get the players on the ice
+        do {
+            try fetchedResultsControllerOnIce.performFetch()
+        } catch let error as NSError {
+            print("\(self) -> \(#function) \(error), \(error.userInfo)")
+        }
+    }  //fetchPlayersOnIce
+    
+    func fetchPlayersOnBench() {
+        
+        do {
+            try fetchedResultsControllerOnBench.performFetch()
+        } catch let error as NSError {
+            print("\(self) -> \(#function) \(error), \(error.userInfo)")
+        }
+        
+    }  //fetchPlayersOnBench
+    
     func collectionViewLayout() {
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -130,13 +183,17 @@ class HomeViewController: UIViewController {
     
     func setupUI () {
         
-        if playersOnBench.count > 0 {
-            gameButton.isEnabled = false
-        } else {
-            gameButton.isEnabled = true
-        }
-        
-        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBench.count)
+        if let count = fetchedResultsControllerOnBench.fetchedObjects?.count  {
+            
+            if count > 0 {
+                gameButton.isEnabled = false
+            } else {
+                gameButton.isEnabled = true
+            }
+            
+            playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: count)
+            
+        }  //if let
         
     }  //setupUI
     
@@ -152,7 +209,8 @@ class HomeViewController: UIViewController {
         }
         
         showPopover.showPopoverForGames(sender: sender as! UIButton, array: gameList, popoverTitle: "Games", delegate: myDelegates!)
-    }
+        
+    }  //selectGame
     
     @IBAction func selectPlayers(_ sender: Any) {
         
@@ -164,14 +222,14 @@ class HomeViewController: UIViewController {
         }
         
         showPopover.showPopoverForPlayers(sender: sender as! UIButton, array: playerList, popoverTitle: "Players", delegate: myDelegates!, managedContext: managedContext )
-    }
+    }  //selectPlayers
     
     func SetupNotificationCenter()  {
         
         let positionNotificationCenter = NotificationCenter.default
-        positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"PlayersOnBench"),
-                                               object:nil, queue:nil,
-                                               using:notificationCenterData)
+        //        positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"PlayersOnBench"),
+        //                                               object:nil, queue:nil,
+        //                                               using:notificationCenterData)
         
         positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"GameNotification"),
                                                object:nil, queue:nil,
@@ -181,15 +239,8 @@ class HomeViewController: UIViewController {
     
     func notificationCenterData(notification:Notification) -> Void  {
         
-        playersOnBench = appDelegate.toPlay!
-        
         //Update UI
         setupUI()
-        
-        //reload data into CollectionView
-        collectionView.reloadData()
-        
-       goFetch.playersOnBench(managedContext: managedContext)
         
     }  //notificationCenterData
     
@@ -259,13 +310,11 @@ class HomeViewController: UIViewController {
     
     @objc func updateCounters() {
         
-        for row in trackTimeOnInce.indices {
+        for players in fetchedResultsControllerOnIce.fetchedObjects! {
             
-            trackTimeOnInce[row]["timeOnIce"]! += 1
+            players.runningTimeOnIce += 1
+            
         }
-        
-        //Update tableview
-        tableView.reloadData()
         
     }  //updateCounters
     
@@ -275,14 +324,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
-        return 1
+        guard let sections = fetchedResultsControllerOnBench.sections else {
+            
+            return 0
+            
+        }
+        
+        return sections.count
         
     }  //numberOfSections
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return playersOnBench.count
+        guard let sectionInfo = fetchedResultsControllerOnBench.sections?[section] else {
+            
+            return 0
+            
+        }
+        
+        return sectionInfo.numberOfObjects
         
     }  //numberOfItemsInSection
     
@@ -290,25 +351,25 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "benchCell", for: indexPath) as! BenchCollectionViewCell
         
-        cell.playerNumberLabel.text   = playersOnBench[indexPath.row].number
-        cell.playerLastNameLabel.text = playersOnBench[indexPath.row].lastName
+        let player = fetchedResultsControllerOnBench.object(at: indexPath)
         
+        cell.playerNumberLabel.text   = String(player.number)
+        cell.playerLastNameLabel.text = player.lastName
         
-        let results = goFetch.timeOnIceWithShifts(player: playersOnBench[indexPath.row], managedContext: managedContext)
+        let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
         
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
         
         cell.totalTimeOnIceLabel.text = totalTimeOnIce
         
-        if selectedPlayerIndexPathArray.contains(indexPath) {
+        if player.onIce {
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
             
         } else {
             
             cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-            
-        }  //if
+        }
         
         return cell
         
@@ -324,70 +385,69 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func configCollectionViewCell(cell: BenchCollectionViewCell, indexPath: IndexPath) {
         
-        if cell.cellBackgroundImageView.image == UIImage(named: "collectionviewcell_60x60_white") {
-            
-            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
-            
-            //Keep track of which players are on the ice
-            playersOnIce.append(playersOnBench[indexPath.row])
-            
-            //Keep track of which players have a blue cell
-            selectedPlayerIndexPathArray.append(indexPath)
-            
-            let currentPlayerSelected = ["indexPath": indexPath.row, "timeOnIce": 0]
-            
-            trackTimeOnInce.append(currentPlayerSelected)
-            
-        } else {
-            
-            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-            
-            //Save to CoreData since the shift is over
-            let selectedPlayerArray = trackTimeOnInce.filter { $0["indexPath"] == indexPath.row }
-            
-            if selectedPlayerArray.count > 0 {
-                
-                let timeOnIce = selectedPlayerArray.first!["timeOnIce"]  //crash
-                let row = selectedPlayerArray.first!["indexPath"]
-                let currentPlayer = playersOnBench[row!]
-                
-                //Only save a shift if it's greater that 1s.
-                if timeOnIce! > 0 {
-                    
-                    saveShift(player: currentPlayer, timeOnIce: timeOnIce!)
-                }
-                
-                //Remove player from ice
-                playersOnIce = playersOnIce.filter { $0 != playersOnBench[indexPath.row] }
-                
-                //Remove cell from being selected
-                selectedPlayerIndexPathArray = selectedPlayerIndexPathArray.filter {$0 != indexPath }
-                
-                //Reomve players time on ice tracking.
-                trackTimeOnInce = trackTimeOnInce.filter { $0["indexPath"] != indexPath.row }
-                
-            }  //selectedPlayerArray.count
-            
-        }
+        let player = fetchedResultsControllerOnBench.object(at: indexPath)
         
-        if playersOnIce.count > 0 {
-            clockButton.isEnabled = true
-        } else {
-            clockButton.isEnabled = false
-            stopTimer()
-        }
+        if player.onIce == false {
+            
+            saveOnIceStatus(player: player, managedContext: managedContext, onIce: true)
+            
+            player.runningTimeOnIce = 0
+            
+        } else if player.onIce == true {
+            
+            //Only save a shift if it's greater that 1s.
+            if player.runningTimeOnIce > 0 {
+                
+                saveShift(player: player, timeOnIce: Int(player.runningTimeOnIce))
+                
+            }  //if timeOnIce!
+            
+            saveOnIceStatus(player: player, managedContext: managedContext, onIce: false)
+            
+        }  //else
         
-        playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: playersOnIce.count)
-        
-        //Update players on bench
-        let playersOnBenchCount = playersOnBench.count - playersOnIce.count
-        playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBenchCount)
-        
-        //update the cells
-        tableView.reloadData()
-        collectionView.reloadData()
-        
+        if let countPlayersOnIce = fetchedResultsControllerOnIce.fetchedObjects?.count {
+            
+            if countPlayersOnIce > 0 {
+                
+                clockButton.isEnabled = true
+                
+            } else {
+                
+                clockButton.isEnabled = false
+                stopTimer()
+            }
+            
+            playersOnIceLabel.attributedText = createAttributedString.forPlayersOnIce(numberOfPlayers: countPlayersOnIce)
+            
+            if let countPlayersOnBench = fetchedResultsControllerOnBench.fetchedObjects?.count {
+                
+                let playersOnBenchCount = countPlayersOnBench - countPlayersOnIce
+                
+                playersOnBenchLabel.attributedText = createAttributedString.forPlayersOnBench(numberOfPlayers: playersOnBenchCount)
+                
+            }  // if let countPlayersOnBench
+            
+        }  // if let countPlayersOnIce
+    
     }  //configCollectionViewCell
+    
+    func saveOnIceStatus(player:Players, managedContext: NSManagedObjectContext, onIce: Bool) {
+        
+        do {
+            
+            player.onIce = onIce
+            
+            //Save
+            try player.managedObjectContext?.save()
+            
+        } catch let error as NSError {
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
+            
+        }  //do
+        
+    }  //saveOnBenchStatus
+    
     
     func saveShift(player:Players, timeOnIce: Int) {
         
@@ -421,14 +481,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        guard let sections = fetchedResultsControllerOnIce.sections else {
+            return 0
+            
+        }
+        
+        return sections.count
         
     }  //numberOfSections
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //return tappedArray.count
-        return playersOnIce.count
+        guard let sectionInfo = fetchedResultsControllerOnIce.sections?[section] else {
+            return 0
+            
+        }
+        
+        return sectionInfo.numberOfObjects
         
     }  //numberOfRowsInSection
     
@@ -436,11 +505,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playersOnIceTableViewCell", for: indexPath) as! PlayersOnIceTableViewCell
         
-        let player = playersOnIce[indexPath.row]
+        let player = fetchedResultsControllerOnIce.object(at: indexPath)
         
-        cell.playerNameLabel.attributedText   = createAttributedString.poundNumberFirstNameLastName(number: player.number!, firstName: player.firstName!, lastName: player.lastName!)
+        cell.playerNameLabel.attributedText   = createAttributedString.poundNumberFirstNameLastName(number: String(player.number), firstName: player.firstName!, lastName: player.lastName!)
         
-        let timeOnIce = timeFormat.mmSS(totalSeconds: trackTimeOnInce[indexPath.row]["timeOnIce"]!)  //crash
+        let timeOnIce = timeFormat.mmSS(totalSeconds: Int(player.runningTimeOnIce))
         cell.playerTimerLabel.text = timeOnIce
         
         let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
@@ -472,9 +541,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             returnValue = ""
         }
         
-        
         return returnValue
-        
     }
     
 }  //extension
@@ -485,4 +552,23 @@ extension HomeViewController: UIPopoverPresentationControllerDelegate {
         
         return .none
     }
+    
 } //extension
+
+extension HomeViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        if controller == fetchedResultsControllerOnIce {
+            
+            tableView.reloadData()
+            
+        } else if controller == fetchedResultsControllerOnBench {
+            
+            collectionView.reloadData()
+            
+        }
+        
+    }  //controllerDidChangeContent
+    
+}  //extension HomeViewController: NSFetchedResultsControllerDelegate

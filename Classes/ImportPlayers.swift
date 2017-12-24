@@ -26,7 +26,7 @@ class ImportPlayers {
             
             player.firstName = "Sidney"
             player.lastName  = "Crosby"
-            player.number    = "87"
+            player.number    =  87
             player.position  = "Centre"
             player.shoots    = "Left"
             player.city      = "Pittsburgh"
@@ -62,7 +62,7 @@ class ImportPlayers {
             
             player.firstName = "Alex"
             player.lastName  = "Ovechkin"
-            player.number    = "8"
+            player.number    = 8
             player.position  = "Left Wing"
             player.shoots    = "Right"
             player.city      = "Washington"
@@ -98,7 +98,7 @@ class ImportPlayers {
             
             player.firstName = "Patrick"
             player.lastName  = "Kane"
-            player.number    = "88"
+            player.number    = 88
             player.position  = "Right Wing"
             player.shoots    = "Left"
             player.city      = "Chicago"
@@ -134,7 +134,7 @@ class ImportPlayers {
             
             player.firstName = "Steven"
             player.lastName  = "Stamkos"
-            player.number    = "91"
+            player.number    = 91
             player.position  = "Centre"
             player.shoots    = "Right"
             player.city      = "Tampa Bay"
@@ -170,7 +170,7 @@ class ImportPlayers {
             
             player.firstName = "Jamie"
             player.lastName  = "Benn"
-            player.number    = "14"
+            player.number    = 14
             player.position  = "Left Wing"
             player.shoots    = "Left"
             player.city      = "Dallas"
@@ -206,7 +206,7 @@ class ImportPlayers {
             
             player.firstName = "John"
             player.lastName  = "Tavares"
-            player.number    = "91"
+            player.number    = 91
             player.position  = "Centre"
             player.shoots    = "Left"
             player.city      = "New York"
@@ -242,7 +242,7 @@ class ImportPlayers {
             
             player.firstName = "P.K."
             player.lastName  = "Subban"
-            player.number    = "76"
+            player.number    = 76
             player.position  = "Defense"
             player.shoots    = "Right"
             player.city      = "Nashville"
@@ -278,7 +278,7 @@ class ImportPlayers {
             
             player.firstName = "Jaromir"
             player.lastName  = "Jagr"
-            player.number    = "68"
+            player.number    = 68
             player.position  = "Right Wing"
             player.shoots    = "Left"
             player.city      = "Calgary"
@@ -314,7 +314,7 @@ class ImportPlayers {
             
             player.firstName = "Evgeni"
             player.lastName  = "Malkin"
-            player.number    = "71"
+            player.number    = 71
             player.position  = "Centre"
             player.shoots    = "Left"
             player.city      = "Pittsburgh"
@@ -350,7 +350,7 @@ class ImportPlayers {
             
             player.firstName = "Connor"
             player.lastName  = "McDavid"
-            player.number    = "97"
+            player.number    = 97
             player.position  = "Centre"
             player.shoots    = "Left"
             player.city      = "Edmonton"
@@ -386,7 +386,7 @@ class ImportPlayers {
             
             player.firstName = "Vladimir"
             player.lastName  = "Tarasenko"
-            player.number    = "91"
+            player.number    = 91
             player.position  = "Centre"
             player.shoots    = "Left"
             player.city      = "St. Louis"
@@ -422,7 +422,7 @@ class ImportPlayers {
             
             player.firstName = "Lucas"
             player.lastName  = "Surette"
-            player.number    = "47"
+            player.number    = 47
             player.position  = "Left Wing"
             player.shoots    = "Left"
             player.city      = "Guelph"

@@ -11,12 +11,29 @@ import CoreData
 
 class PlayerPopoverTableViewController: UITableViewController {
     
-    var players              = [Players]()
-    var playersToPlayInGame  = [Players]()
-    var checkMark            = [IndexPath]()
+    //    var players              = [Players]()
+    //    var playersToPlayInGame  = [Players]()
+    //    var checkMark            = [IndexPath]()
     
     //CoreData
     var managedContext: NSManagedObjectContext!
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<Players> = {
+        
+        let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
+        let sort = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        //        let predicate               = NSPredicate(format: "%K = true", #keyPath(Players.onBench))
+        //        fetchRequest.predicate      = predicate
+        
+        let fetchedResultsController = NSFetchedResultsController( fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+    
     
     //Delegates
     var myDelegates: myDelegates?
@@ -32,19 +49,25 @@ class PlayerPopoverTableViewController: UITableViewController {
         tableView.register(cellNib, forCellReuseIdentifier: "playerPopoverTableViewCell")
         tableView.rowHeight = 75
         
-        if appDelegate.checkmarkIndexPath != nil {
-            
-            if let checkArray = appDelegate.checkmarkIndexPath {
-                checkMark = checkArray
-                
-            }
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("\(self) -> \(#function) \(error), \(error.userInfo)")
         }
         
-        if let playersOnBenchDelegate = appDelegate.toPlay {
-            
-            playersToPlayInGame = playersOnBenchDelegate
-            
-        }
+        //        if appDelegate.checkmarkIndexPath != nil {
+        //
+        //            if let checkArray = appDelegate.checkmarkIndexPath {
+        //                checkMark = checkArray
+        //
+        //            }
+        //        }
+        //
+        //        if let playersOnBenchDelegate = appDelegate.toPlay {
+        //
+        //            playersToPlayInGame = playersOnBenchDelegate
+        //
+        //        }
         
     }  //viewDidLoad
     
@@ -52,12 +75,27 @@ class PlayerPopoverTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        
+        guard let sections = fetchedResultsController.sections else {
+            return 0
+            
+        }
+        
+        return sections.count
+        
+        //        return 1
     }  //numberOfSections
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return players.count
+        guard let sectionInfo = fetchedResultsController.sections?[section] else {
+            return 0
+            
+        }
+        
+        return sectionInfo.numberOfObjects
+        
+        //        return players.count
         
     }  //numberOfRowsInSection
     
@@ -66,21 +104,35 @@ class PlayerPopoverTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playerPopoverTableViewCell", for: indexPath) as! PlayerPopoverTableViewCell
         
-        cell.playerNumberLabel.text      = players[indexPath.row].number
-        cell.playerInformationLabel.text = players[indexPath.row].firstName! + " " + players[indexPath.row].lastName!
-        cell.playerTeamLabel.text        = players[indexPath.row].city! + " " + players[indexPath.row].team!
+        let player = fetchedResultsController.object(at: indexPath)
         
-        if checkMark.count > 0 {
+        cell.playerNumberLabel.text      = String(player.number)
+        cell.playerInformationLabel.text = player.firstName! + " " + player.lastName!
+        cell.playerTeamLabel.text        = player.city! + " " + player.team!
+        
+        //        cell.playerNumberLabel.text      = players[indexPath.row].number
+        //        cell.playerInformationLabel.text = players[indexPath.row].firstName! + " " + players[indexPath.row].lastName!
+        //        cell.playerTeamLabel.text        = players[indexPath.row].city! + " " + players[indexPath.row].team!
+        
+        //        if checkMark.count > 0 {
+        //
+        //            if checkMark.contains(indexPath) {
+        //
+        //                cell.checkMarkImageView.isHidden = false
+        //
+        //            } else {
+        //
+        //                cell.checkMarkImageView.isHidden = true
+        //
+        //            }
+        //        }
+        
+        if player.onBench {
             
-            if checkMark.contains(indexPath) {
-                
-                cell.checkMarkImageView.isHidden = false
-                
-            } else {
-                
-                cell.checkMarkImageView.isHidden = true
-                
-            }
+            cell.checkMarkImageView.isHidden = false
+            
+        } else {
+            cell.checkMarkImageView.isHidden = true
         }
         
         return cell
@@ -105,9 +157,15 @@ class PlayerPopoverTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        let playersCount = String(players.count)
+        guard let numberOfPlayers = fetchedResultsController.sections?[section] else {
+            return ""
+            
+        }
         
-        return playersCount + " Players"
+        //return sectionInfo.numberOfObjects
+        let playersCount = numberOfPlayers.numberOfObjects
+        
+        return String(playersCount) + " Players"
         
     }  //titleForHeaderInSection
     
@@ -115,35 +173,42 @@ class PlayerPopoverTableViewController: UITableViewController {
         
         let cell = tableView.cellForRow(at: indexPath) as! PlayerPopoverTableViewCell
         
-        let selectedPlayerToGoOnBench = players[indexPath.row]
+        //        let selectedPlayerToGoOnBench = players[indexPath.row]
+        
+        let player = fetchedResultsController.object(at: indexPath)
         
         if cell.checkMarkImageView.isHidden {
             
             cell.checkMarkImageView.isHidden = false
             
-            checkMark.append(indexPath)
+            //            checkMark.append(indexPath)
+            //
+            //            playersToPlayInGame.append(selectedPlayerToGoOnBench)
             
-            playersToPlayInGame.append(selectedPlayerToGoOnBench)
-            
-           saveOnBenchStatus(player: selectedPlayerToGoOnBench, managedContext: managedContext, onBench: true)
+            saveOnBenchStatus(player: player, managedContext: managedContext, onBench: true)
             
         } else {
             
             cell.checkMarkImageView.isHidden = true
             
-            checkMark = checkMark.filter { $0 != indexPath }
+            //            checkMark = checkMark.filter { $0 != indexPath }
+            //
+            //            playersToPlayInGame = playersToPlayInGame.filter {$0 != selectedPlayerToGoOnBench}
+            //
             
-            playersToPlayInGame = playersToPlayInGame.filter {$0 != selectedPlayerToGoOnBench}
+            //Remove player from bench
+            saveOnBenchStatus(player: player, managedContext: managedContext, onBench: false)
             
-            saveOnBenchStatus(player: selectedPlayerToGoOnBench, managedContext: managedContext, onBench: false)
+            //Remove player from Ice.
+            saveOnIceStatus(player: player, managedContext: managedContext, onIce: false)
             
         }
         
-        //Store Array in Delegate
-        myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkMark)
-        
-        //Store players in delegate
-        myDelegates?.playersToPlay(players: playersToPlayInGame)
+        //        //Store Array in Delegate
+        //        myDelegates?.storeCheckmarkIndexPathArray(indexPath: checkMark)
+        //
+        //        //Store players in delegate
+        //        myDelegates?.playersToPlay(players: playersToPlayInGame)
         
         //NotificationCenter
         let notificationCenter = NotificationCenter.default
@@ -153,13 +218,12 @@ class PlayerPopoverTableViewController: UITableViewController {
         
     }  //didSelectRowAt
     
+    
+    //Move to own class
     func saveOnBenchStatus(player:Players, managedContext: NSManagedObjectContext, onBench: Bool) {
         
         do {
             
-            
-            print(player, onBench)
-
             player.onBench = onBench
             
             //Save
@@ -171,5 +235,31 @@ class PlayerPopoverTableViewController: UITableViewController {
         }  //do
         
     }  //saveOnBenchStatus
+    
+    //Move to own class
+    func saveOnIceStatus(player:Players, managedContext: NSManagedObjectContext, onIce: Bool) {
+        
+        do {
+            
+            player.onIce = onIce
+            
+            //Save
+            try player.managedObjectContext?.save()
+            
+        } catch let error as NSError {
+            print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")
+            
+        }  //do
+        
+    }  //saveOnIceStatus
+    
+}
+
+extension PlayerPopoverTableViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        tableView.reloadData()
+    }
     
 }

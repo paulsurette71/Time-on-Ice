@@ -178,7 +178,7 @@ class PlayerDetailsTableViewController: UITableViewController {
             
             player.firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             player.lastName  = lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            player.number    = numberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            player.number    = Int16((numberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines))!)!
             player.position  = positionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             player.shoots    = shootsTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             player.city      = cityTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -209,7 +209,7 @@ class PlayerDetailsTableViewController: UITableViewController {
             
             selectedPlayer?.firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             selectedPlayer?.lastName  = lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            selectedPlayer?.number    = numberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            selectedPlayer?.number    = Int16((numberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines))!)!
             selectedPlayer?.position  = positionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             selectedPlayer?.shoots    = shootsTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             selectedPlayer?.city      = cityTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -267,7 +267,7 @@ class PlayerDetailsTableViewController: UITableViewController {
                 label.text = player.lastName
             }
             if let label = self.numberTextField {
-                label.text = player.number
+                label.text = String(player.number)
             }
             if let label = self.cityTextField {
                 label.text = player.city

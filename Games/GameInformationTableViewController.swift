@@ -11,9 +11,7 @@ import CoreData
 
 class GameInformationTableViewController: UITableViewController {
     
-    
     @IBOutlet weak var addBarButtonItem: UIBarButtonItem!
-    
     
     //coredata
     var managedContext: NSManagedObjectContext!
@@ -105,6 +103,32 @@ class GameInformationTableViewController: UITableViewController {
         
         return cell
     }
+    
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        return true
+    }
+    
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let playerToDelete = fetchedResultsController.object(at:indexPath)
+            managedContext.delete(playerToDelete)
+            
+            do {
+                try managedContext.save()
+                
+            } catch let error as NSError {
+                print("\(self) -> \(#function): Saving error: \(error), description: \(error.userInfo)")
+            }  //do
+            
+        }  //if
+        
+    }  //editingStyle
+
     
     func configureCell(_ cell: GameInformationTableViewCell, withGame game: Games, indexPath: IndexPath) {
         
