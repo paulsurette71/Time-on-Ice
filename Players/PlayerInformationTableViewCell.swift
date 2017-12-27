@@ -14,6 +14,7 @@ class PlayerInformationTableViewCell: UITableViewCell {
     @IBOutlet weak var playerInformationLabel: UILabel!
     @IBOutlet weak var totalTimeOnIceLabel: UILabel!
     @IBOutlet weak var totalShiftsLabel: UILabel!
+    @IBOutlet weak var onIceImageView: UIImageView!
     
     //UIButton
     @IBOutlet weak var chevronButton: UIButton!

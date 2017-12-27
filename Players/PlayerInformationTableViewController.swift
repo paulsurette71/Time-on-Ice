@@ -114,8 +114,14 @@ class PlayerInformationTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playerInformationTableViewCell", for: indexPath) as! PlayerInformationTableViewCell
         
-        let results = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withPlayer: results, indexPath: indexPath)
+        let player = fetchedResultsController.object(at: indexPath)
+        configureCell(cell, withPlayer: player, indexPath: indexPath)
+        
+        if player.onIce {
+            cell.onIceImageView.isHidden = false
+        } else {
+            cell.onIceImageView.isHidden = true
+        }
         
         return cell
     }
@@ -175,7 +181,15 @@ class PlayerInformationTableViewController: UITableViewController {
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-        return true
+        let players = goFetch.playersOnIce(managedContext: managedContext)
+        
+        //Don't let the players be deleted if they are on the ice.
+        if players.contains(fetchedResultsController.object(at: indexPath)) {
+            return false
+        } else {
+            return true
+        }
+    
     }
     
     // Override to support editing the table view.
@@ -220,13 +234,14 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
-        case .insert:
+       case .insert:
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
-        case .update:
-                    
-            tableView?.reloadData()
+        case .update: 
+            print("Update")
+            
+//            tableView?.reloadData()
             
 //            let cell = tableView?.cellForRow(at: indexPath!) as! PlayerInformationTableViewCell  //crash?
 //            let results = fetchedResultsController.object(at: indexPath!)
@@ -235,6 +250,7 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
+
         }
     }
     

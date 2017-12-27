@@ -134,10 +134,10 @@ class GamePopoverTableViewController: UITableViewController {
             
         } else {
             
-            guard appDelegate.toPlay?.count == 0 || appDelegate.toPlay == nil else {
-                //This is to make sure you can't unselect the game if there are players on the bench.
-                return
-            }
+//            guard appDelegate.toPlay?.count == 0 || appDelegate.toPlay == nil else {
+//                //This is to make sure you can't unselect the game if there are players on the bench.
+//                return
+//            }
             
             cell.gameCheckmarkImageView.isHidden = true
             

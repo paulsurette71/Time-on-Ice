@@ -16,6 +16,7 @@ class GameInformationTableViewCell: UITableViewCell {
     @IBOutlet weak var visitingTeamLabel: UILabel!
     
     //UIImageView
-    @IBOutlet weak var checkmarkImageView: UIImageView!
+//    @IBOutlet weak var checkmarkImageView: UIImageView!
+    @IBOutlet weak var gameImageView: UIImageView!
     
 }

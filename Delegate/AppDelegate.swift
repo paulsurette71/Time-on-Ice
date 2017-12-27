@@ -20,17 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     let colourPalette = ColourPalette()
     
     //Delegates
-    var checkmarkIndexPath: [IndexPath]?
+//    var checkmarkIndexPath: [IndexPath]?
     var game: Games?
     var gameIndexPath: IndexPath?
-    var toPlay:  [Players]?
-    
-    //    var selectedPlayers: [Players]?
-    //    var playersOnBench: [Players]?
-    //    var playersOnIceIndexPathArray: [IndexPath]?
-    //    var onBench: [Players]?
-    //    var onIce:   [Players]?
-    
+//    var toPlay:  [Players]?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -61,6 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
         
         gameInformationTableViewController.managedContext = coreDataStack.managedContext
         
+        //Stats Tab
+        let statsNavigationController = tabBarController.viewControllers?[3] as! UINavigationController
+        let statsInformationViewController = statsNavigationController.viewControllers[0] as! StatsInformationViewController
+        
+        statsInformationViewController.managedContext = coreDataStack.managedContext
+
+        
         return true
     }
     
@@ -88,11 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     
     //Delegates
     
-    func storeCheckmarkIndexPathArray(indexPath: [IndexPath]) {
-        
-        self.checkmarkIndexPath = indexPath
-    }
-    
     func storeGame(game: Games?) {
         
         self.game = game
@@ -101,11 +96,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     func storeGameCheckmarkIndexPathArray(indexPath: IndexPath?) {
         
         self.gameIndexPath = indexPath
-    }
-    
-    func playersToPlay(players: [Players]) {
-        
-        self.toPlay = players
     }
     
 }

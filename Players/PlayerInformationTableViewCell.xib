@@ -20,19 +20,27 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="H1D-Ip-ITF">
-                        <rect key="frame" x="10" y="29.5" width="310" height="75"/>
+                        <rect key="frame" x="10" y="27.5" width="310" height="79"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#87 Sidney Crosby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nHY-aY-Iqo">
-                                <rect key="frame" x="0.0" y="0.0" width="186.5" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="b7K-mb-fAX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Jew-VU-rT3">
+                                <rect key="frame" x="0.0" y="0.0" width="247.5" height="29"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#87 Sidney Crosby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nHY-aY-Iqo">
+                                        <rect key="frame" x="0.0" y="0.0" width="186.5" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="b7K-mb-fAX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="On Ice" translatesAutoresizingMaskIntoConstraints="NO" id="HYQ-US-dxn">
+                                        <rect key="frame" x="191.5" y="0.0" width="56" height="29"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nyj-rh-Cy3">
-                                <rect key="frame" x="0.0" y="25" width="310" height="50"/>
+                                <rect key="frame" x="0.0" y="29" width="310" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hHo-30-u9J">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
@@ -101,6 +109,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="onIceImageView" destination="HYQ-US-dxn" id="Em0-FT-dNw"/>
                 <outlet property="playerInformationLabel" destination="nHY-aY-Iqo" id="d73-BL-wOD"/>
                 <outlet property="totalShiftsLabel" destination="TOT-dC-O0T" id="llj-BM-TII"/>
                 <outlet property="totalTimeOnIceLabel" destination="Ey7-v1-mfg" id="LbH-2z-hea"/>
@@ -109,6 +118,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="On Ice" width="56" height="29"/>
         <image name="chevron" width="45" height="63"/>
     </resources>
 </document>

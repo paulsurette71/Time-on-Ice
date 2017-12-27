@@ -22,6 +22,9 @@ class GameInformationTableViewController: UITableViewController {
     var convertDate = ConvertDate()
     var showPopover = ShowPopover()
     
+    //App Delegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,7 +51,10 @@ class GameInformationTableViewController: UITableViewController {
             }
         }
         
-    }
+        //Make sure the tableView is updated.
+        tableView.reloadData()
+        
+    }  //viewWillAppear
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -83,7 +89,7 @@ class GameInformationTableViewController: UITableViewController {
             return sections.count
         }
         return 0
-    }
+    }  //numberOfSections
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -93,22 +99,49 @@ class GameInformationTableViewController: UITableViewController {
         }
         
         return sectionInfo.numberOfObjects
-    }
+    }  //numberOfRowsInSection
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameInformationTableViewCell", for: indexPath) as! GameInformationTableViewCell
         
-        let results = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withGame: results, indexPath: indexPath)
+        let game = fetchedResultsController.object(at: indexPath)
+        configureCell(cell, withGame: game, indexPath: indexPath)
         
         return cell
-    }
+        
+    }  //cellForRowAt
+    
+    func configureCell(_ cell: GameInformationTableViewCell, withGame game: Games, indexPath: IndexPath) {
+        
+        let currentDate = convertDate.convertDate(date: (game.date)!)
+        
+        cell.dateLabel.text = currentDate
+        cell.homeTeamLabel.text = game.homeTeamCity! + " " + game.homeTeamName!
+        cell.visitingTeamLabel.text = game.visitorTeamCity! + " " + game.visitorTeamName! + " vs."
+        
+        //Show the game image if the game is selected.
+        if  game == appDelegate.game {
+            cell.gameImageView.isHidden = false
+        } else {
+            cell.gameImageView.isHidden = true
+        }
+        
+    }  //configureCell
+
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-        return true
-    }
+        let games = fetchedResultsController.object(at: indexPath)
+        
+        //Make sure you can't delete a game that's been selected.
+        if games == appDelegate.game {
+            return false
+        } else {
+            return true
+        }
+        
+    }  //canEditRowAt
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -128,26 +161,13 @@ class GameInformationTableViewController: UITableViewController {
         }  //if
         
     }  //editingStyle
-
-    
-    func configureCell(_ cell: GameInformationTableViewCell, withGame game: Games, indexPath: IndexPath) {
-        
-        let currentDate = convertDate.convertDate(date: (game.date)!)
-        
-        cell.dateLabel.text = currentDate
-        cell.homeTeamLabel.text = game.homeTeamCity! + " " + game.homeTeamName!
-        cell.visitingTeamLabel.text = game.visitorTeamCity! + " " + game.visitorTeamName! + " vs."
-        
-    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
         updateGame(indexPath: indexPath)
-    }
+    }  //didSelectRowAt
     
     func updateGame(indexPath: IndexPath)  {
-        
         
         let game = self.fetchedResultsController.object(at: indexPath as IndexPath)
         
@@ -193,13 +213,7 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
         case .update:
-            
             tableView?.reloadData()
-            
-            //            let cell = tableView.cellForRow(at: indexPath!) as! GameInformationTableViewCell
-            //            let results = fetchedResultsController.object(at: indexPath!)
-            //            configureCell(cell, withGame: results, indexPath: indexPath!)
-            
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)

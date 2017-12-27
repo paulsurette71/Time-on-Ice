@@ -160,9 +160,9 @@ class GoFetch {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
         let predicate               = NSPredicate(format: "playersRelationship = %@", player)
         fetchRequest.predicate      = predicate
-
+        
         let nsExpressionForKeyPath  = NSExpression(forKeyPath: "timeOnIce")
-
+        
         let nsExpressionForFunction = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPath])
         let nsExpressionDescriptionCount = NSExpressionDescription()
         nsExpressionDescriptionCount.expression = nsExpressionForFunction
@@ -185,7 +185,7 @@ class GoFetch {
             guard fetchArray.count != 0 else {
                 return resultsDictionary
             }
-
+            
             resultsDictionary = fetchArray.first!  //crash
             
         } catch let error as NSError {
@@ -218,31 +218,160 @@ class GoFetch {
         return fetchGamesArray
         
     }  //games
+    
+    func fetchPlayersOnIceOrBench(managedContext: NSManagedObjectContext, fetchedResultsController: NSFetchedResultsController<Players>) {
+        
+        
+        //Go get the players on the ice
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("\(self) -> \(#function) \(error), \(error.userInfo)")
+        }
+    }  //fetchPlayersOnIce
+    
+    func playersOnIce(managedContext: NSManagedObjectContext) -> [Players] {
+        
+        var playerOnIce = [Players]()
+        
+        let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
+        let sort = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        let predicate               = NSPredicate(format: "%K = true", #keyPath(Players.onIce))
+        fetchRequest.predicate      = predicate
+        
+        do {
+            
+            playerOnIce = try managedContext.fetch(fetchRequest)
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return playerOnIce
+        
+    }  //playersOnIce
+    
+    
+    //Stats Queries
+    
+    func statsShifts(managedContext: NSManagedObjectContext) -> [Any] {
+        
+        var returnResults = [Any]()
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
+        
+        let sort = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        fetchRequest.fetchBatchSize = 8
+        
+        let predicate               = NSPredicate(format: "ANY %K != nil", #keyPath(Players.playersShiftRelationship))
+        fetchRequest.predicate      = predicate
+        
+        do {
+            
+            returnResults = try managedContext.fetch(fetchRequest) 
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return returnResults
+        
+    }  //statsShifts
+    
+    func statsGamesPerPlayer(player: Players, managedContext: NSManagedObjectContext) -> Int {
+        
+        var numberOfGames = 0
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
+        let predicate               = NSPredicate(format: "playersRelationship = %@", player)
+        fetchRequest.predicate      = predicate
+        
+        fetchRequest.fetchBatchSize = 8
+        fetchRequest.propertiesToGroupBy = [#keyPath(Shifts.gameRelationship)]
+        fetchRequest.propertiesToFetch   = [#keyPath(Shifts.gameRelationship)]
+        fetchRequest.resultType          = .dictionaryResultType
+        
+        do {
+            
+            let fetchGamesPerPlayer = try managedContext.fetch(fetchRequest)
+            
+            guard fetchGamesPerPlayer.count > 0 else {
+                
+                return 0
+            }
+            numberOfGames = fetchGamesPerPlayer.count
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return numberOfGames
+    }  //statsGamesPerPlayer
+    
+    func statsPerPlayer(player: Players, managedContext: NSManagedObjectContext)  -> [[String:Int]] {
+        
+        var fetchArray = [[String:Int]]()
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
+        let predicate               = NSPredicate(format: "playersRelationship = %@", player)
+        fetchRequest.predicate      = predicate
+        
+        let nsExpressionForKeyPath  = NSExpression(forKeyPath: "timeOnIce")
+        
+        let nsExpressionForFunctionMin = NSExpression(forFunction: "min:", arguments: [nsExpressionForKeyPath])
+        let nsExpressionDescriptionMin = NSExpressionDescription()
+        nsExpressionDescriptionMin.expression = nsExpressionForFunctionMin
+        nsExpressionDescriptionMin.name = "minShift"
+        nsExpressionDescriptionMin.expressionResultType = .integer16AttributeType
+        
+        let nsExpressionForFunctionMax = NSExpression(forFunction: "max:", arguments: [nsExpressionForKeyPath])
+        let nsExpressionDescriptionMax = NSExpressionDescription()
+        nsExpressionDescriptionMax.expression = nsExpressionForFunctionMax
+        nsExpressionDescriptionMax.name = "maxShift"
+        nsExpressionDescriptionMax.expressionResultType = .integer16AttributeType
 
-//    func playersOnBench(managedContext: NSManagedObjectContext)  {
-//
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
-//
-//        let predicate               = NSPredicate(format: "%K = true", #keyPath(Players.onBench))
-//        fetchRequest.predicate      = predicate
-//
-//        let sort = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
-//        fetchRequest.sortDescriptors = [sort]
-//        fetchRequest.fetchBatchSize = 8
-//
-//        do {
-//
-//            let fetchGamesArray = try managedContext.fetch(fetchRequest)
-//            print(fetchGamesArray)
-//
-//        } catch let error as NSError {
-//
-//            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
-//        }
-//    
-//       
-//    }
+        let nsExpressionForFunctionSum = NSExpression(forFunction: "sum:", arguments: [nsExpressionForKeyPath])
+        let nsExpressionDescriptionSum = NSExpressionDescription()
+        nsExpressionDescriptionSum.expression = nsExpressionForFunctionSum
+        nsExpressionDescriptionSum.name = "sumShift"
+        nsExpressionDescriptionSum.expressionResultType = .integer16AttributeType
 
+        let nsExpressionForFunctionAvg = NSExpression(forFunction: "average:", arguments: [nsExpressionForKeyPath])
+        let nsExpressionDescriptionAvg = NSExpressionDescription()
+        nsExpressionDescriptionAvg.expression = nsExpressionForFunctionAvg
+        nsExpressionDescriptionAvg.name = "avgShift"
+        nsExpressionDescriptionAvg.expressionResultType = .integer16AttributeType
+        
+        let nsExpressionForFunctionCount = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPath])
+        let nsExpressionDescriptionCount = NSExpressionDescription()
+        nsExpressionDescriptionCount.expression = nsExpressionForFunctionCount
+        nsExpressionDescriptionCount.name = "countShift"
+        nsExpressionDescriptionCount.expressionResultType = .integer16AttributeType
+
+        fetchRequest.propertiesToFetch   = [nsExpressionDescriptionMin, nsExpressionDescriptionMax, nsExpressionDescriptionSum, nsExpressionDescriptionAvg, nsExpressionDescriptionCount]
+        
+        fetchRequest.resultType = .dictionaryResultType
+        
+        do {
+            
+            fetchArray = try managedContext.fetch(fetchRequest) as! [[String:Int]]
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return fetchArray
+        
+    }  //statsPerPlayer
+
+    
     
 }
 

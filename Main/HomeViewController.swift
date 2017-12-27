@@ -122,10 +122,10 @@ class HomeViewController: UIViewController {
         }
         
         //Go get the players on the bench
-        fetchPlayersOnBench()
+        goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnBench)
         
         //Go get the players on the ice
-        fetchPlayersOnIce()
+        goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnIce)
         
     }  //viewDidLoad
     
@@ -150,26 +150,6 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
         
     }  //didReceiveMemoryWarning
-    
-    func fetchPlayersOnIce() {
-        
-        //Go get the players on the ice
-        do {
-            try fetchedResultsControllerOnIce.performFetch()
-        } catch let error as NSError {
-            print("\(self) -> \(#function) \(error), \(error.userInfo)")
-        }
-    }  //fetchPlayersOnIce
-    
-    func fetchPlayersOnBench() {
-        
-        do {
-            try fetchedResultsControllerOnBench.performFetch()
-        } catch let error as NSError {
-            print("\(self) -> \(#function) \(error), \(error.userInfo)")
-        }
-        
-    }  //fetchPlayersOnBench
     
     func collectionViewLayout() {
         
@@ -227,9 +207,9 @@ class HomeViewController: UIViewController {
     func SetupNotificationCenter()  {
         
         let positionNotificationCenter = NotificationCenter.default
-        //        positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"PlayersOnBench"),
-        //                                               object:nil, queue:nil,
-        //                                               using:notificationCenterData)
+        positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"PlayersOnBench"),
+                                               object:nil, queue:nil,
+                                               using:notificationCenterData)
         
         positionNotificationCenter.addObserver(forName:Notification.Name(rawValue:"GameNotification"),
                                                object:nil, queue:nil,
@@ -429,7 +409,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }  // if let countPlayersOnBench
             
         }  // if let countPlayersOnIce
-    
+        
     }  //configCollectionViewCell
     
     func saveOnIceStatus(player:Players, managedContext: NSManagedObjectContext, onIce: Bool) {
@@ -542,7 +522,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return returnValue
-    }
+    }  //averageTimeOnIce
     
 }  //extension
 
