@@ -277,6 +277,7 @@ class HomeViewController: UIViewController {
         
         //start the timer
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounters), userInfo: nil, repeats: true)
+        print("startTimer")
         
     }  //startTimer
     

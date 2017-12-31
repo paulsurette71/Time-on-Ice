@@ -20,10 +20,9 @@ class StatsInformationViewController: UIViewController {
     //classes
     let goFetch    = GoFetch()
     let timeFormat = TimeFormat()
-    
-    var playersWithShifts = [Any]()
-    
     let createAttributedString = CreateAttributedString()
+    
+    var playerStatsArray = [[String: Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +37,16 @@ class StatsInformationViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        playersWithShifts = goFetch.statsShifts(managedContext: managedContext)
+        playerStatsArray = goFetch.statsPerPlayer(managedContext: managedContext)
+        
+        guard playerStatsArray.count > 0 else {
+            return
+        }
         
         tableView.reloadData()
         
@@ -54,17 +56,6 @@ class StatsInformationViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
@@ -76,69 +67,72 @@ extension StatsInformationViewController : UITableViewDelegate {
 extension StatsInformationViewController : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        
         return 1
-    }
+        
+    }  //numberOfSections
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playersWithShifts.count
-    }
+        
+        guard playerStatsArray.count > 0 else {
+            return 0
+        }
+        
+        return playerStatsArray.count
+        
+    }  //numberOfRowsInSection
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "statsInformationTableViewCell", for: indexPath) as! StatsInformationTableViewCell
         
-        let player = playersWithShifts[indexPath.row] as! Players
+        cell.selectionStyle = .none
+        
+        let player = playerStatsArray[indexPath.row]
         
         configureCell(cell, withPlayer: player, indexPath: indexPath)
         
         return cell
-    }
+        
+    }  //cellForRowAt
     
-    func configureCell(_ cell: StatsInformationTableViewCell, withPlayer player: Players, indexPath: IndexPath) {
+    func configureCell(_ cell: StatsInformationTableViewCell, withPlayer player: [String: Any], indexPath: IndexPath) {
         
-        let results = goFetch.statsPerPlayer(player: player, managedContext: managedContext)
-        print(results)
+        let totalTimeOnIce = timeFormat.mmSS(totalSeconds: player["sumShift"]! as! Int)
+        cell.totalTimeOnIceLabel.text = totalTimeOnIce
         
-        if results.count != 0 {
-            
-            let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results[indexPath.row]["sumShift"]!)
-            cell.totalTimeOnIceLabel.text = totalTimeOnIce
-            
-            if let shifts = results[indexPath.row]["countShift"] {
-                cell.totalShiftsLabel.text = String(shifts)
-                                
-                let averageTimeOnice = timeFormat.mmSS(totalSeconds: results[indexPath.row]["avgShift"]!)
-                cell.averageTimeOnIceLabel.text = averageTimeOnice
-                
-                let numberOfGames = goFetch.statsGamesPerPlayer(player: player, managedContext: managedContext)
-                cell.totalGamesLabel.text = String(numberOfGames)
-                
-                let averageShifts = averageShiftsPerGame(games: numberOfGames, shifts: shifts)
-                cell.averageShiftsPerGameLabel.text = averageShifts
-                
-                let shortestShift = timeFormat.mmSS(totalSeconds: results[indexPath.row]["minShift"]!)
-                cell.shortestShiftLabel.text = shortestShift
-
-                let longestShift = timeFormat.mmSS(totalSeconds: results[indexPath.row]["maxShift"]!)
-                cell.longestShiftLabel.text = longestShift
-
-                
-                
-            }
-        }
+        let shifts = player["countShift"]!
+        cell.totalShiftsLabel.text = String(describing: shifts)
         
+        let playerObjID   = player["playersRelationship"] as! NSManagedObjectID
+        let playerDetails = managedContext.object(with: playerObjID) as! Players
         
-        let playerInformation = createAttributedString.poundNumberFirstNameLastName(number: String(player.number), firstName: player.firstName!, lastName: player.lastName!)
+        let playerInformation = createAttributedString.poundNumberFirstNameLastName(number: String(playerDetails.number), firstName: playerDetails.firstName!, lastName: playerDetails.lastName!)
         
         cell.statsPlayerInformationLabel.attributedText = playerInformation
         
-        if let city = player.city, let team = player.team {
-            cell.statsTeamInformationLabel.text = city + " " + team
-        }
+        //Games
+        let numberOfGames = goFetch.statsGamesPerPlayer(player: playerDetails, managedContext: managedContext)
+        cell.totalGamesLabel.text = String(numberOfGames)
         
-        cell.selectionStyle = .none
+        //Average Shift Length
+        let averageTimeOnice = timeFormat.mmSS(totalSeconds: player["avgShift"]! as! Int)
+        cell.averageTimeOnIceLabel.text = averageTimeOnice
         
-    }
+        //Shortest Shift
+        let shortestShift = timeFormat.mmSS(totalSeconds: player["minShift"]! as! Int)
+        cell.shortestShiftLabel.text = shortestShift
+        
+        //Longest Shift
+        let longestShift = timeFormat.mmSS(totalSeconds: player["maxShift"]! as! Int)
+        cell.longestShiftLabel.text = longestShift
+        
+        
+        //Average Shifts per Game
+        let averageShifts = averageShiftsPerGame(games: numberOfGames, shifts: shifts as! Int)
+        cell.averageShiftsPerGameLabel.text = averageShifts
+        
+    }  //configureCell
     
     func averageTimeOnIce(player: Players, timeOnIce: Int, shifts: Int) -> String {
         var returnValue = ""
@@ -155,6 +149,7 @@ extension StatsInformationViewController : UITableViewDataSource {
         }
         
         return returnValue
+        
     }  //averageTimeOnIce
     
     func averageShiftsPerGame(games: Int, shifts:Int) -> String {
@@ -185,15 +180,17 @@ extension StatsInformationViewController : UITableViewDataSource {
         header.textLabel?.frame         = header.frame
         header.textLabel?.textAlignment = .left
         header.backgroundView?.backgroundColor = UIColor(named: "gryphonGold")
-    }
+        
+    }  //willDisplayHeaderView
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+                
+        guard playerStatsArray.count > 0 else {
+            return "No Players with Stats"
+        }
         
-        return String(playersWithShifts.count) + " Players"
+        return String(playerStatsArray.count) + " Players"
         
     }  //titleForHeaderInSection
-    
-    
-    
     
 }

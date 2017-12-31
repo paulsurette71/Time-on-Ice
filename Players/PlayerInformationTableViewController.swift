@@ -231,6 +231,7 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
         tableView.beginUpdates()
     }
     
+/*
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
@@ -253,6 +254,7 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
 
         }
     }
+*/
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
