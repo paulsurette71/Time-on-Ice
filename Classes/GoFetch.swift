@@ -292,8 +292,6 @@ class GoFetch {
         
         var numberOfGames = 0
         
-        
-        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
         let predicate               = NSPredicate(format: "playersRelationship = %@", player)
         fetchRequest.predicate      = predicate
@@ -360,9 +358,20 @@ class GoFetch {
         nsExpressionDescriptionCount.name = "countShift"
         nsExpressionDescriptionCount.expressionResultType = .integer16AttributeType
         
-        fetchRequest.propertiesToFetch   = [nsExpressionDescriptionMin, nsExpressionDescriptionMax, nsExpressionDescriptionSum, nsExpressionDescriptionAvg, nsExpressionDescriptionCount, #keyPath(Shifts.playersRelationship), #keyPath(Shifts.gameRelationship)]
         
-        fetchRequest.propertiesToGroupBy   = [#keyPath(Shifts.playersRelationship), #keyPath(Shifts.gameRelationship)]
+        let nsExpressionForKeyPathGame  = NSExpression(forKeyPath: #keyPath(Shifts.gameRelationship))
+        let nsExpressionForFunctionGame = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPathGame])
+        let nsExpressionDescriptionGame = NSExpressionDescription()
+        nsExpressionDescriptionGame.expression = nsExpressionForFunctionGame
+        nsExpressionDescriptionGame.expression = NSExpression.expressionForEvaluatedObject()
+        
+        nsExpressionDescriptionGame.name = "games"
+        nsExpressionDescriptionGame.expressionResultType = .integer16AttributeType
+        
+        
+        fetchRequest.propertiesToFetch   = [nsExpressionDescriptionMin, nsExpressionDescriptionMax, nsExpressionDescriptionSum, nsExpressionDescriptionAvg, nsExpressionDescriptionCount, #keyPath(Shifts.playersRelationship), nsExpressionDescriptionGame]
+        
+        fetchRequest.propertiesToGroupBy   = [#keyPath(Shifts.playersRelationship)]
         fetchRequest.resultType = .dictionaryResultType
         
         do {
@@ -380,7 +389,7 @@ class GoFetch {
         
     }  //statsPerPlayer
     
- }
+}
 
 
 

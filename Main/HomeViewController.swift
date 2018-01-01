@@ -72,6 +72,7 @@ class HomeViewController: UIViewController {
     let showPopover            = ShowPopover()
     let createAttributedString = CreateAttributedString()
     let convertDate            = ConvertDate()
+    let reset                  = Reset()
     
     //App Delegate
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -85,6 +86,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        print("viewDidLoad")
         
         //NotifactionCenter
         SetupNotificationCenter()
@@ -121,9 +124,12 @@ class HomeViewController: UIViewController {
             
         }
         
+//        reset.players(managedContext: managedContext)
+        reset.playersStoredData(managedContext: managedContext)
+        
         //Go get the players on the bench
         goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnBench)
-        
+
         //Go get the players on the ice
         goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnIce)
         
@@ -277,7 +283,6 @@ class HomeViewController: UIViewController {
         
         //start the timer
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounters), userInfo: nil, repeats: true)
-        print("startTimer")
         
     }  //startTimer
     

@@ -54,8 +54,8 @@ class PlayerPopoverTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        
         guard let sections = fetchedResultsController.sections else {
+            
             return 0
             
         }

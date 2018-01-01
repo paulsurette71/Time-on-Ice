@@ -98,6 +98,10 @@ extension StatsInformationViewController : UITableViewDataSource {
     
     func configureCell(_ cell: StatsInformationTableViewCell, withPlayer player: [String: Any], indexPath: IndexPath) {
         
+        guard player["playersRelationship"] as? NSManagedObjectID != nil else {
+            return
+        }
+        
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: player["sumShift"]! as! Int)
         cell.totalTimeOnIceLabel.text = totalTimeOnIce
         
@@ -109,7 +113,9 @@ extension StatsInformationViewController : UITableViewDataSource {
         
         let playerInformation = createAttributedString.poundNumberFirstNameLastName(number: String(playerDetails.number), firstName: playerDetails.firstName!, lastName: playerDetails.lastName!)
         
+        //Player Details.
         cell.statsPlayerInformationLabel.attributedText = playerInformation
+        cell.statsTeamInformationLabel.text = playerDetails.city! + " " + playerDetails.team!
         
         //Games
         let numberOfGames = goFetch.statsGamesPerPlayer(player: playerDetails, managedContext: managedContext)
