@@ -42,7 +42,7 @@ class StatsInformationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        playerStatsArray = goFetch.statsPerPlayer(managedContext: managedContext)
+        playerStatsArray = goFetch.statsPerAllPlayers(managedContext: managedContext)
         
         guard playerStatsArray.count > 0 else {
             return
@@ -56,6 +56,23 @@ class StatsInformationViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let statsPerGameViewController = segue.destination as! StatsPerGameViewController
+        
+        let indexPath = sender as! IndexPath
+        
+        let selectedPlayer = playerStatsArray[indexPath.row]
+        
+        if segue.identifier == "StatsPerGameSegue" {
+            
+            statsPerGameViewController.managedContext = managedContext
+            statsPerGameViewController.selectedPlayer = selectedPlayer
+            
+        }  // if segue.identifier
+        
+    }  //prepare(for segue
     
 }
 
@@ -190,13 +207,21 @@ extension StatsInformationViewController : UITableViewDataSource {
     }  //willDisplayHeaderView
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-                
+        
         guard playerStatsArray.count > 0 else {
+            
             return "No Players with Stats"
         }
         
         return String(playerStatsArray.count) + " Players"
         
     }  //titleForHeaderInSection
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "StatsPerGameSegue", sender: indexPath)
+        
+    } //didSelectRowAt
     
 }

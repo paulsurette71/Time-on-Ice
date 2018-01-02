@@ -128,17 +128,17 @@ class PlayerInformationTableViewController: UITableViewController {
     
     func configureCell(_ cell: PlayerInformationTableViewCell, withPlayer player: Players, indexPath: IndexPath) {
         
-        let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
-        
-        if results.count != 0 {
-            
-            let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
-            cell.totalTimeOnIceLabel.text = totalTimeOnIce
-            
-            if let shifts = results["shifts"] {
-                cell.totalShiftsLabel.text = String(shifts)
-            }
-        }
+//        let results = goFetch.timeOnIceWithShifts(player: player, game: , managedContext: managedContext)
+//        
+//        if results.count != 0 {
+//            
+//            let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
+//            cell.totalTimeOnIceLabel.text = totalTimeOnIce
+//            
+//            if let shifts = results["shifts"] {
+//                cell.totalShiftsLabel.text = String(shifts)
+//            }
+//        }
         
         let playerInformation = createAttributedString.poundNumberFirstNameLastName(number: String(player.number), firstName: player.firstName!, lastName: player.lastName!)
         

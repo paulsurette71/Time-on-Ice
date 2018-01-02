@@ -20,9 +20,6 @@ class Reset {
         do {
             
             fetchAllPlayers = try managedContext.fetch(fetchRequest) as! [Players]
-            print(fetchAllPlayers.count)
-            
-            
             
         } catch let error as NSError {
             

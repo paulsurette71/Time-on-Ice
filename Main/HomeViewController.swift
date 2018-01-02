@@ -83,12 +83,15 @@ class HomeViewController: UIViewController {
     //Delegates
     var myDelegates: myDelegates?
     
+    //Haptic Feedback
+    let impact = UIImpactFeedbackGenerator()
+    let selection = UISelectionFeedbackGenerator()
+    let notification = UINotificationFeedbackGenerator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        print("viewDidLoad")
-        
+                
         //NotifactionCenter
         SetupNotificationCenter()
         
@@ -124,7 +127,6 @@ class HomeViewController: UIViewController {
             
         }
         
-//        reset.players(managedContext: managedContext)
         reset.playersStoredData(managedContext: managedContext)
         
         //Go get the players on the bench
@@ -268,6 +270,7 @@ class HomeViewController: UIViewController {
             button.setImage(UIImage(named: "buttonClockStop"), for: .normal)
             
             startTimer()
+            impact.impactOccurred()
             
         } else {
             
@@ -275,6 +278,8 @@ class HomeViewController: UIViewController {
             button.setImage(UIImage(named: "buttonClockStart"), for: .normal)
             
             stopTimer()
+            //selection.selectionChanged()
+            notification.notificationOccurred(.success)
         }
         
     }  //clock
@@ -342,7 +347,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.playerNumberLabel.text   = String(player.number)
         cell.playerLastNameLabel.text = player.lastName
         
-        let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
+        let results = goFetch.timeOnIceWithShifts(player: player, game: appDelegate.game!, managedContext: managedContext)
         
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
         
@@ -498,7 +503,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let timeOnIce = timeFormat.mmSS(totalSeconds: Int(player.runningTimeOnIce))
         cell.playerTimerLabel.text = timeOnIce
         
-        let results = goFetch.timeOnIceWithShifts(player: player, managedContext: managedContext)
+        let results = goFetch.timeOnIceWithShifts(player: player, game: appDelegate.game!, managedContext: managedContext)
         
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
         cell.timeOnIceLabel.text = totalTimeOnIce
