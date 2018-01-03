@@ -115,17 +115,17 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-        let importPlayers            = ImportPlayers()
-        let importGames              = ImportGames()
-        
-        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-            
-            //Import Test data
-            importPlayers.importPlayers()
-            importGames.importGames()
-            
-        }
+//        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+//        let importPlayers            = ImportPlayers()
+//        let importGames              = ImportGames()
+//        
+//        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+//            
+//            //Import Test data
+//            importPlayers.importPlayers()
+//            importGames.importGames()
+//            
+//        }
         
         reset.playersStoredData(managedContext: managedContext)
         

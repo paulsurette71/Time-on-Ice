@@ -80,7 +80,6 @@ class StatsPerGameViewController: UIViewController {
             gameData = goFetch.getGamesForPlayer(player: player, managedContext: managedContext)
             
             statsPerPlayer = goFetch.statsPerPlayer(player: player, managedContext: managedContext)
-            print(statsPerPlayer)
             
             displayStats()
             

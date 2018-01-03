@@ -45,7 +45,7 @@ class PlayerInformationTableViewController: UITableViewController {
             
             if fetchedObjects == 0 {
                 
-                //Shot popover if there are no players listed.
+                //Show popover if there are no players listed.
                 showPopover.forNoPlayersAdded(view: self, sender: addBarButtonItem)
             }
         }

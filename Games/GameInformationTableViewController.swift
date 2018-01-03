@@ -46,7 +46,7 @@ class GameInformationTableViewController: UITableViewController {
             
             if fetchedObjects == 0 {
                 
-                //Shot popover if there are no games listed.
+                //Show popover if there are no games listed.
                 showPopover.forNoGamesAdded(view: self, sender: addBarButtonItem)
             }
         }
@@ -184,14 +184,24 @@ class GameInformationTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        guard let sectionInfo = fetchedResultsController.sections?[section] else {
-            return "No Games"
-            
+//        guard let sectionInfo = fetchedResultsController.sections?[section] else {
+//            return "No Games"
+//
+//        }
+//
+//        let numberOfGamesForPlayer = String(sectionInfo.numberOfObjects) + " Games"
+//
+//        return numberOfGamesForPlayer
+        
+        let sectionInfo = fetchedResultsController.sections?[section]
+        
+        if sectionInfo?.name == "" {
+            return "No games"
+        } else {
+            return sectionInfo?.name
         }
+
         
-        let numberOfGamesForPlayer = String(sectionInfo.numberOfObjects) + " Games"
-        
-        return numberOfGamesForPlayer
         
     }  //titleForHeaderInSection
 
@@ -234,6 +244,7 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
         tableView.beginUpdates()
     }
     
+    /*
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
@@ -248,6 +259,7 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
         }
     }
+    */
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
