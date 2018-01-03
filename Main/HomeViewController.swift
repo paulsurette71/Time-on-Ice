@@ -84,9 +84,9 @@ class HomeViewController: UIViewController {
     var myDelegates: myDelegates?
     
     //Haptic Feedback
-    let impact = UIImpactFeedbackGenerator()
-    let selection = UISelectionFeedbackGenerator()
-    let notification = UINotificationFeedbackGenerator()
+    let impactFeedbackGenerator = UIImpactFeedbackGenerator()
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,7 +270,7 @@ class HomeViewController: UIViewController {
             button.setImage(UIImage(named: "buttonClockStop"), for: .normal)
             
             startTimer()
-            impact.impactOccurred()
+            impactFeedbackGenerator.impactOccurred()
             
         } else {
             
@@ -279,7 +279,8 @@ class HomeViewController: UIViewController {
             
             stopTimer()
             //selection.selectionChanged()
-            notification.notificationOccurred(.success)
+            notificationFeedbackGenerator.notificationOccurred(.success)
+            
         }
         
     }  //clock

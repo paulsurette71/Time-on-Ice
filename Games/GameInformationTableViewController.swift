@@ -165,7 +165,36 @@ class GameInformationTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         updateGame(indexPath: indexPath)
+        
     }  //didSelectRowAt
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        guard let header = view as? UITableViewHeaderFooterView else {
+            return
+        }
+        
+        header.textLabel?.textColor     = UIColor.black
+        header.textLabel?.font          = UIFont.systemFont(ofSize: 24, weight: .light)
+        header.textLabel?.frame         = header.frame
+        header.textLabel?.textAlignment = .left
+        header.backgroundView?.backgroundColor = UIColor(named: "gryphonGold")
+        
+    }  //willDisplayHeaderView
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        guard let sectionInfo = fetchedResultsController.sections?[section] else {
+            return "No Games"
+            
+        }
+        
+        let numberOfGamesForPlayer = String(sectionInfo.numberOfObjects) + " Games"
+        
+        return numberOfGamesForPlayer
+        
+    }  //titleForHeaderInSection
+
     
     func updateGame(indexPath: IndexPath)  {
         

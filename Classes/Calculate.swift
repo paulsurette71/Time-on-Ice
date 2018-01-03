@@ -10,6 +10,9 @@ import Foundation
 
 class Calculate {
     
+    //classes
+    let timeFormat  = TimeFormat()
+    
     func birthDate(usingThisDate: Date) -> Int {
         
         let calendar = NSCalendar.current
@@ -19,5 +22,59 @@ class Calculate {
         return components.year!
         
     }  //birthDate
-
+    
+    func averageTimeOnIce(player: Players, timeOnIce: Int, shifts: Int) -> String {
+        var returnValue = ""
+        
+        if shifts > 0 {
+            
+            let average = timeOnIce / shifts
+            
+            returnValue = timeFormat.mmSS(totalSeconds: average)
+            
+        } else {
+            
+            returnValue = ""
+        }
+        
+        return returnValue
+        
+    }  //averageTimeOnIce
+    
+    func averageShiftsPerGame(games: Int, shifts:Int) -> String {
+        var returnValue = ""
+        
+        if shifts > 0 {
+            
+            let average = Double(shifts) / Double(games)
+            
+            returnValue = String(average)
+            
+        } else {
+            returnValue = ""
+        }
+        
+        return returnValue
+        
+    }  //averageShiftsPerGame
+    
+    func averageTimeOnIcePerGame(timeOnInce: Int, games: Int) -> Int {
+        
+        var returnValue = 0
+        
+        if games > 0 {
+            
+            let average = Double(timeOnInce) / Double(games)
+            
+            returnValue = Int(average)
+            
+        } else {
+            returnValue = 0
+        }
+        
+        return returnValue
+        
+    }
+    
+    
 }  //Calculate

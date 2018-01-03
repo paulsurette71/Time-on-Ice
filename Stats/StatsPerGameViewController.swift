@@ -14,18 +14,31 @@ class StatsPerGameViewController: UIViewController {
     //UITableView
     @IBOutlet weak var tableView: UITableView!
     
+    //UILabel
+    @IBOutlet weak var totalTimeOnIceLabel: UILabel!
+    @IBOutlet weak var totalShiftsLabel: UILabel!
+    @IBOutlet weak var avergeShiftLengthLabel: UILabel!
+    @IBOutlet weak var shortestShiftLabel: UILabel!
+    @IBOutlet weak var longestShiftLabel: UILabel!
+    @IBOutlet weak var gamesLabel: UILabel!
+    @IBOutlet weak var averageShiftsPerGameLabel: UILabel!
+    @IBOutlet weak var averageTimeOnIcePerGameLabel: UILabel!
+    
     //coredata
     var managedContext: NSManagedObjectContext!
     
     //classes
     let goFetch     = GoFetch()
     let convertDate = ConvertDate()
+    let timeFormat  = TimeFormat()
+    let calculate   = Calculate()
     
     //passed from StatsInformationViewController
     var selectedPlayer: [String: Any]?
     
-    var numberOfGames = 0
-    var gameData = [[String: AnyObject]]()
+    var numberOfGames  = 0
+    var gameData       = [[String: AnyObject]]()
+    var statsPerPlayer = [[String: AnyObject]]()
     var player: Players?
     
     override func viewDidLoad() {
@@ -66,13 +79,42 @@ class StatsPerGameViewController: UIViewController {
             
             gameData = goFetch.getGamesForPlayer(player: player, managedContext: managedContext)
             
-            
-            let statsPerPlayer = goFetch.statsPerPlayer(player: player, managedContext: managedContext)
+            statsPerPlayer = goFetch.statsPerPlayer(player: player, managedContext: managedContext)
             print(statsPerPlayer)
+            
+            displayStats()
             
         }  // if let player
         
     }  //fetchData
+    
+    func displayStats() {
+        
+        let timeOnIce = statsPerPlayer.first!["sumShift"]! as! Int
+        let totalTimeOnIce = timeFormat.mmSS(totalSeconds: timeOnIce)
+        totalTimeOnIceLabel.text = totalTimeOnIce
+        
+        let totalShifts = statsPerPlayer.first!["countShift"]! as! Int
+        totalShiftsLabel.text = String(totalShifts)
+        
+        let avergeShiftLength = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["avgShift"]! as! Int)
+        avergeShiftLengthLabel.text = avergeShiftLength
+
+        let shortestShift = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["minShift"]! as! Int)
+        shortestShiftLabel.text = shortestShift
+        
+        let longestShift = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["maxShift"]! as! Int)
+        longestShiftLabel.text = longestShift
+        
+        let numberOfGamesForPlayer = String(numberOfGames)
+        gamesLabel.text = numberOfGamesForPlayer
+        
+        let averageShiftsPerGame = calculate.averageShiftsPerGame(games: numberOfGames, shifts: totalShifts)
+        averageShiftsPerGameLabel.text = averageShiftsPerGame
+        
+        let averageTimeOnIcePerGame = calculate.averageTimeOnIcePerGame(timeOnInce: timeOnIce, games: numberOfGames)
+        averageTimeOnIcePerGameLabel.text = timeFormat.mmSS(totalSeconds: averageTimeOnIcePerGame)
+    }
     
 }
 
