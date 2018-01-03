@@ -157,7 +157,33 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     @IBAction func camera(_ sender: Any) {
         
+
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+                self.showCamera()
+            }))
+            
+            actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+                self.showPhotoLibrary()
+            }))
+            
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            present(actionSheet, animated: true, completion: nil)
+
+
+        
+        
     }  //camera
+    
+    func showCamera() {
+        
+    }
+    
+    func showPhotoLibrary() {
+        
+    }
     
     @IBAction func birthdate(_ sender: UIDatePicker) {
         

@@ -244,7 +244,6 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
         tableView.beginUpdates()
     }
     
-    /*
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
@@ -259,8 +258,7 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
         }
     }
-    */
-    
+  
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
         let indexSet = IndexSet(integer: sectionIndex)
