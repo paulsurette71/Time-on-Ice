@@ -291,11 +291,56 @@
                         <outlet property="tableView" destination="Rgm-fp-ZtG" id="9bV-I4-pv7"/>
                         <outlet property="totalShiftsLabel" destination="wH0-KZ-cTR" id="T9y-Fv-uxa"/>
                         <outlet property="totalTimeOnIceLabel" destination="EKe-ZC-e9v" id="8oN-SK-bhy"/>
+                        <segue destination="dul-OM-qcY" kind="show" identifier="StatsDetailsPerGameSegue" id="mTl-TC-JTc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qGy-Ks-gzV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1749.5999999999999" y="1529.6851574212894"/>
+        </scene>
+        <!--Stats Details Per Game Table View Controller-->
+        <scene sceneID="Wt4-v6-27v">
+            <objects>
+                <tableViewController storyboardIdentifier="StatsDetailsPerGameTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dul-OM-qcY" customClass="StatsDetailsPerGameTableViewController" customModule="Time_on_Ice" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MFi-kb-7i0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatsDetailsPerGameCell" textLabel="4tf-gs-PlQ" detailTextLabel="nob-lq-EkT" style="IBUITableViewCellStyleSubtitle" id="G2f-MS-6Vf">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G2f-MS-6Vf" id="iTq-CT-S9e">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4tf-gs-PlQ">
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nob-lq-EkT">
+                                            <rect key="frame" x="16" y="25.5" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dul-OM-qcY" id="QLB-xt-lzY"/>
+                            <outlet property="delegate" destination="dul-OM-qcY" id="lBo-K1-r0J"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T96-SB-n5D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2700" y="1524"/>
         </scene>
         <!--Stats-->
         <scene sceneID="Qay-44-dH3">

@@ -456,7 +456,7 @@ class GoFetch {
         nsExpressionDescriptionCount.name = "countShift"
         nsExpressionDescriptionCount.expressionResultType = .integer16AttributeType
         
-
+        
         fetchRequest.propertiesToFetch   = [nsExpressionDescriptionMin, nsExpressionDescriptionMax, nsExpressionDescriptionSum, nsExpressionDescriptionAvg, nsExpressionDescriptionCount]
         
         fetchRequest.propertiesToGroupBy   = [#keyPath(Shifts.playersRelationship)]
@@ -474,7 +474,32 @@ class GoFetch {
         return fetchArray
         
     }  //statsPerPlayer
-
+    
+    func shiftsPerPlayerPerGame(player: Players, game: Games, managedContext: NSManagedObjectContext) -> [[String: Any]] {
+        
+        var resultsDictionary = [[String: Any]]()
+        
+        let fetchRequest       = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
+        let predicatePlayer    = NSPredicate(format: "playersRelationship = %@", player)
+        let predicateGame      = NSPredicate(format: "gameRelationship = %@", game)
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicatePlayer,predicateGame])
+        
+        let sort = NSSortDescriptor(key: #keyPath(Shifts.date), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        fetchRequest.resultType = .dictionaryResultType
+        
+        do {
+            resultsDictionary    = try managedContext.fetch(fetchRequest) as! [[String : Any]] //as! [[String:Int]]
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return resultsDictionary
+    }  //timeOnIceWithShifts
+    
+    
     
 }
 

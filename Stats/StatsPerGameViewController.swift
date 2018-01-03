@@ -99,7 +99,7 @@ class StatsPerGameViewController: UIViewController {
         
         let avergeShiftLength = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["avgShift"]! as! Int)
         avergeShiftLengthLabel.text = avergeShiftLength
-
+        
         let shortestShift = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["minShift"]! as! Int)
         shortestShiftLabel.text = shortestShift
         
@@ -115,6 +115,34 @@ class StatsPerGameViewController: UIViewController {
         let averageTimeOnIcePerGame = calculate.averageTimeOnIcePerGame(timeOnInce: timeOnIce, games: numberOfGames)
         averageTimeOnIcePerGameLabel.text = timeFormat.mmSS(totalSeconds: averageTimeOnIcePerGame)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let statsDetailsPerGameTableViewController = segue.destination as! StatsDetailsPerGameTableViewController
+                
+        //Get selected Game
+        //let indexPath = sender as! IndexPath
+        let indexPath = tableView.indexPathForSelectedRow
+        
+        let game = gameData[(indexPath?.row)!]
+        let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
+        let selectedGame = managedContext.object(with: gameNSManagedObjectID) as! Games
+        
+        
+        //Get selected Player
+        let selectedPlayerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
+        let player = managedContext.object(with: selectedPlayerNSManagedObjectID) as? Players
+        
+        if segue.identifier == "StatsDetailsPerGameSegue" {
+            
+            statsDetailsPerGameTableViewController.managedContext = managedContext
+            statsDetailsPerGameTableViewController.player = player
+            statsDetailsPerGameTableViewController.game = selectedGame
+            
+        }  // if segue.identifier
+        
+    }  //prepare(for segue
+
     
 }
 
@@ -188,5 +216,10 @@ extension StatsPerGameViewController: UITableViewDataSource {
         
     }  //titleForHeaderInSection
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "StatsDetailsPerGameSegue", sender: nil)
+        
+    } //didSelectRowAt
+
 }  //UITableViewDataSource
