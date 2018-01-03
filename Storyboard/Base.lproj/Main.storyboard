@@ -1772,31 +1772,27 @@
                                 <rect key="frame" x="54" y="306" width="268" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's get started!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itb-di-5jh">
-                                        <rect key="frame" x="113" y="0.0" width="155" height="27"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="14d-83-naA"/>
-                                        </constraints>
+                                        <rect key="frame" x="113" y="0.0" width="155" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to create your first game." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmd-kL-Q2m">
-                                        <rect key="frame" x="0.0" y="29" width="268" height="26"/>
+                                        <rect key="frame" x="0.0" y="28.5" width="268" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Itb-di-5jh" firstAttribute="trailing" secondItem="Nmd-kL-Q2m" secondAttribute="trailing" id="tGe-FD-Zkg"/>
+                                    <constraint firstItem="Itb-di-5jh" firstAttribute="trailing" secondItem="Nmd-kL-Q2m" secondAttribute="trailing" id="Ckn-XG-5Xe"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" name="gryphonBlue"/>
                         <constraints>
-                            <constraint firstItem="PkG-MF-EuO" firstAttribute="centerY" secondItem="J2k-m5-kc5" secondAttribute="centerY" id="Mz3-ek-n9I"/>
-                            <constraint firstItem="PkG-MF-EuO" firstAttribute="centerX" secondItem="J2k-m5-kc5" secondAttribute="centerX" id="N7t-JA-eKY"/>
-                            <constraint firstItem="PkG-MF-EuO" firstAttribute="top" secondItem="fRU-jM-Fmz" secondAttribute="top" constant="286" id="es6-Vr-9Vz"/>
+                            <constraint firstItem="PkG-MF-EuO" firstAttribute="centerY" secondItem="J2k-m5-kc5" secondAttribute="centerY" id="QQR-WP-hdJ"/>
+                            <constraint firstItem="PkG-MF-EuO" firstAttribute="centerX" secondItem="J2k-m5-kc5" secondAttribute="centerX" id="SP5-js-9jx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fRU-jM-Fmz"/>
                     </view>
@@ -1830,14 +1826,14 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="jN0-91-yAq" firstAttribute="trailing" secondItem="dl2-Ii-0Uy" secondAttribute="trailing" id="GX3-tj-3hE"/>
+                                    <constraint firstItem="jN0-91-yAq" firstAttribute="trailing" secondItem="dl2-Ii-0Uy" secondAttribute="trailing" id="DJp-i3-FqA"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" name="gryphonGold"/>
                         <constraints>
-                            <constraint firstItem="0vo-DK-Dun" firstAttribute="centerY" secondItem="Syi-40-LMh" secondAttribute="centerY" id="T1m-oz-SH3"/>
-                            <constraint firstItem="0vo-DK-Dun" firstAttribute="centerX" secondItem="Syi-40-LMh" secondAttribute="centerX" id="wdk-no-PDu"/>
+                            <constraint firstItem="0vo-DK-Dun" firstAttribute="centerY" secondItem="Syi-40-LMh" secondAttribute="centerY" id="H2M-gP-9le"/>
+                            <constraint firstItem="0vo-DK-Dun" firstAttribute="centerX" secondItem="Syi-40-LMh" secondAttribute="centerX" id="m4P-3f-WVr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yzu-6J-1QH"/>
                     </view>
