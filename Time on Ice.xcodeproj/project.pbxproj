@@ -63,6 +63,9 @@
 		75E304F21FCC96E50010C708 /* TimeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E304F11FCC96E50010C708 /* TimeFormat.swift */; };
 		75E333A71FD0E49A00408317 /* Time On Ice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75E333A51FD0E49A00408317 /* Time On Ice.xcdatamodeld */; };
 		75E9E8621FBE218900A51F89 /* PlayerInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E9E8611FBE218900A51F89 /* PlayerInformationTableViewController.swift */; };
+		75F74CA21FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F74CA11FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift */; };
+		75F74CA51FFEABF10029FF42 /* BarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F74CA41FFEABF10029FF42 /* BarEntry.swift */; };
+		75F74CA71FFEAC590029FF42 /* BasicBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F74CA61FFEAC590029FF42 /* BasicBarChart.swift */; };
 		75F7EF341FD8BDBD002BD535 /* PlayerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EF331FD8BDBD002BD535 /* PlayerPicker.swift */; };
 		75F7EF361FD8C03D002BD535 /* PlayerPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EF351FD8C03D002BD535 /* PlayerPopoverViewController.swift */; };
 /* End PBXBuildFile section */
@@ -126,6 +129,9 @@
 		75E304F11FCC96E50010C708 /* TimeFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormat.swift; sourceTree = "<group>"; };
 		75E333A61FD0E49A00408317 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		75E9E8611FBE218900A51F89 /* PlayerInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationTableViewController.swift; sourceTree = "<group>"; };
+		75F74CA11FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDetailsPerGameViewController.swift; sourceTree = "<group>"; };
+		75F74CA41FFEABF10029FF42 /* BarEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarEntry.swift; sourceTree = "<group>"; };
+		75F74CA61FFEAC590029FF42 /* BasicBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBarChart.swift; sourceTree = "<group>"; };
 		75F7EF331FD8BDBD002BD535 /* PlayerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPicker.swift; sourceTree = "<group>"; };
 		75F7EF351FD8C03D002BD535 /* PlayerPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPopoverViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,6 +170,7 @@
 		750FA1FD1FBCDCDA00A1D89A = {
 			isa = PBXGroup;
 			children = (
+				75F74CA31FFEA2D20029FF42 /* BarChart */,
 				755257981FF14E9A0063B646 /* Stats */,
 				75E333A81FD0E4AB00408317 /* CoreData */,
 				75710CA21FD75E5B00D04762 /* Games */,
@@ -204,6 +211,7 @@
 				7552579A1FF2A4100063B646 /* StatsInformationTableViewCell.xib */,
 				75A0C4B61FFBD746006DED1F /* StatsPerGameViewController.swift */,
 				7553BF141FFD5697005C2CDC /* StatsDetailsPerGameTableViewController.swift */,
+				75F74CA11FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -245,6 +253,15 @@
 				75DA911B1FE569B500A10F10 /* NoPlayersViewController.swift */,
 			);
 			path = Players;
+			sourceTree = "<group>";
+		};
+		75F74CA31FFEA2D20029FF42 /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				75F74CA41FFEABF10029FF42 /* BarEntry.swift */,
+				75F74CA61FFEAC590029FF42 /* BasicBarChart.swift */,
+			);
+			path = BarChart;
 			sourceTree = "<group>";
 		};
 		75F977F71FC4CA41006506A4 /* Classes */ = {
@@ -388,6 +405,7 @@
 				75292F191FD1EE7F00CE5DCC /* Picker.swift in Sources */,
 				75BC884C1FEB08DC00EFE077 /* Games+CoreDataProperties.swift in Sources */,
 				75292F1B1FD1F38F00CE5DCC /* PopoverViewController.swift in Sources */,
+				75F74CA51FFEABF10029FF42 /* BarEntry.swift in Sources */,
 				755257A01FFA8FBF0063B646 /* Reset.swift in Sources */,
 				750FA21C1FBCDE7B00A1D89A /* HomeViewController.swift in Sources */,
 				7553BF171FFD748B005C2CDC /* Camera.swift in Sources */,
@@ -398,6 +416,7 @@
 				750388451FDEE6F90086073D /* NoGamePopoverViewController.swift in Sources */,
 				75DA911C1FE569B500A10F10 /* NoPlayersViewController.swift in Sources */,
 				7539FC8B1FD6D336009E6CB4 /* ImportPlayers.swift in Sources */,
+				75F74CA21FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift in Sources */,
 				751022F61FC61DD7000009EC /* BenchCollectionViewCell.swift in Sources */,
 				753C215C1FDAD920005DC7F4 /* ShowPopover.swift in Sources */,
 				7539FC851FD4458C009E6CB4 /* Delegates.swift in Sources */,
@@ -405,6 +424,7 @@
 				755257971FF14E8E0063B646 /* StatsInformationViewController.swift in Sources */,
 				75D2F38F1FD868290089DC63 /* GameInformationTableViewCell.swift in Sources */,
 				75E333A71FD0E49A00408317 /* Time On Ice.xcdatamodeld in Sources */,
+				75F74CA71FFEAC590029FF42 /* BasicBarChart.swift in Sources */,
 				75D2F3921FD86B9C0089DC63 /* changeAppearance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

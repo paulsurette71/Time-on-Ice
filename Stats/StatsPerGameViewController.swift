@@ -117,8 +117,10 @@ class StatsPerGameViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let statsDetailsPerGameTableViewController = segue.destination as! StatsDetailsPerGameTableViewController
-                
+        //        let statsDetailsPerGameTableViewController = segue.destination as! StatsDetailsPerGameTableViewController
+        let statsDetailsPerGameViewController = segue.destination as! StatsDetailsPerGameViewController
+        
+        
         //Get selected Game
         //let indexPath = sender as! IndexPath
         let indexPath = tableView.indexPathForSelectedRow
@@ -134,14 +136,14 @@ class StatsPerGameViewController: UIViewController {
         
         if segue.identifier == "StatsDetailsPerGameSegue" {
             
-            statsDetailsPerGameTableViewController.managedContext = managedContext
-            statsDetailsPerGameTableViewController.player = player
-            statsDetailsPerGameTableViewController.game = selectedGame
+            statsDetailsPerGameViewController.managedContext = managedContext
+            statsDetailsPerGameViewController.player = player
+            statsDetailsPerGameViewController.game = selectedGame
             
         }  // if segue.identifier
         
     }  //prepare(for segue
-
+    
     
 }
 
@@ -220,5 +222,5 @@ extension StatsPerGameViewController: UITableViewDataSource {
         performSegue(withIdentifier: "StatsDetailsPerGameSegue", sender: nil)
         
     } //didSelectRowAt
-
+    
 }  //UITableViewDataSource
