@@ -12,7 +12,9 @@ import CoreData
 class StatsDetailsPerGameViewController: UIViewController {
     
     //UIView
-    @IBOutlet weak var barChartView: BasicBarChart!
+    //    @IBOutlet weak var barChartView: BasicBarChart!
+    @IBOutlet weak var barChartView: LineChart!
+    
     
     //UITableView
     @IBOutlet weak var tableView: UITableView!
@@ -33,10 +35,13 @@ class StatsDetailsPerGameViewController: UIViewController {
     var results = [[String: Any]]()
     
     //barchart
-    var barChartData: [BarEntry] = []
+    //    var barChartData: [BarEntry] = []
+    var barChartData: [PointEntry] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        barChartView.isCurved = true
         
         // Do any additional setup after loading the view.
     }
@@ -52,27 +57,26 @@ class StatsDetailsPerGameViewController: UIViewController {
         self.title = (player?.firstName)! + " " + (player?.lastName)!
         
         results = goFetch.shiftsPerPlayerPerGame(player: player!, game: game!, managedContext: managedContext)
-        
+        print(results)
         
         /*
- 
+         
          for elements in array.indices {
          
          print(elements + 1)
          print(array[elements]["Age"]!)
          
          }
- 
-        */
-       
-        for shifts in results {
+         
+         */
+        
+        for index in results.indices {
             
-            let timeOnIce = shifts["timeOnIce"]
-            let height: Float = Float(timeOnIce as! Float) / 100.0
+            let timeOnIce = results[index]["timeOnIce"]
             
-            let currentTimeOnIce = timeFormat.mmSS(totalSeconds: timeOnIce as! Int)
+            let shiftNumber = String(index + 1)
             
-            barChartData.append(BarEntry(color: #colorLiteral(red: 0.4117647059, green: 0.6392156863, blue: 0.7254901961, alpha: 1), height: height, textValue: currentTimeOnIce, title: "Hello"))
+            barChartData.append(PointEntry(value: timeOnIce as! Int, label: shiftNumber))
         }
         
         barChartView.dataEntries = barChartData
@@ -121,7 +125,7 @@ extension StatsDetailsPerGameViewController : UITableViewDataSource {
         
         cell.textLabel?.text = String(indexPath.row + 1) + " - " + String(currentTimeOnIce)
         cell.detailTextLabel?.text = currentDate
-
+        
         return cell
         
     }  //cellForRowAt

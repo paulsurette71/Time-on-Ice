@@ -18,6 +18,8 @@
 		750FA21C1FBCDE7B00A1D89A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750FA21B1FBCDE7B00A1D89A /* HomeViewController.swift */; };
 		751022F61FC61DD7000009EC /* BenchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751022F41FC61DD7000009EC /* BenchCollectionViewCell.swift */; };
 		751022F71FC61DD7000009EC /* BenchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 751022F51FC61DD7000009EC /* BenchCollectionViewCell.xib */; };
+		7518A0311FFEC7A50092278F /* CurveAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518A0301FFEC7A50092278F /* CurveAlgorithm.swift */; };
+		7518A0331FFEC7E60092278F /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518A0321FFEC7E60092278F /* LineChart.swift */; };
 		75292ECF1FD196FB00CE5DCC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292ECE1FD196FB00CE5DCC /* CoreDataStack.swift */; };
 		75292F191FD1EE7F00CE5DCC /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292F181FD1EE7F00CE5DCC /* Picker.swift */; };
 		75292F1B1FD1F38F00CE5DCC /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75292F1A1FD1F38F00CE5DCC /* PopoverViewController.swift */; };
@@ -84,6 +86,8 @@
 		750FA21B1FBCDE7B00A1D89A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		751022F41FC61DD7000009EC /* BenchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchCollectionViewCell.swift; sourceTree = "<group>"; };
 		751022F51FC61DD7000009EC /* BenchCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BenchCollectionViewCell.xib; sourceTree = "<group>"; };
+		7518A0301FFEC7A50092278F /* CurveAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveAlgorithm.swift; sourceTree = "<group>"; };
+		7518A0321FFEC7E60092278F /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		75292ECE1FD196FB00CE5DCC /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		75292F181FD1EE7F00CE5DCC /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		75292F1A1FD1F38F00CE5DCC /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 			children = (
 				75F74CA41FFEABF10029FF42 /* BarEntry.swift */,
 				75F74CA61FFEAC590029FF42 /* BasicBarChart.swift */,
+				7518A0301FFEC7A50092278F /* CurveAlgorithm.swift */,
+				7518A0321FFEC7E60092278F /* LineChart.swift */,
 			);
 			path = BarChart;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 				750FA20A1FBCDCDA00A1D89A /* AppDelegate.swift in Sources */,
 				75E9E8621FBE218900A51F89 /* PlayerInformationTableViewController.swift in Sources */,
 				75795AD11FC358F8006A52D7 /* PlayerDetailsTableViewController.swift in Sources */,
+				7518A0331FFEC7E60092278F /* LineChart.swift in Sources */,
 				756C7B911FEFF65F00DBF5CD /* Players+CoreDataProperties.swift in Sources */,
 				75BC88481FEB08DC00EFE077 /* Shifts+CoreDataProperties.swift in Sources */,
 				7553BF151FFD5697005C2CDC /* StatsDetailsPerGameTableViewController.swift in Sources */,
@@ -394,6 +401,7 @@
 				75D2F3941FD874C20089DC63 /* ConvertDate.swift in Sources */,
 				7539FC901FD6EADF009E6CB4 /* RoundedImage.swift in Sources */,
 				756C7B901FEFF65F00DBF5CD /* Players+CoreDataClass.swift in Sources */,
+				7518A0311FFEC7A50092278F /* CurveAlgorithm.swift in Sources */,
 				75D803A71FC8D6930084B97E /* PlayersOnIceTableViewCell.swift in Sources */,
 				75710CA61FD75E8700D04762 /* GameDetailsTableViewController.swift in Sources */,
 				75795AD31FC37B6B006A52D7 /* Calculate.swift in Sources */,

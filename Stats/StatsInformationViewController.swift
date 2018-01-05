@@ -180,11 +180,17 @@ extension StatsInformationViewController : UITableViewDataSource {
         
         if shifts > 0 {
             
-            let average = Double(shifts) / Double(games)
+            let average =  Double(shifts) / Double(games)
             
-            returnValue = String(average)
+            //check for remainder for proper formatting.
+            if shifts % games == 0 {
+                returnValue = String(format: "%.0f", average)  //no decimal places
+            } else {
+                returnValue = String(format: "%.2f", average)  //two decimal places
+            }
             
         } else {
+            
             returnValue = ""
         }
         

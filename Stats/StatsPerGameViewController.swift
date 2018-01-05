@@ -117,22 +117,20 @@ class StatsPerGameViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        //        let statsDetailsPerGameTableViewController = segue.destination as! StatsDetailsPerGameTableViewController
         let statsDetailsPerGameViewController = segue.destination as! StatsDetailsPerGameViewController
         
-        
         //Get selected Game
-        //let indexPath = sender as! IndexPath
         let indexPath = tableView.indexPathForSelectedRow
         
         let game = gameData[(indexPath?.row)!]
         let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
         let selectedGame = managedContext.object(with: gameNSManagedObjectID) as! Games
         
-        
         //Get selected Player
         let selectedPlayerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
         let player = managedContext.object(with: selectedPlayerNSManagedObjectID) as? Players
+        
+//        let shiftCount = goFetch.shiftsPerPlayerPerGame(player: player!, game: selectedGame, managedContext: managedContext)
         
         if segue.identifier == "StatsDetailsPerGameSegue" {
             
