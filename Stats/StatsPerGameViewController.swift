@@ -45,6 +45,11 @@ class StatsPerGameViewController: UIViewController {
         let cellChartNib = UINib(nibName: "StatsChartTableViewCell", bundle: nil)
         tableView.register(cellChartNib, forCellReuseIdentifier: "StatsChartCell")
         
+        //StatsOneShiftTableViewCell
+        let cellChartOneShiftNib = UINib(nibName: "StatsOneShiftTableViewCell", bundle: nil)
+        tableView.register(cellChartOneShiftNib, forCellReuseIdentifier: "StatsOneShiftCell")
+
+        
         
     }  //viewDidLoad
     
@@ -169,7 +174,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "StatsChartCell", for: indexPath) as! StatsChartTableViewCell
                 
                 //Game Information
                 let game = gameData[indexPath.section - 1]
@@ -192,8 +196,14 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 }
 
                 guard timeOnIceValues.count > 1 else {
+                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "StatsOneShiftCell") as! StatsOneShiftTableViewCell
+                    
                     return cell
                 }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "StatsChartCell", for: indexPath) as! StatsChartTableViewCell
+                
                 
                 configureChartPerGame(cell, data: timeOnIceValues)
                 
