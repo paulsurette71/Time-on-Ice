@@ -128,6 +128,8 @@ class BasicBarChart: UIView {
             }
             lineLayer.strokeColor = #colorLiteral(red: 0.7607843137, green: 0.01568627451, blue: 0.1882352941, alpha: 1).cgColor
             self.layer.insertSublayer(lineLayer, at: 0)
+            
+            
         }
     }
     

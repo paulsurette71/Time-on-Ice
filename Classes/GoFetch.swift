@@ -258,36 +258,36 @@ class GoFetch {
     
     //Stats Queries
     
-    func statsShifts(managedContext: NSManagedObjectContext) -> [Any] {
-        
-        var returnResults = [Any]()
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
-        
-        fetchRequest.propertiesToGroupBy = [#keyPath(Players.playersShiftRelationship)]
-        fetchRequest.propertiesToFetch   = [#keyPath(Players.playersShiftRelationship)]
-        fetchRequest.resultType          = .dictionaryResultType
-        
-        
-        //        let sort = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
-        //        fetchRequest.sortDescriptors = [sort]
-        //        fetchRequest.fetchBatchSize = 8
-        //
-        //        let predicate               = NSPredicate(format: "ANY %K != nil", #keyPath(Players.playersShiftRelationship))
-        //        fetchRequest.predicate      = predicate
-        
-        do {
-            
-            returnResults = try managedContext.fetch(fetchRequest)
-            
-        } catch let error as NSError {
-            
-            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        return returnResults
-        
-    }  //statsShifts
+//    func statsShifts(managedContext: NSManagedObjectContext) -> [Any] {
+//
+//        var returnResults = [Any]()
+//
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
+//
+//        fetchRequest.propertiesToGroupBy = [#keyPath(Players.playersShiftRelationship)]
+//        fetchRequest.propertiesToFetch   = [#keyPath(Players.playersShiftRelationship)]
+//        fetchRequest.resultType          = .dictionaryResultType
+//
+//
+//        //        let sort = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
+//        //        fetchRequest.sortDescriptors = [sort]
+//        //        fetchRequest.fetchBatchSize = 8
+//        //
+//        //        let predicate               = NSPredicate(format: "ANY %K != nil", #keyPath(Players.playersShiftRelationship))
+//        //        fetchRequest.predicate      = predicate
+//
+//        do {
+//
+//            returnResults = try managedContext.fetch(fetchRequest)
+//
+//        } catch let error as NSError {
+//
+//            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+//        }
+//
+//        return returnResults
+//
+//    }  //statsShifts
     
     func statsGamesPerPlayer(player: Players, managedContext: NSManagedObjectContext) -> Int {
         
@@ -489,8 +489,8 @@ class GoFetch {
         fetchRequest.resultType = .dictionaryResultType
         
         do {
-            resultsDictionary    = try managedContext.fetch(fetchRequest) as! [[String : Any]] //as! [[String:Int]]
-            
+            resultsDictionary    = try managedContext.fetch(fetchRequest) as! [[String : Any]]
+     
         } catch let error as NSError {
             
             print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
@@ -499,7 +499,30 @@ class GoFetch {
         return resultsDictionary
     }  //timeOnIceWithShifts
     
-    
+    func statsTimeOnIcePerPlayer(player: Players, managedContext: NSManagedObjectContext) -> [Shifts] {
+        
+        var timeOnIcePerPlayer = [Shifts]()
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
+        let predicate               = NSPredicate(format: "playersRelationship = %@", player)
+        fetchRequest.predicate      = predicate
+        
+        fetchRequest.propertiesToFetch   = [#keyPath(Shifts.timeOnIce)]
+        
+        do {
+            
+            timeOnIcePerPlayer = try managedContext.fetch(fetchRequest) as! [Shifts]
+            
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return timeOnIcePerPlayer
+
+    }  //statsTimeOnIcePerPlayer
+
     
 }
 

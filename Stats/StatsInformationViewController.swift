@@ -208,7 +208,7 @@ extension StatsInformationViewController : UITableViewDataSource {
         header.textLabel?.font          = UIFont.systemFont(ofSize: 24, weight: .light)
         header.textLabel?.frame         = header.frame
         header.textLabel?.textAlignment = .left
-        header.backgroundView?.backgroundColor = UIColor(named: "gryphonGold")
+//        header.backgroundView?.backgroundColor = UIColor(named: "gryphonGold")
         
     }  //willDisplayHeaderView
     

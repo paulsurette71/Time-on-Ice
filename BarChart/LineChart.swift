@@ -39,6 +39,11 @@ class LineChart: UIView {
     /// The top most horizontal line in the chart will be 10% higher than the highest value in the chart
     let topHorizontalLine: CGFloat = 110.0 / 100.0
     
+    //Distance from edge
+    let distanceFromEdge: CGFloat = 60  //Paul
+    
+    let fontSizeForLabels: CGFloat = 17
+    
     var isCurved: Bool = false
     
     var dataEntries: [PointEntry]? {
@@ -84,14 +89,13 @@ class LineChart: UIView {
         mainLayer.addSublayer(dataLayer)
         scrollView.layer.addSublayer(mainLayer)
         
-        gradientLayer.colors = [#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1).cgColor, UIColor.clear.cgColor]
+        gradientLayer.colors = [#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1).cgColor, #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1).cgColor, #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1).cgColor, #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor]
       
         scrollView.layer.addSublayer(gradientLayer)
         
-
         self.layer.addSublayer(gridLayer)
         self.addSubview(scrollView)
-        self.backgroundColor = #colorLiteral(red: 0.4117647059, green: 0.6392156863, blue: 0.7254901961, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
     }
     
     override func layoutSubviews() {
@@ -105,7 +109,7 @@ class LineChart: UIView {
             gridLayer.frame = CGRect(x: 0, y: topSpace, width: self.frame.width, height: mainLayer.frame.height - topSpace - bottomSpace)
             
             clean()
-            drawHorizontalLines()
+          drawHorizontalLines()
             if isCurved {
                 drawCurvedChart()
             } else {
@@ -128,7 +132,7 @@ class LineChart: UIView {
             
             for i in 0..<entries.count {
                 let height = dataLayer.frame.height * (1 - ((CGFloat(entries[i].value) - CGFloat(min)) / minMaxRange))
-                let point = CGPoint(x: CGFloat(i)*lineGap + 40, y: height)
+                let point = CGPoint(x: CGFloat(i)*lineGap + distanceFromEdge, y: height)
                 result.append(point)
             }
             return result
@@ -146,7 +150,7 @@ class LineChart: UIView {
             
             let lineLayer = CAShapeLayer()
             lineLayer.path = path.cgPath
-            lineLayer.strokeColor = UIColor.white.cgColor
+            lineLayer.strokeColor = UIColor.black.cgColor
             lineLayer.fillColor = UIColor.clear.cgColor
             dataLayer.addSublayer(lineLayer)
         }
@@ -178,8 +182,9 @@ class LineChart: UIView {
         if let path = CurveAlgorithm.shared.createCurvedPath(dataPoints) {
             let lineLayer = CAShapeLayer()
             lineLayer.path = path.cgPath
-            lineLayer.strokeColor = UIColor.white.cgColor
+            lineLayer.strokeColor = #colorLiteral(red: 0.1294117647, green: 0.4470588235, blue: 0.9882352941, alpha: 1)
             lineLayer.fillColor = UIColor.clear.cgColor
+            lineLayer.lineWidth = 5.0
             dataLayer.addSublayer(lineLayer)
         }
     }
@@ -188,26 +193,29 @@ class LineChart: UIView {
      Create a gradient layer below the line that connecting all dataPoints
      */
     private func maskGradientLayer() {
+        
         if let dataPoints = dataPoints,
             dataPoints.count > 0 {
             
             let path = UIBezierPath()
             path.move(to: CGPoint(x: dataPoints[0].x, y: dataLayer.frame.height))
             path.addLine(to: dataPoints[0])
+            
             if isCurved,
                 let curvedPath = CurveAlgorithm.shared.createCurvedPath(dataPoints) {
                 path.append(curvedPath)
             } else if let straightPath = createPath() {
                 path.append(straightPath)
             }
+            
             path.addLine(to: CGPoint(x: dataPoints[dataPoints.count-1].x, y: dataLayer.frame.height))
             path.addLine(to: CGPoint(x: dataPoints[0].x, y: dataLayer.frame.height))
             
             let maskLayer = CAShapeLayer()
             maskLayer.path = path.cgPath
-            maskLayer.fillColor = UIColor.white.cgColor
+            maskLayer.fillColor = UIColor.clear.cgColor
             maskLayer.strokeColor = UIColor.clear.cgColor
-            maskLayer.lineWidth = 0.0
+            maskLayer.lineWidth = 0.5
             
             gradientLayer.mask = maskLayer
         }
@@ -217,17 +225,20 @@ class LineChart: UIView {
      Create titles at the bottom for all entries showed in the chart
      */
     private func drawLables() {
+        
         if let dataEntries = dataEntries,
             dataEntries.count > 0 {
+            
             for i in 0..<dataEntries.count {
                 let textLayer = CATextLayer()
-                textLayer.frame = CGRect(x: lineGap*CGFloat(i) - lineGap/2 + 40, y: mainLayer.frame.size.height - bottomSpace/2 - 8, width: lineGap, height: 16)
-                textLayer.foregroundColor = UIColor.white.cgColor //#colorLiteral(red: 0.5019607843, green: 0.6784313725, blue: 0.8078431373, alpha: 1).cgColor
+                textLayer.frame = CGRect(x: lineGap*CGFloat(i) - lineGap/2 + distanceFromEdge, y: mainLayer.frame.size.height - bottomSpace/2 - 8, width: lineGap, height: 20)
+                
+                textLayer.foregroundColor = UIColor.black.cgColor
                 textLayer.backgroundColor = UIColor.clear.cgColor
                 textLayer.alignmentMode = kCAAlignmentCenter
                 textLayer.contentsScale = UIScreen.main.scale
                 textLayer.font = CTFontCreateWithName(UIFont.systemFont(ofSize: 0).fontName as CFString, 0, nil)
-                textLayer.fontSize = 11
+                textLayer.fontSize = fontSizeForLabels
                 textLayer.string = dataEntries[i].label
                 mainLayer.addSublayer(textLayer)
             }
@@ -243,28 +254,31 @@ class LineChart: UIView {
         }
         
         var gridValues: [CGFloat]? = nil
+        
         if dataEntries.count < 4 && dataEntries.count > 0 {
             gridValues = [0, 1]
         } else if dataEntries.count >= 4 {
             gridValues = [0, 0.25, 0.5, 0.75, 1]
         }
+        
         if let gridValues = gridValues {
+            
             for value in gridValues {
                 let height = value * gridLayer.frame.size.height
                 
-                let path = UIBezierPath()
-                path.move(to: CGPoint(x: 0, y: height))
-                path.addLine(to: CGPoint(x: gridLayer.frame.size.width, y: height))
+//                let path = UIBezierPath()
+//                path.move(to: CGPoint(x: 0, y: height))
+//                path.addLine(to: CGPoint(x: gridLayer.frame.size.width, y: height))
+//
+//                let lineLayer = CAShapeLayer()
+//                lineLayer.path = path.cgPath
+//                lineLayer.fillColor = UIColor.clear.cgColor
+//                lineLayer.strokeColor = UIColor.gray.cgColor
+//                if (value > 0.0 && value < 1.0) {
+//                    lineLayer.lineDashPattern = [4, 4]
+//                }
                 
-                let lineLayer = CAShapeLayer()
-                lineLayer.path = path.cgPath
-                lineLayer.fillColor = UIColor.clear.cgColor
-                lineLayer.strokeColor = UIColor.white.cgColor
-                if (value > 0.0 && value < 1.0) {
-                    lineLayer.lineDashPattern = [4, 4]
-                }
-                
-                gridLayer.addSublayer(lineLayer)
+//                gridLayer.addSublayer(lineLayer)
                 
                 var minMaxGap:CGFloat = 0
                 var lineValue:Int = 0
@@ -275,13 +289,12 @@ class LineChart: UIView {
                 }
                 
                 let textLayer = CATextLayer()
-                textLayer.frame = CGRect(x: 4, y: height, width: 50, height: 16)
-                textLayer.foregroundColor = UIColor.white.cgColor
+                textLayer.frame = CGRect(x: 4, y: height, width: 50, height: 20)
+                textLayer.foregroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
                 textLayer.backgroundColor = UIColor.clear.cgColor
                 textLayer.contentsScale = UIScreen.main.scale
                 textLayer.font = CTFontCreateWithName(UIFont.systemFont(ofSize: 0).fontName as CFString, 0, nil)
-                textLayer.fontSize = 12
-//                textLayer.string = "\(lineValue)"
+                textLayer.fontSize = fontSizeForLabels
                 textLayer.string = timeFormat.mmSS(totalSeconds: lineValue)
                                 
                 gridLayer.addSublayer(textLayer)
