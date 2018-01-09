@@ -184,25 +184,15 @@ class GameInformationTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-//        guard let sectionInfo = fetchedResultsController.sections?[section] else {
-//            return "No Games"
-//
-//        }
-//
-//        let numberOfGamesForPlayer = String(sectionInfo.numberOfObjects) + " Games"
-//
-//        return numberOfGamesForPlayer
-        
-        let sectionInfo = fetchedResultsController.sections?[section]
-        
-        if sectionInfo?.name == "" {
-            return "No games"
-        } else {
-            return sectionInfo?.name
+        guard let sectionInfo = fetchedResultsController.sections?[section] else {
+            return "No Games"
+
         }
 
-        
-        
+        let numberOfGamesForPlayer = String(sectionInfo.numberOfObjects) + " Games"
+
+        return numberOfGamesForPlayer
+                
     }  //titleForHeaderInSection
 
     

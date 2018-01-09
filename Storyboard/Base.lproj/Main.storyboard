@@ -130,7 +130,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOa-UK-miM">
                                 <rect key="frame" x="0.0" y="46" width="375" height="28"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players On Ice" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGA-Zg-82y">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players on Ice" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGA-Zg-82y">
                                         <rect key="frame" x="15" y="0.0" width="360" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -147,7 +147,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z1V-wy-CnS">
-                                <rect key="frame" x="0.0" y="74" width="375" height="250"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="246"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="playersTableViewCell" textLabel="2eh-Ie-kLQ" style="IBUITableViewCellStyleDefault" id="SG8-jn-ebg">
@@ -174,7 +174,7 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-vu-LSl" userLabel="Button Stack View">
-                                <rect key="frame" x="10" y="329" width="130" height="60"/>
+                                <rect key="frame" x="10" y="325" width="130" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-fs-WSk">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -193,17 +193,20 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R19-ey-bkE">
-                                <rect key="frame" x="305" y="329" width="60" height="60"/>
+                                <rect key="frame" x="305" y="325" width="60" height="60"/>
                                 <state key="normal" image="buttonClockStart"/>
                                 <connections>
                                     <action selector="clock:" destination="5t9-lx-hAx" eventType="touchUpInside" id="glZ-qH-fv8"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2X6-Bf-eC0">
-                                <rect key="frame" x="0.0" y="390" width="375" height="24"/>
+                                <rect key="frame" x="0.0" y="386" width="375" height="32"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players on Bench" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8g7-iG-cMa">
-                                        <rect key="frame" x="15" y="0.0" width="360" height="24"/>
+                                        <rect key="frame" x="15" y="0.0" width="360" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="PVy-Tw-beJ"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -213,7 +216,7 @@
                                 <constraints>
                                     <constraint firstItem="8g7-iG-cMa" firstAttribute="leading" secondItem="2X6-Bf-eC0" secondAttribute="leading" constant="15" id="U8O-ce-Ghj"/>
                                     <constraint firstItem="8g7-iG-cMa" firstAttribute="top" secondItem="2X6-Bf-eC0" secondAttribute="top" id="ivN-2m-aIX"/>
-                                    <constraint firstAttribute="bottom" secondItem="8g7-iG-cMa" secondAttribute="bottom" id="uI9-Xx-bcj"/>
+                                    <constraint firstAttribute="bottom" secondItem="8g7-iG-cMa" secondAttribute="bottom" constant="4" id="uI9-Xx-bcj"/>
                                     <constraint firstAttribute="trailing" secondItem="8g7-iG-cMa" secondAttribute="trailing" id="vWN-3d-GpQ"/>
                                 </constraints>
                             </view>
@@ -258,7 +261,7 @@
                             <constraint firstItem="R19-ey-bkE" firstAttribute="top" secondItem="vAe-vu-LSl" secondAttribute="top" id="HU2-hs-SRN"/>
                             <constraint firstItem="2X6-Bf-eC0" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="I72-oN-sFi"/>
                             <constraint firstItem="2X6-Bf-eC0" firstAttribute="top" secondItem="R19-ey-bkE" secondAttribute="bottom" constant="1" id="Kbj-BQ-P2R"/>
-                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="2X6-Bf-eC0" secondAttribute="bottom" id="MVQ-AR-W6r"/>
+                            <constraint firstItem="2zv-rF-527" firstAttribute="top" secondItem="2X6-Bf-eC0" secondAttribute="bottom" constant="-4" id="MVQ-AR-W6r"/>
                             <constraint firstItem="asf-En-Zf8" firstAttribute="top" secondItem="kzy-O2-pP9" secondAttribute="top" id="NTi-tu-sB1"/>
                             <constraint firstItem="tOa-UK-miM" firstAttribute="trailing" secondItem="kzy-O2-pP9" secondAttribute="trailing" id="Svr-3x-ag3"/>
                             <constraint firstItem="asf-En-Zf8" firstAttribute="leading" secondItem="kzy-O2-pP9" secondAttribute="leading" id="aHU-JD-tsl"/>
@@ -1223,7 +1226,7 @@
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pO-l6-Ib6">
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
-                                <color key="backgroundColor" name="gryphonBlue"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="UE3-Yy-IcW"/>
                                 </constraints>
@@ -1265,7 +1268,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEC-dN-gbZ">
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
-                                <color key="backgroundColor" name="gryphonBlue"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="f3N-GT-RSb"/>
                                 </constraints>
@@ -1344,11 +1347,12 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To begin, tap the " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVf-Gy-x61">
                                                 <rect key="frame" x="0.0" y="4" width="158" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user icon 25x25" translatesAutoresizingMaskIntoConstraints="NO" id="4rM-X7-4i5">
                                                 <rect key="frame" x="160" y="0.0" width="27" height="25"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
@@ -1358,13 +1362,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="at the bottom right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZk-LJ-v8l">
                                                 <rect key="frame" x="0.0" y="0.0" width="171.5" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to add players." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qr7-78-XWr">
                                                 <rect key="frame" x="0.0" y="26.5" width="136.5" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -1372,7 +1376,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="gryphonGold"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Bg2-Me-Dnp" firstAttribute="centerY" secondItem="JAb-cE-1pk" secondAttribute="centerY" id="QGx-MO-fmz"/>
                             <constraint firstItem="Bg2-Me-Dnp" firstAttribute="centerX" secondItem="JAb-cE-1pk" secondAttribute="centerX" id="l8i-sX-eR7"/>
@@ -1429,7 +1433,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To begin, tap the " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8CC-UB-mmJ">
                                                 <rect key="frame" x="0.0" y="4" width="158" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar icon 25x25 copy" translatesAutoresizingMaskIntoConstraints="NO" id="x5u-HI-YJt">
@@ -1443,13 +1447,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="at the bottom right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9i-RH-Vzj">
                                                 <rect key="frame" x="0.0" y="0.0" width="171.5" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to add a game." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efA-p2-79U">
                                                 <rect key="frame" x="0.0" y="26.5" width="138" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -1457,7 +1461,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="gryphonBlue"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="h4X-l5-gcq" firstAttribute="centerX" secondItem="dPI-97-LmX" secondAttribute="centerX" id="dwg-lo-uKh"/>
                             <constraint firstItem="h4X-l5-gcq" firstAttribute="centerY" secondItem="dPI-97-LmX" secondAttribute="centerY" id="iZg-L7-3GY"/>
@@ -1483,13 +1487,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's get started!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itb-di-5jh">
                                         <rect key="frame" x="113" y="0.0" width="155" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to create your first game." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmd-kL-Q2m">
                                         <rect key="frame" x="0.0" y="28.5" width="268" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1498,7 +1502,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="gryphonBlue"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PkG-MF-EuO" firstAttribute="centerY" secondItem="J2k-m5-kc5" secondAttribute="centerY" id="QQR-WP-hdJ"/>
                             <constraint firstItem="PkG-MF-EuO" firstAttribute="centerX" secondItem="J2k-m5-kc5" secondAttribute="centerX" id="SP5-js-9jx"/>
@@ -1524,13 +1528,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's get started!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jN0-91-yAq">
                                         <rect key="frame" x="116" y="0.0" width="155" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to create your first player." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dl2-Ii-0Uy">
                                         <rect key="frame" x="0.0" y="28.5" width="271" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1539,7 +1543,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="gryphonGold"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0vo-DK-Dun" firstAttribute="centerY" secondItem="Syi-40-LMh" secondAttribute="centerY" id="H2M-gP-9le"/>
                             <constraint firstItem="0vo-DK-Dun" firstAttribute="centerX" secondItem="Syi-40-LMh" secondAttribute="centerX" id="m4P-3f-WVr"/>
@@ -1580,12 +1584,6 @@
         <image name="separatorLine108px" width="108" height="1"/>
         <image name="separatorLine167px" width="167" height="1"/>
         <image name="user icon 25x25" width="27" height="25"/>
-        <namedColor name="gryphonBlue">
-            <color red="0.41176470588235292" green="0.63921568627450975" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="gryphonGold">
-            <color red="1" green="0.7803921568627451" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="hockeyNetRed">
             <color red="0.92549019610000005" green="0.20392156859999999" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
