@@ -63,7 +63,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        roundedImageView.setRounded(image: headShotImageView, colour: "gryphonGold")
+        roundedImageView.setRounded(image: headShotImageView, colour: #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1))
         
         //NotificationCenter
         SetupNotificationCenter()
@@ -148,11 +148,11 @@ class PlayerDetailsTableViewController: UITableViewController {
             return
         }
         
-        header.textLabel?.textColor     = UIColor.black
+        header.textLabel?.textColor     = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         header.textLabel?.font          = UIFont.systemFont(ofSize: 24, weight: .light)
         header.textLabel?.frame         = header.frame
         header.textLabel?.textAlignment = .left
-        header.backgroundView?.backgroundColor = UIColor(named: "gryphonGold")
+        header.backgroundView?.backgroundColor = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
     }
     
     @IBAction func camera(_ sender: Any) {

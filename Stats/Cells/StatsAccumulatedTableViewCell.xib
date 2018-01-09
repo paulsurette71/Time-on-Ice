@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.77254901960784317" green="0.72156862745098038" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FrF-3V-ThS" firstAttribute="centerY" secondItem="gmA-d5-toU" secondAttribute="centerY" id="J1v-M4-LeZ"/>
                             <constraint firstAttribute="trailing" secondItem="FrF-3V-ThS" secondAttribute="trailing" id="MKX-ob-xW7"/>
@@ -66,7 +66,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.7725490196" green="0.72156862749999995" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="4ZR-mV-bdf"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="UVI-vt-rz1"/>
@@ -156,7 +156,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.7725490196" green="0.72156862749999995" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="ZTX-zu-ngS"/>
                         </constraints>

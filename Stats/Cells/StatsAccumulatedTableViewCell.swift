@@ -29,7 +29,7 @@ class StatsAccumulatedTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
             
-        let backgroundColour = #colorLiteral(red: 0.7725490196, green: 0.7215686275, blue: 0.6784313725, alpha: 1)
+        let backgroundColour = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
         
         //set background colour for headings
         timeOnIceView.backgroundColor = backgroundColour

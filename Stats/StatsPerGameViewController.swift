@@ -373,7 +373,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
         header.textLabel?.font                 = UIFont.systemFont(ofSize: 20, weight: .light)
         header.textLabel?.frame                = header.frame
         header.textLabel?.textAlignment        = .left
-        header.backgroundView?.backgroundColor = #colorLiteral(red: 0.6352941176, green: 0.5764705882, blue: 0.5254901961, alpha: 1)
+        header.backgroundView?.backgroundColor = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
         
     }  //willDisplayHeaderView
     
@@ -401,6 +401,10 @@ extension StatsPerGameViewController: UITableViewDataSource {
         }
         
     }  //titleForHeaderInSection
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }  //heightForHeaderInSection
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
