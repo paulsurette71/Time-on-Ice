@@ -16,6 +16,24 @@ class StatsPerGameViewController: UIViewController {
     
     //coredata
     var managedContext: NSManagedObjectContext!
+    var fetchedResultsController: NSFetchedResultsController<Shifts>!
+    
+    lazy var fetchedResultsControllerShiftPerPlayer: NSFetchedResultsController<Shifts> = {
+        
+        let fetchRequest: NSFetchRequest<Shifts> = Shifts.fetchRequest()
+        let sort = NSSortDescriptor(key: #keyPath(Shifts.date), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        let predicate               = NSPredicate(format: "playersRelationship = %@", selectedPlayer!)
+        fetchRequest.predicate      = predicate
+        
+        let fetchedResultsControllerShiftPerPlayer = NSFetchedResultsController( fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsControllerShiftPerPlayer.delegate = self
+        
+        return fetchedResultsControllerShiftPerPlayer
+    }()
+    
     
     //classes
     let goFetch     = GoFetch()
@@ -24,12 +42,12 @@ class StatsPerGameViewController: UIViewController {
     let calculate   = Calculate()
     
     //passed from StatsInformationViewController
-    var selectedPlayer: [String: Any]?
+    var selectedPlayer: Players?
     
     var numberOfGames  = 0
     var gameData       = [[String: AnyObject]]()
     var statsPerPlayer = [[String: AnyObject]]()
-    //    var player: Players?
+    var listOfShifts = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,70 +66,54 @@ class StatsPerGameViewController: UIViewController {
         //StatsOneShiftTableViewCell
         let cellChartOneShiftNib = UINib(nibName: "StatsOneShiftTableViewCell", bundle: nil)
         tableView.register(cellChartOneShiftNib, forCellReuseIdentifier: "StatsOneShiftCell")
+        
+        //StatsOneShiftTableViewCell
+        let cellChartPerGame = UINib(nibName: "StatsAccumaltedPerGameTableViewCell", bundle: nil)
+        tableView.register(cellChartPerGame, forCellReuseIdentifier: "StatsAccumaltedPerGameCell")
 
-        
-        
+    
+
     }  //viewDidLoad
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard (selectedPlayer != nil) else {
-            return
+        do {
+            try fetchedResultsControllerShiftPerPlayer.performFetch()
+        } catch let error as NSError {
+            print("\(self) -> \(#function) \(error), \(error.userInfo)")
         }
         
-        fetchData()
+        for shifts in fetchedResultsControllerShiftPerPlayer.fetchedObjects! {
+            
+            listOfShifts += [Int(shifts.timeOnIce)]
+        }
         
-    }
+        fetchData(player: selectedPlayer!)
+        
+    }  //viewWillAppear
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func fetchData() {
+    func fetchData(player: Players) {
         
-        let playerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
+        guard player.firstName != nil, player.lastName != nil else {
+            
+            navigationController?.popToRootViewController(animated: true)
+            return
+        }
         
-        if let player = managedContext.object(with: playerNSManagedObjectID) as? Players {
-            
-            self.title = (player.firstName)! + " " + (player.lastName)!
-            
-            numberOfGames = goFetch.statsGamesPerPlayer(player: player, managedContext: managedContext)
-            
-            gameData = goFetch.getGamesForPlayer(player: player, managedContext: managedContext)
-            
-            statsPerPlayer = goFetch.statsPerPlayer(player: player, managedContext: managedContext)
-            
-        }  // if let player
+        self.title = (player.firstName)! + " " + (player.lastName)!
+        
+        numberOfGames = goFetch.statsGamesPerPlayer(player: player, managedContext: managedContext)
+        
+        gameData = goFetch.getGamesForPlayer(player: player, managedContext: managedContext)
+        
         
     }  //fetchData
-    
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //
-    //        let statsDetailsPerGameViewController = segue.destination as! StatsDetailsPerGameViewController
-    //
-    //        //Get selected Game
-    //        let indexPath = tableView.indexPathForSelectedRow
-    //
-    //        let game = gameData[(indexPath?.row)!]
-    //        let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
-    //        let selectedGame = managedContext.object(with: gameNSManagedObjectID) as! Games
-    //
-    //        //Get selected Player
-    //        let selectedPlayerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
-    //        let player = managedContext.object(with: selectedPlayerNSManagedObjectID) as? Players
-    //
-    //        if segue.identifier == "StatsDetailsPerGameSegue" {
-    //
-    //            statsDetailsPerGameViewController.managedContext = managedContext
-    //            statsDetailsPerGameViewController.player = player
-    //            statsDetailsPerGameViewController.game = selectedGame
-    //
-    //        }  // if segue.identifier
-    //
-    //    }  //prepare(for segue
-    
     
 }
 
@@ -135,7 +137,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2 //numberOfGames + 2
+         return 2
         
     }  //numberOfRowsInSection
     
@@ -166,7 +168,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "StatsAccumulatedCell", for: indexPath) as! StatsAccumulatedTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "StatsAccumaltedPerGameCell", for: indexPath) as! StatsAccumaltedPerGameTableViewCell   //Try this one
                 
                 configureStatsCell(cell, indexPath: indexPath)
                 
@@ -174,18 +176,12 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
             } else {
                 
-                
                 //Game Information
                 let game = gameData[indexPath.section - 1]
                 let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
                 let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
                 
-                //Player Information
-                let playerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
-                let player = managedContext.object(with: playerNSManagedObjectID) as? Players
-                
-                
-                let results = goFetch.shiftsPerPlayerPerGame(player: player!, game: gameDetails, managedContext: managedContext)
+                let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
                 
                 var timeOnIceValues = [Int]()
                 
@@ -194,7 +190,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
                     timeOnIceValues += [shifts["timeOnIce"] as! Int]
                     
                 }
-
+                
                 guard timeOnIceValues.count > 1 else {
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "StatsOneShiftCell") as! StatsOneShiftTableViewCell
@@ -214,39 +210,35 @@ extension StatsPerGameViewController: UITableViewDataSource {
         }  //if indexPath.section == 0
         
         
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
+        //                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
         //
-        //        //Game Information
-        //        let game = gameData[indexPath.section - 1]
-        //        let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
-        //        let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
+        //                //Game Information
+        //                let game = gameData[indexPath.section - 1]
+        //                let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
+        //                let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
         //
-        //        //Player Information
-        //        let playerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
-        //        let player = managedContext.object(with: playerNSManagedObjectID) as? Players
+        //                //Player Information
+        ////                let playerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
+        ////                let player = managedContext.object(with: playerNSManagedObjectID) as? Players
         //
-        //        let results = goFetch.shiftsPerPlayerPerGame(player: player!, game: gameDetails, managedContext: managedContext)
+        //                let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
         //
-        //        print(convertDate.convertDate(date: (gameDetails.date)!))
-        //        print(results)
+        //                print(convertDate.convertDate(date: (gameDetails.date)!))
+        //                print(results)
         //
-        //        return cell
+        //                return cell
         
         
     }  //cellForRowAt
     
-    func configureStatsCell(_ cell: StatsAccumulatedTableViewCell, indexPath: IndexPath) {
+    func configureStatsCell(_ cell: StatsAccumaltedPerGameTableViewCell, indexPath: IndexPath) {
         
         //Game Information
         let game = gameData[indexPath.section - 1]
         let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
         let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
         
-        //Player Information
-        let playerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
-        let player = managedContext.object(with: playerNSManagedObjectID) as? Players
-        
-        let results = goFetch.shiftsPerPlayerPerGame(player: player!, game: gameDetails, managedContext: managedContext)
+         let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
         
         var totalTimeOnIce = 0
         var minMaxArray = [Int]()
@@ -279,32 +271,35 @@ extension StatsPerGameViewController: UITableViewDataSource {
         let longestShift = timeFormat.mmSS(totalSeconds: max!)
         cell.statsLongestShiftLengthLabel.text = longestShift
         
-        
-        
-    }
+    }  //configureStatsCell
     
     
     func configureAccumulatedCell(_ cell: StatsAccumulatedTableViewCell, indexPath: IndexPath) {
         
         //Total TimeOnIce
-        let timeOnIce = statsPerPlayer.first!["sumShift"]! as! Int
+        //        let timeOnIce = statsPerPlayer.first!["sumShift"]! as! Int
+        let timeOnIce = listOfShifts.reduce(0, +)
+        
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: timeOnIce)
         cell.statsTotalTimeOnIceLabel.text = totalTimeOnIce
         
         //Total Shifts
-        let totalShifts = statsPerPlayer.first!["countShift"]! as! Int
+        //        let totalShifts = statsPerPlayer.first!["countShift"]! as! Int
+        let totalShifts = listOfShifts.count
         cell.statsTotalShiftsLabel.text =  String(totalShifts)
         
         //Average Shift Length
-        let avergeShiftLength = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["avgShift"]! as! Int)
+        let averageShift = timeOnIce / totalShifts
+        //        let avergeShiftLength = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["avgShift"]! as! Int)
+        let avergeShiftLength = timeFormat.mmSS(totalSeconds: averageShift)
         cell.statsAverageShiftLengthLabel.text = avergeShiftLength
         
         //Shortest Shift Length
-        let shortestShift = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["minShift"]! as! Int)
+        let shortestShift = timeFormat.mmSS(totalSeconds: listOfShifts.min()!)
         cell.statsShortestShiftLengthLabel.text = shortestShift
         
         //Longest Shift
-        let longestShift = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["maxShift"]! as! Int)
+        let longestShift = timeFormat.mmSS(totalSeconds: listOfShifts.max()!)
         cell.statsLongestShiftLengthLabel.text = longestShift
         
         //Number of Games
@@ -319,7 +314,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
         let averageTimeOnIcePerGame = calculate.averageTimeOnIcePerGame(timeOnInce: timeOnIce, games: numberOfGames)
         cell.statsAvgTimeOnIcePerGameLabel.text = timeFormat.mmSS(totalSeconds: averageTimeOnIcePerGame)
         
-    }  //configureCell
+    }  //configureAccumulatedCell
     
     func configureChartCell(_ cell: StatsChartTableViewCell, indexPath: IndexPath) {
         
@@ -328,20 +323,15 @@ extension StatsPerGameViewController: UITableViewDataSource {
         
         if indexPath.section == 0 && indexPath.row == 1 {
             
-            let playerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
+            let timeOnIcePerPlayer = goFetch.statsTimeOnIcePerPlayer(player: selectedPlayer!, managedContext: managedContext)
             
-            if let player = managedContext.object(with: playerNSManagedObjectID) as? Players {
+            for index in timeOnIcePerPlayer.indices {
                 
-                let timeOnIcePerPlayer = goFetch.statsTimeOnIcePerPlayer(player: player, managedContext: managedContext)
+                let timeOnIce = timeOnIcePerPlayer[index].timeOnIce
                 
-                for index in timeOnIcePerPlayer.indices {
-                    
-                    let timeOnIce = timeOnIcePerPlayer[index].timeOnIce
-                    
-                    let shiftNumber = String(index + 1)
-                    
-                    barChartData.append(PointEntry(value: Int(timeOnIce), label: shiftNumber))
-                }
+                let shiftNumber = String(index + 1)
+                
+                barChartData.append(PointEntry(value: Int(timeOnIce), label: shiftNumber))
                 
                 //draw barChart
                 cell.chartView.isCurved = true
@@ -349,7 +339,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
             }  //if let player =
             
-        }// if indexPath.section
+        }  // if indexPath.section
         
     }  //configureChartCell
     
@@ -367,7 +357,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
             barChartData.append(PointEntry(value: Int(timeOnIce), label: shiftNumber))
         }
         
-
         //draw barChart
         cell.chartView.isCurved = true
         cell.chartView.dataEntries = barChartData
@@ -415,18 +404,79 @@ extension StatsPerGameViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 0 {
+        var returnValue:CGFloat = 0
+        
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 0 {
+                
+                returnValue = 240
+                
+            } else if indexPath.row == 1 {
+                
+                returnValue = 200
+                
+            }
             
-            return 240
+        default:
             
-        } else if indexPath.row == 1 {
-            
-            return 200
-            
-        } else {
-            
-            return 44
-        }
+            if indexPath.row == 0 {
+                
+                returnValue = 163
+                
+            } else if indexPath.row == 1 {
+                
+                returnValue = 200
+                
+            }
+
+        }  //switch
+        
+       return  returnValue
+
     }  //heightForRowAt
     
 }  //UITableViewDataSource
+
+extension StatsPerGameViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+        
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .update:
+            tableView?.reloadData()
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        
+        let indexSet = IndexSet(integer: sectionIndex)
+        switch type {
+        case .insert:
+            tableView.insertSections(indexSet, with: .automatic)
+        case .delete:
+            tableView.deleteSections(indexSet, with: .automatic)
+        default: break
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+        
+    }
+    
+} //extension
+
+

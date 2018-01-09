@@ -12,11 +12,12 @@ class PlayerInformationTableViewCell: UITableViewCell {
     
     //UILabel
     @IBOutlet weak var playerInformationLabel: UILabel!
-    @IBOutlet weak var totalTimeOnIceLabel: UILabel!
-    @IBOutlet weak var totalShiftsLabel: UILabel!
     @IBOutlet weak var onIceImageView: UIImageView!
+    @IBOutlet weak var playerNumberLabel: UILabel!
+    
     
     //UIButton
+    @IBOutlet weak var statsButton: UIButton!
     @IBOutlet weak var chevronButton: UIButton!
-
+    
  }

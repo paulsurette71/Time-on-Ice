@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmA-d5-toU" userLabel="Time On Ice View">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time On Ice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FrF-3V-ThS">
-                                <rect key="frame" x="15" y="4" width="360" height="24"/>
+                                <rect key="frame" x="15" y="4" width="360" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -34,11 +34,12 @@
                             <constraint firstItem="FrF-3V-ThS" firstAttribute="centerY" secondItem="gmA-d5-toU" secondAttribute="centerY" id="J1v-M4-LeZ"/>
                             <constraint firstAttribute="trailing" secondItem="FrF-3V-ThS" secondAttribute="trailing" id="MKX-ob-xW7"/>
                             <constraint firstItem="FrF-3V-ThS" firstAttribute="top" secondItem="gmA-d5-toU" secondAttribute="top" constant="4" id="d5t-RR-5aj"/>
+                            <constraint firstAttribute="height" constant="28" id="l7Z-a3-5zQ"/>
                             <constraint firstItem="FrF-3V-ThS" firstAttribute="leading" secondItem="gmA-d5-toU" secondAttribute="leading" constant="15" id="p7I-zK-f95"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="icO-ir-wvL" userLabel="Time On Ice Total Stack View">
-                        <rect key="frame" x="15" y="36.5" width="71" height="41"/>
+                        <rect key="frame" x="15" y="33.5" width="71" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zt0-GP-wog">
                                 <rect key="frame" x="14.5" y="0.0" width="42" height="20.5"/>
@@ -47,7 +48,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shi-kS-lNX">
-                                <rect key="frame" x="0.0" y="20.5" width="71" height="20.5"/>
+                                <rect key="frame" x="0.0" y="23.5" width="71" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -68,6 +69,7 @@
                         <color key="backgroundColor" red="0.7725490196" green="0.72156862749999995" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="4ZR-mV-bdf"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="UVI-vt-rz1"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-Wc-r3t" userLabel="Shifts Stack View">
@@ -155,6 +157,9 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.7725490196" green="0.72156862749999995" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="ZTX-zu-ngS"/>
+                        </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dC3-f9-Q9g" userLabel="Games Stack View">
                         <rect key="frame" x="15" y="194" width="345" height="41"/>

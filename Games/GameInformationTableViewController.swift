@@ -252,6 +252,7 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
         case .update:
+            print("GameInformationTableViewController Update")
             tableView?.reloadData()
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)

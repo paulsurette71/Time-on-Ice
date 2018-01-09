@@ -67,6 +67,7 @@ class PlayerPopoverTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let sectionInfo = fetchedResultsController.sections?[section] else {
+            
             return 0
             
         }
@@ -91,6 +92,7 @@ class PlayerPopoverTableViewController: UITableViewController {
             cell.checkMarkImageView.isHidden = false
             
         } else {
+            
             cell.checkMarkImageView.isHidden = true
         }
         

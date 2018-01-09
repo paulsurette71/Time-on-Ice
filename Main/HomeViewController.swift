@@ -91,7 +91,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-                
+        
         //NotifactionCenter
         SetupNotificationCenter()
         
@@ -115,25 +115,25 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-//        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-//        let importPlayers            = ImportPlayers()
-//        let importGames              = ImportGames()
-//        
-//        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-//            
-//            //Import Test data
-//            importPlayers.importPlayers()
-//            importGames.importGames()
-//            
-//        }
+        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        let importPlayers            = ImportPlayers()
+        let importGames              = ImportGames()
+        
+        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+            
+            //Import Test data
+            importPlayers.importPlayers()
+            importGames.importGames()
+            
+        }
         
         reset.playersStoredData(managedContext: managedContext)
         
-        //Go get the players on the bench
-        goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnBench)
-
-        //Go get the players on the ice
-        goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnIce)
+        //        //Go get the players on the bench
+        //        goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnBench)
+        //
+        //        //Go get the players on the ice
+        //        goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnIce)
         
     }  //viewDidLoad
     
@@ -150,6 +150,10 @@ class HomeViewController: UIViewController {
             clockButton.isEnabled = true
             playersButton.isEnabled = true
         }
+        
+        fetchAndReloadTableView()
+        
+        fetchAndReloadCollectionView()
         
     }  //viewWillAppear
     
@@ -227,11 +231,30 @@ class HomeViewController: UIViewController {
     
     func notificationCenterData(notification:Notification) -> Void  {
         
+        fetchAndReloadCollectionView()
+        
         //Update UI
-        setupUI()
+        self.setupUI()
         
     }  //notificationCenterData
     
+    func fetchAndReloadTableView () {
+        
+        //Go get the players on the ice
+        goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnIce)
+        
+        tableView.reloadData()
+        
+    }
+    
+    func fetchAndReloadCollectionView () {
+        
+        //Go get the players on the bench
+        goFetch.fetchPlayersOnIceOrBench(managedContext: managedContext, fetchedResultsController: fetchedResultsControllerOnBench)
+        
+        collectionView.reloadData()
+        
+    }
     func displayGameHeader(notification:Notification) -> Void {
         
         guard (appDelegate.game != nil) else {
@@ -306,6 +329,8 @@ class HomeViewController: UIViewController {
             
             players.runningTimeOnIce += 1
             
+            tableView.reloadData()
+            
         }
         
     }  //updateCounters
@@ -354,13 +379,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.totalTimeOnIceLabel.text = totalTimeOnIce
         
-        if player.onIce {
+        DispatchQueue.main.async {
             
-            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
+            if player.onIce {
+                
+                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
+                
+            } else {
+                
+                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
+            }
             
-        } else {
-            
-            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
         }
         
         return cell
@@ -368,6 +397,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }  //cellForItemAt
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print("didSelectItemAt")
         
         let cell = collectionView.cellForItem(at: indexPath) as! BenchCollectionViewCell
         
@@ -385,6 +416,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             player.runningTimeOnIce = 0
             
+
+            
         } else if player.onIce == true {
             
             //Only save a shift if it's greater that 1s.
@@ -397,6 +430,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             saveOnIceStatus(player: player, managedContext: managedContext, onIce: false)
             
         }  //else
+        
+        
+        fetchAndReloadTableView()
+        collectionView.reloadData()
         
         if let countPlayersOnIce = fetchedResultsControllerOnIce.fetchedObjects?.count {
             
@@ -549,18 +586,19 @@ extension HomeViewController: UIPopoverPresentationControllerDelegate {
 
 extension HomeViewController: NSFetchedResultsControllerDelegate {
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
-        if controller == fetchedResultsControllerOnIce {
-            
-            tableView.reloadData()
-            
-        } else if controller == fetchedResultsControllerOnBench {
-            
-            collectionView.reloadData()
-            
-        }
-        
-    }  //controllerDidChangeContent
+    //    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    //
+    //        if controller == fetchedResultsControllerOnIce {
+    //
+    //            tableView.reloadData()
+    //
+    //        } else if controller == fetchedResultsControllerOnBench {
+    //
+    //            collectionView.reloadData()
+    //
+    //        }
+    //
+    //    }  //controllerDidChangeContent
     
 }  //extension HomeViewController: NSFetchedResultsControllerDelegate
+

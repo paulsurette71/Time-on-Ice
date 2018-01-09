@@ -31,7 +31,7 @@ class PlayerInformationTableViewController: UITableViewController {
         // Register tableView cell classes
         let cellNib = UINib(nibName: "PlayerInformationTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "playerInformationTableViewCell")
-        tableView.rowHeight = 90
+        tableView.rowHeight = 70
         
         goFetchPlayers()
     }
@@ -51,19 +51,23 @@ class PlayerInformationTableViewController: UITableViewController {
         }
         
         //Update the tableview.
-        tableView.reloadData()
+        //        tableView.reloadData()
         
     }
     
     func goFetchPlayers() {
         
         let fetchRequest: NSFetchRequest<Players> = Players.fetchRequest()
-        let sortTeam   = NSSortDescriptor(key: #keyPath(Players.team), ascending: true)
-        let sortNumber = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
-        fetchRequest.sortDescriptors = [sortTeam, sortNumber]
-        fetchRequest.fetchBatchSize = 10
+        //        let sortTeam   = NSSortDescriptor(key: #keyPath(Players.team), ascending: true)
+        //        let sortNumber = NSSortDescriptor(key: #keyPath(Players.number), ascending: true)
+        //        fetchRequest.sortDescriptors = [sortTeam, sortNumber]
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: #keyPath(Players.team), cacheName: nil)
+        let sortByPlayerLastName = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
+        fetchRequest.sortDescriptors = [sortByPlayerLastName]
+        //        fetchRequest.fetchBatchSize = 10
+        
+        //        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: #keyPath(Players.team), cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
         
         fetchedResultsController.delegate = self
         
@@ -117,6 +121,22 @@ class PlayerInformationTableViewController: UITableViewController {
         let player = fetchedResultsController.object(at: indexPath)
         configureCell(cell, withPlayer: player, indexPath: indexPath)
         
+        cell.chevronButton.tag = indexPath.row
+        cell.statsButton.tag = indexPath.row
+        
+        cell.chevronButton.addTarget(self, action: #selector(chevron), for: .touchUpInside)
+        cell.statsButton.addTarget(self, action: #selector(stats), for: .touchUpInside)
+        
+        //Check to see how many games are played to show button.
+        let gamesPlayed = goFetch.statsGamesPerPlayer(player: player, managedContext: managedContext)
+        
+        if gamesPlayed > 0 {
+            cell.statsButton.isHidden = false
+        } else {
+            cell.statsButton.isHidden = true
+        }
+        
+        //Check to see if the on ice image should be shown.
         if player.onIce {
             cell.onIceImageView.isHidden = false
         } else {
@@ -128,29 +148,37 @@ class PlayerInformationTableViewController: UITableViewController {
     
     func configureCell(_ cell: PlayerInformationTableViewCell, withPlayer player: Players, indexPath: IndexPath) {
         
-//        let results = goFetch.timeOnIceWithShifts(player: player, game: , managedContext: managedContext)
-//        
-//        if results.count != 0 {
-//            
-//            let totalTimeOnIce = timeFormat.mmSS(totalSeconds: results["timeOnIce"]!)
-//            cell.totalTimeOnIceLabel.text = totalTimeOnIce
-//            
-//            if let shifts = results["shifts"] {
-//                cell.totalShiftsLabel.text = String(shifts)
-//            }
-//        }
-        
-        let playerInformation = createAttributedString.poundNumberFirstNameLastName(number: String(player.number), firstName: player.firstName!, lastName: player.lastName!)
-        
-        cell.playerInformationLabel.attributedText = playerInformation
-        
+        cell.playerInformationLabel.text = player.firstName! + " " + player.lastName!
+        cell.playerNumberLabel.text = String(player.number)
         cell.selectionStyle = .none
         
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    @objc func chevron(sender: UIButton)  {
         
-        updatePlayer(indexPath: indexPath)
+        //This replaces accessoryButtonTappedForRowWith
+        
+        let indexPath = NSIndexPath(row: sender.tag, section: 0)
+        
+        updatePlayer(indexPath: indexPath as IndexPath)
+        
+    }
+    
+    @objc func stats(sender: UIButton)  {
+        
+        //This replaces accessoryButtonTappedForRowWith
+        
+        let indexPath = NSIndexPath(row: sender.tag, section: 0)
+        
+        let selectedPlayer = fetchedResultsController.object(at: indexPath as IndexPath)
+        
+        let statsPerGameViewController = storyboard?.instantiateViewController(withIdentifier: "StatsPerGameViewController") as! StatsPerGameViewController
+        
+        statsPerGameViewController.managedContext = managedContext
+        statsPerGameViewController.selectedPlayer = selectedPlayer
+        
+        self.navigationController?.pushViewController(statsPerGameViewController, animated: true)
+        
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -168,13 +196,16 @@ class PlayerInformationTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        let sectionInfo = fetchedResultsController.sections?[section]
-        
-        if sectionInfo?.name == "" {
-            return "No team for Player"
-        } else {
-            return sectionInfo?.name
+        guard let numberOfPlayers = fetchedResultsController.sections?[section] else {
+            
+            return ""
+            
         }
+        
+        //return sectionInfo.numberOfObjects
+        let playersCount = numberOfPlayers.numberOfObjects
+        
+        return String(playersCount) + " Players"
         
     }  //titleForHeaderInSection
     
@@ -189,7 +220,7 @@ class PlayerInformationTableViewController: UITableViewController {
         } else {
             return true
         }
-    
+        
     }
     
     // Override to support editing the table view.
@@ -231,30 +262,22 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
         tableView.beginUpdates()
     }
     
-/*
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
-       case .insert:
+            
+        case .insert:
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
-        case .update: 
-            print("Update")
-            
-//            tableView?.reloadData()
-            
-//            let cell = tableView?.cellForRow(at: indexPath!) as! PlayerInformationTableViewCell  //crash?
-//            let results = fetchedResultsController.object(at: indexPath!)
-//            configureCell(cell, withPlayer: results, indexPath: indexPath!)
-            
+        case .update:
+            tableView?.reloadData()
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
-
+            
         }
     }
-*/
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         

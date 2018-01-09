@@ -52,11 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
         
         gameInformationTableViewController.managedContext = coreDataStack.managedContext
         
-        //Stats Tab
-        let statsNavigationController = tabBarController.viewControllers?[3] as! UINavigationController
-        let statsInformationViewController = statsNavigationController.viewControllers[0] as! StatsInformationViewController
-        
-        statsInformationViewController.managedContext = coreDataStack.managedContext
+//        //Stats Tab
+//        let statsNavigationController = tabBarController.viewControllers?[3] as! UINavigationController
+//        let statsInformationViewController = statsNavigationController.viewControllers[0] as! StatsInformationViewController
+//        
+//        statsInformationViewController.managedContext = coreDataStack.managedContext
 
         
         return true

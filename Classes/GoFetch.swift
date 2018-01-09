@@ -222,13 +222,13 @@ class GoFetch {
     
     func fetchPlayersOnIceOrBench(managedContext: NSManagedObjectContext, fetchedResultsController: NSFetchedResultsController<Players>) {
         
-        
         //Go get the players on the ice
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
             print("\(self) -> \(#function) \(error), \(error.userInfo)")
         }
+        
     }  //fetchPlayersOnIce
     
     func playersOnIce(managedContext: NSManagedObjectContext) -> [Players] {
