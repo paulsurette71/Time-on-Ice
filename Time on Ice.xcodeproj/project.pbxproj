@@ -34,7 +34,6 @@
 		7539FC901FD6EADF009E6CB4 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7539FC8F1FD6EADF009E6CB4 /* RoundedImage.swift */; };
 		753C215C1FDAD920005DC7F4 /* ShowPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C215B1FDAD920005DC7F4 /* ShowPopover.swift */; };
 		753C215E1FDADB05005DC7F4 /* NoPlayerPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C215D1FDADB05005DC7F4 /* NoPlayerPopoverViewController.swift */; };
-		755257971FF14E8E0063B646 /* StatsInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755257961FF14E8E0063B646 /* StatsInformationViewController.swift */; };
 		755257A01FFA8FBF0063B646 /* Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552579F1FFA8FBF0063B646 /* Reset.swift */; };
 		7553BF171FFD748B005C2CDC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553BF161FFD748B005C2CDC /* Camera.swift */; };
 		756C7B901FEFF65F00DBF5CD /* Players+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C7B8E1FEFF65F00DBF5CD /* Players+CoreDataClass.swift */; };
@@ -69,8 +68,9 @@
 		75E304F01FCC6AF30010C708 /* CreateAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E304EF1FCC6AF30010C708 /* CreateAttributedString.swift */; };
 		75E304F21FCC96E50010C708 /* TimeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E304F11FCC96E50010C708 /* TimeFormat.swift */; };
 		75E333A71FD0E49A00408317 /* Time On Ice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75E333A51FD0E49A00408317 /* Time On Ice.xcdatamodeld */; };
+		75E56F192006805D002CCF3D /* ShiftDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E56F172006805D002CCF3D /* ShiftDetailsTableViewCell.swift */; };
+		75E56F1A2006805D002CCF3D /* ShiftDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E56F182006805D002CCF3D /* ShiftDetailsTableViewCell.xib */; };
 		75E9E8621FBE218900A51F89 /* PlayerInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E9E8611FBE218900A51F89 /* PlayerInformationTableViewController.swift */; };
-		75F74CA21FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F74CA11FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift */; };
 		75F74CA51FFEABF10029FF42 /* BarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F74CA41FFEABF10029FF42 /* BarEntry.swift */; };
 		75F74CA71FFEAC590029FF42 /* BasicBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F74CA61FFEAC590029FF42 /* BasicBarChart.swift */; };
 		75F7EF341FD8BDBD002BD535 /* PlayerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EF331FD8BDBD002BD535 /* PlayerPicker.swift */; };
@@ -107,7 +107,6 @@
 		7539FC8F1FD6EADF009E6CB4 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
 		753C215B1FDAD920005DC7F4 /* ShowPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPopover.swift; sourceTree = "<group>"; };
 		753C215D1FDADB05005DC7F4 /* NoPlayerPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPlayerPopoverViewController.swift; sourceTree = "<group>"; };
-		755257961FF14E8E0063B646 /* StatsInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsInformationViewController.swift; sourceTree = "<group>"; };
 		7552579F1FFA8FBF0063B646 /* Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reset.swift; sourceTree = "<group>"; };
 		7553BF161FFD748B005C2CDC /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		756C7B8E1FEFF65F00DBF5CD /* Players+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Players+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -142,8 +141,9 @@
 		75E304EF1FCC6AF30010C708 /* CreateAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAttributedString.swift; sourceTree = "<group>"; };
 		75E304F11FCC96E50010C708 /* TimeFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormat.swift; sourceTree = "<group>"; };
 		75E333A61FD0E49A00408317 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		75E56F172006805D002CCF3D /* ShiftDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		75E56F182006805D002CCF3D /* ShiftDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShiftDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		75E9E8611FBE218900A51F89 /* PlayerInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationTableViewController.swift; sourceTree = "<group>"; };
-		75F74CA11FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDetailsPerGameViewController.swift; sourceTree = "<group>"; };
 		75F74CA41FFEABF10029FF42 /* BarEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarEntry.swift; sourceTree = "<group>"; };
 		75F74CA61FFEAC590029FF42 /* BasicBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBarChart.swift; sourceTree = "<group>"; };
 		75F7EF331FD8BDBD002BD535 /* PlayerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPicker.swift; sourceTree = "<group>"; };
@@ -220,9 +220,7 @@
 		755257981FF14E9A0063B646 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				755257961FF14E8E0063B646 /* StatsInformationViewController.swift */,
 				75A0C4B61FFBD746006DED1F /* StatsPerGameViewController.swift */,
-				75F74CA11FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift */,
 				7591FC1E2000025E001CAE70 /* Cells */,
 			);
 			path = Stats;
@@ -251,6 +249,8 @@
 				752C0C7E20016F71007DE9BC /* StatsOneShiftTableViewCell.xib */,
 				752C0C812001713E007DE9BC /* StatsAccumaltedPerGameTableViewCell.swift */,
 				752C0C822001713E007DE9BC /* StatsAccumaltedPerGameTableViewCell.xib */,
+				75E56F172006805D002CCF3D /* ShiftDetailsTableViewCell.swift */,
+				75E56F182006805D002CCF3D /* ShiftDetailsTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -395,6 +395,7 @@
 				750388431FDECDA10086073D /* GamePopoverTableViewCell.xib in Resources */,
 				750FA20F1FBCDCDA00A1D89A /* Main.storyboard in Resources */,
 				7574B3CB1FC8CE7E00CF4214 /* Assets.xcassets in Resources */,
+				75E56F1A2006805D002CCF3D /* ShiftDetailsTableViewCell.xib in Resources */,
 				752C0C842001713E007DE9BC /* StatsAccumaltedPerGameTableViewCell.xib in Resources */,
 				75D803A81FC8D6930084B97E /* PlayersOnIceTableViewCell.xib in Resources */,
 			);
@@ -444,6 +445,7 @@
 				755257A01FFA8FBF0063B646 /* Reset.swift in Sources */,
 				7591FC1C200000F4001CAE70 /* StatsChartTableViewCell.swift in Sources */,
 				750FA21C1FBCDE7B00A1D89A /* HomeViewController.swift in Sources */,
+				75E56F192006805D002CCF3D /* ShiftDetailsTableViewCell.swift in Sources */,
 				7553BF171FFD748B005C2CDC /* Camera.swift in Sources */,
 				75A062C21FD96F3500EA626F /* PlayerPopoverTableViewController.swift in Sources */,
 				7503883D1FDECBE20086073D /* GamePopoverTableViewController.swift in Sources */,
@@ -451,13 +453,11 @@
 				750388451FDEE6F90086073D /* NoGamePopoverViewController.swift in Sources */,
 				75DA911C1FE569B500A10F10 /* NoPlayersViewController.swift in Sources */,
 				7539FC8B1FD6D336009E6CB4 /* ImportPlayers.swift in Sources */,
-				75F74CA21FFEA09C0029FF42 /* StatsDetailsPerGameViewController.swift in Sources */,
 				751022F61FC61DD7000009EC /* BenchCollectionViewCell.swift in Sources */,
 				753C215C1FDAD920005DC7F4 /* ShowPopover.swift in Sources */,
 				7539FC851FD4458C009E6CB4 /* Delegates.swift in Sources */,
 				753C215E1FDADB05005DC7F4 /* NoPlayerPopoverViewController.swift in Sources */,
 				752C0C832001713E007DE9BC /* StatsAccumaltedPerGameTableViewCell.swift in Sources */,
-				755257971FF14E8E0063B646 /* StatsInformationViewController.swift in Sources */,
 				75D2F38F1FD868290089DC63 /* GameInformationTableViewCell.swift in Sources */,
 				75E333A71FD0E49A00408317 /* Time On Ice.xcdatamodeld in Sources */,
 				75F74CA71FFEAC590029FF42 /* BasicBarChart.swift in Sources */,

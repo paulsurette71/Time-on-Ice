@@ -70,9 +70,11 @@ class StatsPerGameViewController: UIViewController {
         //StatsOneShiftTableViewCell
         let cellChartPerGame = UINib(nibName: "StatsAccumaltedPerGameTableViewCell", bundle: nil)
         tableView.register(cellChartPerGame, forCellReuseIdentifier: "StatsAccumaltedPerGameCell")
-
-    
-
+        
+        //StatsOneShiftTableViewCell
+        let cellShifts = UINib(nibName: "ShiftDetailsTableViewCell", bundle: nil)
+        tableView.register(cellShifts, forCellReuseIdentifier: "ShiftDetailsCell")
+        
     }  //viewDidLoad
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,11 +102,11 @@ class StatsPerGameViewController: UIViewController {
     
     func fetchData(player: Players) {
         
-        guard player.firstName != nil, player.lastName != nil else {
-            
-            navigationController?.popToRootViewController(animated: true)
-            return
-        }
+        //        guard player.firstName != nil, player.lastName != nil else {
+        //
+        //            navigationController?.popToRootViewController(animated: true)
+        //            return
+        //        }
         
         self.title = (player.firstName)! + " " + (player.lastName)!
         
@@ -137,12 +139,26 @@ extension StatsPerGameViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-         return 2
+        if section == 0 {
+            
+            return 2
+            
+        } else {
+            
+            let game = gameData[section - 1]
+            let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
+            let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
+            
+            let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
+            
+            return results.count + 2
+        }
         
     }  //numberOfRowsInSection
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         
         if indexPath.section == 0 {
             
@@ -166,6 +182,12 @@ extension StatsPerGameViewController: UITableViewDataSource {
             
         } else {
             
+            //Game Information
+            let game = gameData[indexPath.section - 1]
+            let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
+            let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
+            
+            
             if indexPath.row == 0 {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "StatsAccumaltedPerGameCell", for: indexPath) as! StatsAccumaltedPerGameTableViewCell   //Try this one
@@ -174,12 +196,12 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
                 return cell
                 
-            } else {
+            } else if indexPath.row == 1 {
                 
-                //Game Information
-                let game = gameData[indexPath.section - 1]
-                let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
-                let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
+                //                //Game Information
+                //                let game = gameData[indexPath.section - 1]
+                //                let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
+                //                let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
                 
                 let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
                 
@@ -205,9 +227,21 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
                 return cell
                 
+            } else {  //Shift details
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ShiftDetailsCell", for: indexPath) as! ShiftDetailsTableViewCell
+                
+                
+                
+                configueShiftCell(cell: cell, indexPath: indexPath, player: selectedPlayer!, game: gameDetails)
+                
+                return cell
+                
             }  //if indexPath.row == 0
             
         }  //if indexPath.section == 0
+        
+        
         
         
         //                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
@@ -231,6 +265,44 @@ extension StatsPerGameViewController: UITableViewDataSource {
         
     }  //cellForRowAt
     
+    func configueShiftCell (cell: ShiftDetailsTableViewCell, indexPath: IndexPath, player: Players, game: Games) {
+        
+        let results = goFetch.shiftsPerPlayerPerGame(player: player, game: game, managedContext: managedContext)
+        let timeOnIce = results[indexPath.row - 2]["timeOnIce"]
+        let shiftDate = results[indexPath.row - 2]["date"] as! Date
+        
+        if indexPath.row > 2 {
+            let previousDate = results[indexPath.row - 3]["date"] as! Date
+            let timeDifference   = shiftDate.timeIntervalSince(previousDate)
+            cell.dateDifferenceLabel.text = timeDifference.stringTime
+            
+        } else {
+            
+            cell.dateDifferenceLabel.text = "0s"
+        }
+        
+        cell.timeOnIceLabel.text = timeFormat.mmSS(totalSeconds: timeOnIce as! Int)
+        cell.dateLabel.text = convertDateToString(dateToConvert: shiftDate)
+        cell.numberOfShiftsLabel.text = String(indexPath.row - 1)
+        
+
+    }  //configueShiftCell
+    
+    func convertDateToString(dateToConvert:Date) -> String {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.timeStyle = .medium  //10:00:00 PM
+        
+        let dateAsAString = dateFormatter.string(from: dateToConvert)
+        let dateAsADate   = dateFormatter.date(from: dateAsAString)
+        let convertedDateAsAString = dateFormatter.string(from: dateAsADate!)
+        
+        return convertedDateAsAString
+        
+    }
+    
+    
     func configureStatsCell(_ cell: StatsAccumaltedPerGameTableViewCell, indexPath: IndexPath) {
         
         //Game Information
@@ -238,7 +310,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
         let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
         let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
         
-         let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
+        let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
         
         var totalTimeOnIce = 0
         var minMaxArray = [Int]()
@@ -432,12 +504,16 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
                 returnValue = 200
                 
+            } else {
+                
+                //Individual shifts
+                returnValue = 50
             }
-
+            
         }  //switch
         
-       return  returnValue
-
+        return  returnValue
+        
     }  //heightForRowAt
     
 }  //UITableViewDataSource
@@ -483,4 +559,36 @@ extension StatsPerGameViewController: NSFetchedResultsControllerDelegate {
     
 } //extension
 
+extension TimeInterval {
+    
+    //https://stackoverflow.com/review/suggested-edits/16940597
+    
+    private var milliseconds: Int {
+        return Int((truncatingRemainder(dividingBy: 1)) * 1000)
+    }
+    
+    private var seconds: Int {
+        return Int(self) % 60
+    }
+    
+    private var minutes: Int {
+        return (Int(self) / 60 ) % 60
+    }
+    
+    private var hours: Int {
+        return Int(self) / 3600
+    }
+    
+    var stringTime: String {
+        if hours != 0 {
+            return "\(hours)h \(minutes)m \(seconds)s"
+        } else if minutes != 0 {
+            return "\(minutes)m \(seconds)s"
+        } else if milliseconds != 0 {
+            return "\(seconds)s \(milliseconds)ms"
+        } else {
+            return "\(seconds)s"
+        }
+    }
+}  //TimeInterval
 

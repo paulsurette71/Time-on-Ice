@@ -55,9 +55,6 @@ class Calculate {
                 returnValue = String(format: "%.2f", average)  //two decimal places
             }
 
-            
-//            returnValue = String(average)
-            
         } else {
             returnValue = ""
         }

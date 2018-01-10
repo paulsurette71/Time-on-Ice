@@ -19,7 +19,6 @@ class ColourPalette {
         UINavigationBar.appearance().tintColor           = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
                                                             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 28, weight: .heavy)]
-//        UINavigationBar.appearance().barTintColor        = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         //UITabBar
         UITabBar.appearance().tintColor               = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
