@@ -2,8 +2,8 @@
 //  Shifts+CoreDataProperties.swift
 //  Time on Ice
 //
-//  Created by Surette, Paul on 2017-12-20.
-//  Copyright © 2017 Surette, Paul. All rights reserved.
+//  Created by Surette, Paul on 2018-01-11.
+//  Copyright © 2018 Surette, Paul. All rights reserved.
 //
 //
 
@@ -19,6 +19,7 @@ extension Shifts {
 
     @NSManaged public var date: NSDate?
     @NSManaged public var timeOnIce: Int16
+    @NSManaged public var period: Int16
     @NSManaged public var gameRelationship: Games?
     @NSManaged public var playersRelationship: Players?
 

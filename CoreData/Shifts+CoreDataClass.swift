@@ -2,8 +2,8 @@
 //  Shifts+CoreDataClass.swift
 //  Time on Ice
 //
-//  Created by Surette, Paul on 2017-12-20.
-//  Copyright © 2017 Surette, Paul. All rights reserved.
+//  Created by Surette, Paul on 2018-01-11.
+//  Copyright © 2018 Surette, Paul. All rights reserved.
 //
 //
 

@@ -99,6 +99,11 @@ class StatsPerGameViewController: UIViewController {
         
         fetchData(player: selectedPlayer!)
         
+        //Period
+        let period = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: 1)
+        print("number of shifts 1t period \(period)")
+        
+        
     }  //viewWillAppear
     
     override func didReceiveMemoryWarning() {
@@ -210,6 +215,10 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 //                let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
                 
                 let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
+                
+                
+
+
                 
                 var timeOnIceValues = [Int]()
                 
@@ -354,21 +363,20 @@ extension StatsPerGameViewController: UITableViewDataSource {
     
     func configureAccumulatedCell(_ cell: StatsAccumulatedTableViewCell, indexPath: IndexPath) {
         
+        
+        
         //Total TimeOnIce
-        //        let timeOnIce = statsPerPlayer.first!["sumShift"]! as! Int
         let timeOnIce = listOfShifts.reduce(0, +)
         
         let totalTimeOnIce = timeFormat.mmSS(totalSeconds: timeOnIce)
         cell.statsTotalTimeOnIceLabel.text = totalTimeOnIce
         
         //Total Shifts
-        //        let totalShifts = statsPerPlayer.first!["countShift"]! as! Int
         let totalShifts = listOfShifts.count
         cell.statsTotalShiftsLabel.text =  String(totalShifts)
         
         //Average Shift Length
         let averageShift = timeOnIce / totalShifts
-        //        let avergeShiftLength = timeFormat.mmSS(totalSeconds: statsPerPlayer.first!["avgShift"]! as! Int)
         let avergeShiftLength = timeFormat.mmSS(totalSeconds: averageShift)
         cell.statsAverageShiftLengthLabel.text = avergeShiftLength
         
@@ -504,7 +512,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
             
             if indexPath.row == 0 {
                 
-                returnValue = 163
+                returnValue = 250  //163
                 
             } else if indexPath.row == 1 {
                 
