@@ -88,14 +88,15 @@ class GameInformationTableViewController: UITableViewController {
         if let sections = fetchedResultsController.sections {
             return sections.count
         }
+        
         return 0
+        
     }  //numberOfSections
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let sectionInfo = fetchedResultsController.sections?[section] else {
             return 0
-            
         }
         
         return sectionInfo.numberOfObjects
@@ -127,7 +128,7 @@ class GameInformationTableViewController: UITableViewController {
         }
         
     }  //configureCell
-
+    
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -186,15 +187,15 @@ class GameInformationTableViewController: UITableViewController {
         
         guard let sectionInfo = fetchedResultsController.sections?[section] else {
             return "No Games"
-
+            
         }
-
+        
         let numberOfGamesForPlayer = String(sectionInfo.numberOfObjects) + " Games"
-
+        
         return numberOfGamesForPlayer
-                
+        
     }  //titleForHeaderInSection
-
+    
     
     func updateGame(indexPath: IndexPath)  {
         
@@ -241,15 +242,15 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
+            tableView?.reloadData()
         case .update:
-            print("GameInformationTableViewController Update")
             tableView?.reloadData()
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
         }
     }
-  
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
         let indexSet = IndexSet(integer: sectionIndex)
@@ -258,6 +259,7 @@ extension GameInformationTableViewController: NSFetchedResultsControllerDelegate
             tableView.insertSections(indexSet, with: .automatic)
         case .delete:
             tableView.deleteSections(indexSet, with: .automatic)
+            tableView?.reloadData()
         default: break
         }
     }

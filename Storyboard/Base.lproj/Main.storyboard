@@ -649,7 +649,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MHg-ay-4FA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="pc1-Gd-TUS">
                                 <cells>
@@ -669,12 +669,13 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DLR-3r-A1C">
                                                     <rect key="frame" x="235" y="63" width="30" height="24"/>
-                                                    <state key="normal" image="icons8-camera-filled"/>
+                                                    <state key="normal" image="camera_white"/>
                                                     <connections>
                                                         <action selector="camera:" destination="ITt-Vh-5Bn" eventType="touchUpInside" id="NwS-6g-xGe"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="DLR-3r-A1C" firstAttribute="bottom" secondItem="Obc-Ia-GKl" secondAttribute="bottom" id="8IC-Mz-2Yb"/>
                                                 <constraint firstItem="Obc-Ia-GKl" firstAttribute="centerX" secondItem="VV5-M6-wXe" secondAttribute="centerX" id="C6i-EH-KYc"/>
@@ -1578,9 +1579,9 @@
         <image name="buttonGame" width="60" height="60"/>
         <image name="buttonPlayers" width="60" height="60"/>
         <image name="calendar icon 25x25 copy" width="27" height="25"/>
+        <image name="camera_white" width="30" height="24"/>
         <image name="headshot" width="75" height="75"/>
         <image name="home icon 25x25" width="27" height="25"/>
-        <image name="icons8-camera-filled" width="30" height="24"/>
         <image name="separatorLine108px" width="108" height="1"/>
         <image name="separatorLine167px" width="167" height="1"/>
         <image name="user icon 25x25" width="27" height="25"/>

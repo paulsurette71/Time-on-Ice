@@ -21,5 +21,16 @@ class ConvertDate {
         
     }  //convertDate
     
+    func convertDateOnly(date:NSDate) -> String {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateStyle = DateFormatter.Style.medium
+        
+        return formatter.string(from: date as Date)
+        
+    }  //convertDate
+
+    
 }  //ConvertDate
 

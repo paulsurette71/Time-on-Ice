@@ -270,12 +270,12 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
+            tableView?.reloadData()
         case .update:
             tableView?.reloadData()
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
-            
         }
     }
     
@@ -287,6 +287,7 @@ extension PlayerInformationTableViewController: NSFetchedResultsControllerDelega
             tableView.insertSections(indexSet, with: .automatic)
         case .delete:
             tableView.deleteSections(indexSet, with: .automatic)
+            tableView?.reloadData()
         default: break
         }
     }

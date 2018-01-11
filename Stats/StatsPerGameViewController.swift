@@ -471,7 +471,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
             let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
             let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
             
-            let currentDate = convertDate.convertDate(date: (gameDetails.date)!)
+            let currentDate = convertDate.convertDateOnly(date: (gameDetails.date)!) + " - " + gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
             
             let sectionHeader = currentDate
             
