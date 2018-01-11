@@ -115,17 +115,17 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-//        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-//        let importPlayers            = ImportPlayers()
-//        let importGames              = ImportGames()
-//        
-//        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-//            
-//            //Import Test data
-//            importPlayers.importPlayers()
-//            importGames.importGames()
-//            
-//        }
+        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        let importPlayers            = ImportPlayers()
+        let importGames              = ImportGames()
+        
+        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+            
+            //Import Test data
+            importPlayers.importPlayers()
+            importGames.importGames()
+            
+        }
         
         reset.playersStoredData(managedContext: managedContext)
         
@@ -232,6 +232,7 @@ class HomeViewController: UIViewController {
     func notificationCenterData(notification:Notification) -> Void  {
         
         fetchAndReloadCollectionView()
+        fetchAndReloadTableView()
         
         //Update UI
         self.setupUI()
@@ -379,18 +380,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.totalTimeOnIceLabel.text = totalTimeOnIce
         
-        DispatchQueue.main.async {
-            
+//        DispatchQueue.main.async {
+        
             if player.onIce {
                 
-                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_blue")
+                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_gray")
                 
             } else {
                 
                 cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
             }
             
-        }
+//        }
         
         return cell
         

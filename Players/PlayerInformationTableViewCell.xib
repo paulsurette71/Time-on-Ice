@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,51 +26,37 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Sidney Crosby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nHY-aY-Iqo">
-                        <rect key="frame" x="16" y="11" width="209" height="38"/>
+                        <rect key="frame" x="15" y="17" width="150" height="26.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onIce 50x50" translatesAutoresizingMaskIntoConstraints="NO" id="4tP-To-4Xq">
-                        <rect key="frame" x="225" y="4" width="50" height="50"/>
+                        <rect key="frame" x="180" y="4" width="50" height="50"/>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="w89-Fy-OTc">
-                        <rect key="frame" x="275" y="4" width="100" height="50"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RkQ-3o-HMC">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <state key="normal" image="stats 50x50"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzQ-c5-Kwr">
-                                <rect key="frame" x="50" y="0.0" width="50" height="50"/>
-                                <state key="normal" image="chevron 50x50"/>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="Ygv-L7-BBa"/>
-                            <constraint firstAttribute="height" constant="50" id="gbx-sn-rF1"/>
-                        </constraints>
-                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RkQ-3o-HMC">
+                        <rect key="frame" x="275" y="4" width="50" height="50"/>
+                        <state key="normal" image="stats 50x50"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzQ-c5-Kwr">
+                        <rect key="frame" x="325" y="4" width="50" height="50"/>
+                        <state key="normal" image="chevron 50x50"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="sWy-O9-m0P" secondAttribute="trailing" id="25s-d8-y9Z"/>
-                    <constraint firstItem="nHY-aY-Iqo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="4a8-GS-s7T"/>
-                    <constraint firstItem="4tP-To-4Xq" firstAttribute="leading" secondItem="nHY-aY-Iqo" secondAttribute="trailing" id="6Ig-v7-YrY"/>
-                    <constraint firstItem="4tP-To-4Xq" firstAttribute="leading" secondItem="nHY-aY-Iqo" secondAttribute="trailing" id="7js-I0-9wM"/>
-                    <constraint firstItem="nHY-aY-Iqo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="IZF-h2-DqY"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="nHY-aY-Iqo" secondAttribute="bottom" id="Jh2-Tl-qrd"/>
-                    <constraint firstItem="4tP-To-4Xq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="JmN-4a-6aG"/>
-                    <constraint firstItem="w89-Fy-OTc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="JuE-Vu-p2p"/>
-                    <constraint firstItem="sWy-O9-m0P" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="NC6-Fd-QnH"/>
-                    <constraint firstItem="nHY-aY-Iqo" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Pay-7V-G8A"/>
-                    <constraint firstItem="nHY-aY-Iqo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="PwV-HU-1C9"/>
-                    <constraint firstItem="sWy-O9-m0P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="SCY-vS-yZT"/>
-                    <constraint firstAttribute="trailing" secondItem="w89-Fy-OTc" secondAttribute="trailing" id="Tp9-iR-Md5"/>
-                    <constraint firstItem="w89-Fy-OTc" firstAttribute="leading" secondItem="4tP-To-4Xq" secondAttribute="trailing" id="UyN-H8-txK"/>
-                    <constraint firstAttribute="bottom" secondItem="sWy-O9-m0P" secondAttribute="bottom" id="can-cq-tIz"/>
-                    <constraint firstItem="sWy-O9-m0P" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ntm-w3-SXy"/>
-                    <constraint firstItem="nHY-aY-Iqo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="omR-kE-APV"/>
+                    <constraint firstItem="nHY-aY-Iqo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="1ol-lV-0Jo"/>
+                    <constraint firstItem="sWy-O9-m0P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4nU-n1-Usk"/>
+                    <constraint firstAttribute="trailing" secondItem="sWy-O9-m0P" secondAttribute="trailing" id="HSz-ZO-aQw"/>
+                    <constraint firstItem="4tP-To-4Xq" firstAttribute="leading" secondItem="nHY-aY-Iqo" secondAttribute="trailing" constant="15" id="UTD-2l-RCe"/>
+                    <constraint firstItem="4tP-To-4Xq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YLZ-Tv-lSP"/>
+                    <constraint firstItem="nHY-aY-Iqo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="a3G-3o-81b"/>
+                    <constraint firstItem="sWy-O9-m0P" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="esn-ch-jf3"/>
+                    <constraint firstAttribute="trailing" secondItem="AzQ-c5-Kwr" secondAttribute="trailing" id="heH-E8-fzC"/>
+                    <constraint firstAttribute="bottom" secondItem="sWy-O9-m0P" secondAttribute="bottom" id="opj-Ne-cha"/>
+                    <constraint firstItem="AzQ-c5-Kwr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="roB-vQ-2mW"/>
+                    <constraint firstItem="RkQ-3o-HMC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="sH5-mH-esD"/>
+                    <constraint firstItem="AzQ-c5-Kwr" firstAttribute="leading" secondItem="RkQ-3o-HMC" secondAttribute="trailing" id="vr9-bg-740"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="FPE-wk-Y2e">
-                        <rect key="frame" x="15" y="4.5" width="310" height="72"/>
+                        <rect key="frame" x="15" y="4.5" width="305" height="72"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oTd-ft-7oW">
                                 <rect key="frame" x="0.0" y="0.0" width="113" height="29"/>
@@ -50,8 +50,8 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="mdb-2l-c4u">
-                        <rect key="frame" x="330" y="7.5" width="45" height="63"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron 50x50" translatesAutoresizingMaskIntoConstraints="NO" id="mdb-2l-c4u">
+                        <rect key="frame" x="325" y="14" width="50" height="50"/>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -74,6 +74,6 @@
     </objects>
     <resources>
         <image name="Game" width="49" height="29"/>
-        <image name="chevron" width="45" height="63"/>
+        <image name="chevron 50x50" width="50" height="50"/>
     </resources>
 </document>

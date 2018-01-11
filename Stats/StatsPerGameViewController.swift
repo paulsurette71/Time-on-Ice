@@ -91,6 +91,12 @@ class StatsPerGameViewController: UIViewController {
             listOfShifts += [Int(shifts.timeOnIce)]
         }
         
+        guard listOfShifts.count > 1 else {
+            
+            navigationController?.popToRootViewController(animated: true)
+            return
+        }
+        
         fetchData(player: selectedPlayer!)
         
     }  //viewWillAppear
