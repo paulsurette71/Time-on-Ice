@@ -484,8 +484,9 @@ class GoFetch {
         let predicateGame      = NSPredicate(format: "gameRelationship = %@", game)
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicatePlayer,predicateGame])
         
-        let sort = NSSortDescriptor(key: #keyPath(Shifts.date), ascending: true)
-        fetchRequest.sortDescriptors = [sort]
+        let sortByPeriod = NSSortDescriptor(key: #keyPath(Shifts.period), ascending: true)
+        let sortByDate = NSSortDescriptor(key: #keyPath(Shifts.date), ascending: true)
+        fetchRequest.sortDescriptors = [sortByPeriod, sortByDate]
         fetchRequest.resultType = .dictionaryResultType
         
         do {

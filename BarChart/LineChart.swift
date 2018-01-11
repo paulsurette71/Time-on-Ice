@@ -31,7 +31,7 @@ class LineChart: UIView {
     let lineGap: CGFloat = 60.0
     
     /// preseved space at top of the chart
-    let topSpace: CGFloat = 40.0
+    let topSpace: CGFloat = 10.0
     
     /// preserved space at bottom of the chart to show labels along the Y axis
     let bottomSpace: CGFloat = 40.0

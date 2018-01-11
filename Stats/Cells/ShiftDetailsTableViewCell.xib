@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="50.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aaz-sd-MO4">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aaz-sd-MO4">
                         <rect key="frame" x="15" y="13.5" width="27.5" height="24"/>
                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                         <nil key="textColor"/>
@@ -48,12 +48,17 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1stPeriod" translatesAutoresizingMaskIntoConstraints="NO" id="Sh7-p0-gu3">
+                        <rect key="frame" x="60" y="15" width="41" height="21"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="yXt-gM-nuV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6fj-zm-4iq"/>
+                    <constraint firstItem="Sh7-p0-gu3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="60" id="Cv0-ZQ-Xy2"/>
                     <constraint firstItem="WPX-VF-PDM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ER1-t5-Lhv"/>
                     <constraint firstAttribute="trailing" secondItem="yXt-gM-nuV" secondAttribute="trailing" constant="15" id="Jdt-GA-FtG"/>
                     <constraint firstItem="Aaz-sd-MO4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Trj-sS-qwi"/>
+                    <constraint firstItem="Sh7-p0-gu3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ayP-SA-iKa"/>
                     <constraint firstItem="WPX-VF-PDM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="fNx-pb-dRw"/>
                     <constraint firstItem="Aaz-sd-MO4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="oT7-h3-0HT"/>
                 </constraints>
@@ -63,9 +68,13 @@
                 <outlet property="dateDifferenceLabel" destination="r61-f9-uOK" id="7Ka-qv-HkY"/>
                 <outlet property="dateLabel" destination="jPv-HC-bMa" id="Jav-Gg-LhM"/>
                 <outlet property="numberOfShiftsLabel" destination="Aaz-sd-MO4" id="Mfm-ko-YhQ"/>
+                <outlet property="periodImage" destination="Sh7-p0-gu3" id="1Q9-Gv-Lnv"/>
                 <outlet property="timeOnIceLabel" destination="WPX-VF-PDM" id="8at-3f-cNU"/>
             </connections>
             <point key="canvasLocation" x="-131" y="-90.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="1stPeriod" width="41" height="21"/>
+    </resources>
 </document>
