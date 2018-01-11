@@ -17,9 +17,14 @@ class StatsAccumulatedTableViewCell: UITableViewCell {
     @IBOutlet weak var statsShortestShiftLengthLabel: UILabel!
     @IBOutlet weak var statsLongestShiftLengthLabel: UILabel!
     @IBOutlet weak var statsTotalGamesLabel: UILabel!
-    
     @IBOutlet weak var statsAvgShiftsPerGameLabel: UILabel!
     @IBOutlet weak var statsAvgTimeOnIcePerGameLabel: UILabel!
+    
+    //Period Label
+    @IBOutlet weak var stats1stPeriodLabel: UILabel!
+    @IBOutlet weak var stats2ndPeriodLabel: UILabel!
+    @IBOutlet weak var stats3rdPeriodLabel: UILabel!
+    @IBOutlet weak var statsOvertimePeriodLabel: UILabel!
     
     //UIView
     @IBOutlet weak var timeOnIceView: UIView!

@@ -264,8 +264,12 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="shiftsView" destination="wyG-Ca-Avb" id="eWY-jr-3VG"/>
+                <outlet property="stats1stPeriodLabel" destination="zdo-LH-Y5A" id="uWQ-12-XJI"/>
+                <outlet property="stats2ndPeriodLabel" destination="iAn-Zd-eWq" id="1Fn-yC-HQf"/>
+                <outlet property="stats3rdPeriodLabel" destination="h0i-4U-ksm" id="zwV-UN-lYL"/>
                 <outlet property="statsAverageShiftLengthLabel" destination="iz0-wc-aIh" id="p6u-5g-Q6r"/>
                 <outlet property="statsLongestShiftLengthLabel" destination="HQ2-ub-cmY" id="IBO-Im-76h"/>
+                <outlet property="statsOvertimePeriodLabel" destination="fwp-HM-Iu8" id="d3J-KB-YFY"/>
                 <outlet property="statsShortestShiftLengthLabel" destination="61t-eC-458" id="Lak-YH-hxj"/>
                 <outlet property="statsTotalShiftsLabel" destination="wlo-CP-JZG" id="0q4-tc-ddJ"/>
                 <outlet property="statsTotalTimeOnIceLabel" destination="qn8-jV-UKG" id="tgE-qQ-Is5"/>

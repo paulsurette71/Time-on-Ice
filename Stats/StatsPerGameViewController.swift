@@ -47,7 +47,8 @@ class StatsPerGameViewController: UIViewController {
     var numberOfGames  = 0
     var gameData       = [[String: AnyObject]]()
     var statsPerPlayer = [[String: AnyObject]]()
-    var listOfShifts = [Int]()
+    var listOfShifts   = [Int]()
+    var allPeriods     = [String: Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,8 +89,29 @@ class StatsPerGameViewController: UIViewController {
         
         for shifts in fetchedResultsControllerShiftPerPlayer.fetchedObjects! {
             
+//            var firstPeriod    = 0
+//            var secondPeriod   = 0
+//            var thirdPeriod    = 0
+//            var overtimePeriod = 0
+            
             listOfShifts += [Int(shifts.timeOnIce)]
+            
+//            switch shifts.period {
+//            case 1:
+//                firstPeriod += 1
+//            case 2:
+//                secondPeriod += 1
+//            case 3:
+//                thirdPeriod += 1
+//            case 4:
+//                overtimePeriod += 1
+//            default:
+//                print("default")
+//            }
+            
         }
+        
+//        allPeriods["1st Period"] = firstPeriod
         
         guard listOfShifts.count > 1 else {
             
@@ -98,11 +120,6 @@ class StatsPerGameViewController: UIViewController {
         }
         
         fetchData(player: selectedPlayer!)
-        
-        //Period
-        let period = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: 1)
-        print("number of shifts 1t period \(period)")
-        
         
     }  //viewWillAppear
     
@@ -216,10 +233,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
                 let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
                 
-                
-
-
-                
                 var timeOnIceValues = [Int]()
                 
                 for shifts in results {
@@ -300,7 +313,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
         cell.dateLabel.text = convertDateToString(dateToConvert: shiftDate)
         cell.numberOfShiftsLabel.text = String(indexPath.row - 1)
         
-
+        
     }  //configueShiftCell
     
     func convertDateToString(dateToConvert:Date) -> String {
@@ -316,7 +329,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
         return convertedDateAsAString
         
     }
-    
     
     func configureStatsCell(_ cell: StatsAccumaltedPerGameTableViewCell, indexPath: IndexPath) {
         
@@ -336,6 +348,23 @@ extension StatsPerGameViewController: UITableViewDataSource {
             minMaxArray += [shifts["timeOnIce"] as! Int]
             
         }
+        
+        //periods
+        //statsShiftsPerPlayerPerPeriodPerGame
+        
+        //periods
+        let firstPeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: 1)
+        cell.stats1stPeriodLabel.text = String(firstPeriod)
+        
+        let secondPeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: 2)
+        cell.stats2ndPeriodLabel.text = String(secondPeriod)
+        
+        let thirdPeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: 3)
+        cell.stats3rdPeriodLabel.text = String(thirdPeriod)
+        
+        let overtimePeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: 4)
+        cell.statsOvertimePeriodLabel.text = String(overtimePeriod)
+
         
         //Total TimeOnIce
         cell.statsTotalTimeOnIceLabel.text = timeFormat.mmSS(totalSeconds: totalTimeOnIce)
@@ -363,7 +392,18 @@ extension StatsPerGameViewController: UITableViewDataSource {
     
     func configureAccumulatedCell(_ cell: StatsAccumulatedTableViewCell, indexPath: IndexPath) {
         
-        
+        //periods
+        let firstPeriod = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: 1)
+        cell.stats1stPeriodLabel.text = String(firstPeriod)
+
+        let secondPeriod = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: 2)
+        cell.stats2ndPeriodLabel.text = String(secondPeriod)
+
+        let thirdPeriod = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: 3)
+        cell.stats3rdPeriodLabel.text = String(thirdPeriod)
+
+        let overtimePeriod = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: 4)
+        cell.statsOvertimePeriodLabel.text = String(overtimePeriod)
         
         //Total TimeOnIce
         let timeOnIce = listOfShifts.reduce(0, +)
@@ -500,7 +540,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
         case 0:
             if indexPath.row == 0 {
                 
-                returnValue = 240
+                returnValue = 320 //240
                 
             } else if indexPath.row == 1 {
                 

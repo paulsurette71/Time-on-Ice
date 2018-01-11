@@ -535,7 +535,7 @@ class GoFetch {
         let nsExpressionForKeyPath  = NSExpression(forKeyPath: #keyPath(Shifts.period))
         
         let nsExpressionForFunction = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPath])
-
+        
         let nsExpressionDescriptionCount = NSExpressionDescription()
         nsExpressionDescriptionCount.expression = nsExpressionForFunction
         
@@ -549,7 +549,7 @@ class GoFetch {
             guard shiftsPerPeriod.count > 0 else {
                 return 0
             }
-   
+            
             numberOfPeriods = shiftsPerPeriod.first as! Int
             
         } catch let error as NSError {
@@ -559,7 +559,48 @@ class GoFetch {
         
         return numberOfPeriods
         
-    }  //statsTimeOnIcePerPlayer
+    }  //statsShiftsPerPlayerPerPeriod
+    
+    func statsShiftsPerPlayerPerPeriodPerGame(player: Players, game: Games, managedContext: NSManagedObjectContext, period: Int) -> Int {
+        
+        var numberOfPeriods = 0
+        
+        let fetchRequest       = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
+        let predicatePlayer    = NSPredicate(format: "playersRelationship = %@", player)
+        let predicatePeriod    = NSPredicate(format: "%K = %d", #keyPath(Shifts.period), period)
+        let predicateGame      = NSPredicate(format: "gameRelationship = %@", game)
+        
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicatePlayer, predicatePeriod, predicateGame])
+        
+        let nsExpressionForKeyPath  = NSExpression(forKeyPath: #keyPath(Shifts.period))
+        
+        let nsExpressionForFunction = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPath])
+        
+        let nsExpressionDescriptionCount = NSExpressionDescription()
+        nsExpressionDescriptionCount.expression = nsExpressionForFunction
+        
+        fetchRequest.propertiesToFetch   = [nsExpressionDescriptionCount]
+        fetchRequest.resultType = .countResultType
+        
+        do {
+            
+            let shiftsPerPeriod = try managedContext.fetch(fetchRequest)
+ 
+            guard shiftsPerPeriod.count > 0 else {
+                return 0
+            }
+            
+            numberOfPeriods = shiftsPerPeriod.first as! Int
+            
+        } catch let error as NSError {
+            
+            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return numberOfPeriods
+        
+    }  //statsShiftsPerPlayerPerPeriodPerGame
+    
     
 }
 
