@@ -35,8 +35,13 @@
 		7539FC901FD6EADF009E6CB4 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7539FC8F1FD6EADF009E6CB4 /* RoundedImage.swift */; };
 		753C215C1FDAD920005DC7F4 /* ShowPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C215B1FDAD920005DC7F4 /* ShowPopover.swift */; };
 		753C215E1FDADB05005DC7F4 /* NoPlayerPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C215D1FDADB05005DC7F4 /* NoPlayerPopoverViewController.swift */; };
+		75451F86200810AA00831A08 /* PeriodPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75451F85200810AA00831A08 /* PeriodPicker.swift */; };
+		75451F882008130100831A08 /* PeriodPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75451F872008130100831A08 /* PeriodPopoverViewController.swift */; };
+		75451F8B20081E7300831A08 /* ButtonImagesForState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75451F8A20081E7300831A08 /* ButtonImagesForState.swift */; };
 		755257A01FFA8FBF0063B646 /* Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552579F1FFA8FBF0063B646 /* Reset.swift */; };
 		7553BF171FFD748B005C2CDC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553BF161FFD748B005C2CDC /* Camera.swift */; };
+		755A7436200844F0000C5B19 /* Shifts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755A7434200844F0000C5B19 /* Shifts+CoreDataClass.swift */; };
+		755A7437200844F0000C5B19 /* Shifts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755A7435200844F0000C5B19 /* Shifts+CoreDataProperties.swift */; };
 		756C7B901FEFF65F00DBF5CD /* Players+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C7B8E1FEFF65F00DBF5CD /* Players+CoreDataClass.swift */; };
 		756C7B911FEFF65F00DBF5CD /* Players+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C7B8F1FEFF65F00DBF5CD /* Players+CoreDataProperties.swift */; };
 		75710CA41FD75E7800D04762 /* GameInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75710CA31FD75E7800D04762 /* GameInformationTableViewController.swift */; };
@@ -50,8 +55,6 @@
 		7591FC191FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7591FC171FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.xib */; };
 		7591FC1C200000F4001CAE70 /* StatsChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7591FC1A200000F4001CAE70 /* StatsChartTableViewCell.swift */; };
 		7591FC1D200000F4001CAE70 /* StatsChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7591FC1B200000F4001CAE70 /* StatsChartTableViewCell.xib */; };
-		759CC5E82007A20300F4B688 /* Shifts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759CC5E62007A20300F4B688 /* Shifts+CoreDataClass.swift */; };
-		759CC5E92007A20300F4B688 /* Shifts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759CC5E72007A20300F4B688 /* Shifts+CoreDataProperties.swift */; };
 		75A062C21FD96F3500EA626F /* PlayerPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A062C11FD96F3500EA626F /* PlayerPopoverTableViewController.swift */; };
 		75A062C51FD9769800EA626F /* PlayerPopoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A062C31FD9769800EA626F /* PlayerPopoverTableViewCell.swift */; };
 		75A062C61FD9769800EA626F /* PlayerPopoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75A062C41FD9769800EA626F /* PlayerPopoverTableViewCell.xib */; };
@@ -109,8 +112,13 @@
 		7539FC8F1FD6EADF009E6CB4 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
 		753C215B1FDAD920005DC7F4 /* ShowPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPopover.swift; sourceTree = "<group>"; };
 		753C215D1FDADB05005DC7F4 /* NoPlayerPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPlayerPopoverViewController.swift; sourceTree = "<group>"; };
+		75451F85200810AA00831A08 /* PeriodPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodPicker.swift; sourceTree = "<group>"; };
+		75451F872008130100831A08 /* PeriodPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodPopoverViewController.swift; sourceTree = "<group>"; };
+		75451F8A20081E7300831A08 /* ButtonImagesForState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImagesForState.swift; sourceTree = "<group>"; };
 		7552579F1FFA8FBF0063B646 /* Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reset.swift; sourceTree = "<group>"; };
 		7553BF161FFD748B005C2CDC /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		755A7434200844F0000C5B19 /* Shifts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shifts+CoreDataClass.swift"; sourceTree = "<group>"; };
+		755A7435200844F0000C5B19 /* Shifts+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shifts+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		756C7B8E1FEFF65F00DBF5CD /* Players+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Players+CoreDataClass.swift"; sourceTree = "<group>"; };
 		756C7B8F1FEFF65F00DBF5CD /* Players+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Players+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75710CA31FD75E7800D04762 /* GameInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInformationTableViewController.swift; sourceTree = "<group>"; };
@@ -124,8 +132,6 @@
 		7591FC171FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsAccumulatedTableViewCell.xib; sourceTree = "<group>"; };
 		7591FC1A200000F4001CAE70 /* StatsChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsChartTableViewCell.swift; sourceTree = "<group>"; };
 		7591FC1B200000F4001CAE70 /* StatsChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsChartTableViewCell.xib; sourceTree = "<group>"; };
-		759CC5E62007A20300F4B688 /* Shifts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shifts+CoreDataClass.swift"; sourceTree = "<group>"; };
-		759CC5E72007A20300F4B688 /* Shifts+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shifts+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75A062C11FD96F3500EA626F /* PlayerPopoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPopoverTableViewController.swift; sourceTree = "<group>"; };
 		75A062C31FD9769800EA626F /* PlayerPopoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPopoverTableViewCell.swift; sourceTree = "<group>"; };
 		75A062C41FD9769800EA626F /* PlayerPopoverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerPopoverTableViewCell.xib; sourceTree = "<group>"; };
@@ -186,6 +192,8 @@
 		750FA1FD1FBCDCDA00A1D89A = {
 			isa = PBXGroup;
 			children = (
+				75451F8A20081E7300831A08 /* ButtonImagesForState.swift */,
+				75451F872008130100831A08 /* PeriodPopoverViewController.swift */,
 				75F74CA31FFEA2D20029FF42 /* BarChart */,
 				755257981FF14E9A0063B646 /* Stats */,
 				75E333A81FD0E4AB00408317 /* CoreData */,
@@ -260,12 +268,12 @@
 		75E333A81FD0E4AB00408317 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				755A7434200844F0000C5B19 /* Shifts+CoreDataClass.swift */,
+				755A7435200844F0000C5B19 /* Shifts+CoreDataProperties.swift */,
 				756C7B8E1FEFF65F00DBF5CD /* Players+CoreDataClass.swift */,
 				756C7B8F1FEFF65F00DBF5CD /* Players+CoreDataProperties.swift */,
 				75BC88431FEB08DC00EFE077 /* Games+CoreDataClass.swift */,
 				75BC88441FEB08DC00EFE077 /* Games+CoreDataProperties.swift */,
-				759CC5E62007A20300F4B688 /* Shifts+CoreDataClass.swift */,
-				759CC5E72007A20300F4B688 /* Shifts+CoreDataProperties.swift */,
 				75E333A51FD0E49A00408317 /* Time On Ice.xcdatamodeld */,
 				75292ECE1FD196FB00CE5DCC /* CoreDataStack.swift */,
 			);
@@ -314,6 +322,7 @@
 				753C215B1FDAD920005DC7F4 /* ShowPopover.swift */,
 				7552579F1FFA8FBF0063B646 /* Reset.swift */,
 				7553BF161FFD748B005C2CDC /* Camera.swift */,
+				75451F85200810AA00831A08 /* PeriodPicker.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -424,17 +433,18 @@
 				75A062C51FD9769800EA626F /* PlayerPopoverTableViewCell.swift in Sources */,
 				75F7EF341FD8BDBD002BD535 /* PlayerPicker.swift in Sources */,
 				750388391FDDD4270086073D /* ImportGames.swift in Sources */,
+				755A7436200844F0000C5B19 /* Shifts+CoreDataClass.swift in Sources */,
 				75E304F21FCC96E50010C708 /* TimeFormat.swift in Sources */,
+				75451F86200810AA00831A08 /* PeriodPicker.swift in Sources */,
 				75BC884B1FEB08DC00EFE077 /* Games+CoreDataClass.swift in Sources */,
 				75D2F3941FD874C20089DC63 /* ConvertDate.swift in Sources */,
 				752C0C7F20016F71007DE9BC /* StatsOneShiftTableViewCell.swift in Sources */,
 				7539FC901FD6EADF009E6CB4 /* RoundedImage.swift in Sources */,
+				755A7437200844F0000C5B19 /* Shifts+CoreDataProperties.swift in Sources */,
 				756C7B901FEFF65F00DBF5CD /* Players+CoreDataClass.swift in Sources */,
 				7518A0311FFEC7A50092278F /* CurveAlgorithm.swift in Sources */,
 				75D803A71FC8D6930084B97E /* PlayersOnIceTableViewCell.swift in Sources */,
-				759CC5E92007A20300F4B688 /* Shifts+CoreDataProperties.swift in Sources */,
 				75710CA61FD75E8700D04762 /* GameDetailsTableViewController.swift in Sources */,
-				759CC5E82007A20300F4B688 /* Shifts+CoreDataClass.swift in Sources */,
 				75795AD31FC37B6B006A52D7 /* Calculate.swift in Sources */,
 				75E304F01FCC6AF30010C708 /* CreateAttributedString.swift in Sources */,
 				7539FC891FD4CBB4009E6CB4 /* GoFetch.swift in Sources */,
@@ -451,11 +461,13 @@
 				75E56F192006805D002CCF3D /* ShiftDetailsTableViewCell.swift in Sources */,
 				7553BF171FFD748B005C2CDC /* Camera.swift in Sources */,
 				75A062C21FD96F3500EA626F /* PlayerPopoverTableViewController.swift in Sources */,
+				75451F8B20081E7300831A08 /* ButtonImagesForState.swift in Sources */,
 				7503883D1FDECBE20086073D /* GamePopoverTableViewController.swift in Sources */,
 				75A0C4B71FFBD746006DED1F /* StatsPerGameViewController.swift in Sources */,
 				750388451FDEE6F90086073D /* NoGamePopoverViewController.swift in Sources */,
 				75DA911C1FE569B500A10F10 /* NoPlayersViewController.swift in Sources */,
 				7539FC8B1FD6D336009E6CB4 /* ImportPlayers.swift in Sources */,
+				75451F882008130100831A08 /* PeriodPopoverViewController.swift in Sources */,
 				751022F61FC61DD7000009EC /* BenchCollectionViewCell.swift in Sources */,
 				753C215C1FDAD920005DC7F4 /* ShowPopover.swift in Sources */,
 				7539FC851FD4458C009E6CB4 /* Delegates.swift in Sources */,

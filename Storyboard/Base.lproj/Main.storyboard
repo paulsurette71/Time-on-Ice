@@ -174,7 +174,7 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-vu-LSl" userLabel="Button Stack View">
-                                <rect key="frame" x="10" y="325" width="130" height="60"/>
+                                <rect key="frame" x="10" y="325" width="200" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-fs-WSk">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -188,6 +188,13 @@
                                         <state key="normal" image="buttonPlayers"/>
                                         <connections>
                                             <action selector="selectPlayers:" destination="5t9-lx-hAx" eventType="touchUpInside" id="hFB-2K-YPJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="peZ-sK-vvp">
+                                        <rect key="frame" x="140" y="0.0" width="60" height="60"/>
+                                        <state key="normal" image="buttonPeriod1st"/>
+                                        <connections>
+                                            <action selector="period:" destination="5t9-lx-hAx" eventType="touchUpInside" id="mG3-Db-eyX"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -282,6 +289,7 @@
                         <outlet property="gameButton" destination="2ai-fs-WSk" id="NXC-Qd-T1e"/>
                         <outlet property="gameDateInformationLabel" destination="0dr-VT-gxH" id="d1R-X0-S41"/>
                         <outlet property="gameInformationLabel" destination="hyX-s5-Ggk" id="wiA-lq-RzY"/>
+                        <outlet property="periodButton" destination="peZ-sK-vvp" id="hJh-UK-6jc"/>
                         <outlet property="playersButton" destination="tSx-Aj-f3d" id="eME-MZ-9D7"/>
                         <outlet property="playersOnBenchLabel" destination="8g7-iG-cMa" id="DHk-S0-DTd"/>
                         <outlet property="playersOnIceLabel" destination="VGA-Zg-82y" id="sGh-4J-Yr0"/>
@@ -291,6 +299,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N3J-0q-A6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="805.60000000000002" y="-1425.3373313343329"/>
+        </scene>
+        <!--Period Popover View Controller-->
+        <scene sceneID="bTg-y5-uX6">
+            <objects>
+                <viewController storyboardIdentifier="PeriodPopoverViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C8Y-ry-Gka" customClass="PeriodPopoverViewController" customModule="Time_on_Ice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rni-JQ-DLp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qZ7-FM-PJU">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Period" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0F-xC-2KN">
+                                        <rect key="frame" x="15" y="0.0" width="360" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="z0F-xC-2KN" secondAttribute="bottom" id="5aQ-Eb-XPG"/>
+                                    <constraint firstItem="z0F-xC-2KN" firstAttribute="leading" secondItem="qZ7-FM-PJU" secondAttribute="leading" constant="15" id="GzC-f7-6MS"/>
+                                    <constraint firstAttribute="height" constant="28" id="U7d-DJ-CjH"/>
+                                    <constraint firstItem="z0F-xC-2KN" firstAttribute="top" secondItem="qZ7-FM-PJU" secondAttribute="top" id="co2-Wi-eGe"/>
+                                    <constraint firstAttribute="trailing" secondItem="z0F-xC-2KN" secondAttribute="trailing" id="ngm-34-lIl"/>
+                                </constraints>
+                            </view>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ljK-WD-gBJ" customClass="PeriodPicker" customModule="Time_on_Ice" customModuleProvider="target">
+                                <rect key="frame" x="27.5" y="225.5" width="320" height="216"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qZ7-FM-PJU" firstAttribute="leading" secondItem="aGm-We-t3d" secondAttribute="leading" id="I28-8R-9Mh"/>
+                            <constraint firstItem="ljK-WD-gBJ" firstAttribute="centerX" secondItem="rni-JQ-DLp" secondAttribute="centerX" id="TST-hk-Deu"/>
+                            <constraint firstItem="aGm-We-t3d" firstAttribute="trailing" secondItem="qZ7-FM-PJU" secondAttribute="trailing" id="VzO-Kg-u2h"/>
+                            <constraint firstItem="qZ7-FM-PJU" firstAttribute="top" secondItem="rni-JQ-DLp" secondAttribute="top" id="uVD-sh-wx8"/>
+                            <constraint firstItem="ljK-WD-gBJ" firstAttribute="centerY" secondItem="rni-JQ-DLp" secondAttribute="centerY" id="w82-I0-sz9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aGm-We-t3d"/>
+                    </view>
+                    <connections>
+                        <outlet property="picker" destination="ljK-WD-gBJ" id="8VC-jx-xLH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ul9-PV-Kgv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1890" y="-1407"/>
         </scene>
         <!--Players-->
         <scene sceneID="SWO-IL-mFT">
@@ -1577,6 +1634,7 @@
     <resources>
         <image name="buttonClockStart" width="60" height="60"/>
         <image name="buttonGame" width="60" height="60"/>
+        <image name="buttonPeriod1st" width="60" height="60"/>
         <image name="buttonPlayers" width="60" height="60"/>
         <image name="calendar icon 25x25 copy" width="27" height="25"/>
         <image name="camera_white" width="30" height="24"/>

@@ -524,13 +524,13 @@ class GoFetch {
         
     }  //statsTimeOnIcePerPlayer
     
-    func statsShiftsPerPlayerPerPeriod(player: Players, managedContext: NSManagedObjectContext, period: Int) -> Int {
+    func statsShiftsPerPlayerPerPeriod(player: Players, managedContext: NSManagedObjectContext, period: Period) -> Int {
         
         var numberOfPeriods = 0
         
         let fetchRequest       = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
         let predicatePlayer    = NSPredicate(format: "playersRelationship = %@", player)
-        let predicatePeriod    = NSPredicate(format: "%K = %d", #keyPath(Shifts.period), period)
+        let predicatePeriod    = NSPredicate(format: "%K = %@", #keyPath(Shifts.period), period.rawValue)
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicatePlayer, predicatePeriod])
         
         let nsExpressionForKeyPath  = NSExpression(forKeyPath: #keyPath(Shifts.period))
@@ -562,13 +562,13 @@ class GoFetch {
         
     }  //statsShiftsPerPlayerPerPeriod
     
-    func statsShiftsPerPlayerPerPeriodPerGame(player: Players, game: Games, managedContext: NSManagedObjectContext, period: Int) -> Int {
+    func statsShiftsPerPlayerPerPeriodPerGame(player: Players, game: Games, managedContext: NSManagedObjectContext, period: Period) -> Int {
         
         var numberOfPeriods = 0
         
         let fetchRequest       = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
         let predicatePlayer    = NSPredicate(format: "playersRelationship = %@", player)
-        let predicatePeriod    = NSPredicate(format: "%K = %d", #keyPath(Shifts.period), period)
+        let predicatePeriod    = NSPredicate(format: "%K = %@", #keyPath(Shifts.period), period.rawValue)
         let predicateGame      = NSPredicate(format: "gameRelationship = %@", game)
         
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicatePlayer, predicatePeriod, predicateGame])

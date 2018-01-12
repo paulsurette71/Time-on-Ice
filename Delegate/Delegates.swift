@@ -12,5 +12,6 @@ protocol myDelegates {
     
     func storeGame(game: Games?)
     func storeGameCheckmarkIndexPathArray(indexPath: IndexPath?)
+    func storePeriod(periodSelected: Period)
     
 }  //myDelegates

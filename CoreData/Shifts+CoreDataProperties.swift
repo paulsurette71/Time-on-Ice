@@ -18,8 +18,8 @@ extension Shifts {
     }
 
     @NSManaged public var date: NSDate?
+    @NSManaged public var period: String?
     @NSManaged public var timeOnIce: Int16
-    @NSManaged public var period: Int16
     @NSManaged public var gameRelationship: Games?
     @NSManaged public var playersRelationship: Players?
 

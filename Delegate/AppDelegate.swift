@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     //Delegates
     var game: Games?
     var gameIndexPath: IndexPath?
-
+    var periodSelected: Period?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
@@ -52,12 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
         
         gameInformationTableViewController.managedContext = coreDataStack.managedContext
         
-//        //Stats Tab
-//        let statsNavigationController = tabBarController.viewControllers?[3] as! UINavigationController
-//        let statsInformationViewController = statsNavigationController.viewControllers[0] as! StatsInformationViewController
-//        
-//        statsInformationViewController.managedContext = coreDataStack.managedContext
-
+        //        //Stats Tab
+        //        let statsNavigationController = tabBarController.viewControllers?[3] as! UINavigationController
+        //        let statsInformationViewController = statsNavigationController.viewControllers[0] as! StatsInformationViewController
+        //        
+        //        statsInformationViewController.managedContext = coreDataStack.managedContext
+        
         
         return true
     }
@@ -94,6 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     func storeGameCheckmarkIndexPathArray(indexPath: IndexPath?) {
         
         self.gameIndexPath = indexPath
+    }
+    
+    func storePeriod(periodSelected: Period) {
+        
+        self.periodSelected = periodSelected
+        
     }
     
 }

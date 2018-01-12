@@ -50,9 +50,24 @@ class ImportShifts {
                     let randomTimeOnIce = arc4random_uniform(150) + 1 //Just so you can't get 0
                     let randomPeriod =  arc4random_uniform(3) + 1  ////Just so you can't get 0
                     
-                    print("Shift \(i) - \(Int(randomTimeOnIce)) Period \(Int(randomPeriod))")
+                    var period: Period?
                     
-                    saveShifts(player: player, game: game, timeOnIce: Int(randomTimeOnIce), period: Int(randomPeriod), managedContext: managedContext)
+                    switch randomPeriod {
+                    case 1:
+                        period = Period.first
+                    case 2:
+                        period = Period.second
+                    case 3:
+                        period = Period.third
+                    case 4:
+                        period = Period.overtime
+                    default:
+                         period = Period.first
+                    }
+                    
+                    print("Shift \(i) - \(Int(randomTimeOnIce)) Period \(String(describing: period!))")
+                    
+                    saveShifts(player: player, game: game, timeOnIce: Int(randomTimeOnIce), period: period!, managedContext: managedContext)
                     
                 }
             }
@@ -61,7 +76,7 @@ class ImportShifts {
     }  //importShifts
     
     
-    func saveShifts (player: Players, game: Games, timeOnIce: Int, period: Int, managedContext: NSManagedObjectContext) {
+    func saveShifts (player: Players, game: Games, timeOnIce: Int, period: Period, managedContext: NSManagedObjectContext) {
         
         do {
             
@@ -71,7 +86,7 @@ class ImportShifts {
             shifts.gameRelationship = game
             shifts.playersRelationship = player
             shifts.timeOnIce = Int16(timeOnIce)
-            shifts.period = Int16(period)
+            shifts.period = period.rawValue
             shifts.date = Date() as NSDate
             
             try managedContext.save()

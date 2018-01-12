@@ -63,6 +63,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var gameButton: UIButton!
     @IBOutlet weak var playersButton: UIButton!
     @IBOutlet weak var clockButton: UIButton!
+    @IBOutlet weak var periodButton: UIButton!
+    
+    
     
     var tappedButton                 = true
     
@@ -91,6 +94,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //set the period
+        myDelegates?.storePeriod(periodSelected: .first)
         
         //NotifactionCenter
         SetupNotificationCenter()
@@ -337,6 +343,39 @@ class HomeViewController: UIViewController {
         }
         
     }  //updateCounters
+    
+    @IBAction func period(_ sender: UIButton) {
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        
+        let periodPopoverViewController = rootViewController?.storyboard?.instantiateViewController(withIdentifier: "PeriodPopoverViewController") as! PeriodPopoverViewController
+        
+//        scoreClockPopoverViewController.periodSelected         = periodSelected
+//        scoreClockPopoverViewController.mainView               = mainView
+//        scoreClockPopoverViewController.sender                 = sender
+        periodPopoverViewController.modalPresentationStyle = .popover
+        periodPopoverViewController.preferredContentSize   = CGSize(width: 100, height: 200)
+        periodPopoverViewController.homeViewController     = self
+        periodPopoverViewController.myDelegates = myDelegates
+        
+        
+        let popover = periodPopoverViewController.popoverPresentationController!
+        popover.delegate = self
+        popover.permittedArrowDirections = .any
+        
+        popover.sourceView = sender
+        popover.sourceRect = sender.bounds
+        
+        rootViewController?.present(periodPopoverViewController, animated: true, completion: nil)
+
+        
+        
+    }  //period
+    
     
 }  //ShotDetailsPopover
 
@@ -604,4 +643,3 @@ extension HomeViewController: NSFetchedResultsControllerDelegate {
     //    }  //controllerDidChangeContent
     
 }  //extension HomeViewController: NSFetchedResultsControllerDelegate
-
