@@ -20,6 +20,11 @@ class StatsAccumulatedTableViewCell: UITableViewCell {
     @IBOutlet weak var statsAvgShiftsPerGameLabel: UILabel!
     @IBOutlet weak var statsAvgTimeOnIcePerGameLabel: UILabel!
     
+    @IBOutlet weak var stats1stPeriodPercentageLabel: UILabel!
+    @IBOutlet weak var stats2ndPeriodPercentageLabel: UILabel!
+    @IBOutlet weak var stats3rdPeriodPercentageLabel: UILabel!
+    @IBOutlet weak var statsOTPeriodPercentageLabel: UILabel!
+    
     //Period Label
     @IBOutlet weak var stats1stPeriodLabel: UILabel!
     @IBOutlet weak var stats2ndPeriodLabel: UILabel!

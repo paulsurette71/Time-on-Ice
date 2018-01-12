@@ -276,7 +276,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
     func configueShiftCell (cell: ShiftDetailsTableViewCell, indexPath: IndexPath, player: Players, game: Games) {
         
         let results = goFetch.shiftsPerPlayerPerGame(player: player, game: game, managedContext: managedContext)
-        print(results)
         
         let timeOnIce = results[indexPath.row - 2]["timeOnIce"]
         let shiftDate = results[indexPath.row - 2]["date"] as! Date
@@ -290,7 +289,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
             
             cell.dateDifferenceLabel.text = "0s"
         }
-                
+        
         let period = results[indexPath.row - 2]["period"]! as! Period.RawValue
         
         if period == Period.first.rawValue {
@@ -350,25 +349,29 @@ extension StatsPerGameViewController: UITableViewDataSource {
         let firstPeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: Period(rawValue: Period.first.rawValue)!)
         
         if firstPeriod != 0 {
-            cell.stats1stPeriodLabel.text = String(firstPeriod) + " (" + convertToPercentage(period: firstPeriod, totalShift: results.count) + "%)"
+            cell.stats1stPeriodLabel.text = String(firstPeriod)
+            cell.stats1stPeriodPercentageLabel.text = convertToPercentage(period: firstPeriod, totalShift: results.count) + "%"
         }
         
         let secondPeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: Period(rawValue: Period.second.rawValue)!)
         
         if secondPeriod != 0 {
-            cell.stats2ndPeriodLabel.text = String(secondPeriod) + " (" + convertToPercentage(period: secondPeriod, totalShift: results.count) + "%)"
+            cell.stats2ndPeriodLabel.text = String(secondPeriod)
+            cell.stats2ndPeriodPercentageLabel.text = convertToPercentage(period: secondPeriod, totalShift: results.count) + "%"
         }
         
         let thirdPeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: Period(rawValue: Period.third.rawValue)!)
         
         if thirdPeriod != 0 {
-            cell.stats3rdPeriodLabel.text = String(thirdPeriod) + " (" + convertToPercentage(period: thirdPeriod, totalShift: results.count) + "%)"
+            cell.stats3rdPeriodLabel.text = String(thirdPeriod)
+            cell.stats3rdPeriodPercentageLabel.text = convertToPercentage(period: thirdPeriod, totalShift: results.count) + "%"
         }
         
         let overtimePeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: Period(rawValue: Period.overtime.rawValue)!)
         
         if overtimePeriod != 0 {
-            cell.statsOvertimePeriodLabel.text = String(overtimePeriod) + " (" + convertToPercentage(period: overtimePeriod, totalShift: results.count) + "%)"
+            cell.statsOvertimePeriodLabel.text = String(overtimePeriod)
+            cell.statsOTPeriodPercentageLabel.text = convertToPercentage(period: overtimePeriod, totalShift: results.count) + "%"
         }
         
         //Total TimeOnIce
@@ -420,24 +423,28 @@ extension StatsPerGameViewController: UITableViewDataSource {
         //Periods
         let firstPeriod = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: Period(rawValue: Period.first.rawValue)!)
         if firstPeriod != 0 {
-            cell.stats1stPeriodLabel.text = String(firstPeriod) + " (" + convertToPercentage(period: firstPeriod, totalShift: totalShifts) + "%)"
+            cell.stats1stPeriodLabel.text = String(firstPeriod)
+            cell.stats1stPeriodPercentageLabel.text = convertToPercentage(period: firstPeriod, totalShift: totalShifts) + "%"
         }
         
         let secondPeriod = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: Period(rawValue: Period.second.rawValue)!)
         if secondPeriod != 0 {
-            cell.stats2ndPeriodLabel.text = String(secondPeriod) + " (" + convertToPercentage(period: secondPeriod, totalShift: totalShifts) + "%)"
+            cell.stats2ndPeriodLabel.text = String(secondPeriod)
+            cell.stats2ndPeriodPercentageLabel.text = convertToPercentage(period: secondPeriod, totalShift: totalShifts) + "%"
         }
         
         let thirdPeriod = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: Period(rawValue: Period.third.rawValue)!)
         if thirdPeriod != 0 {
-            cell.stats3rdPeriodLabel.text = String(thirdPeriod) + " (" + convertToPercentage(period: thirdPeriod, totalShift: totalShifts) + "%)"
+            cell.stats3rdPeriodLabel.text = String(thirdPeriod)
+            cell.stats3rdPeriodPercentageLabel.text = convertToPercentage(period: thirdPeriod, totalShift: totalShifts) + "%"
         }
-
+        
         let overtimePeriod = goFetch.statsShiftsPerPlayerPerPeriod(player: selectedPlayer!, managedContext: managedContext, period: Period(rawValue: Period.overtime.rawValue)!)
         if overtimePeriod != 0 {
-            cell.statsOvertimePeriodLabel.text = String(overtimePeriod) + " (" + convertToPercentage(period: overtimePeriod, totalShift: totalShifts) + "%)"
+            cell.statsOvertimePeriodLabel.text = String(overtimePeriod)
+            cell.statsOTPeriodPercentageLabel.text = convertToPercentage(period: overtimePeriod, totalShift: totalShifts) + "%"
         }
-
+        
         //Average Shift Length
         let averageShift = timeOnIce / totalShifts
         let avergeShiftLength = timeFormat.mmSS(totalSeconds: averageShift)
