@@ -122,19 +122,26 @@ class PlayerInformationTableViewController: UITableViewController {
         configureCell(cell, withPlayer: player, indexPath: indexPath)
         
         cell.chevronButton.tag = indexPath.row
-        cell.statsButton.tag = indexPath.row
+        cell.statsButton.tag   = indexPath.row
         
         cell.chevronButton.addTarget(self, action: #selector(chevron), for: .touchUpInside)
         cell.statsButton.addTarget(self, action: #selector(stats), for: .touchUpInside)
         
-        //Check to see how many games are played to show button.
-        let gamesPlayed = goFetch.statsGamesPerPlayer(player: player, managedContext: managedContext)
+        //Check to see if there are at least 3 shifts to display stats
+        if let shift = player.playersShiftRelationship as! Set<Shifts>? {
+            
+            if shift.count > 2 {
+                
+                cell.statsButton.isHidden = false
+                
+            } else {
+                
+                cell.statsButton.isHidden = true
+                
+            }  //if shift.count
+
+        }  //if let shift
         
-        if gamesPlayed > 0 {
-            cell.statsButton.isHidden = false
-        } else {
-            cell.statsButton.isHidden = true
-        }
         
         //Check to see if the on ice image should be shown.
         if player.onIce {

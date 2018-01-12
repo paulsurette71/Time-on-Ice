@@ -35,16 +35,18 @@ class StatsAccumulatedTableViewCell: UITableViewCell {
     @IBOutlet weak var timeOnIceView: UIView!
     @IBOutlet weak var shiftsView: UIView!
     @IBOutlet weak var gamesView: UIView!
+    @IBOutlet weak var periodView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
             
-        let backgroundColour = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1)
+        let backgroundColour = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
         
         //set background colour for headings
         timeOnIceView.backgroundColor = backgroundColour
         shiftsView.backgroundColor = backgroundColour
         gamesView.backgroundColor = backgroundColour
+        periodView.backgroundColor = backgroundColour
         
         // Initialization code
     }

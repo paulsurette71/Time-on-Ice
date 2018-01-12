@@ -11,6 +11,7 @@ import UIKit
 struct PointEntry {
     let value: Int
     let label: String
+
 }
 
 extension PointEntry: Comparable {
@@ -31,7 +32,7 @@ class LineChart: UIView {
     let lineGap: CGFloat = 60.0
     
     /// preseved space at top of the chart
-    let topSpace: CGFloat = 10.0
+    let topSpace: CGFloat = 5.0
     
     /// preserved space at bottom of the chart to show labels along the Y axis
     let bottomSpace: CGFloat = 40.0
@@ -40,11 +41,15 @@ class LineChart: UIView {
     let topHorizontalLine: CGFloat = 110.0 / 100.0
     
     //Distance from edge
-    let distanceFromEdge: CGFloat = 60  //Paul
+    let distanceFromEdge: CGFloat = 15  //Paul
     
     let fontSizeForLabels: CGFloat = 17
     
     var isCurved: Bool = false
+    
+    var averageStartPoint: CGPoint?
+    var averageEndPoint: CGPoint?
+    var averageTimeOnIce: Double?
     
     var dataEntries: [PointEntry]? {
         didSet {
@@ -90,12 +95,12 @@ class LineChart: UIView {
         scrollView.layer.addSublayer(mainLayer)
         
         gradientLayer.colors = [#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1).cgColor, #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1).cgColor, #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1).cgColor, #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor]
-      
+        
         scrollView.layer.addSublayer(gradientLayer)
         
         self.layer.addSublayer(gridLayer)
         self.addSubview(scrollView)
-        self.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
     override func layoutSubviews() {
@@ -109,7 +114,8 @@ class LineChart: UIView {
             gridLayer.frame = CGRect(x: 0, y: topSpace, width: self.frame.width, height: mainLayer.frame.height - topSpace - bottomSpace)
             
             clean()
-          drawHorizontalLines()
+//            drawHorizontalLines()
+            
             if isCurved {
                 drawCurvedChart()
             } else {
@@ -130,7 +136,14 @@ class LineChart: UIView {
             var result: [CGPoint] = []
             let minMaxRange: CGFloat = CGFloat(max - min) * topHorizontalLine
             
+            //Average
+            averageTimeOnIce = findAverage(array: entries)
+            let averageHeight = dataLayer.frame.height * (1 - ((CGFloat(averageTimeOnIce!) - CGFloat(min)) / minMaxRange))
+            averageStartPoint = CGPoint(x: CGFloat(0) * lineGap + distanceFromEdge, y: averageHeight)
+            averageEndPoint = CGPoint(x: CGFloat(entries.count) * lineGap - 45, y: averageHeight)
+            
             for i in 0..<entries.count {
+                
                 let height = dataLayer.frame.height * (1 - ((CGFloat(entries[i].value) - CGFloat(min)) / minMaxRange))
                 let point = CGPoint(x: CGFloat(i)*lineGap + distanceFromEdge, y: height)
                 result.append(point)
@@ -139,6 +152,22 @@ class LineChart: UIView {
         }
         return []
     }
+    
+    func findAverage(array: [PointEntry]) -> Double {
+        
+        var sumOfValues = 0
+        
+        for values in array {
+            
+            sumOfValues += values.value
+            
+        }
+        
+        let averageTimeOnIce = Double(sumOfValues) / Double(array.count)
+        
+        return averageTimeOnIce
+        
+    }  //findAverage
     
     /**
      Draw a zigzag line connecting all points in dataPoints
@@ -179,14 +208,32 @@ class LineChart: UIView {
         guard let dataPoints = dataPoints, dataPoints.count > 0 else {
             return
         }
+        
+        //print(dataPoints)
+        
         if let path = CurveAlgorithm.shared.createCurvedPath(dataPoints) {
             let lineLayer = CAShapeLayer()
             lineLayer.path = path.cgPath
-            lineLayer.strokeColor = #colorLiteral(red: 0.1294117647, green: 0.4470588235, blue: 0.9882352941, alpha: 1)
+            lineLayer.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             lineLayer.fillColor = UIColor.clear.cgColor
-            lineLayer.lineWidth = 5.0
+            lineLayer.lineWidth = 4
             dataLayer.addSublayer(lineLayer)
         }
+        
+        //design the path
+        let path = UIBezierPath()
+        path.move(to: averageStartPoint!)
+        path.addLine(to: averageEndPoint!)
+        
+        //design path in layer
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        shapeLayer.lineWidth = 2
+        
+        dataLayer.addSublayer(shapeLayer)
+        
+        
     }
     
     /**
@@ -233,7 +280,7 @@ class LineChart: UIView {
                 let textLayer = CATextLayer()
                 textLayer.frame = CGRect(x: lineGap*CGFloat(i) - lineGap/2 + distanceFromEdge, y: mainLayer.frame.size.height - bottomSpace/2 - 8, width: lineGap, height: 20)
                 
-                textLayer.foregroundColor = UIColor.black.cgColor
+                textLayer.foregroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) //UIColor.black.cgColor
                 textLayer.backgroundColor = UIColor.clear.cgColor
                 textLayer.alignmentMode = kCAAlignmentCenter
                 textLayer.contentsScale = UIScreen.main.scale
@@ -255,48 +302,50 @@ class LineChart: UIView {
         
         var gridValues: [CGFloat]? = nil
         
-        if dataEntries.count < 4 && dataEntries.count > 0 {
-            gridValues = [0, 1]
-        } else if dataEntries.count >= 4 {
-            gridValues = [0, 0.25, 0.5, 0.75, 1]
-        }
+//        if dataEntries.count < 4 && dataEntries.count > 0 {
+//            gridValues = [0, 1]
+//        } else if dataEntries.count >= 4 {
+//            gridValues = [0, 0.25, 0.5, 0.75, 1]
+//        }
+        
+        gridValues = [0, 0.5 ,1]
         
         if let gridValues = gridValues {
             
             for value in gridValues {
                 let height = value * gridLayer.frame.size.height
                 
-//                let path = UIBezierPath()
-//                path.move(to: CGPoint(x: 0, y: height))
-//                path.addLine(to: CGPoint(x: gridLayer.frame.size.width, y: height))
-//
-//                let lineLayer = CAShapeLayer()
-//                lineLayer.path = path.cgPath
-//                lineLayer.fillColor = UIColor.clear.cgColor
-//                lineLayer.strokeColor = UIColor.gray.cgColor
-//                if (value > 0.0 && value < 1.0) {
-//                    lineLayer.lineDashPattern = [4, 4]
-//                }
+                //                let path = UIBezierPath()
+                //                path.move(to: CGPoint(x: 0, y: height))
+                //                path.addLine(to: CGPoint(x: gridLayer.frame.size.width, y: height))
+                //
+                //                let lineLayer = CAShapeLayer()
+                //                lineLayer.path = path.cgPath
+                //                lineLayer.fillColor = UIColor.clear.cgColor
+                //                lineLayer.strokeColor = UIColor.gray.cgColor
+                //                if (value > 0.0 && value < 1.0) {
+                //                    lineLayer.lineDashPattern = [4, 4]
+                //                }
                 
-//                gridLayer.addSublayer(lineLayer)
+                //                gridLayer.addSublayer(lineLayer)
                 
                 var minMaxGap:CGFloat = 0
                 var lineValue:Int = 0
-                if let max = dataEntries.max()?.value,
-                    let min = dataEntries.min()?.value {
-                    minMaxGap = CGFloat(max - min) * topHorizontalLine
-                    lineValue = Int((1-value) * minMaxGap) + Int(min)
+                
+                if let max = dataEntries.max()?.value  { //let min = dataEntries.min()?.value
+                    minMaxGap = CGFloat(max) //* topHorizontalLine
+                    lineValue = Int((1-value) * minMaxGap) //+ Int(min)
                 }
                 
                 let textLayer = CATextLayer()
                 textLayer.frame = CGRect(x: 4, y: height, width: 50, height: 20)
-                textLayer.foregroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+                textLayer.foregroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor
                 textLayer.backgroundColor = UIColor.clear.cgColor
                 textLayer.contentsScale = UIScreen.main.scale
                 textLayer.font = CTFontCreateWithName(UIFont.systemFont(ofSize: 0).fontName as CFString, 0, nil)
                 textLayer.fontSize = fontSizeForLabels
                 textLayer.string = timeFormat.mmSS(totalSeconds: lineValue)
-                                
+                
                 gridLayer.addSublayer(textLayer)
             }
         }

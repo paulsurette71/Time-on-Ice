@@ -150,13 +150,15 @@ class HomeViewController: UIViewController {
         
         if appDelegate.game == nil  {
             
-            clockButton.isEnabled = false
+            clockButton.isEnabled   = false
             playersButton.isEnabled = false
+            periodButton.isEnabled  = false
             
         } else {
             
-            clockButton.isEnabled = true
+            clockButton.isEnabled   = true
             playersButton.isEnabled = true
+            periodButton.isEnabled  = true
         }
         
         fetchAndReloadTableView()
@@ -271,6 +273,7 @@ class HomeViewController: UIViewController {
             gameInformationLabel.text     = "Welcome"
             gameDateInformationLabel.text = ""
             playersButton.isEnabled = false
+            periodButton.isEnabled = false
             
             return
         }
@@ -287,6 +290,7 @@ class HomeViewController: UIViewController {
             gameDateInformationLabel.text = currentDate
             
             playersButton.isEnabled = true
+            periodButton.isEnabled = true
             
         }
     }  //displayGameHeader

@@ -34,7 +34,6 @@ class StatsPerGameViewController: UIViewController {
         return fetchedResultsControllerShiftPerPlayer
     }()
     
-    
     //classes
     let goFetch     = GoFetch()
     let convertDate = ConvertDate()
@@ -526,7 +525,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
         }
         
         header.textLabel?.textColor            = UIColor.white
-        header.textLabel?.font                 = UIFont.systemFont(ofSize: 20, weight: .light)
+        header.textLabel?.font                 = UIFont.systemFont(ofSize: 20, weight: .heavy)
         header.textLabel?.frame                = header.frame
         header.textLabel?.textAlignment        = .left
         header.backgroundView?.backgroundColor = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
