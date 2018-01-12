@@ -276,6 +276,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
     func configueShiftCell (cell: ShiftDetailsTableViewCell, indexPath: IndexPath, player: Players, game: Games) {
         
         let results = goFetch.shiftsPerPlayerPerGame(player: player, game: game, managedContext: managedContext)
+        print(results)
         
         let timeOnIce = results[indexPath.row - 2]["timeOnIce"]
         let shiftDate = results[indexPath.row - 2]["date"] as! Date

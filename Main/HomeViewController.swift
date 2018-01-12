@@ -440,8 +440,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print("didSelectItemAt")
-        
         let cell = collectionView.cellForItem(at: indexPath) as! BenchCollectionViewCell
         
         configCollectionViewCell(cell: cell, indexPath: indexPath)
@@ -534,6 +532,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             shifts.timeOnIce           = Int16(timeOnIce)
             shifts.date                = Date() as NSDate
+            shifts.period              = appDelegate.periodSelected.map { $0.rawValue }
             
             //Save
             try managedContext.save()

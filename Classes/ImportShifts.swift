@@ -48,7 +48,7 @@ class ImportShifts {
                 for i in 1...numberOfShifts {
                     
                     let randomTimeOnIce = arc4random_uniform(150) + 1 //Just so you can't get 0
-                    let randomPeriod =  arc4random_uniform(3) + 1  ////Just so you can't get 0
+                    let randomPeriod =  arc4random_uniform(4) + 1  ////Just so you can't get 0
                     
                     var period: Period?
                     
