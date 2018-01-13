@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     var game: Games?
     var gameIndexPath: IndexPath?
     var periodSelected: Period?
+    var playerHeadShot: UIImage?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -46,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
         let playerInformationTableViewController = playerNavigationController.viewControllers[0] as! PlayerInformationTableViewController
         
         playerInformationTableViewController.managedContext = coreDataStack.managedContext
+        playerInformationTableViewController.myDelegates = self  //For Camera HeadShots
         
         //Game Tab
         let gameNavigationController = tabBarController.viewControllers?[1] as! UINavigationController
@@ -100,6 +102,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     func storePeriod(periodSelected: Period) {
         
         self.periodSelected = periodSelected
+        
+    }
+    
+    func storeHeadShot(playerHeadShot: UIImage) {
+        
+        self.playerHeadShot = playerHeadShot
         
     }
     

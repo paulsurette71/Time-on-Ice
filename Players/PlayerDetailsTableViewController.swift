@@ -41,6 +41,7 @@ class PlayerDetailsTableViewController: UITableViewController {
     let calculate        = Calculate()
     let goFetch          = GoFetch()
     let roundedImageView = RoundedImageView()
+    let camera           = Camera()
     
     //JPEG Compresion
     let bestQuality:CGFloat = 1.0
@@ -59,6 +60,12 @@ class PlayerDetailsTableViewController: UITableViewController {
     //Arrays
     let shootsArray = ["Left", "Right"].sorted()
     let positionArray = ["Defense", "Goalie", "Left Wing", "Right Wing", "Centre", "Forward"].sorted()
+    
+    //Delegates
+    var myDelegates: myDelegates?
+    
+    //App Delegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +109,17 @@ class PlayerDetailsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        print("viewWillAppear")
+        
+        
+        guard (appDelegate.playerHeadShot != nil) else {
+            
+            tableView.reloadData()
+            return
+        }
+        
+        headShotImageView.image = appDelegate.playerHeadShot
         
         tableView.reloadData()
     }
@@ -155,35 +173,13 @@ class PlayerDetailsTableViewController: UITableViewController {
         header.backgroundView?.backgroundColor = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
     }
     
-    @IBAction func camera(_ sender: Any) {
+    @IBAction func headShot(_ sender: Any) {
         
-
-            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-                self.showCamera()
-            }))
-            
-            actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-                self.showPhotoLibrary()
-            }))
-            
-            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
-            present(actionSheet, animated: true, completion: nil)
-
-
-        
-        
-    }  //camera
-    
-    func showCamera() {
+        camera.myDelegates = myDelegates
+        camera.takePicture()
         
     }
     
-    func showPhotoLibrary() {
-        
-    }
     
     @IBAction func birthdate(_ sender: UIDatePicker) {
         
@@ -245,6 +241,10 @@ class PlayerDetailsTableViewController: UITableViewController {
             selectedPlayer?.division  = divisionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             selectedPlayer?.height    = heightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             selectedPlayer?.weight    = weightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            //HeadShot
+            let headshot     = UIImageJPEGRepresentation(headShotImageView.image!, bestQuality) as NSData?
+            selectedPlayer?.headshot  = headshot
             
             try selectedPlayer?.managedObjectContext?.save()
             
@@ -427,7 +427,7 @@ extension PlayerDetailsTableViewController: UITextFieldDelegate {
             
             showPopover(textField: cityTextField, array: cityNames.sorted(), popoverTitle: "City")
         }
-
+        
         if textField == leagueTextField {
             
             let leagueNames = goFetch.league(managedContext: managedContext)
@@ -438,7 +438,7 @@ extension PlayerDetailsTableViewController: UITextFieldDelegate {
             
             showPopover(textField: leagueTextField, array: leagueNames.sorted(), popoverTitle: "League")
         }
-
+        
         if textField == levelTextField {
             
             let levelNames = goFetch.level(managedContext: managedContext)
@@ -449,7 +449,7 @@ extension PlayerDetailsTableViewController: UITextFieldDelegate {
             
             showPopover(textField: levelTextField, array: levelNames.sorted(), popoverTitle: "Level")
         }
-
+        
         if textField == divisionTextField {
             
             let divisionNames = goFetch.division(managedContext: managedContext)
@@ -460,7 +460,7 @@ extension PlayerDetailsTableViewController: UITextFieldDelegate {
             
             showPopover(textField: divisionTextField, array: divisionNames.sorted(), popoverTitle: "Division")
         }
-
+        
         
     }  //textFieldDidBeginEditing
     

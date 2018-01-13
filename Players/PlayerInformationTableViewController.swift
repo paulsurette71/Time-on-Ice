@@ -25,6 +25,9 @@ class PlayerInformationTableViewController: UITableViewController {
     let timeFormat             = TimeFormat()
     let showPopover            = ShowPopover()
     
+    //Delegates
+    var myDelegates: myDelegates?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -85,7 +88,8 @@ class PlayerInformationTableViewController: UITableViewController {
         let playerDetailsTableViewController = storyboard?.instantiateViewController(withIdentifier: "PlayerDetailsTableViewController") as! PlayerDetailsTableViewController
         
         playerDetailsTableViewController.selectedPlayer = player
-        playerDetailsTableViewController.newPlayer = false
+        playerDetailsTableViewController.newPlayer      = false
+        playerDetailsTableViewController.myDelegates    = myDelegates
         
         //This is for lookup popovers
         playerDetailsTableViewController.managedContext = managedContext

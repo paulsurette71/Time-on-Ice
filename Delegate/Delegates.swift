@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 protocol myDelegates {
     
     func storeGame(game: Games?)
     func storeGameCheckmarkIndexPathArray(indexPath: IndexPath?)
     func storePeriod(periodSelected: Period)
+    func storeHeadShot(playerHeadShot: UIImage)
     
 }  //myDelegates
