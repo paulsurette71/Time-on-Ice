@@ -37,7 +37,7 @@ class Camera: NSObject, UIImagePickerControllerDelegate, UINavigationControllerD
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        let resizedImage = resizeImage(image: info[UIImagePickerControllerOriginalImage] as! UIImage, newWidth: 500.0)
+        let resizedImage = resizeImage(image: info[UIImagePickerControllerOriginalImage] as! UIImage, newWidth: CGSize(width: 75, height: 75))
                 
         myDelegates?.storeHeadShot(playerHeadShot: resizedImage)
         
@@ -52,21 +52,39 @@ class Camera: NSObject, UIImagePickerControllerDelegate, UINavigationControllerD
     }  //imagePickerControllerDidCancel
     
     
-    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+    func resizeImage(image: UIImage, newWidth: CGSize) -> UIImage {
         
-        //http://nshipster.com/image-resizing/
+//        //http://nshipster.com/image-resizing/
+//
+//        let size = image.size.applying(CGAffineTransform(scaleX: 0.50, y: 0.50))
+//        let hasAlpha = false
+//        let scale: CGFloat = 1.0 // Automatically use scale factor of main screen
+//
+//        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+//        image.draw(in: CGRect(origin: CGPoint(), size: size))
+//
+//        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return scaledImage!
+//
+//        func resizeImageWith(newSize: CGSize) -> UIImage {
         
-        let size = image.size.applying(CGAffineTransform(scaleX: 0.10, y: 0.10))
-        let hasAlpha = false
-        let scale: CGFloat = 3.0 // Automatically use scale factor of main screen
+            let horizontalRatio = newWidth.width / image.size.width
+            let verticalRatio = newWidth.height / image.size.height
+            
+            let ratio = max(horizontalRatio, verticalRatio)
+            let newSize = CGSize(width: image.size.width * ratio, height: image.size.height * ratio)
         
-        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
-        image.draw(in: CGRect(origin: CGPoint(), size: size))
+            UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
         
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        image.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        
         UIGraphicsEndImageContext()
         
-        return scaledImage!
+        return newImage!
+//        }
         
     }  //resizeImage
     
