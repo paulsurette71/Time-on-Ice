@@ -110,12 +110,10 @@ class PlayerDetailsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("viewWillAppear")
-        
-        
         guard (appDelegate.playerHeadShot != nil) else {
             
             tableView.reloadData()
+        
             return
         }
         

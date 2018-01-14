@@ -75,6 +75,10 @@ class StatsPerGameViewController: UIViewController {
         let cellShifts = UINib(nibName: "ShiftDetailsTableViewCell", bundle: nil)
         tableView.register(cellShifts, forCellReuseIdentifier: "ShiftDetailsCell")
         
+        //StatsOneShiftTableViewCell
+        let cellHeader = UINib(nibName: "StatsTableViewHeaderFooterView", bundle: nil)
+        tableView.register(cellHeader, forHeaderFooterViewReuseIdentifier: "StatsTableViewHeaderFooterView")
+        
     }  //viewDidLoad
     
     override func viewWillAppear(_ animated: Bool) {
@@ -518,29 +522,36 @@ extension StatsPerGameViewController: UITableViewDataSource {
         
     }  //configureChartPerGame
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
-        guard let header = view as? UITableViewHeaderFooterView else {
-            return
-        }
-        
-        header.textLabel?.textColor            = UIColor.white
-        header.textLabel?.font                 = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        header.textLabel?.frame                = header.frame
-        header.textLabel?.textAlignment        = .left
-        header.backgroundView?.backgroundColor = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
-        
-    }  //willDisplayHeaderView
+    //    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    //
+    //        guard let header = view as? UITableViewHeaderFooterView else {
+    //            return
+    //        }
+    //
+    //        header.textLabel?.textColor                 = UIColor.white
+    //        header.textLabel?.font                      = UIFont.systemFont(ofSize: 20, weight: .heavy)
+    //        header.textLabel?.frame                     = header.frame
+    //        header.textLabel?.textAlignment             = .left
+    //        header.textLabel?.adjustsFontSizeToFitWidth = true
+    //        header.textLabel?.minimumScaleFactor        = 0.5
+    //        header.backgroundView?.backgroundColor      = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
+    //
+    //    }  //willDisplayHeaderView
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard numberOfGames != 0 else {
-            return "No Games"
-        }
+        let cell = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "StatsTableViewHeaderFooterView")
+        let header = cell as! StatsTableViewHeaderFooterView
+        
+        header.actionButton.tag   = section
+        header.actionButton.addTarget(self, action: #selector(action), for: .touchUpInside)
         
         if section == 0 {
             
-            return "Overall Stats"
+            header.dateLabel.text  = "Overall Stats"
+            header.teamsLabel.text = nil
+            
+            return cell
             
         } else {
             
@@ -548,14 +559,67 @@ extension StatsPerGameViewController: UITableViewDataSource {
             let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
             let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
             
-            let currentDate = convertDate.convertDateOnly(date: (gameDetails.date)!) + " - " + gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
+            let currentDate = convertDate.convertDateOnly(date: (gameDetails.date)!) //+ " - " + gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
             
-            let sectionHeader = currentDate
             
-            return sectionHeader
-        }
+            header.dateLabel.text  = currentDate
+            header.teamsLabel.text = gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
+            
+            return cell
+            
+        }  //if section
         
-    }  //titleForHeaderInSection
+    }  //viewForHeaderInSection
+    
+    @objc func action(sender: UIButton)  {
+        
+        let indexPath = NSIndexPath(row: 0, section: sender.tag)
+        
+        let activityViewController = UIActivityViewController(activityItems: ["Hello"],applicationActivities: nil)
+        
+        activityViewController.excludedActivityTypes = [.addToReadingList,
+                                                        .airDrop,
+                                                        .assignToContact,
+                                                        .markupAsPDF,
+                                                        .openInIBooks,
+                                                        .postToFacebook,
+                                                        .postToFlickr,
+                                                        .postToTencentWeibo,
+                                                        .postToTwitter,
+                                                        .postToVimeo,
+                                                        .postToWeibo,
+                                                        .print,
+                                                        .saveToCameraRoll]
+        
+        present(activityViewController, animated: true, completion: nil)
+        
+    }  //action
+    
+    
+    //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    //
+    //        guard numberOfGames != 0 else {
+    //            return "No Games"
+    //        }
+    //
+    //        if section == 0 {
+    //
+    //            return "Overall Stats"
+    //
+    //        } else {
+    //
+    //            let game = gameData[section - 1]
+    //            let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
+    //            let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
+    //
+    //            let currentDate = convertDate.convertDateOnly(date: (gameDetails.date)!) + " - " + gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
+    //
+    //            let sectionHeader = currentDate
+    //
+    //            return sectionHeader
+    //        }
+    //
+    //    }  //titleForHeaderInSection
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60

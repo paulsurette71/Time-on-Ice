@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StatsTableViewHeaderFooterView" customModule="Time_on_Ice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w8N-V2-eJf">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="k6N-bL-f0I">
+                            <rect key="frame" x="15" y="5" width="311" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8th-fR-eSR">
+                                    <rect key="frame" x="0.0" y="0.0" width="311" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="0dP-og-hfX"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Woc-hi-PY0">
+                                    <rect key="frame" x="0.0" y="25" width="311" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="HHo-m1-9aY"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaI-Y1-msG">
+                            <rect key="frame" x="341" y="17" width="19" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="buY-Nf-TlS"/>
+                                <constraint firstAttribute="width" constant="19" id="jJD-Ce-Fny"/>
+                            </constraints>
+                            <state key="normal" image="icons8-upload"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="k6N-bL-f0I" firstAttribute="leading" secondItem="w8N-V2-eJf" secondAttribute="leading" constant="15" id="CRn-Zh-UPZ"/>
+                        <constraint firstAttribute="trailing" secondItem="MaI-Y1-msG" secondAttribute="trailing" constant="15" id="DWb-QU-hUC"/>
+                        <constraint firstItem="k6N-bL-f0I" firstAttribute="centerY" secondItem="w8N-V2-eJf" secondAttribute="centerY" id="Dh4-dL-fsu"/>
+                        <constraint firstItem="MaI-Y1-msG" firstAttribute="centerY" secondItem="w8N-V2-eJf" secondAttribute="centerY" id="MZ8-8s-OYh"/>
+                        <constraint firstItem="MaI-Y1-msG" firstAttribute="leading" secondItem="k6N-bL-f0I" secondAttribute="trailing" constant="15" id="WR7-kU-7U5"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="w8N-V2-eJf" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="6NC-9H-6iz"/>
+                <constraint firstItem="w8N-V2-eJf" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="ROT-aX-9jx"/>
+                <constraint firstItem="w8N-V2-eJf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aUJ-H0-qcy"/>
+                <constraint firstItem="w8N-V2-eJf" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="pa9-qb-KCk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="actionButton" destination="MaI-Y1-msG" id="EQL-gp-iuc"/>
+                <outlet property="dateLabel" destination="8th-fR-eSR" id="rUP-id-HAT"/>
+                <outlet property="teamsLabel" destination="Woc-hi-PY0" id="mFm-t2-6D3"/>
+            </connections>
+            <point key="canvasLocation" x="12.5" y="73"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icons8-upload" width="19" height="26"/>
+    </resources>
+</document>

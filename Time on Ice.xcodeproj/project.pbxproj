@@ -40,6 +40,8 @@
 		75451F8B20081E7300831A08 /* ButtonImagesForState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75451F8A20081E7300831A08 /* ButtonImagesForState.swift */; };
 		755257A01FFA8FBF0063B646 /* Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552579F1FFA8FBF0063B646 /* Reset.swift */; };
 		7553BF171FFD748B005C2CDC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553BF161FFD748B005C2CDC /* Camera.swift */; };
+		7557A6CD200B9DA100FCCD18 /* StatsTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7557A6CC200B9DA100FCCD18 /* StatsTableViewHeaderFooterView.xib */; };
+		7557A6CF200BA13800FCCD18 /* StatsTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7557A6CE200BA13800FCCD18 /* StatsTableViewHeaderFooterView.swift */; };
 		755A7436200844F0000C5B19 /* Shifts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755A7434200844F0000C5B19 /* Shifts+CoreDataClass.swift */; };
 		755A7437200844F0000C5B19 /* Shifts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755A7435200844F0000C5B19 /* Shifts+CoreDataProperties.swift */; };
 		756C7B901FEFF65F00DBF5CD /* Players+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C7B8E1FEFF65F00DBF5CD /* Players+CoreDataClass.swift */; };
@@ -117,6 +119,8 @@
 		75451F8A20081E7300831A08 /* ButtonImagesForState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImagesForState.swift; sourceTree = "<group>"; };
 		7552579F1FFA8FBF0063B646 /* Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reset.swift; sourceTree = "<group>"; };
 		7553BF161FFD748B005C2CDC /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		7557A6CC200B9DA100FCCD18 /* StatsTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
+		7557A6CE200BA13800FCCD18 /* StatsTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		755A7434200844F0000C5B19 /* Shifts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shifts+CoreDataClass.swift"; sourceTree = "<group>"; };
 		755A7435200844F0000C5B19 /* Shifts+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shifts+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		756C7B8E1FEFF65F00DBF5CD /* Players+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Players+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -231,6 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				75A0C4B61FFBD746006DED1F /* StatsPerGameViewController.swift */,
+				7557A6CC200B9DA100FCCD18 /* StatsTableViewHeaderFooterView.xib */,
+				7557A6CE200BA13800FCCD18 /* StatsTableViewHeaderFooterView.swift */,
 				7591FC1E2000025E001CAE70 /* Cells */,
 			);
 			path = Stats;
@@ -396,6 +402,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7557A6CD200B9DA100FCCD18 /* StatsTableViewHeaderFooterView.xib in Resources */,
 				7591FC1D200000F4001CAE70 /* StatsChartTableViewCell.xib in Resources */,
 				758D35FF1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib in Resources */,
 				7591FC191FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.xib in Resources */,
@@ -425,6 +432,7 @@
 				75F7EF361FD8C03D002BD535 /* PlayerPopoverViewController.swift in Sources */,
 				750FA20A1FBCDCDA00A1D89A /* AppDelegate.swift in Sources */,
 				75E9E8621FBE218900A51F89 /* PlayerInformationTableViewController.swift in Sources */,
+				7557A6CF200BA13800FCCD18 /* StatsTableViewHeaderFooterView.swift in Sources */,
 				75795AD11FC358F8006A52D7 /* PlayerDetailsTableViewController.swift in Sources */,
 				7518A0331FFEC7E60092278F /* LineChart.swift in Sources */,
 				756C7B911FEFF65F00DBF5CD /* Players+CoreDataProperties.swift in Sources */,
