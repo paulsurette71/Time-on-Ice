@@ -133,7 +133,7 @@ class PlayerInformationTableViewController: UITableViewController {
         
         //Check to see if there are at least 3 shifts to display stats
         if let shift = player.playersShiftRelationship as! Set<Shifts>? {
-            
+                        
             if shift.count > 2 {
                 
                 cell.statsButton.isHidden = false

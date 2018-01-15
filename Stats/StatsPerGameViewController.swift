@@ -34,11 +34,38 @@ class StatsPerGameViewController: UIViewController {
         return fetchedResultsControllerShiftPerPlayer
     }()
     
+    struct AccumulatedStats {
+        var totalTimeOnIce: String
+        var totalShifts: String
+        var averageShifts: String
+        var shortestShift: String
+        var longestShift: String
+        var firstPeriod: String
+        var firstPeriodPercentage: String
+        var secondPeriod: String
+        var secondPeriodPercentage: String
+        var thirdPeriod: String
+        var thirdPeriodPercentage: String
+        var overtimePeriod: String
+        var overTimePeriodPercentage: String
+        var numberOfGames: String
+        var averageShiftPerGame: String
+        var averageTimeOnIcePerGame: String
+        var playerInformation: String
+        var gameDate: String
+        var teams: String
+        var shifts: [[String: Any]]
+
+    }
+    
+    var accumulatedStatsPerPlayer: AccumulatedStats?
+
     //classes
     let goFetch     = GoFetch()
     let convertDate = ConvertDate()
     let timeFormat  = TimeFormat()
     let calculate   = Calculate()
+    let message     = Message()
     
     //passed from StatsInformationViewController
     var selectedPlayer: Players?
@@ -96,12 +123,6 @@ class StatsPerGameViewController: UIViewController {
             
         }
         
-        guard listOfShifts.count > 1 else {
-            
-            navigationController?.popToRootViewController(animated: true)
-            return
-        }
-        
         fetchData(player: selectedPlayer!)
         
     }  //viewWillAppear
@@ -112,12 +133,6 @@ class StatsPerGameViewController: UIViewController {
     }
     
     func fetchData(player: Players) {
-        
-        //        guard player.firstName != nil, player.lastName != nil else {
-        //
-        //            navigationController?.popToRootViewController(animated: true)
-        //            return
-        //        }
         
         self.title = (player.firstName)! + " " + (player.lastName)!
         
@@ -198,7 +213,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
             let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
             let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
             
-            
             if indexPath.row == 0 {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "StatsAccumaltedPerGameCell", for: indexPath) as! StatsAccumaltedPerGameTableViewCell   //Try this one
@@ -208,11 +222,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 return cell
                 
             } else if indexPath.row == 1 {
-                
-                //                //Game Information
-                //                let game = gameData[indexPath.section - 1]
-                //                let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
-                //                let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
                 
                 let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
                 
@@ -233,7 +242,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "StatsChartCell", for: indexPath) as! StatsChartTableViewCell
                 
-                
                 configureChartPerGame(cell, data: timeOnIceValues)
                 
                 return cell
@@ -242,8 +250,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ShiftDetailsCell", for: indexPath) as! ShiftDetailsTableViewCell
                 
-                
-                
                 configueShiftCell(cell: cell, indexPath: indexPath, player: selectedPlayer!, game: gameDetails)
                 
                 return cell
@@ -251,28 +257,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
             }  //if indexPath.row == 0
             
         }  //if indexPath.section == 0
-        
-        
-        
-        
-        //                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
-        //
-        //                //Game Information
-        //                let game = gameData[indexPath.section - 1]
-        //                let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
-        //                let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
-        //
-        //                //Player Information
-        ////                let playerNSManagedObjectID = selectedPlayer!["playersRelationship"] as! NSManagedObjectID
-        ////                let player = managedContext.object(with: playerNSManagedObjectID) as? Players
-        //
-        //                let results = goFetch.shiftsPerPlayerPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext)
-        //
-        //                print(convertDate.convertDate(date: (gameDetails.date)!))
-        //                print(results)
-        //
-        //                return cell
-        
         
     }  //cellForRowAt
     
@@ -398,6 +382,19 @@ extension StatsPerGameViewController: UITableViewDataSource {
         let longestShift = timeFormat.mmSS(totalSeconds: max!)
         cell.statsLongestShiftLengthLabel.text = longestShift
         
+        //For Sharing
+        let currentDate = convertDate.convertDateOnly(date: (gameDetails.date)!)
+        let totalShifts = results.count
+        let timeOnIce   = timeFormat.mmSS(totalSeconds: totalTimeOnIce)
+        let teams       = gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
+        let firstPeriodPercentage = convertToPercentage(period: firstPeriod, totalShift: totalShifts) + "%"
+        let secondPeriodPercentage = convertToPercentage(period: secondPeriod, totalShift: totalShifts) + "%"
+        let thirdPeriodPercentage = convertToPercentage(period: thirdPeriod, totalShift: totalShifts) + "%"
+        let overtimePeriodPercentage = convertToPercentage(period: overtimePeriod, totalShift: totalShifts) + "%"
+        let playerName = (selectedPlayer?.firstName!)! + " " + (selectedPlayer?.lastName!)!
+        
+        accumulatedStatsPerPlayer = AccumulatedStats(totalTimeOnIce: timeOnIce, totalShifts: String(totalShifts), averageShifts: avergeShiftLength, shortestShift: shortestShift, longestShift: longestShift, firstPeriod: String(firstPeriod), firstPeriodPercentage: firstPeriodPercentage, secondPeriod: String(secondPeriod), secondPeriodPercentage: secondPeriodPercentage, thirdPeriod: String(thirdPeriod), thirdPeriodPercentage: thirdPeriodPercentage, overtimePeriod: String(overtimePeriod), overTimePeriodPercentage: overtimePeriodPercentage, numberOfGames: "", averageShiftPerGame: "", averageTimeOnIcePerGame: "", playerInformation: playerName, gameDate: currentDate, teams: teams, shifts: results)
+        
     }  //configureStatsCell
     
     
@@ -411,7 +408,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
     
     
     func configureAccumulatedCell(_ cell: StatsAccumulatedTableViewCell, indexPath: IndexPath) {
-        
         
         //Total TimeOnIce
         let timeOnIce = listOfShifts.reduce(0, +)
@@ -471,8 +467,18 @@ extension StatsPerGameViewController: UITableViewDataSource {
         
         //Average Time on Ice Per Game
         let averageTimeOnIcePerGame = calculate.averageTimeOnIcePerGame(timeOnInce: timeOnIce, games: numberOfGames)
-        cell.statsAvgTimeOnIcePerGameLabel.text = timeFormat.mmSS(totalSeconds: averageTimeOnIcePerGame)
+        let averageTimeOnIce = timeFormat.mmSS(totalSeconds: averageTimeOnIcePerGame)
+        cell.statsAvgTimeOnIcePerGameLabel.text = averageTimeOnIce
         
+        //For Sharing
+        let firstPeriodPercentage = convertToPercentage(period: firstPeriod, totalShift: totalShifts) + "%"
+        let secondPeriodPercentage = convertToPercentage(period: secondPeriod, totalShift: totalShifts) + "%"
+        let thirdPeriodPercentage = convertToPercentage(period: thirdPeriod, totalShift: totalShifts) + "%"
+        let overtimePeriodPercentage = convertToPercentage(period: overtimePeriod, totalShift: totalShifts) + "%"
+        let playerName = (selectedPlayer?.firstName!)! + " " + (selectedPlayer?.lastName!)!
+        
+        accumulatedStatsPerPlayer = AccumulatedStats(totalTimeOnIce: totalTimeOnIce, totalShifts: String(totalShifts), averageShifts: avergeShiftLength, shortestShift: shortestShift, longestShift: longestShift, firstPeriod: String(firstPeriod), firstPeriodPercentage: firstPeriodPercentage, secondPeriod: String(secondPeriod), secondPeriodPercentage: secondPeriodPercentage, thirdPeriod: String(thirdPeriod), thirdPeriodPercentage: thirdPeriodPercentage, overtimePeriod: String(overtimePeriod), overTimePeriodPercentage: overtimePeriodPercentage, numberOfGames: String(numberOfGames), averageShiftPerGame: averageShiftsPerGame, averageTimeOnIcePerGame: averageTimeOnIce, playerInformation: playerName, gameDate: "", teams: "", shifts: [[:]])
+
     }  //configureAccumulatedCell
     
     func configureChartCell(_ cell: StatsChartTableViewCell, indexPath: IndexPath) {
@@ -521,23 +527,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
         cell.chartView.dataEntries = barChartData
         
     }  //configureChartPerGame
-    
-    //    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-    //
-    //        guard let header = view as? UITableViewHeaderFooterView else {
-    //            return
-    //        }
-    //
-    //        header.textLabel?.textColor                 = UIColor.white
-    //        header.textLabel?.font                      = UIFont.systemFont(ofSize: 20, weight: .heavy)
-    //        header.textLabel?.frame                     = header.frame
-    //        header.textLabel?.textAlignment             = .left
-    //        header.textLabel?.adjustsFontSizeToFitWidth = true
-    //        header.textLabel?.minimumScaleFactor        = 0.5
-    //        header.backgroundView?.backgroundColor      = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
-    //
-    //    }  //willDisplayHeaderView
-    
+        
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let cell = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "StatsTableViewHeaderFooterView")
@@ -561,7 +551,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
             
             let currentDate = convertDate.convertDateOnly(date: (gameDetails.date)!) //+ " - " + gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
             
-            
             header.dateLabel.text  = currentDate
             header.teamsLabel.text = gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
             
@@ -573,9 +562,26 @@ extension StatsPerGameViewController: UITableViewDataSource {
     
     @objc func action(sender: UIButton)  {
         
-        let indexPath = NSIndexPath(row: 0, section: sender.tag)
+        //        let indexPath = NSIndexPath(row: 0, section: sender.tag)
         
-        let activityViewController = UIActivityViewController(activityItems: ["Hello"],applicationActivities: nil)
+        //        let cell = tableView.dequeueReusableCell(withIdentifier: "StatsChartCell", for: indexPath as IndexPath) as! StatsChartTableViewCell
+        
+        
+        //        let scrollViewContentSize = (cell.chartView.super.
+        //
+        //        UIGraphicsBeginImageContext(scrollViewContentSize)
+        //        cell.chartView.layer.render(in:UIGraphicsGetCurrentContext()!)
+        //        let image = UIGraphicsGetImageFromCurrentImageContext()
+        //        UIGraphicsEndImageContext()
+        
+        //set Subject line
+
+        
+        let results = message.build(data: accumulatedStatsPerPlayer!)
+        
+        let activityViewController = UIActivityViewController(activityItems: [results["message"]!],applicationActivities: nil)
+    
+        activityViewController.setValue(results["subjectLine"], forKey: "Subject")
         
         activityViewController.excludedActivityTypes = [.addToReadingList,
                                                         .airDrop,
@@ -594,32 +600,6 @@ extension StatsPerGameViewController: UITableViewDataSource {
         present(activityViewController, animated: true, completion: nil)
         
     }  //action
-    
-    
-    //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    //
-    //        guard numberOfGames != 0 else {
-    //            return "No Games"
-    //        }
-    //
-    //        if section == 0 {
-    //
-    //            return "Overall Stats"
-    //
-    //        } else {
-    //
-    //            let game = gameData[section - 1]
-    //            let gameNSManagedObjectID = game["gameRelationship"] as! NSManagedObjectID
-    //            let gameDetails = managedContext.object(with: gameNSManagedObjectID) as! Games
-    //
-    //            let currentDate = convertDate.convertDateOnly(date: (gameDetails.date)!) + " - " + gameDetails.visitorTeamCity! + " vs. " + gameDetails.homeTeamCity!
-    //
-    //            let sectionHeader = currentDate
-    //
-    //            return sectionHeader
-    //        }
-    //
-    //    }  //titleForHeaderInSection
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60

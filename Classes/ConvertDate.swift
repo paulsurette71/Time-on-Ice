@@ -30,6 +30,21 @@ class ConvertDate {
         return formatter.string(from: date as Date)
         
     }  //convertDate
+    
+    func convertDateToTime(dateToConvert:Date) -> String {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.timeStyle = .medium  //10:00:00 PM
+        
+        let dateAsAString = dateFormatter.string(from: dateToConvert)
+        let dateAsADate   = dateFormatter.date(from: dateAsAString)
+        let convertedDateAsAString = dateFormatter.string(from: dateAsADate!)
+        
+        return convertedDateAsAString
+        
+    }
+
 
     
 }  //ConvertDate

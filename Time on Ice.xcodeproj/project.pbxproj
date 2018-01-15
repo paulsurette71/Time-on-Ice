@@ -51,6 +51,7 @@
 		7574B3CB1FC8CE7E00CF4214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7574B3CA1FC8CE7E00CF4214 /* Assets.xcassets */; };
 		75795AD11FC358F8006A52D7 /* PlayerDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */; };
 		75795AD31FC37B6B006A52D7 /* Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75795AD21FC37B6B006A52D7 /* Calculate.swift */; };
+		758BD9E9200D541F009B17EE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758BD9E8200D541F009B17EE /* Message.swift */; };
 		758D35FE1FD2EEB80038BBDB /* PlayerInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758D35FC1FD2EEB80038BBDB /* PlayerInformationTableViewCell.swift */; };
 		758D35FF1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 758D35FD1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib */; };
 		7591FC181FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7591FC161FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.swift */; };
@@ -130,6 +131,7 @@
 		7574B3CA1FC8CE7E00CF4214 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75795AD01FC358F8006A52D7 /* PlayerDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsTableViewController.swift; sourceTree = "<group>"; };
 		75795AD21FC37B6B006A52D7 /* Calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculate.swift; sourceTree = "<group>"; };
+		758BD9E8200D541F009B17EE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		758D35FC1FD2EEB80038BBDB /* PlayerInformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationTableViewCell.swift; sourceTree = "<group>"; };
 		758D35FD1FD2EEB80038BBDB /* PlayerInformationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerInformationTableViewCell.xib; sourceTree = "<group>"; };
 		7591FC161FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsAccumulatedTableViewCell.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				7552579F1FFA8FBF0063B646 /* Reset.swift */,
 				7553BF161FFD748B005C2CDC /* Camera.swift */,
 				75451F85200810AA00831A08 /* PeriodPicker.swift */,
+				758BD9E8200D541F009B17EE /* Message.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				75D2F38F1FD868290089DC63 /* GameInformationTableViewCell.swift in Sources */,
 				751768032006F88500720242 /* ImportShifts.swift in Sources */,
 				75E333A71FD0E49A00408317 /* Time On Ice.xcdatamodeld in Sources */,
+				758BD9E9200D541F009B17EE /* Message.swift in Sources */,
 				75F74CA71FFEAC590029FF42 /* BasicBarChart.swift in Sources */,
 				75D2F3921FD86B9C0089DC63 /* changeAppearance.swift in Sources */,
 			);

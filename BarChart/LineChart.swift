@@ -67,7 +67,7 @@ class LineChart: UIView {
     private let mainLayer: CALayer = CALayer()
     
     /// Contains mainLayer and label for each data entry
-    private let scrollView: UIScrollView = UIScrollView()
+    let scrollView: UIScrollView = UIScrollView()
     
     /// Contains horizontal lines
     private let gridLayer: CALayer = CALayer()
