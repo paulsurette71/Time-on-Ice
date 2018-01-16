@@ -55,11 +55,12 @@ class StatsPerGameViewController: UIViewController {
         var gameDate: String
         var teams: String
         var shifts: [[String: Any]]
-
+        
     }
     
     var accumulatedStatsPerPlayer: AccumulatedStats?
-
+    var accumulatedStatsPerGame: AccumulatedStats?
+    
     //classes
     let goFetch     = GoFetch()
     let convertDate = ConvertDate()
@@ -477,8 +478,8 @@ extension StatsPerGameViewController: UITableViewDataSource {
         let overtimePeriodPercentage = convertToPercentage(period: overtimePeriod, totalShift: totalShifts) + "%"
         let playerName = (selectedPlayer?.firstName!)! + " " + (selectedPlayer?.lastName!)!
         
-        accumulatedStatsPerPlayer = AccumulatedStats(totalTimeOnIce: totalTimeOnIce, totalShifts: String(totalShifts), averageShifts: avergeShiftLength, shortestShift: shortestShift, longestShift: longestShift, firstPeriod: String(firstPeriod), firstPeriodPercentage: firstPeriodPercentage, secondPeriod: String(secondPeriod), secondPeriodPercentage: secondPeriodPercentage, thirdPeriod: String(thirdPeriod), thirdPeriodPercentage: thirdPeriodPercentage, overtimePeriod: String(overtimePeriod), overTimePeriodPercentage: overtimePeriodPercentage, numberOfGames: String(numberOfGames), averageShiftPerGame: averageShiftsPerGame, averageTimeOnIcePerGame: averageTimeOnIce, playerInformation: playerName, gameDate: "", teams: "", shifts: [[:]])
-
+        accumulatedStatsPerGame = AccumulatedStats(totalTimeOnIce: totalTimeOnIce, totalShifts: String(totalShifts), averageShifts: avergeShiftLength, shortestShift: shortestShift, longestShift: longestShift, firstPeriod: String(firstPeriod), firstPeriodPercentage: firstPeriodPercentage, secondPeriod: String(secondPeriod), secondPeriodPercentage: secondPeriodPercentage, thirdPeriod: String(thirdPeriod), thirdPeriodPercentage: thirdPeriodPercentage, overtimePeriod: String(overtimePeriod), overTimePeriodPercentage: overtimePeriodPercentage, numberOfGames: String(numberOfGames), averageShiftPerGame: averageShiftsPerGame, averageTimeOnIcePerGame: averageTimeOnIce, playerInformation: playerName, gameDate: "", teams: "", shifts: [[:]])
+        
     }  //configureAccumulatedCell
     
     func configureChartCell(_ cell: StatsChartTableViewCell, indexPath: IndexPath) {
@@ -527,7 +528,7 @@ extension StatsPerGameViewController: UITableViewDataSource {
         cell.chartView.dataEntries = barChartData
         
     }  //configureChartPerGame
-        
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let cell = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "StatsTableViewHeaderFooterView")
@@ -562,25 +563,22 @@ extension StatsPerGameViewController: UITableViewDataSource {
     
     @objc func action(sender: UIButton)  {
         
-        //        let indexPath = NSIndexPath(row: 0, section: sender.tag)
+        var results = [String: String]()
         
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: "StatsChartCell", for: indexPath as IndexPath) as! StatsChartTableViewCell
+        let indexPath = NSIndexPath(row: 0, section: sender.tag)
         
-        
-        //        let scrollViewContentSize = (cell.chartView.super.
-        //
-        //        UIGraphicsBeginImageContext(scrollViewContentSize)
-        //        cell.chartView.layer.render(in:UIGraphicsGetCurrentContext()!)
-        //        let image = UIGraphicsGetImageFromCurrentImageContext()
-        //        UIGraphicsEndImageContext()
-        
-        //set Subject line
-
-        
-        let results = message.build(data: accumulatedStatsPerPlayer!)
+        if indexPath.section == 0 {
+            
+            results = message.build(data: accumulatedStatsPerGame!)
+            
+        } else {
+            
+            results = message.build(data: accumulatedStatsPerPlayer!)
+            
+        }
         
         let activityViewController = UIActivityViewController(activityItems: [results["message"]!],applicationActivities: nil)
-    
+        
         activityViewController.setValue(results["subjectLine"], forKey: "Subject")
         
         activityViewController.excludedActivityTypes = [.addToReadingList,
