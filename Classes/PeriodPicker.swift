@@ -92,17 +92,13 @@ extension PeriodPicker: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         
         return 35.0
-    }
+    }  //rowHeightForComponent
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return String(describing: periodArray[row])
         
-    }
+    }  //titleForRow
     
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        print(periodArray[row])
-//    }
-
 }
 

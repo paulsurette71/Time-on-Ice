@@ -208,9 +208,7 @@ class LineChart: UIView {
         guard let dataPoints = dataPoints, dataPoints.count > 0 else {
             return
         }
-        
-        //print(dataPoints)
-        
+                
         if let path = CurveAlgorithm.shared.createCurvedPath(dataPoints) {
             let lineLayer = CAShapeLayer()
             lineLayer.path = path.cgPath

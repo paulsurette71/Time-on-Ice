@@ -260,6 +260,7 @@ class PlayerInformationTableViewController: UITableViewController {
         if segue.identifier == "newSegue" {
             
             playerDetailsTableViewController.managedContext = managedContext
+            playerDetailsTableViewController.myDelegates    = myDelegates
             playerDetailsTableViewController.newPlayer = true
             
         }

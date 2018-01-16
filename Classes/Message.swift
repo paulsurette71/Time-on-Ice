@@ -23,12 +23,10 @@ class Message {
         
         if data.teams == "" {
             
-            print("Accumlated Stats")
             returnValue = accumlated(data: data)
             
         } else {
             
-            print("Per Game Stats")
             returnValue = perGame(data: data)
         }
         
@@ -149,9 +147,7 @@ class Message {
     }  //perGame
     
     func accumlated(data: StatsPerGameViewController.AccumulatedStats) -> [String: String] {
-        
-        print(data)
-        
+                
         var message = ""
         
         message += data.playerInformation

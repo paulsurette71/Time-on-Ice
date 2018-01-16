@@ -44,7 +44,7 @@ class PeriodPopoverViewController: UIViewController {
         }
         
         currentPeriod = appDelegate.periodSelected
-        print(currentPeriod!)
+
         picker.setPickerToSelectedPeriod(currentPeriod: currentPeriod!)
         
     }  //viewWillAppear

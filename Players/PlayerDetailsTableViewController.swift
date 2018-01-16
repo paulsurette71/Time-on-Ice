@@ -175,8 +175,8 @@ class PlayerDetailsTableViewController: UITableViewController {
         
         camera.myDelegates = myDelegates
         camera.takePicture()
-        
-    }
+    
+    }  //headShot
     
     
     @IBAction func birthdate(_ sender: UIDatePicker) {
@@ -368,7 +368,6 @@ class PlayerDetailsTableViewController: UITableViewController {
         
         let textField = (notification.object as! UITextField)
         textField.text = value as? String
-        
         
     }  //updatePositionLabel
     

@@ -105,9 +105,7 @@ class BasicBarChart: UIView {
     }
     
     private func drawHorizontalLines() {
-        
-        print("drawHorizontalLines")
-        
+                
         self.layer.sublayers?.forEach({
             if $0 is CAShapeLayer {
                 $0.removeFromSuperlayer()

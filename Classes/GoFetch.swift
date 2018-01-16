@@ -255,40 +255,7 @@ class GoFetch {
         
     }  //playersOnIce
     
-    
-    //Stats Queries
-    
-    //    func statsShifts(managedContext: NSManagedObjectContext) -> [Any] {
-    //
-    //        var returnResults = [Any]()
-    //
-    //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
-    //
-    //        fetchRequest.propertiesToGroupBy = [#keyPath(Players.playersShiftRelationship)]
-    //        fetchRequest.propertiesToFetch   = [#keyPath(Players.playersShiftRelationship)]
-    //        fetchRequest.resultType          = .dictionaryResultType
-    //
-    //
-    //        //        let sort = NSSortDescriptor(key: #keyPath(Players.lastName), ascending: true)
-    //        //        fetchRequest.sortDescriptors = [sort]
-    //        //        fetchRequest.fetchBatchSize = 8
-    //        //
-    //        //        let predicate               = NSPredicate(format: "ANY %K != nil", #keyPath(Players.playersShiftRelationship))
-    //        //        fetchRequest.predicate      = predicate
-    //
-    //        do {
-    //
-    //            returnResults = try managedContext.fetch(fetchRequest)
-    //
-    //        } catch let error as NSError {
-    //
-    //            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
-    //        }
-    //
-    //        return returnResults
-    //
-    //    }  //statsShifts
-    
+
     func statsGamesPerPlayer(player: Players, managedContext: NSManagedObjectContext) -> Int {
         
         var numberOfGames = 0
@@ -320,74 +287,6 @@ class GoFetch {
         return numberOfGames
     }  //statsGamesPerPlayer
     
-    //    func statsPerAllPlayers(managedContext: NSManagedObjectContext)  -> [[String:AnyObject]] {
-    //        //Help from: https://stackoverflow.com/questions/48015367/how-to-add-one-to-part-of-one-to-many-to-fetch-results/48025848?noredirect=1#comment83058767_48025848
-    //
-    //        var fetchArray = [[String:AnyObject]]()
-    //
-    //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
-    //
-    //        let nsExpressionForKeyPath  = NSExpression(forKeyPath: "timeOnIce")
-    //
-    //        let nsExpressionForFunctionMin = NSExpression(forFunction: "min:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionMin = NSExpressionDescription()
-    //        nsExpressionDescriptionMin.expression = nsExpressionForFunctionMin
-    //        nsExpressionDescriptionMin.name = "minShift"
-    //        nsExpressionDescriptionMin.expressionResultType = .integer16AttributeType
-    //
-    //        let nsExpressionForFunctionMax = NSExpression(forFunction: "max:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionMax = NSExpressionDescription()
-    //        nsExpressionDescriptionMax.expression = nsExpressionForFunctionMax
-    //        nsExpressionDescriptionMax.name = "maxShift"
-    //        nsExpressionDescriptionMax.expressionResultType = .integer16AttributeType
-    //
-    //        let nsExpressionForFunctionSum = NSExpression(forFunction: "sum:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionSum = NSExpressionDescription()
-    //        nsExpressionDescriptionSum.expression = nsExpressionForFunctionSum
-    //        nsExpressionDescriptionSum.name = "sumShift"
-    //        nsExpressionDescriptionSum.expressionResultType = .integer16AttributeType
-    //
-    //        let nsExpressionForFunctionAvg = NSExpression(forFunction: "average:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionAvg = NSExpressionDescription()
-    //        nsExpressionDescriptionAvg.expression = nsExpressionForFunctionAvg
-    //        nsExpressionDescriptionAvg.name = "avgShift"
-    //        nsExpressionDescriptionAvg.expressionResultType = .integer16AttributeType
-    //
-    //        let nsExpressionForFunctionCount = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionCount = NSExpressionDescription()
-    //        nsExpressionDescriptionCount.expression = nsExpressionForFunctionCount
-    //        nsExpressionDescriptionCount.name = "countShift"
-    //        nsExpressionDescriptionCount.expressionResultType = .integer16AttributeType
-    //
-    //
-    //        let nsExpressionForKeyPathGame  = NSExpression(forKeyPath: #keyPath(Shifts.gameRelationship.date))
-    //        let nsExpressionForFunctionGame = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPathGame])
-    //        let nsExpressionDescriptionGame = NSExpressionDescription()
-    //        nsExpressionDescriptionGame.expression = nsExpressionForFunctionGame
-    //        nsExpressionDescriptionGame.expression = NSExpression.expressionForEvaluatedObject()
-    //
-    //        nsExpressionDescriptionGame.name = "games"
-    //        nsExpressionDescriptionGame.expressionResultType = .integer16AttributeType
-    //
-    //
-    //        fetchRequest.propertiesToFetch   = [nsExpressionDescriptionMin, nsExpressionDescriptionMax, nsExpressionDescriptionSum, nsExpressionDescriptionAvg, nsExpressionDescriptionCount, #keyPath(Shifts.playersRelationship), nsExpressionDescriptionGame]
-    //
-    //        fetchRequest.propertiesToGroupBy   = [#keyPath(Shifts.playersRelationship)]
-    //        fetchRequest.resultType = .dictionaryResultType
-    //
-    //        do {
-    //
-    //            fetchArray += try managedContext.fetch(fetchRequest) as! [[String:AnyObject]]
-    //
-    //        } catch let error as NSError {
-    //
-    //            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
-    //        }
-    //
-    //        return fetchArray
-    //
-    //    }  //statsPerAllPlayers
-    
     func getGamesForPlayer(player: Players, managedContext: NSManagedObjectContext) ->  [[String : AnyObject]] {
         
         //select ZGAMERELATIONSHIP from ZSHIFTS where ZPLAYERSRELATIONSHIP = 5 group by ZGAMERELATIONSHIP;
@@ -415,67 +314,7 @@ class GoFetch {
         
     }  //getGamesForPlayer
     
-    //    func statsPerPlayer(player: Players, managedContext: NSManagedObjectContext)  -> [[String:AnyObject]] {
-    //        //Help from: https://stackoverflow.com/questions/48015367/how-to-add-one-to-part-of-one-to-many-to-fetch-results/48025848?noredirect=1#comment83058767_48025848
-    //
-    //        var fetchArray = [[String:AnyObject]]()
-    //
-    //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
-    //        let predicate          = NSPredicate(format: "playersRelationship = %@", player)
-    //        fetchRequest.predicate = predicate
-    //
-    //        let nsExpressionForKeyPath  = NSExpression(forKeyPath: "timeOnIce")
-    //
-    //        let nsExpressionForFunctionMin = NSExpression(forFunction: "min:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionMin = NSExpressionDescription()
-    //        nsExpressionDescriptionMin.expression = nsExpressionForFunctionMin
-    //        nsExpressionDescriptionMin.name = "minShift"
-    //        nsExpressionDescriptionMin.expressionResultType = .integer16AttributeType
-    //
-    //        let nsExpressionForFunctionMax = NSExpression(forFunction: "max:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionMax = NSExpressionDescription()
-    //        nsExpressionDescriptionMax.expression = nsExpressionForFunctionMax
-    //        nsExpressionDescriptionMax.name = "maxShift"
-    //        nsExpressionDescriptionMax.expressionResultType = .integer16AttributeType
-    //
-    //        let nsExpressionForFunctionSum = NSExpression(forFunction: "sum:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionSum = NSExpressionDescription()
-    //        nsExpressionDescriptionSum.expression = nsExpressionForFunctionSum
-    //        nsExpressionDescriptionSum.name = "sumShift"
-    //        nsExpressionDescriptionSum.expressionResultType = .integer16AttributeType
-    //
-    //        let nsExpressionForFunctionAvg = NSExpression(forFunction: "average:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionAvg = NSExpressionDescription()
-    //        nsExpressionDescriptionAvg.expression = nsExpressionForFunctionAvg
-    //        nsExpressionDescriptionAvg.name = "avgShift"
-    //        nsExpressionDescriptionAvg.expressionResultType = .integer16AttributeType
-    //
-    //        let nsExpressionForFunctionCount = NSExpression(forFunction: "count:", arguments: [nsExpressionForKeyPath])
-    //        let nsExpressionDescriptionCount = NSExpressionDescription()
-    //        nsExpressionDescriptionCount.expression = nsExpressionForFunctionCount
-    //        nsExpressionDescriptionCount.name = "countShift"
-    //        nsExpressionDescriptionCount.expressionResultType = .integer16AttributeType
-    //
-    //
-    //        fetchRequest.propertiesToFetch   = [nsExpressionDescriptionMin, nsExpressionDescriptionMax, nsExpressionDescriptionSum, nsExpressionDescriptionAvg, nsExpressionDescriptionCount]
-    //
-    //        fetchRequest.propertiesToGroupBy   = [#keyPath(Shifts.playersRelationship)]
-    //        fetchRequest.resultType = .dictionaryResultType
-    //
-    //        do {
-    //
-    //            fetchArray += try managedContext.fetch(fetchRequest) as! [[String:AnyObject]]
-    //
-    //        } catch let error as NSError {
-    //
-    //            print("\(self) -> \(#function): Could not fetch. \(error), \(error.userInfo)")
-    //        }
-    //
-    //        return fetchArray
-    //
-    //    }  //statsPerPlayer
-    
-    func shiftsPerPlayerPerGame(player: Players, game: Games, managedContext: NSManagedObjectContext) -> [[String: Any]] {
+     func shiftsPerPlayerPerGame(player: Players, game: Games, managedContext: NSManagedObjectContext) -> [[String: Any]] {
         
         var resultsDictionary = [[String: Any]]()
         
