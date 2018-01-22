@@ -339,6 +339,10 @@ extension StatsPerGameViewController: UITableViewDataSource {
         if firstPeriod != 0 {
             cell.stats1stPeriodLabel.text = String(firstPeriod)
             cell.stats1stPeriodPercentageLabel.text = convertToPercentage(period: firstPeriod, totalShift: results.count) + "%"
+        } else {
+            cell.stats1stPeriodLabel.text = "-"
+            cell.stats1stPeriodPercentageLabel.text = "-"
+            
         }
         
         let secondPeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: Period(rawValue: Period.second.rawValue)!)
@@ -346,6 +350,9 @@ extension StatsPerGameViewController: UITableViewDataSource {
         if secondPeriod != 0 {
             cell.stats2ndPeriodLabel.text = String(secondPeriod)
             cell.stats2ndPeriodPercentageLabel.text = convertToPercentage(period: secondPeriod, totalShift: results.count) + "%"
+        } else {
+            cell.stats2ndPeriodLabel.text = "-"
+            cell.stats2ndPeriodPercentageLabel.text = "-"
         }
         
         let thirdPeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: Period(rawValue: Period.third.rawValue)!)
@@ -353,6 +360,9 @@ extension StatsPerGameViewController: UITableViewDataSource {
         if thirdPeriod != 0 {
             cell.stats3rdPeriodLabel.text = String(thirdPeriod)
             cell.stats3rdPeriodPercentageLabel.text = convertToPercentage(period: thirdPeriod, totalShift: results.count) + "%"
+        } else {
+            cell.stats3rdPeriodLabel.text = "-"
+            cell.stats3rdPeriodPercentageLabel.text = "-"
         }
         
         let overtimePeriod = goFetch.statsShiftsPerPlayerPerPeriodPerGame(player: selectedPlayer!, game: gameDetails, managedContext: managedContext, period: Period(rawValue: Period.overtime.rawValue)!)
@@ -360,6 +370,9 @@ extension StatsPerGameViewController: UITableViewDataSource {
         if overtimePeriod != 0 {
             cell.statsOvertimePeriodLabel.text = String(overtimePeriod)
             cell.statsOTPeriodPercentageLabel.text = convertToPercentage(period: overtimePeriod, totalShift: results.count) + "%"
+        } else {
+            cell.statsOvertimePeriodLabel.text = "-"
+            cell.statsOTPeriodPercentageLabel.text = "-"
         }
         
         //Total TimeOnIce

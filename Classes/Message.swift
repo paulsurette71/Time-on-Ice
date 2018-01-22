@@ -124,7 +124,7 @@ class Message {
                 let timeDifference   = comparisonDate.timeIntervalSince(previousDate)
                 let timeOfShift = convertDate.convertDateToTime(dateToConvert: shifts[index]["date"] as! Date)
                 
-                timeDifferenceResults += "\(index + 1) - \(String(describing: shifts[index]["period"]!)) Period - \(String(describing: timeOfShift)) - \(timeDifference.stringTime)s"
+                timeDifferenceResults += "\(index + 1) - \(String(describing: shifts[index]["period"]!)) Period - \(String(describing: timeOfShift)) - \(timeDifference.stringTime)"
                 timeDifferenceResults += newLine
             }
             
@@ -133,7 +133,7 @@ class Message {
         
         message += timeDifferenceResults
         message += newLine
-        message += "NOTE: The Time between Shifts is represented as the time of day the shift took place.  This is NOT based on the arena clock."
+        message += "NOTE: The Time between Shifts is represented as the time of day the shift took place.  This is not based on the arena clock."
         message += newLine
         message += newLine
         message += "Thanks for using Time on Ice"
