@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13771" systemVersion="16G1036" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Game" representedClassName="Game" syncable="YES" codeGenerationType="class">
+        <attribute name="arenaCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="arenaName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gameDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="oppositionCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="oppositionTeamName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="gameToPlayerRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerInformation" inverseName="gameRelationship" inverseEntity="PlayerInformation" syncable="YES"/>
+    </entity>
+    <entity name="PlayerInformation" representedClassName="PlayerInformation" syncable="YES" codeGenerationType="class">
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="headshot" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="playerNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shoots" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeOnIce" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalShifts" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="gameRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="gameToPlayerRelationship" inverseEntity="Game" syncable="YES"/>
+        <relationship name="shiftRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShiftInformation" inverseName="shiftToPlayerRelationship" inverseEntity="ShiftInformation" syncable="YES"/>
+    </entity>
+    <entity name="ShiftInformation" representedClassName="ShiftInformation" syncable="YES" codeGenerationType="class">
+        <attribute name="runningTimeOnIce" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="shiftDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="shifts" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="timeOnIce" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="shiftToPlayerRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerInformation" inverseName="shiftRelationship" inverseEntity="PlayerInformation" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Game" positionX="-180" positionY="-54" width="128" height="133"/>
+        <element name="PlayerInformation" positionX="108" positionY="-52" width="128" height="223"/>
+        <element name="ShiftInformation" positionX="-173" positionY="144" width="128" height="118"/>
+    </elements>
+</model>

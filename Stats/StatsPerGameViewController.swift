@@ -21,7 +21,7 @@ class StatsPerGameViewController: UIViewController {
     lazy var fetchedResultsControllerShiftPerPlayer: NSFetchedResultsController<Shifts> = {
         
         let fetchRequest: NSFetchRequest<Shifts> = Shifts.fetchRequest()
-        let sort = NSSortDescriptor(key: #keyPath(Shifts.date), ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(Shifts.date), ascending: false)  //Jan 29
         fetchRequest.sortDescriptors = [sort]
         
         let predicate               = NSPredicate(format: "playersRelationship = %@", selectedPlayer!)

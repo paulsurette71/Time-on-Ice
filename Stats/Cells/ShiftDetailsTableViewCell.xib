@@ -64,6 +64,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="dateDifferenceLabel" destination="r61-f9-uOK" id="7Ka-qv-HkY"/>
                 <outlet property="dateLabel" destination="jPv-HC-bMa" id="Jav-Gg-LhM"/>

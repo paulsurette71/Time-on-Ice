@@ -203,7 +203,7 @@ class GoFetch {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Games")
         
-        let sort = NSSortDescriptor(key: #keyPath(Games.date), ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(Games.date), ascending: false)  //Jan 29
         fetchRequest.sortDescriptors = [sort]
         fetchRequest.fetchBatchSize = 8
         
@@ -295,6 +295,10 @@ class GoFetch {
         
         let fetchRequest       = NSFetchRequest<NSFetchRequestResult>(entityName: "Shifts")
         let predicate          = NSPredicate(format: "playersRelationship = %@", player)
+        
+        let sortByDate = NSSortDescriptor(key: #keyPath(Shifts.date), ascending: false)  //Jan 29
+        fetchRequest.sortDescriptors = [sortByDate]  //Jan 29
+        
         fetchRequest.predicate = predicate
         
         fetchRequest.propertiesToGroupBy = [#keyPath(Shifts.gameRelationship)]

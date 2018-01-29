@@ -64,7 +64,7 @@ class GameInformationTableViewController: UITableViewController {
     func goFetch() {
         
         let fetchRequest: NSFetchRequest<Games> = Games.fetchRequest()
-        let sortDate   = NSSortDescriptor(key: #keyPath(Games.date), ascending: true)
+        let sortDate   = NSSortDescriptor(key: #keyPath(Games.date), ascending: false)  //Jan 29
         
         fetchRequest.sortDescriptors = [sortDate]
         fetchRequest.fetchBatchSize = 10
