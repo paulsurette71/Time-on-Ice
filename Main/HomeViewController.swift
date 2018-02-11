@@ -539,7 +539,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             shifts.period              = appDelegate.periodSelected.map { $0.rawValue }
             
             //Save
-            try managedContext.save()
+            try managedContext.save()  //crash
             
         } catch let error as NSError {
             print("\(self) -> \(#function): Fetch error: \(error) description: \(error.userInfo)")

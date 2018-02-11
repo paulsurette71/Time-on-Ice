@@ -658,42 +658,47 @@ extension StatsPerGameViewController: UITableViewDataSource {
 
 extension StatsPerGameViewController: NSFetchedResultsControllerDelegate {
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-        
-    }
+    //This causes a crash when a player is on the ice
+    //and you select the stats.
+    //Go back to the Home tab, and take the player off the ice.
+    //App will crash
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .automatic)
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .automatic)
-        case .update:
-            tableView?.reloadData()
-        case .move:
-            tableView.deleteRows(at: [indexPath!], with: .automatic)
-            tableView.insertRows(at: [newIndexPath!], with: .automatic)
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        
-        let indexSet = IndexSet(integer: sectionIndex)
-        switch type {
-        case .insert:
-            tableView.insertSections(indexSet, with: .automatic)
-        case .delete:
-            tableView.deleteSections(indexSet, with: .automatic)
-        default: break
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-        
-    }
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView.beginUpdates()
+//        
+//    }
+//    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        
+//        switch type {
+//        case .insert:
+//            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+//        case .delete:
+//            tableView.deleteRows(at: [indexPath!], with: .automatic)
+//        case .update:
+//            tableView?.reloadData()
+//        case .move:
+//            tableView.deleteRows(at: [indexPath!], with: .automatic)
+//            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+//        }
+//    }
+//    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        
+//        let indexSet = IndexSet(integer: sectionIndex)
+//        switch type {
+//        case .insert:
+//            tableView.insertSections(indexSet, with: .automatic)
+//        case .delete:
+//            tableView.deleteSections(indexSet, with: .automatic)
+//        default: break
+//        }
+//    }
+//    
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView.endUpdates()  //crash
+//        
+//    }
     
 } //extension
 
