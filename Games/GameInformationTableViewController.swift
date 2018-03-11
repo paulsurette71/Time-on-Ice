@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class GameInformationTableViewController: UITableViewController {
     
@@ -35,6 +36,12 @@ class GameInformationTableViewController: UITableViewController {
         
         goFetch()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Analytics.setScreenName("Game Tab", screenClass: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

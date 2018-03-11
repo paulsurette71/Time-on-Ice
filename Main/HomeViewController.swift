@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Foundation
+import Firebase
 
 class HomeViewController: UIViewController {
     
@@ -65,8 +66,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var clockButton: UIButton!
     @IBOutlet weak var periodButton: UIButton!
     
-    
-    
     var tappedButton                 = true
     
     //classes
@@ -90,6 +89,12 @@ class HomeViewController: UIViewController {
     let impactFeedbackGenerator = UIImpactFeedbackGenerator()
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Analytics.setScreenName("Home Tab", screenClass: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,20 +126,20 @@ class HomeViewController: UIViewController {
         //collectionView Layout
         collectionViewLayout()
         
-//        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
-//        let importPlayers            = ImportPlayers()
-//        let importGames              = ImportGames()
-//        let importShifts             = ImportShifts()
-//
-//       if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
-//
-//            //Import Test data
-//            importPlayers.importPlayers()
-//            importGames.importGames()
-//            importShifts.importShifts()
-//
-//       }
-    
+        //        let isAppAlreadyLaunchedOnce = IsAppAlreadyLaunchedOnce()
+        //        let importPlayers            = ImportPlayers()
+        //        let importGames              = ImportGames()
+        //        let importShifts             = ImportShifts()
+        //
+        //       if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+        //
+        //            //Import Test data
+        //            importPlayers.importPlayers()
+        //            importGames.importGames()
+        //            importShifts.importShifts()
+        //
+        //       }
+        
         reset.playersStoredData(managedContext: managedContext)
         
         //        //Go get the players on the bench
@@ -358,9 +363,9 @@ class HomeViewController: UIViewController {
         
         let periodPopoverViewController = rootViewController?.storyboard?.instantiateViewController(withIdentifier: "PeriodPopoverViewController") as! PeriodPopoverViewController
         
-//        scoreClockPopoverViewController.periodSelected         = periodSelected
-//        scoreClockPopoverViewController.mainView               = mainView
-//        scoreClockPopoverViewController.sender                 = sender
+        //        scoreClockPopoverViewController.periodSelected         = periodSelected
+        //        scoreClockPopoverViewController.mainView               = mainView
+        //        scoreClockPopoverViewController.sender                 = sender
         periodPopoverViewController.modalPresentationStyle = .popover
         periodPopoverViewController.preferredContentSize   = CGSize(width: 100, height: 200)
         periodPopoverViewController.homeViewController     = self
@@ -375,7 +380,7 @@ class HomeViewController: UIViewController {
         popover.sourceRect = sender.bounds
         
         rootViewController?.present(periodPopoverViewController, animated: true, completion: nil)
-
+        
         
         
     }  //period
@@ -425,18 +430,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.totalTimeOnIceLabel.text = totalTimeOnIce
         
-//        DispatchQueue.main.async {
+        //        DispatchQueue.main.async {
         
-            if player.onIce {
-                
-                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_gray")
-                
-            } else {
-                
-                cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
-            }
+        if player.onIce {
             
-//        }
+            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_gray")
+            
+        } else {
+            
+            cell.cellBackgroundImageView.image = UIImage(named: "collectionviewcell_60x60_white")
+        }
+        
+        //        }
         
         return cell
         
@@ -460,7 +465,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             player.runningTimeOnIce = 0
             
-
+            
             
         } else if player.onIce == true {
             

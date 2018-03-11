@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
@@ -28,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, myDelegates {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
+        
+        //Firebase
+        FirebaseApp.configure()
         
         //Pretty up the place
         colourPalette.changeAppearance()

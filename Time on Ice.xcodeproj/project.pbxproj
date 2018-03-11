@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D04B30DFF328A8DD57389AF /* Pods_Time_on_Ice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2CCB1FC9A92F0010C8C7F4 /* Pods_Time_on_Ice.framework */; };
 		750388391FDDD4270086073D /* ImportGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750388381FDDD4270086073D /* ImportGames.swift */; };
 		7503883D1FDECBE20086073D /* GamePopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7503883C1FDECBE20086073D /* GamePopoverTableViewController.swift */; };
 		750388421FDECDA10086073D /* GamePopoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750388401FDECDA10086073D /* GamePopoverTableViewCell.swift */; };
@@ -58,6 +59,7 @@
 		7591FC191FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7591FC171FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.xib */; };
 		7591FC1C200000F4001CAE70 /* StatsChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7591FC1A200000F4001CAE70 /* StatsChartTableViewCell.swift */; };
 		7591FC1D200000F4001CAE70 /* StatsChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7591FC1B200000F4001CAE70 /* StatsChartTableViewCell.xib */; };
+		7598FFCD2055644F00829131 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7598FFCC2055644F00829131 /* GoogleService-Info.plist */; };
 		75A062C21FD96F3500EA626F /* PlayerPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A062C11FD96F3500EA626F /* PlayerPopoverTableViewController.swift */; };
 		75A062C51FD9769800EA626F /* PlayerPopoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A062C31FD9769800EA626F /* PlayerPopoverTableViewCell.swift */; };
 		75A062C61FD9769800EA626F /* PlayerPopoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75A062C41FD9769800EA626F /* PlayerPopoverTableViewCell.xib */; };
@@ -85,6 +87,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C2FBFE6D0AFECDA835F963F /* Pods-Time on Ice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time on Ice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Time on Ice/Pods-Time on Ice.debug.xcconfig"; sourceTree = "<group>"; };
+		702B949A75A1DD713FCEB05E /* Pods-Time on Ice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time on Ice.release.xcconfig"; path = "Pods/Target Support Files/Pods-Time on Ice/Pods-Time on Ice.release.xcconfig"; sourceTree = "<group>"; };
 		750388381FDDD4270086073D /* ImportGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportGames.swift; sourceTree = "<group>"; };
 		7503883C1FDECBE20086073D /* GamePopoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePopoverTableViewController.swift; sourceTree = "<group>"; };
 		750388401FDECDA10086073D /* GamePopoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePopoverTableViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 		7591FC171FFFBC40001CAE70 /* StatsAccumulatedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsAccumulatedTableViewCell.xib; sourceTree = "<group>"; };
 		7591FC1A200000F4001CAE70 /* StatsChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsChartTableViewCell.swift; sourceTree = "<group>"; };
 		7591FC1B200000F4001CAE70 /* StatsChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsChartTableViewCell.xib; sourceTree = "<group>"; };
+		7598FFCC2055644F00829131 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A062C11FD96F3500EA626F /* PlayerPopoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPopoverTableViewController.swift; sourceTree = "<group>"; };
 		75A062C31FD9769800EA626F /* PlayerPopoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPopoverTableViewCell.swift; sourceTree = "<group>"; };
 		75A062C41FD9769800EA626F /* PlayerPopoverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerPopoverTableViewCell.xib; sourceTree = "<group>"; };
@@ -162,6 +167,7 @@
 		75F74CA61FFEAC590029FF42 /* BasicBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBarChart.swift; sourceTree = "<group>"; };
 		75F7EF331FD8BDBD002BD535 /* PlayerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPicker.swift; sourceTree = "<group>"; };
 		75F7EF351FD8C03D002BD535 /* PlayerPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPopoverViewController.swift; sourceTree = "<group>"; };
+		FB2CCB1FC9A92F0010C8C7F4 /* Pods_Time_on_Ice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Time_on_Ice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,12 +175,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D04B30DFF328A8DD57389AF /* Pods_Time_on_Ice.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16B0F6C6D450C28DB69A1D79 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB2CCB1FC9A92F0010C8C7F4 /* Pods_Time_on_Ice.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7501B7B61FD88D370072D7AE /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +228,9 @@
 				75F977F81FC4CA4D006506A4 /* Storyboard */,
 				75E9E8651FBE21A200A51F89 /* Players */,
 				750FA2071FBCDCDA00A1D89A /* Products */,
+				7598FFCC2055644F00829131 /* GoogleService-Info.plist */,
+				8D731F1CBE4D6C6609985D18 /* Pods */,
+				16B0F6C6D450C28DB69A1D79 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -346,6 +364,15 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		8D731F1CBE4D6C6609985D18 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4C2FBFE6D0AFECDA835F963F /* Pods-Time on Ice.debug.xcconfig */,
+				702B949A75A1DD713FCEB05E /* Pods-Time on Ice.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -353,9 +380,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 750FA2181FBCDCDA00A1D89A /* Build configuration list for PBXNativeTarget "Time on Ice" */;
 			buildPhases = (
+				B33D37218FC405A9176CD4AE /* [CP] Check Pods Manifest.lock */,
 				750FA2021FBCDCDA00A1D89A /* Sources */,
 				750FA2031FBCDCDA00A1D89A /* Frameworks */,
 				750FA2041FBCDCDA00A1D89A /* Resources */,
+				EF215495C56D35EFC74514C6 /* [CP] Embed Pods Frameworks */,
+				FFBD5FA0C297B3162892A7F5 /* [CP] Copy Pods Resources */,
+				75F5E6EF205568C0001CCA92 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -414,6 +445,7 @@
 				751022F71FC61DD7000009EC /* BenchCollectionViewCell.xib in Resources */,
 				75A062C61FD9769800EA626F /* PlayerPopoverTableViewCell.xib in Resources */,
 				75D2F3901FD868290089DC63 /* GameInformationTableViewCell.xib in Resources */,
+				7598FFCD2055644F00829131 /* GoogleService-Info.plist in Resources */,
 				750388431FDECDA10086073D /* GamePopoverTableViewCell.xib in Resources */,
 				750FA20F1FBCDCDA00A1D89A /* Main.storyboard in Resources */,
 				7574B3CB1FC8CE7E00CF4214 /* Assets.xcassets in Resources */,
@@ -424,6 +456,79 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		75F5E6EF205568C0001CCA92 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
+		};
+		B33D37218FC405A9176CD4AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Time on Ice-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF215495C56D35EFC74514C6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Time on Ice/Pods-Time on Ice-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Time on Ice/Pods-Time on Ice-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFBD5FA0C297B3162892A7F5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Time on Ice/Pods-Time on Ice-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		750FA2021FBCDCDA00A1D89A /* Sources */ = {
@@ -624,9 +729,11 @@
 		};
 		750FA2191FBCDCDA00A1D89A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C2FBFE6D0AFECDA835F963F /* Pods-Time on Ice.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 28DUX73466;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -640,9 +747,11 @@
 		};
 		750FA21A1FBCDCDA00A1D89A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 702B949A75A1DD713FCEB05E /* Pods-Time on Ice.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 28DUX73466;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;

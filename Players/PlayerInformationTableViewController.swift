@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class PlayerInformationTableViewController: UITableViewController {
     
@@ -37,6 +38,12 @@ class PlayerInformationTableViewController: UITableViewController {
         tableView.rowHeight = 70
         
         goFetchPlayers()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Analytics.setScreenName("Players Tab", screenClass: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
