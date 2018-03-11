@@ -126,15 +126,15 @@ class HomeViewController: UIViewController {
 //        let importGames              = ImportGames()
 //        let importShifts             = ImportShifts()
 //
-//        if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
+//       if !isAppAlreadyLaunchedOnce.isAppAlreadyLaunchedOnce() {
 //
 //            //Import Test data
 //            importPlayers.importPlayers()
 //            importGames.importGames()
 //            importShifts.importShifts()
 //
-//        }
-        
+//       }
+    
         reset.playersStoredData(managedContext: managedContext)
         
         //        //Go get the players on the bench
